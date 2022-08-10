@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<!-- tiles 적용 -->
+<tiles-definitions>
+    <!--  메인레이아웃, 메인페이지  -->
+    <definition name="mainLayout" template="/WEB-INF/views/tiles/tiles_main_layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/tiles/header_template.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/footer_template.jsp" />
+    </definition>
+    <definition name="*.mainTiles" extends="mainLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="*/*.mainTiles" extends="mainLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+
+    <!-- 서브레이아웃, 마이페이지 및 관리자페이지 -->
+    <definition name="subLayout" template="/WEB-INF/views/tiles/tiles_sub_layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/tiles/header_template.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/menu_template.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/footer_template.jsp" />
+    </definition>
+    <definition name="*.subTiles" extends="subLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="*/*.subTiles" extends="subLayout">
+            <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+
+    <!-- 타일즈 미 적용 -->
+    <definition name="normalLayout" template="/WEB-INF/views/tiles/normal_layout.jsp">
+        <put-attribute name="content" value="" />
+    </definition>
+
+    <definition name="*.jsp" extends="normalLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+
+    <definition name="*/*.jsp" extends="normalLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+</tiles-definitions>

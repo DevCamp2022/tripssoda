@@ -1,0 +1,1 @@
+$("div.content").text("J쿼리 동작 테스트");

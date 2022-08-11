@@ -20,6 +20,7 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="com.devcamp.tripssoda.dto"/>
 		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+		<property name="configLocation" value="WEB-INF/config/mybatis-config.xml"/>
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

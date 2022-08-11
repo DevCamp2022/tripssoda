@@ -5,7 +5,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("SampleDto")
 public class SampleDto {
     public String id;
-    public String sample;
+    public String sampleData;
 
 
     public String getId() {
@@ -17,18 +17,18 @@ public class SampleDto {
     }
 
     public String getSample() {
-        return sample;
+        return sampleData;
     }
 
     public void setSample(String sample) {
-        this.sample = sample;
+        this.sampleData = sample;
     }
 
     @Override
     public String toString() {
         return "SampleDto{" +
                 "id='" + id + '\'' +
-                ", sample='" + sample + '\'' +
+                ", sample='" + sampleData + '\'' +
                 '}';
     }
 }

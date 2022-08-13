@@ -1,0 +1,21 @@
+.side-container-board{
+    text-align: center;
+    margin: 35px 0;
+
+}
+
+.side-container-board li{
+    padding: 20px 50px;
+    background: whitesmoke;
+
+}
+
+.side-container-stats{
+    margin: 35px 0;
+    text-align: center;
+}
+
+.side-container-stats li{
+    padding: 20px 50px;
+    background: whitesmoke;
+}

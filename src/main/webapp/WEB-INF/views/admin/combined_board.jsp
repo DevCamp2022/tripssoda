@@ -1,0 +1,118 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+
+<link rel="stylesheet" href="/css/admin/combined_board.css" />
+
+<div class="combined-wrap">
+    <div class="b-tit">
+        <c:if test='${param.menuCode==null}'><h1>combined board</h1></c:if>
+        <c:if test='${param.menuCode=="M001"}'><h1>Notice board</h1></c:if>
+        <c:if test='${param.menuCode=="M002"}'><h1>Promotion board</h1></c:if>
+        <c:if test='${param.menuCode=="M003"}'><h1>FAQ board</h1></c:if>
+        <c:if test='${param.menuCode=="M004"}'><h1>Inquiry board</h1></c:if>
+    </div>
+
+    <div class="search-container">
+        <form action="<c:url value="/admin/boardList"/>" class="search-form" method="get">
+            <select class="search-option" name="option">
+                <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>
+                <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>
+                <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
+            </select>
+
+            <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">
+            <input type="submit" class="search-button" value="검색">
+        </form>
+    </div>
+
+
+    <form name="boardListForm">
+        <table class="combined-list-tb">
+            <tr>
+                <td colspan="7">
+                    <button disabled>전체선택</button>
+                    <button type="button" id="listBtn">전체목록</button>
+                    <button type="button" id="writeBtn">글쓰기</button>
+                </td>
+                <td colspan="3">
+                    <button id="bDelBtn" type="button">삭제</button>
+                </td>
+            </tr>
+            <tr>
+                <th class="titb" ><input type="checkbox" id="all_check"></th>
+                <th class="titb" >번호</th>
+                <th class="tit" >게시판코드</th>
+
+                <th class="titt" >제목</th>
+    <%--            <th>내용</th>--%>
+                <th class="tit">조회수</th>
+                <th class="titb">상태</th>
+                <th class="tit">생성일시</th>
+                <th class="tit">작성자</th>
+                <th class="tit">수정일시</th>
+                <th class="tit">수정자</th>
+            </tr>
+
+    <%--        ${requestScope.list}--%>
+            <c:forEach var="dto" items="${list}">
+                <tr>
+                    <td><input type="checkbox" class="row_check" name="row_check" data-user-id="${dto.id}"></td>
+                    <td class="con" name="id">${dto.id}</td>
+                    <td class="con" id="menuCode" data-menu-code="${dto.menuCode}">${dto.menuCode}</td>
+                    <td class="con"><a href="/admin/boardContent?id=${dto.id}" >${dto.title}</a></td>
+                    <%--<td>${dto.content}</td>--%>
+                    <td class="con">${dto.viewCnt}</td>
+                    <td class="con"> ${dto.status==1? '게시중' : '삭제된글'} </td>
+
+                    <td class="con">
+                        <fmt:formatDate value="${dto.createdAt}" pattern="yyyy-MM-dd" type="date"/>
+                        <fmt:formatDate value="${dto.createdAt}" pattern="HH:mm" type="time"/>
+                    </td>
+                    <td class="con">${dto.createdBy}</td>
+                    <td class="con">
+                        <fmt:formatDate value="${dto.updatedAt}" pattern="yyyy-MM-dd" type="date"/>
+                        <fmt:formatDate value="${dto.updatedAt}" pattern="HH:mm" type="time"/>
+                    </td>
+                    <td class="con">${dto.updatedBy}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </form>
+
+
+    <br>
+    <div class="paging-container">
+        <div class="paging">
+            <c:if test="${totalCnt==null || totalCnt==0}">
+                <div> 게시물이 없습니다. </div>
+            </c:if>
+            <c:if test="${totalCnt!=null && totalCnt!=0}">
+                <c:if test="${ph.showPrev}">
+                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                </c:if>
+                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                    <a class="page ${i==ph.sc.page? "paging-active" : ""}" href="<c:url value="/admin/boardList${ph.sc.getQueryString(i)}"/>">${i}</a>
+                </c:forEach>
+                <c:if test="${ph.showNext}">
+                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                </c:if>
+            </c:if>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/board.js"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#all_check').change(function(){
+            var is_check = $(this).is(':checked');
+            console.log('is_check =' + is_check);
+
+            $('.row_check').prop('checked',is_check);
+        });
+    });
+</script>

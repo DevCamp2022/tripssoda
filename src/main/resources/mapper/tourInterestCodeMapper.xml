@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.TourInterestCodeMapper">
+    <insert id="insertTourInterestCode" parameterType="TourInterestCodeDto">
+        INSERT INTO tour_interest_code (tour_intr_code, tour_intr_keyword, tour_intr_description)
+        VALUES (#{tourIntrCode}, #{tourIntrKeyword}, #{tourIntrDescription})
+    </insert>
+
+    <select id="selectTourInterestCode" parameterType="String" resultType="TourInterestCodeDto">
+        SELECT tour_intr_code, tour_intr_keyword, tour_intr_description
+        FROM tour_interest_code
+        WHERE tour_intr_code = #{tourIntrCode}
+    </select>
+
+    <select id="selectAllTourInterestCode" resultType="TourInterestCodeDto">
+        SELECT *
+        FROM tour_interest_code
+    </select>
+
+    <update id="updateTourInterestCode" parameterType="int">
+        UPDATE tour_interest_code
+        SET tour_intr_keyword = #{tourIntrKeyword}, tour_intr_description = #{tourIntrDescription}
+        WHERE tour_intr_code = #{tourIntrCode}
+    </update>
+
+    <delete id="deleteTourInterestCode" parameterType="String">
+        DELETE FROM tour_interest_code
+        WHERE tour_intr_code = #{tourIntrCode}
+    </delete>
+
+</mapper>

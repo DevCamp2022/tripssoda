@@ -1,0 +1,115 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* body */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contents {
+    width: 500px;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+}
+
+.form-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.input-list {
+    padding: 5px;
+}
+
+.row-title {
+    margin: 5px 0;
+}
+
+.email-wrap {
+    box-sizing: border-box;
+}
+
+.email-wrap > input {
+    width: 320px;
+    height: 24px;
+    box-sizing: border-box;
+}
+
+.email-wrap > button {
+    display: inline-block;
+}
+
+.input-password {
+    width: 320px;
+    height: 24px;
+    box-sizing: border-box;
+}
+
+.input-name {
+
+}
+
+.input-phone-number {
+
+}
+
+.select-gender {
+
+}
+
+.input-birth-year {
+
+}
+
+.select-birth-month {
+
+}
+
+.select-birth-day {
+
+}
+
+.terms-wrap {
+
+}
+
+.terms-list {
+    overflow: hidden;
+}
+
+.terms-checkbox {
+    float: left;
+}
+
+.terms-title {
+    float: left;
+}
+
+.terms-link {
+    display: block;
+    float: right;
+}
+
+.register-btn {
+    display: block;
+    margin: 0 auto;
+}

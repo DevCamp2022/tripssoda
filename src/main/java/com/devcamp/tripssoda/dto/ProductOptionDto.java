@@ -1,20 +1,33 @@
 package com.devcamp.tripssoda.dto;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 
 @Alias("ProductOptionDto")
 public class ProductOptionDto {
     private Integer productOptionId;
     private Integer productId;
-    private Integer type;
+    private String type;
+    private boolean countable;
     private String name;
     private String content;
     private Integer price;
     private Integer orderNo;
-    private String createdAt;
+    private Date createdAt;
     private Integer createdBy;
-    private String updatedAt;
+    private Date updatedAt;
     private Integer updatedBy;
+
+ public boolean isCountable() {
+        return countable;
+    }
+
+    public void setCountable(boolean countable) {
+        this.countable = countable;
+    }
 
     public Integer getProductOptionId() {
         return productOptionId;
@@ -32,11 +45,12 @@ public class ProductOptionDto {
         this.productId = productId;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
+
         this.type = type;
     }
 
@@ -72,13 +86,6 @@ public class ProductOptionDto {
         this.orderNo = orderNo;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public Integer getCreatedBy() {
         return createdBy;
@@ -86,14 +93,6 @@ public class ProductOptionDto {
 
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public Integer getUpdatedBy() {
@@ -104,20 +103,20 @@ public class ProductOptionDto {
         this.updatedBy = updatedBy;
     }
 
-    @Override
-    public String toString() {
-        return "ProductOptionDto{" +
-                "productOptionId=" + productOptionId +
-                ", productId=" + productId +
-                ", type=" + type +
-                ", name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                ", price=" + price +
-                ", order=" + orderNo +
-                ", createdAt='" + createdAt + '\'' +
-                ", createdBy=" + createdBy +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", updatedBy=" + updatedBy +
-                '}';
+    public Date getCreatedAt() {
+        return createdAt;
     }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
 }

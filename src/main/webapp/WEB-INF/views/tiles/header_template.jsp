@@ -2,5 +2,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="header">
-	<h1>헤더헤더헤더</h1>
+	<h1>헤더헤더헤더헤더헤더헤더헤더헤더</h1>
 </div>

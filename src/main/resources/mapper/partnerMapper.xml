@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.PartnerMapper">
+    <insert id="insertPartner" parameterType="PartnerDto">
+		INSERT INTO partner
+        (
+        user_id,
+        reg_number,
+        company_name,
+        intro,
+        intro_attachment,
+        service_region,
+        product_type,
+        manager_name,
+        manager_tel,
+        terms_agreement,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
+        )
+        VALUES
+        (
+        #{userId},
+        #{regNumber},
+        #{companyName},
+        #{intro},
+        #{introAttachment},
+        #{serviceRegion},
+        #{productType},
+        #{managerName},
+        #{managerTel},
+        #{termsAgreement},
+        now(),
+        #{userId},
+        now(),
+        #{userId}
+        )
+    </insert>
+
+
+</mapper>

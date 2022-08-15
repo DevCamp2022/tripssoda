@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+div.reservation-wrap {
+}
+
+div.reservation-wrap > form {
+    display: flex;
+    align-items: flex-start;
+}
+
+div.reservation-wrap > form > div.reservation-info{
+    display: inline-block;
+    width: 740px;
+    padding: 32px 42px;
+    margin: 0;
+}
+
+div.reservation-wrap > form > div.reservation-detail {
+    display: inline-block;
+    width: 330px;
+    padding: 30px 20px;
+    margin: 0;
+}
+
+div.reservation-detail > div.detail-header {
+    width: 330px;
+    overflow: hidden;
+}
+
+div.detail-header > img.thumbnail{
+    max-width: 100%;
+    vertical-align: top;
+    object-fit: cover;
+}
+
+ul.detail-info > li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0 0;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+div.reservation-info .sel, div.reservation-info .inp{
+width: 100%;
+}
+
+div.row.row-name > * {
+    width: 40%;
+}
+
+div.row.row-birthday > input.reserver-birth-year {
+    width: 40%;
+}
+div.row.row-birthday > * {
+    width: 20%;
+}
+
+div.row.row-tel > select.reserver-ctry-code{
+    width: 20%;
+}
+
+div.row.row-tel > input.reserver-tel{
+    width: 60%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

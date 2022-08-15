@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.PaymentMapper">
+    <select id="selectReserverInfo" parameterType="int" resultType="ReserverDto">
+		SELECT
+		    id,
+		    name,
+		    email,
+		    tel,
+		    gender,
+		    birthday,
+		    point
+		FROM
+		    user_info
+		WHERE
+		    id=#{userId};
+    </select>
+	<select id="selectPaymentInitialInfo" parameterType="map" resultMap="PaymentInitialInfoResultMap">
+		SELECT
+			p.id AS product_id,
+			p.title,
+			p.thumbnail,
+		    p.meeting_point,
+		    p.pickup_option,
+			p.pickup_type,
+		    p.limit_qty,
+			ps.id AS schedule_id,
+			ps.price AS schedule_price,
+			ps.start_date,
+			po.id AS option_id,
+			po.type,
+			po.countable,
+			po.name,
+			po.content,
+			po.price,
+			po.order_no
+		FROM
+			product AS p
+		LEFT JOIN
+			product_schedule AS ps
+			ON p.id = ps.product_id
+		LEFT JOIN
+			product_option AS po
+			ON p.id = po.product_id
+		WHERE
+			p.id = #{productId, jdbcType=VARCHAR} AND ps.id = #{scheduleId, jdbcType=VARCHAR}
+		ORDER BY
+			po.order_no ASC ;
+	</select>
+	<resultMap id="PaymentInitialInfoResultMap" type="PaymentInitialInfoDto">
+		<id column="product_id" property="productId"/>
+		<result column="title" property="title"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="schedule_id" property="scheduleId"/>
+		<result column="schedule_price" property="schedulePrice"/>
+		<result column="option_id" property="optionId"/>
+		<result column="start_date" property="startDate"/>
+		<result column="meeting_point" property="meetingPoint"/>
+		<result column="pickup_option" property="pickupOption"/>
+		<result column="pickup_type" property="pickupType"/>
+		<result column="limit_qty" property="limitQty"/>
+		<collection property="optionList" ofType="ProductOptionDto" javaType="java.util.List">
+			<id column="option_id" property="productOptionId"/>
+			<result column="type" property="type"/>
+			<result column="countable" property="countable"/>
+			<result column="name" property="name"/>
+			<result column="content" property="content"/>
+			<result column="price" property="price"/>
+			<result column="order_no" property="orderNo"/>
+		</collection>
+	</resultMap>
+</mapper>

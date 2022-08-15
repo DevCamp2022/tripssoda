@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.AdminBoardMapper">
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM combined_board
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM combined_board
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        UPDATE combined_board
+        SET   status = 0
+        WHERE id = #{id} and user_id = #{userId}
+    </delete>
+
+    <insert id="insert" parameterType="CombinedBoardDto">
+        INSERT INTO combined_board
+            (title, content, user_id, menu_code, created_by)
+        VALUES
+            (#{title}, #{content}, #{userId}, #{menuCode}, #{userId})
+    </insert>
+
+    <select id="selectAllBoard" resultType="CombinedBoardDto">
+        SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by
+        FROM combined_board
+        ORDER BY created_at DESC, id DESC
+    </select>
+
+    <sql id="selectFromBoard">
+        SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by
+        FROM combined_board
+    </sql>
+
+    <select id="selectBoard" parameterType="int" resultType="CombinedBoardDto">
+        <include refid="selectFromBoard"/>
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectPage" parameterType="map" resultType="CombinedBoardDto">
+        <include refid="selectFromBoard"/>
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <update id="update" parameterType="CombinedBoardDto">
+        UPDATE combined_board
+        SET   title = #{title}
+          , content = #{content}
+          , updated_at = now()
+          , updated_by = #{userId}
+        WHERE id = #{id}
+    </update>
+
+    <update id="increaseViewCnt" parameterType="int">
+        UPDATE combined_board
+        SET   view_cnt = view_cnt + 1
+        WHERE id = #{id}
+    </update>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='sc.option=="T"'>
+                AND title LIKE concat('%', #{sc.keyword}, '%')
+            </when>
+            <when test='sc.option=="W"'>
+                AND user_id LIKE concat('%', #{sc.keyword}, '%')
+            </when>
+            <otherwise>
+                AND (title   LIKE concat('%', #{sc.keyword}, '%')
+                OR   content LIKE concat('%', #{sc.keyword}, '%'))
+            </otherwise>
+        </choose>
+    </sql>
+
+
+<!--        <select id="searchSelectPage" parameterType="SearchCondition" resultType="CombinedBoardDto">-->
+<!--            SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by-->
+<!--            FROM  combined_board-->
+<!--            WHERE true-->
+<!--            <include refid="searchCondition"/>-->
+<!--            ORDER BY created_at DESC, id DESC-->
+<!--            LIMIT #{offset}, #{pageSize}-->
+<!--        </select>-->
+
+
+    <select id="searchSelectPage" parameterType="java.util.Map" resultType="CombinedBoardDto">
+        SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by
+        FROM  combined_board
+        WHERE true
+        <include refid="searchCondition"/>
+
+        <if test='menuCode != "0"'>
+            and
+            menu_code = #{menuCode}
+        </if>
+
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+
+    <select id="searchResultCnt" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM  combined_board
+        WHERE true
+        <include refid="searchCondition"/>
+
+        <if test='menuCode != "0"'>
+            and
+            menu_code = #{menuCode}
+        </if>
+
+    </select>
+</mapper>

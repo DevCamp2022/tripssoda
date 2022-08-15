@@ -3,14 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 
 <link rel="stylesheet" href="/css/admin/combined_board.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 <div class="combined-wrap">
     <div class="b-tit">
-        <c:if test='${param.menuCode==null}'><h1>combined board</h1></c:if>
-        <c:if test='${param.menuCode=="M001"}'><h1>Notice board</h1></c:if>
-        <c:if test='${param.menuCode=="M002"}'><h1>Promotion board</h1></c:if>
-        <c:if test='${param.menuCode=="M003"}'><h1>FAQ board</h1></c:if>
-        <c:if test='${param.menuCode=="M004"}'><h1>Inquiry board</h1></c:if>
+        <c:if test='${param.menuCode==null}'><h1>Combined Board</h1></c:if>
+        <c:if test='${param.menuCode=="M001"}'><h1>Notice Board</h1></c:if>
+        <c:if test='${param.menuCode=="M002"}'><h1>Promotion Board</h1></c:if>
+        <c:if test='${param.menuCode=="M003"}'><h1>FAQ Board</h1></c:if>
+        <c:if test='${param.menuCode=="M004"}'><h1>Inquiry Board</h1></c:if>
     </div>
 
     <div class="search-container">
@@ -32,7 +33,7 @@
             <tr>
                 <td colspan="7">
                     <button disabled>전체선택</button>
-                    <button type="button" id="listBtn">전체목록</button>
+<%--                    <button type="button" id="listBtn">전체목록</button>--%>
                     <button type="button" id="writeBtn">글쓰기</button>
                 </td>
                 <td colspan="3">
@@ -47,7 +48,7 @@
                 <th class="titt" >제목</th>
     <%--            <th>내용</th>--%>
                 <th class="tit">조회수</th>
-                <th class="titb">상태</th>
+                <th class="tit">상태</th>
                 <th class="tit">생성일시</th>
                 <th class="tit">작성자</th>
                 <th class="tit">수정일시</th>
@@ -56,22 +57,22 @@
 
     <%--        ${requestScope.list}--%>
             <c:forEach var="dto" items="${list}">
-                <tr>
-                    <td><input type="checkbox" class="row_check" name="row_check" data-user-id="${dto.id}"></td>
+                <tr class="con-td">
+                    <td class="con"><input type="checkbox" class="row_check" name="row_check" data-user-id="${dto.id}"></td>
                     <td class="con" name="id">${dto.id}</td>
                     <td class="con" id="menuCode" data-menu-code="${dto.menuCode}">${dto.menuCode}</td>
-                    <td class="con"><a href="/admin/boardContent?id=${dto.id}" >${dto.title}</a></td>
+                    <td class="con"><a href="/admin/boardContent${searchCondition.queryString}&id=${dto.id}" >${dto.title}</a></td>
                     <%--<td>${dto.content}</td>--%>
                     <td class="con">${dto.viewCnt}</td>
                     <td class="con"> ${dto.status==1? '게시중' : '삭제된글'} </td>
 
                     <td class="con">
-                        <fmt:formatDate value="${dto.createdAt}" pattern="yyyy-MM-dd" type="date"/>
+                        <fmt:formatDate value="${dto.createdAt}" pattern="yy-MM-dd" type="date"/>
                         <fmt:formatDate value="${dto.createdAt}" pattern="HH:mm" type="time"/>
                     </td>
                     <td class="con">${dto.createdBy}</td>
                     <td class="con">
-                        <fmt:formatDate value="${dto.updatedAt}" pattern="yyyy-MM-dd" type="date"/>
+                        <fmt:formatDate value="${dto.updatedAt}" pattern="yy-MM-dd" type="date"/>
                         <fmt:formatDate value="${dto.updatedAt}" pattern="HH:mm" type="time"/>
                     </td>
                     <td class="con">${dto.updatedBy}</td>

@@ -64,14 +64,12 @@ $('#bDelBtn').click(function(){
     }
 })
 
-$("#listBtn").on("click", function(){
-    location.href="/admin/boardList?";
-});
+
 
 $('table.combined-list-tb').on('click', "#writeBtn", function() {
     location.href = '/admin/write';
-});
 
+});
 
 
 

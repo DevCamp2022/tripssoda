@@ -24,6 +24,14 @@ public class CombinedBoardDto {
     public CombinedBoardDto() {
     }
 
+    public CombinedBoardDto(String menuCode, int userId, String title, String content, int createdBy) {
+        this.menuCode = menuCode;
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.createdBy = createdBy;
+    }
+
     public int getId() {
         return id;
     }

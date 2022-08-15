@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 
 <link rel="stylesheet" href="/css/admin/combined_board.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 <script>
     let msg = "${msg}";
@@ -12,34 +13,9 @@
 
 
 
-<%--    <div class="container">--%>
-<%--        <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>--%>
-<%--        <form id="form" class="frm" action="" method="post">--%>
-<%--            <input type="hidden" name="id" value="${dto.id}">--%>
-<%--    --%>
-<%--            <input class="tit" name="title" type="text" value="${dto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}><br>--%>
-<%--            <textarea class="con" name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${dto.content}</textarea><br>--%>
-<%--    --%>
-<%--            <c:if test="${mode eq 'new'}">--%>
-<%--                <button type="button" id="writeBtn" >등록</button>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${mode ne 'new'}">--%>
-<%--                <button type="button" id="writeNewBtn" >글쓰기</button>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${dto.id eq id}">--%>
-<%--                <button type="button" id="modifyBtn" >수정</button>--%>
-<%--                <button type="button" id="removeBtn" >삭제</button>--%>
-<%--            </c:if>--%>
-<%--            <button type="button" id="listBtn" > 목록</button>--%>
-<%--        </form>--%>
-<%--    </div>--%>
-
-
 <div class="combined-wrap">
-
+    <div class="combined-wrap-tit"><h1 class="writing-header">${mode=="new" ? "Board Register" : "Contents"}</h1></div>
     <form id="form" class="frm" action="" method="post">
-        <input type="hidden" name="id" value="${dto.id}">
-
 
         <table class="combined-list-tb">
 
@@ -62,8 +38,8 @@
         <c:if test="${mode ne 'new'}">
             <tr>
                 <td colspan="10">
-                    <button>수정</button>
-                    <button>삭제</button>
+                    <button type="button" id="modifyBtn">수정</button>
+                    <button id="conDelBtn" type="button">삭제</button>
                     <button type="button" id="listBtn"> 목록</button>
                 </td>
             </tr>
@@ -86,7 +62,7 @@
         <tr>
             <td class="con contit" colspan="10">
 <%--                ${dto.title}--%>
-                    <input name="title" type="text" value="${dto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>
+                    <input name="title" type="text" value="${combinedBoardDto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>
             </td>
         </tr>
 
@@ -96,19 +72,33 @@
         <tr>
             <td class="con concon" colspan="10">
 <%--                ${dto.content}--%>
-                    <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${dto.content}</textarea>
+                    <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${combinedBoardDto.content}</textarea>
             </td>
         </tr>
+<%--            <tr>--%>
+<%--                <td>--%>
+<%--                    <c:if test="${mode eq 'new'}">--%>
+<%--                        <button type="button" id="writeBtn">등록</button>--%>
+<%--                        <button type="button" id="resetBtn"> 취소</button>--%>
+
+<%--                    </c:if>--%>
+<%--                </td>--%>
+<%--            </tr>--%>
 
 
     </table>
+<%--            <c:if test="${mode eq 'new'}">--%>
+<%--                <button type="button" id="writeBtn">등록</button>--%>
+<%--                <button type="button" id="resetBtn"> 취소</button>--%>
 
-    <c:if test="${mode eq 'new'}">
-        <button type="button" id="writeBtn">등록</button>
-    </c:if>
+<%--            </c:if>--%>
 
     </form>
+    <c:if test="${mode eq 'new'}">
+        <button type="button" id="writeBtn">등록</button>
+        <button type="button" id="resetBtn"> 취소</button>
 
+    </c:if>
     <table>
         <c:if test="${mode ne 'new'}">
             <tr>
@@ -123,10 +113,6 @@
 </div>
 
 
-
-
-
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/board.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -138,10 +124,11 @@
         let formCheck = function() {
             let form = document.getElementById("form");
 
-            if(form.boardOption.selectedIndex==0){
-                alert("게시판선택해주세요");
-                return ;
-            }
+            if(${mode eq 'new'})
+                if(form.boardOption.selectedIndex==0){
+                    alert("게시판선택해주세요");
+                    return ;
+                }
 
             if(form.title.value=="") {
                 alert("제목을 입력해 주세요.");
@@ -165,13 +152,12 @@
         $("#writeBtn").on("click", function() {
             let form = $("#form");
 
-
             if (formCheck())
                 if (!confirm("등록하시겠습니까?"))
                     return;
                 else {
                     alert("url타쟈");
-                    form.attr("action", "<c:url value='/admin/write'/>");
+                    form.attr("action", '/admin/write');
                     form.attr("method", "post");
                     form.submit();
                 }
@@ -183,18 +169,22 @@
 
             // 1. 읽기 상태이면, 수정 상태로 변경
             if(isReadonly=='readonly') {
-                $(".writing-header").html("게시판 수정");
+                $(".writing-header").html("Board Modify");
                 $("input[name=title]").attr('readonly', false);
                 $("textarea").attr('readonly', false);
                 $("#modifyBtn").html("<i class='fa fa-pencil'></i> 등록");
+                $("#listBtn").html("취소");
                 return;
             }
 
             // 2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/board/modify${searchCondition.queryString}'/>");
+            form.attr("action", "<c:url value='/admin/boardModify${searchCondition.queryString}+&id=${param.id}'/>");
             form.attr("method", "post");
-            if(formCheck())
+            alert("왓나 / ");
+            if(formCheck()) {
+                alert("수정ㄱ");
                 form.submit();
+            }
         });
 
         $("#removeBtn").on("click", function(){
@@ -209,5 +199,18 @@
         $("#listBtn").on("click", function(){
             location.href="<c:url value='/admin/boardList${searchCondition.queryString}'/>";
         });
+
+        $("#resetBtn").on("click", function(){
+            if(!confirm("글 작성을 취소하시겠습니까?")){
+                return;
+            }else{
+            location.href="<c:url value='/admin/boardList${searchCondition.queryString}'/>";
+            }
+        });
+
+        $('#conDelBtn').on('click', function(){
+            location.href="<c:url value='/admin/remove${searchCondition.queryString}'/>";
+        })
+
     });
 </script>

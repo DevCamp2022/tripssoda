@@ -13,14 +13,16 @@
     </delete>
 
     <delete id="delete" parameterType="map">
-        DELETE FROM combined_board WHERE id = #{id} and user_id = #{userId}
+        UPDATE combined_board
+        SET   status = 0
+        WHERE id = #{id} and user_id = #{userId}
     </delete>
 
     <insert id="insert" parameterType="CombinedBoardDto">
         INSERT INTO combined_board
-            (title, content, user_id, menu_code)
+            (title, content, user_id, menu_code, created_by)
         VALUES
-            (#{title}, #{content}, #{user_id}, #{menu_code})
+            (#{title}, #{content}, #{userId}, #{menuCode}, #{userId})
     </insert>
 
     <select id="selectAllBoard" resultType="CombinedBoardDto">
@@ -50,6 +52,7 @@
         SET   title = #{title}
           , content = #{content}
           , updated_at = now()
+          , updated_by = #{userId}
         WHERE id = #{id}
     </update>
 
@@ -61,15 +64,15 @@
 
     <sql id="searchCondition">
         <choose>
-            <when test='option=="T"'>
-                AND title LIKE concat('%', #{keyword}, '%')
+            <when test='sc.option=="T"'>
+                AND title LIKE concat('%', #{sc.keyword}, '%')
             </when>
-            <when test='option=="W"'>
-                AND user_id LIKE concat('%', #{keyword}, '%')
+            <when test='sc.option=="W"'>
+                AND user_id LIKE concat('%', #{sc.keyword}, '%')
             </when>
             <otherwise>
-                AND (title   LIKE concat('%', #{keyword}, '%')
-                OR   content LIKE concat('%', #{keyword}, '%'))
+                AND (title   LIKE concat('%', #{sc.keyword}, '%')
+                OR   content LIKE concat('%', #{sc.keyword}, '%'))
             </otherwise>
         </choose>
     </sql>
@@ -89,18 +92,7 @@
         SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by
         FROM  combined_board
         WHERE true
-        <choose>
-            <when test='sc.option=="T"'>
-                AND title LIKE concat('%', #{sc.keyword}, '%')
-            </when>
-            <when test='sc.option=="W"'>
-                AND user_id LIKE concat('%', #{sc.keyword}, '%')
-            </when>
-            <otherwise>
-                AND (title   LIKE concat('%', #{sc.keyword}, '%')
-                OR   content LIKE concat('%', #{sc.keyword}, '%'))
-            </otherwise>
-        </choose>
+        <include refid="searchCondition"/>
 
         <if test='menuCode != "0"'>
             and
@@ -111,30 +103,12 @@
         LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 
-<!--    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">-->
-<!--        SELECT count(*)-->
-<!--        FROM  combined_board-->
-<!--        WHERE true-->
-<!--        <include refid="searchCondition"/>-->
-
-<!--    </select>-->
 
     <select id="searchResultCnt" parameterType="java.util.Map" resultType="int">
         SELECT count(*)
         FROM  combined_board
         WHERE true
-        <choose>
-            <when test='sc.option=="T"'>
-                AND title LIKE concat('%', #{sc.keyword}, '%')
-            </when>
-            <when test='sc.option=="W"'>
-                AND user_id LIKE concat('%', #{sc.keyword}, '%')
-            </when>
-            <otherwise>
-                AND (title   LIKE concat('%', #{sc.keyword}, '%')
-                OR   content LIKE concat('%', #{sc.keyword}, '%'))
-            </otherwise>
-        </choose>
+        <include refid="searchCondition"/>
 
         <if test='menuCode != "0"'>
             and

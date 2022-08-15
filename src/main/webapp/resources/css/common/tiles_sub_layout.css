@@ -15,7 +15,7 @@ div.header{
 }
 
 div.content-container{
-    background-color: skyblue;
+    /*background-color: skyblue;*/
     width:100%;
     min-width: 1200px;
 }
@@ -29,7 +29,7 @@ div.content-container::after{
 div.content-wrap{
     width: 1200px;
     margin: 0 auto;
-    background-color: cornflowerblue;
+    /*background-color: cornflowerblue;*/
 }
 
 div.left-wrap{
@@ -37,7 +37,7 @@ div.left-wrap{
 }
 div.left-wrap > div.menu{
     width: 320px;
-    background-color: deepskyblue;
+    /*background-color: deepskyblue;*/
 }
 
 div.right-wrap{

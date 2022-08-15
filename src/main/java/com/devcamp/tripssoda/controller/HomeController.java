@@ -40,7 +40,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 
-		System.out.println(sampleService.selectAllSample());
+//		System.out.println(sampleService.selectAllSample());
 
 		model.addAttribute("sample_img", "/image/sample_img.png");
 

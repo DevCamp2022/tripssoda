@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.WithdrawUserMapper">
+    <insert id="insertWithdrawUser" parameterType="UserDto">
+        INSERT INTO withdraw_user (name, pwd, email, tel, gender, birthday, nickname, intro, profile_img, instagram_id, point, report_cnt, user_code, reg_date)
+        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname}, #{intro}, #{profileImg}, #{instagramId}, #{point}, #{reportCnt}, #{userCode}, #{createdAt})
+    </insert>
+</mapper>

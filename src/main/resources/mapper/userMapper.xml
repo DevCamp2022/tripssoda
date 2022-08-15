@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.UserMapper">
+    <insert id="insertUser" parameterType="UserDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_info (name, pwd, email, tel, gender, birthday, nickname)
+        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname})
+    </insert>
+
+    <select id="selectUser" parameterType="String" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE email = #{email}
+    </select>
+
+    <update id="updateUser" parameterType="UserDto">
+        UPDATE user_info
+        SET profile_img = #{profileImg}, nickname = #{nickname}, intro = #{intro}, instagram_id = #{instagramId},
+            tel = #{tel}, pwd = #{pwd}
+        WHERE email = #{email}
+    </update>
+
+    <update id="updateCreatedBy" parameterType="map">
+        UPDATE user_info
+        SET created_by = #{createdBy}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateUpdatedBy" parameterType="map">
+        UPDATE user_info
+        SET updated_by = #{updatedBy}
+        WHERE id = #{userId}
+    </update>
+
+    <update id="updateUserCode" parameterType="map">
+        UPDATE user_info
+        SET user_code = #{userCode}
+        WHERE id = #{userId}
+    </update>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM user_info
+        WHERE email = #{email}
+    </delete>
+</mapper>

@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+}
+
+.main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 22px;
+    text-align: center;
+}
+
+.sub-title {
+    font-size: 14px;
+    text-align: center;
+}
+
+.interest-list {
+    overflow: hidden;
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.interest {
+    float: left;
+    width: 460px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.interest .keyword {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.select-box {
+    width: 1000px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.interest-rank {
+    margin: 10px;
+}
+
+.button-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.button-wrap > button {
+    margin: 10px;
+}
+
+

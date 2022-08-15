@@ -1,0 +1,70 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
+
+.main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contents {
+    width: 723px;
+    border: 1px solid black;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.slogan {
+    border: 1px solid black;
+    margin: 20px auto;
+}
+
+.slogan-text {
+    text-align: center;
+}
+
+button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+}
+
+.kakao-register-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    margin: 20px auto;
+    background: #FEE500;
+    cursor: pointer;
+    border: none;
+}
+
+.email-register-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+.ask-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ask {
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
+.login-btn {
+    font-size: 18px;
+    width: 70px;
+    cursor: pointer;
+}

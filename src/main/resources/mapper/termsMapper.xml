@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.TermsMapper">
+    <insert id="insertTerms" parameterType="TermsDto">
+        INSERT INTO terms (title, content, necessary, order_no, user_code, apply_at, status)
+        VALUES (#{title}, #{content}, #{necessary}, #{orderNo}, #{userCode}, #{applyAt}, #{status})
+    </insert>
+
+    <select id="selectTerms" parameterType="map" resultType="TermsDto">
+        SELECT * FROM terms
+        WHERE user_code = #{userCode} and order_no = #{orderNo}
+    </select>
+
+    <select id="selectAllTermsByCode" parameterType="String" resultType="TermsDto">
+        SELECT *
+        FROM terms
+        WHERE user_code = #{user_code}
+        ORDER BY order_no ASC
+    </select>
+
+    <update id="updateTerms" parameterType="TermsDto">
+        UPDATE terms
+        SET title = #{title}, content = #{content}, necessary = ${necessary}, order_no = #{orderNo}, user_code = #{userCode}, apply_at = #{applyAt}, status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTerms" parameterType="int">
+        DELETE FROM terms
+        WHERE id = #{id}
+    </delete>
+</mapper>

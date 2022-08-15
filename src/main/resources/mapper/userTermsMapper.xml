@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.UserTermsMapper">
+    <insert id="insertUserTerms" parameterType="UserTermsDto">
+        INSERT INTO user_terms (user_id, terms_id, status, agreement_at)
+        VALUES (#{userId}, #{termsId}, #{status}, #{agreementAt})
+    </insert>
+    <select id="selectUserTerms" parameterType="int" resultType="UserTermsDto">
+        SELECT *
+        FROM user_terms
+        WHERE id = #{id}
+    </select>
+    <select id="selectAllUserTerms" resultType="UserTermsDto">
+        SELECT *
+        FROM user_terms
+    </select>
+    <update id="updateUserTerms" parameterType="UserTermsDto">
+        UPDATE user_terms
+        SET terms_id = #{terms_id}, status = #{status}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteUserTerms" parameterType="int">
+        DELETE FROM user_terms
+        WHERE id = #{id}
+    </delete>
+</mapper>

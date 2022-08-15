@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+
 @Alias("ProductOptionDto")
 public class ProductOptionDto {
     private Integer productOptionId;
@@ -20,7 +21,7 @@ public class ProductOptionDto {
     private Date updatedAt;
     private Integer updatedBy;
 
-    public boolean isCountable() {
+ public boolean isCountable() {
         return countable;
     }
 
@@ -49,6 +50,7 @@ public class ProductOptionDto {
     }
 
     public void setType(String type) {
+
         this.type = type;
     }
 
@@ -76,11 +78,11 @@ public class ProductOptionDto {
         this.price = price;
     }
 
-    public Integer getOrderNo() {
+    public Integer getOrder() {
         return orderNo;
     }
 
-    public void setOrderNo(Integer orderNo) {
+    public void setOrder(Integer order) {
         this.orderNo = orderNo;
     }
 
@@ -92,7 +94,6 @@ public class ProductOptionDto {
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
-
 
     public Integer getUpdatedBy() {
         return updatedBy;
@@ -118,20 +119,4 @@ public class ProductOptionDto {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "ProductOptionDto{" +
-                "productOptionId=" + productOptionId +
-                ", productId=" + productId +
-                ", type=" + type +
-                ", name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                ", price=" + price +
-                ", order=" + orderNo +
-                ", createdAt='" + createdAt + '\'' +
-                ", createdBy=" + createdBy +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", updatedBy=" + updatedBy +
-                '}';
-    }
 }

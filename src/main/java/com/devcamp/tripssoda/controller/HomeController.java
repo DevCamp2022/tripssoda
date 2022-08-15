@@ -34,7 +34,6 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 
-
 		model.addAttribute("sample_img", "/image/sample_img.png");
 
 		return "home/home.subTiles";

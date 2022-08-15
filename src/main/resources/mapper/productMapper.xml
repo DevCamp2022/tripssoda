@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.ProductMapper">
+<!--    <insert id="insertProduct" parameterType="RegProductDto" useGeneratedKeys="true" keyProperty="productId">-->
+    <insert id="insertProduct" parameterType="RegProductDto">
+		INSERT INTO product
+        (
+        partner_id,
+        title,
+        thumbnail,
+        req_time,
+        keyword,
+        refund_amount,
+        day_cnt,
+        min_member,
+        max_member,
+        prd_intro,
+        course_intro,
+        inclusion,
+        exclusion,
+        additional_info,
+        meeting_point,
+        mandatory_guidance,
+        refund_policy,
+        sale_status,
+        approval_status,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
+        )
+        VALUES
+        (
+        #{partnerId},
+        #{title},
+        #{thumbnail},
+        #{reqTime},
+        #{keyword},
+        #{refundAmount},
+        #{dayCnt},
+        #{minMember},
+        #{maxMember},
+        #{prdIntro},
+        #{courseIntro},
+        #{inclusion},
+        #{exclusion},
+        #{additionalInfo},
+        #{meetingPoint},
+        #{mandatoryGuidance},
+        #{refundPolicy},
+        0,
+        0,
+        now(),
+        #{partnerId},
+        now(),
+        #{partnerId}
+        )
+    </insert>
+</mapper>

@@ -26,18 +26,18 @@
 <div class="side-container">
     <div class="side-container-board">
         <ul>
-            <li id="all"><a href="/admin/boardList?">전체관리</a></li>
-            <li id="noticeBtn"><a href="/admin/boardList?menuCode=M001" data-menu-code="M001">공지사항</a></li>
-            <li id="promoBtn"><a href="/admin/boardList?menuCode=M002">프로모션</a></li>
-            <li id="faqBtn"><a href="/admin/boardList?menuCode=M003">자주묻는질문</a></li>
-            <li id="qBtn"><a href="/admin/inquiry?menuCode=M004">1:1 문의</a></li>
+            <li id="all"><a href="/admin/boardList?">전체관리<span>></span></a></li>
+            <li id="noticeBtn"><a href="/admin/boardList?menuCode=M001" data-menu-code="M001">공지사항<span>></span></a></li>
+            <li id="promoBtn"><a href="/admin/boardList?menuCode=M002">프로모션<span>></span></a></li>
+            <li id="faqBtn"><a href="/admin/boardList?menuCode=M003">FAQ<span>></span></a></li>
+            <li id="qBtn"><a href="/admin/inquiry?menuCode=M004">1:1 문의<span>></span></a></li>
         </ul>
     </div>
 
     <div class="side-container-stats">
         <ul>
-            <li>회원관리</li>
-            <li>파트너관리</li>
+            <li><a href="#"> 회원관리<span>></span></a></li>
+            <li><a href="#"> 파트너관리<span>></span></a></li>
         </ul>
     </div>
 </div>

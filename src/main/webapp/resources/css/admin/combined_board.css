@@ -1,59 +1,70 @@
+
+
 .combined-wrap{
-    height: 900px;
+    height: 1000px;
     padding-top: 30px;
     padding-left: 50px;
+    color: black;
+    width:910px;
+}
 
+.combined-wrap .b-tit{
+    border-left: black solid 3px;
+    margin-top: 30px;
 }
 
 .combined-wrap .b-tit h1{
     font-size : 24px;
-    margin: 10px;
-    margin-bottom: 30px;
+    margin-left: 10px;
+    /*margin-bottom: 30px;*/
 }
 
 
 .combined-wrap .combined-list-tb{
-    width:840px;
+    /*width:840px;*/
+    width: 100%;
 }
 
 .combined-wrap .titb{
     text-align: center;
-    background: pink;
+    background: whitesmoke;
     height:30px;
     width:100px;
+    line-height: 30px;
 }
 
 .combined-wrap .tit{
     text-align: center;
-    background: pink;
-    height:25px;
-    width:300px;
+    background: whitesmoke;
+    height:30px;
+    width:330px;
+    line-height: 30px;
 }
 
 .combined-wrap .titt{
     padding: 5px 0;
     text-align: center;
-    background: pink;
+    background: whitesmoke;
     height:30px;
     width: 950px;
+    line-height: 30px;
 }
 
 .combined-wrap td a{
     text-decoration: none;
+    /*color: dimgray;*/
+    color: black;
 }
 
 
 .combined-wrap .con{
     text-align: center;
-    color:yellow;
+    /*color:yellow;*/
     height:30px;
     line-height: 30px;
 
 }
 
-.combined-wrap .b-tit{
-    border-left: black solid 3px;
-}
 
 .search-container {
     /*background-color: rgb(253, 253, 250);*/
@@ -115,9 +126,11 @@
     color: rgb(165, 165, 165);
 }
 
-.paging{
-    align: center;
+.paging-container{
+    display: flex;
+    justify-content: center;
 }
+
 
 .frm .contit{
     /*width: 840px;*/
@@ -128,4 +141,18 @@
     padding: 5px;
     margin: 0;
 
+}
+
+.combined-wrap-tit{
+    border-left: black solid 3px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.writing-header{
+    font-size : 24px;
+    margin-left: 10px;
+}
+
+.con-td .con{
+    border-bottom: 1px solid whitesmoke;
 }

@@ -7,4 +7,9 @@
 </div>
 <img src="${sample_img}" style="width:300px"/>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/script/sampleJs.js"></script>
+<a href="/register">회원가입</a>
+<a href="/login">로그인</a>
+<a href="/mypage/info">마이페이지</a>
+<a href="/logout">로그아웃</a>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/sample/sampleJs.js"></script>

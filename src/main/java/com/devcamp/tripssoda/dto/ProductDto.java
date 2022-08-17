@@ -4,6 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("ProductDto")
 public class ProductDto {
+    private Integer userId;
     private Integer productId;
     private Integer partnerId;
     private String title;
@@ -31,6 +32,14 @@ public class ProductDto {
     private Integer createdBy;
     private String updatedAt;
     private Integer updatedBy;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -238,6 +247,14 @@ public class ProductDto {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     @Override

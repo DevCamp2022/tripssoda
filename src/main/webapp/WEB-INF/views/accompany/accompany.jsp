@@ -23,7 +23,7 @@
         text-align: center;
     }
     .thumbnail {
-        width: 1200px;
+        width: 800px;
         height: 400px;
         margin: auto;
         text-align: center;
@@ -33,34 +33,34 @@
 
     .wrap {
         flex: 1;
-        width: 600px;
+        width: 800px;
         height: 900px;
         border: 1px solid black;
         margin: auto;
     }
     .wrap > .title {
-        width: 800px;
+        width: 600px;
         height: 200px;
         border: 1px solid black;
         margin: 0 auto 0 auto;
         text-align: center;
     }
     .wrap > .region {
-        width: 800px;
+        width: 600px;
         height: 200px;
         border: 1px solid black;
         margin: 0 auto 0 auto;
         text-align: center;
     }
     .wrap > .content {
-        width: 800px;
+        width: 600px;
         height: 200px;
         border: 1px solid black;
         margin: 0 auto 0 auto;
         text-align: center;
     }
     .wrap > .tag {
-        width: 800px;
+        width: 600px;
         height: 50px;
         border: 1px solid black;
         margin: 0 auto 0 auto;
@@ -69,7 +69,7 @@
 
     .wrap2 {
         display: flex;
-        width: 800px;
+        width: 600px;
         height: 50px;
         margin: auto;
         text-align: center;
@@ -97,7 +97,7 @@
     }
     .profile {
         flex: 1;
-        width: 300px;
+        width: 400px;
         height: 300px;
         border: 1px solid black;
         margin: 0 auto 0 auto;
@@ -105,7 +105,7 @@
     }
     .wrap3 {
         display: flex;
-        width: 800px;
+        width: 600px;
         height: 100px;
         border: 1px solid black;
         margin: auto;
@@ -153,7 +153,7 @@
         <div class="tag">해시태그 : <c:out value="${accompanyDto.hashtag}"/></div>
         <div class="wrap2">
             <div class="date">
-                등록일 : <fmt:formatDate value="${accompanyDto.createdAt}" pattern="yyyy.MM.dd hh:mm" />
+                등록일 : <fmt:formatDate value="${accompanyDto.createdAt}" pattern="yyyy.MM.dd HH:mm" />
             </div>
             <div class="view-cnt">
                 조회수 : ${accompanyDto.viewCnt}
@@ -167,7 +167,14 @@
 </div>
 </form>
 
-<div class="profile">프로필</div>
+<div class="profile">
+    <div>
+        프로필
+    </div>
+    <div class="chat-url">
+        <a href="https://${accompanyDto.chatUrl}">오픈채팅방입장</a>
+    </div>
+</div>
 </div>
 
 <script>

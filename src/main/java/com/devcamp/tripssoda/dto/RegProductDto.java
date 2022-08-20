@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Alias("RegProductDto")
 public class RegProductDto implements Serializable {
+    private Integer userId;
     //product
     private Integer productId;
     private Integer partnerId;
@@ -60,6 +61,70 @@ public class RegProductDto implements Serializable {
     private Integer scheduleCreatedBy;
     private String scheduleUpdatedAt;
     private Integer scheduleUpdatedBy;
+
+    public RegProductDto() {
+    }
+
+    public RegProductDto(Integer userId, Integer productId, Integer partnerId, String title, String thumbnail, Integer rating, Integer reqTime, String keyword, Integer refundAmount, Integer dayCnt, Integer limitQty, Integer minMember, Integer maxMember, String prdIntro, String courseIntro, String inclusion, String exclusion, String additionalInfo, String meetingPoint, String mandatoryGuidance, String refundPolicy, Integer totalLikes, Integer saleStatus, Integer approvalStatus, String createdAt, Integer createdBy, String updatedAt, Integer updatedBy, Integer productOptionId, String type, String name, String content, Integer price, Integer orderNo, String optionCreatedAt, Integer optionCreatedBy, String optionUpdatedAt, Integer optionUpdatedBy, Integer productScheduleId, String startDate, String endDate, Integer schedulePrice, Integer currentMember, Integer scheduleMinMember, Integer scheduleMaxMember, Integer memberStatus, String scheduleCreatedAt, Integer scheduleCreatedBy, String scheduleUpdatedAt, Integer scheduleUpdatedBy) {
+        this.userId = userId;
+        this.productId = productId;
+        this.partnerId = partnerId;
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.rating = rating;
+        this.reqTime = reqTime;
+        this.keyword = keyword;
+        this.refundAmount = refundAmount;
+        this.dayCnt = dayCnt;
+        this.limitQty = limitQty;
+        this.minMember = minMember;
+        this.maxMember = maxMember;
+        this.prdIntro = prdIntro;
+        this.courseIntro = courseIntro;
+        this.inclusion = inclusion;
+        this.exclusion = exclusion;
+        this.additionalInfo = additionalInfo;
+        this.meetingPoint = meetingPoint;
+        this.mandatoryGuidance = mandatoryGuidance;
+        this.refundPolicy = refundPolicy;
+        this.totalLikes = totalLikes;
+        this.saleStatus = saleStatus;
+        this.approvalStatus = approvalStatus;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
+        this.productOptionId = productOptionId;
+        this.type = type;
+        this.name = name;
+        this.content = content;
+        this.price = price;
+        this.orderNo = orderNo;
+        this.optionCreatedAt = optionCreatedAt;
+        this.optionCreatedBy = optionCreatedBy;
+        this.optionUpdatedAt = optionUpdatedAt;
+        this.optionUpdatedBy = optionUpdatedBy;
+        this.productScheduleId = productScheduleId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.schedulePrice = schedulePrice;
+        this.currentMember = currentMember;
+        this.scheduleMinMember = scheduleMinMember;
+        this.scheduleMaxMember = scheduleMaxMember;
+        this.memberStatus = memberStatus;
+        this.scheduleCreatedAt = scheduleCreatedAt;
+        this.scheduleCreatedBy = scheduleCreatedBy;
+        this.scheduleUpdatedAt = scheduleUpdatedAt;
+        this.scheduleUpdatedBy = scheduleUpdatedBy;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -437,10 +502,27 @@ public class RegProductDto implements Serializable {
         this.scheduleCreatedBy = scheduleCreatedBy;
     }
 
+    public String getScheduleUpdatedAt() {
+        return scheduleUpdatedAt;
+    }
+
+    public void setScheduleUpdatedAt(String scheduleUpdatedAt) {
+        this.scheduleUpdatedAt = scheduleUpdatedAt;
+    }
+
+    public Integer getScheduleUpdatedBy() {
+        return scheduleUpdatedBy;
+    }
+
+    public void setScheduleUpdatedBy(Integer scheduleUpdatedBy) {
+        this.scheduleUpdatedBy = scheduleUpdatedBy;
+    }
+
     @Override
     public String toString() {
         return "RegProductDto{" +
-                "productId=" + productId +
+                "userId=" + userId +
+                ", productId=" + productId +
                 ", partnerId=" + partnerId +
                 ", title='" + title + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +

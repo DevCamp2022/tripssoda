@@ -1,3 +1,24 @@
+
+
+//thumbnail upload
+$("#uploadThumb").change(function(){
+    //정규표현식
+    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+    var f = $(this)[0].files[0]; //현재 선택한 파일
+    if(!f.type.match(reg)){
+        alert("유효한 확장자가 아닙니다.");
+        return;
+    }
+    
+    var reader = new FileReader();
+    reader.onload = function(e){
+        let newImg = document.createElement('img');
+        newImg.setAttribute("src", e.target.result);
+        $(".td-thumbnail").append(newImg);
+    }
+    reader.readAsDataURL($(this)[0].files[0]);
+});
+
 //textarea -> ckeditor
 CKEDITOR.replace('prdIntro',
     {filebrowserUploadUrl:'/ckeditor/fileUploader'
@@ -28,19 +49,42 @@ $(document).on("click",".hashes .delBtn",function(){
 
 //포함사항, 미포함사항, 추가사항 항목 추가 버튼이벤트
 $("#add-inclusion").click(function(){
-    let s = '<input type="text" name="inclusion" id="inclusion"/><br>';
+    let s = '<div class="inclusion">';
+    s += '<input type="text" name="inclusion" id="inclusion"/>';
+    s += '<button type="button" class="inclusion-delBtn">삭제하기</button><br></div>';
     $(".td-inclusion").append(s);
 });
 
 $("#add-exclusion").click(function(){
-    let s = '<input type="text" name="exclusion" id="exclusion"/><br>';
+    let s = '<div class="exclusion">';
+    s += '<input type="text" name="exclusion" id="exclusion"/>';
+    s += '<button type="button" class="exclusion-delBtn">삭제하기</button><br></div>';
     $(".td-exclusion").append(s);
 });
 
 $("#add-additionalInfo").click(function(){
-    let s = '<input type="text" name="additionalInfo" id="additionalInfo"/><br>';
+    let s = '<div class="additionalInfo">';
+    s += '<input type="text" name="additionalInfo" id="additionalInfo"/>';
+    s += '<button type="button" class="additionalInfo-delBtn">삭제하기</button><br></div>';
     $(".td-additionalInfo").append(s);
 });
+
+//포함사항, 미포함사항, 추가사항 항목 삭제 이벤트
+$(document).on("click",".inclusion .inclusion-delBtn",function(){
+    let idx = $(".inclusion .inclusion-delBtn").index(this);
+    $(".inclusion .inclusion-delBtn").eq(idx).parent().remove();
+});
+
+$(document).on("click",".exclusion .exclusion-delBtn",function(){
+    let idx = $(".exclusion .exclusion-delBtn").index(this);
+    $(".exclusion .exclusion-delBtn").eq(idx).parent().remove();
+});
+
+$(document).on("click",".additionalInfo .additionalInfo-delBtn",function(){
+    let idx = $(".additionalInfo .additionalInfo-delBtn").index(this);
+    $(".additionalInfo .additionalInfo-delBtn").eq(idx).parent().remove();
+});
+
 
 
 //상품옵션-선택형-옵션추가 이벤트
@@ -68,24 +112,52 @@ $(document).on("click",".content-wrapper .content-delBtn",function(){
     $(".content-wrapper .content-delBtn").eq(idx).parent().remove();
 });
 
+//초기 상품옵션 넣기 버튼이벤트
+$(".init-option-addBtn").click(function(){
+    $(this).hide();
+    $(".init-option-delBtn").show();
+    $(".init-product-option").show();
+    $("#init-type-s").attr("disabled",false);
+    $("#init-type-a").attr("disabled",false);
+})
 
+$(".init-option-delBtn").click(function(){
+    $(this).hide();
+    $(".init-option-addBtn").show();
+    $(".init-product-option").hide();
+    $("#init-type-s").attr("disabled",true);
+    $("#init-type-a").attr("disabled",true);
+});
 
 //상품옵션 type선택 이벤트
 let optionCnt = 1;
 $(document).ready(function(){
-    for(let i=0; i<optionCnt; i++){
-        $(".type_ans_" + i).hide();
-
-        $("input[name='regProductDtoList[" + i + "].type']").change(function(){
-            if($("input[name='regProductDtoList[" + i + "].type']:checked").val() == "S") {
-                $(".type_ans_" + i).hide();
-                $(".type_sel_" + i).show();
-            } else if ($("input[name='regProductDtoList[" + i + "].type']:checked").val() == "A") {
-                $(".type_sel_" + i).hide();
-                $(".type_ans_" + i).show();
-            }
-        })
-    }
+    $(".init-product-option").hide();
+    $(".type_ans_0").hide();
+    $(".init-option-delBtn").hide();
+    $("#init-type-s").attr("disabled",true);
+    $("#init-type-a").attr("disabled",true);
+    $("input[name='regProductOptionListDto[0].type']").change(function(){
+        if($("input[name='regProductOptionListDto[0].type']:checked").val() == "S") {
+            // $("#init-type-a").attr("disabled",true);
+            // $("#init-type-s").attr("disabled",false);
+            $(".input-option-a-name_0").attr("disabled",true);
+            $(".input-option-s-name_0").attr("disabled",false);
+            $(".input-option-s-content_0").attr("disabled",false);
+            $(".input-option-s-price_0").attr("disabled",false);
+            $(".type_ans_0").hide();
+            $(".type_sel_0").show();
+        } else if ($("input[name='regProductOptionListDto[0].type']:checked").val() == "A") {
+            // $("#init-type-a").attr("disabled",false);
+            // $("#init-type-s").attr("disabled",true);
+            $(".input-option-a-name_0").attr("disabled",false);
+            $(".input-option-s-name_0").attr("disabled",true);
+            $(".input-option-s-content_0").attr("disabled",true);
+            $(".input-option-s-price_0").attr("disabled",true);
+            $(".type_sel_0").hide();
+            $(".type_ans_0").show();
+        }
+    })
 });
 
 //test
@@ -101,8 +173,8 @@ $("#add-product-option").click(function(){
     //let s = '<table><tr><th>옵션명</th><th>옵션</th></tr><tr><td><input type="text" name="name"></td><td class="td-option-content"><input type="text" name="content"><button type="button" id="add-option">옵션추가</button><br></td></tr><tr><td><button type="button" id="add-product-option">상품옵션추가하기</button></td></tr></table>';
     let s = '';
     s += '<div class="option-wrap">'
-    s += '<input type="radio" name="regProductDtoList[' + optionCnt + '].type" value="S" checked>선택형';
-    s += '<input type="radio" name="regProductDtoList[' + optionCnt + '].type" value="A">단답형';
+    s += '<input type="radio" name="regProductOptionListDto[' + optionCnt + '].type" value="S" checked>선택형';
+    s += '<input type="radio" name="regProductOptionListDto[' + optionCnt + '].type" value="A">단답형';
     s += '<div class="type_sel_' + optionCnt + '">';
     s += '<table>';
     s += '<tr>';
@@ -111,13 +183,13 @@ $("#add-product-option").click(function(){
     s += '</tr>';
     s += '<tr>';
     s += '<td>';
-    s += '<input type="text" name="regProductDtoList[' + optionCnt + '].name">';
+    s += '<input type="text" class="input-option-s-name_' + optionCnt + '" name="regProductOptionListDto[' + optionCnt + '].name">';
     s += '</td>';
     s += '<td class="td-option-content_'+optionCnt+'">';
-    s += '<div class="option-content_'+optionCnt+'" name="regProductDtoList[' + optionCnt + '].content">';
-    s += '<input type="text" name="regProductDtoList[' + optionCnt + '].content">';
-    s += '<input type="number" name="regProductDtoList[' + optionCnt + '].price">';
-    s += '<input type="text" name="regProductDtoList[' + optionCnt + '].orderNo" value="'+optionCnt+'">';
+    s += '<div class="option-content_'+optionCnt+'" name="regProductOptionListDto[' + optionCnt + '].content">';
+    s += '<input type="text" class="input-option-s-content_' + optionCnt + '" name="regProductOptionListDto[' + optionCnt + '].content">';
+    s += '<input type="number" class="input-option-s-price_' + optionCnt + '" name="regProductOptionListDto[' + optionCnt + '].price">';
+    s += '<input type="text" name="regProductOptionListDto[' + optionCnt + '].orderNo" value="'+optionCnt+'">';
     s += '<button type="button" class="add-option">옵션추가</button><br>';
     s += '</div>';
     s += '</td>';
@@ -132,8 +204,8 @@ $("#add-product-option").click(function(){
     s += '</tr>';
     s += '<tr>';
     s += '<td>';
-    s += '<input type="text" name="regProductDtoList[' + optionCnt + '].name">';
-    s += '<input type="text" name="regProductDtoList[' + optionCnt + '].orderNo" value="'+optionCnt+'">';
+    s += '<input type="text" class="input-option-a-name_' + optionCnt + '" name="regProductOptionListDto[' + optionCnt + '].name">';
+    s += '<input type="text" name="regProductOptionListDto[' + optionCnt + '].orderNo" value="'+optionCnt+'">';
     s += '</td>';
     s += '</tr>';
     s += '</table>';
@@ -144,11 +216,19 @@ $("#add-product-option").click(function(){
 
     $(document).ready(function(){
         for(let i=0; i<optionCnt; i++){
-            $("input[name='regProductDtoList[" + i + "].type']").change(function(){
-                if($("input[name='regProductDtoList[" + i + "].type']:checked").val() == "S") {
+            $("input[name='regProductOptionListDto[" + i + "].type']").change(function(){
+                if($("input[name='regProductOptionListDto[" + i + "].type']:checked").val() == "S") {
+                    $(".input-option-a-name_"+i).attr("disabled",true);
+                    $(".input-option-s-name_"+i).attr("disabled",false);
+                    $(".input-option-s-content_"+i).attr("disabled",false);
+                    $(".input-option-s-price_"+i).attr("disabled",false);
                     $(".type_ans_" + i).hide();
                     $(".type_sel_" + i).show();
-                } else if ($("input[name='regProductDtoList[" + i + "].type']:checked").val() == "A") {
+                } else if ($("input[name='regProductOptionListDto[" + i + "].type']:checked").val() == "A") {
+                    $(".input-option-a-name_"+i).attr("disabled",false);
+                    $(".input-option-s-name_"+i).attr("disabled",true);
+                    $(".input-option-s-content_"+i).attr("disabled",true);
+                    $(".input-option-s-price_"+i).attr("disabled",true);
                     $(".type_sel_" + i).hide();
                     $(".type_ans_" + i).show();
                 }
@@ -168,16 +248,121 @@ $(document).on("click",".option-wrap .option-delBtn",function(){
     console.log("=======================");
 });
 
+//상품일정(start-end)선택 후 일정list 출력
+$(document).on("change","#startDate",function(){
+    if($("#endDate").val() == null || $("#endDate").val() == '') {
+        return
+    };
+    getScheduleList();
+})
+
+$(document).on("change","#endDate",function(){
+    if($("#startDate").val() == null || $("#startDate").val() == '') {
+        return
+    };
+    getScheduleList();
+})
+
+function getScheduleList() {
+    $(".table-schedule").html("");
+    let v = "";
+    v += "<tr>";
+    v += "<th>번호</th>";
+    v += "<th>시작여행일</th>";
+    v += "<th>가격</th>";
+    v += "<th>모집 최소인원</th>";
+    v += "<th>모집 최대인원</th>";
+    v += "<th>일정 삭제</th>";
+    $(".table-schedule").html(v);
+    
+
+    const start = $("#startDate").val();
+    const end = $("#endDate").val();
+
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    const durMilis = endDate.getTime() - startDate.getTime();
+    const durDays = durMilis/(1000*60*60*24);
+
+    $('input[name=dayCnt]').attr('value',`${durDays+1}`);
+
+    // const req = $("#reqTime").val();
+    // const reqMilis = new Date(req).getTime();
+
+    let scheduleCnt = 0;
+    while(startDate <= endDate) {
+
+        let realStart = startDate.toISOString().split("T")[0];
+
+        let s = "";
+        s += "<tr class='tr-schedule'>";
+        s += "<td>" + (scheduleCnt + 1) + "</td>";
+        s += "<td>";
+        s += realStart + " " + startDate.toString().slice(0, 3);
+        s += "<input type='text' name='regProductScheduleListDto[" + scheduleCnt + "].startDate' value='" + realStart + "'>";
+        s += "</td>";
+        s += "<td>";
+        s += "<input type='text' class='schedulePrice_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].schedulePrice'>";
+        s += "</td>";
+        s += "<td>";
+        s += "<input type='text' class='scheduleMinMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMinMember'>";
+        s += "</td>";
+        s += "<td>";
+        s += "<input type='text' class='scheduleMaxMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMaxMember'>";
+        s += "</td>";
+        s += "<td><span class='schedule-delBtn'>X<span></td>";
+        s += "</tr>";
+        $(".table-schedule").append(s);
+		startDate.setDate(startDate.getDate() + 1);
+        scheduleCnt++;
+	}
+}
+
+//상품상세일정 삭제하기
+$(document).on("click",".tr-schedule .schedule-delBtn",function(){
+    let idx = $(".tr-schedule .schedule-delBtn").index(this);
+    $(".tr-schedule .schedule-delBtn").eq(idx).parent().parent().remove();
+});
+
+
+//상품상세일정 첫번째 일정 입력값을 전체 기본값으로 설정
+$(document).on("keyup",".schedulePrice_0",function(){
+    let len = $('input[name=dayCnt]').val();
+    let repeater = $(".schedulePrice_0").val();
+    for(let i=1; i<=len; i++) {
+        $(".schedulePrice_"+i+"").attr('value',repeater);
+    }
+});
+$(document).on("keyup",".scheduleMinMember_0",function(){
+    let len = $('input[name=dayCnt]').val();
+    let repeater = $(".scheduleMinMember_0").val();
+    for(let i=1; i<=len; i++) {
+        $(".scheduleMinMember_"+i+"").attr('value',repeater);
+    }
+});
+$(document).on("keyup",".scheduleMaxMember_0",function(){
+    let len = $('input[name=dayCnt]').val();
+    let repeater = $(".scheduleMaxMember_0").val();
+    for(let i=1; i<=len; i++) {
+        $(".scheduleMaxMember_"+i+"").attr('value',repeater);
+    }
+});
+
+
+
+
+
 function valid() {
     if($("#title").val() == "") {
         alert("상품제목을 입력해 주세요");
         return false;
     }
-    // 파일업로더 구현 후 추가할 것
-    // if($("#thumbnail").val() == "") {
-    //     alert("썸네일 이미지를 첨부해 주세요.");
-    //     return false;
-    // }
+
+    if($("#thumbnail").val() == "") {
+        alert("썸네일 이미지를 첨부해 주세요.");
+        return false;
+    }
 
     if($("#reqTime").val() == "") {
         alert("여행소요시간을 입력해 주세요.");
@@ -234,7 +419,6 @@ function valid() {
         return false;
     }
 
-    console.log("모든 유효성을 통과함");
     return true;
 }
 

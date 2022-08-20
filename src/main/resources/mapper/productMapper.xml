@@ -3,8 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="com.devcamp.tripssoda.mapper.ProductMapper">
-<!--    <insert id="insertProduct" parameterType="RegProductDto" useGeneratedKeys="true" keyProperty="productId">-->
-    <insert id="insertProduct" parameterType="RegProductDto">
+    <insert id="insertProduct" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="productId">
 		INSERT INTO product
         (
         partner_id,
@@ -53,9 +52,69 @@
         0,
         0,
         now(),
-        #{partnerId},
+        #{userId},
         now(),
-        #{partnerId}
+        #{userId}
+        )
+    </insert>
+
+    <insert id="insertProductOptionList" parameterType="RegProductOptionDto">
+        INSERT INTO product_option
+        (
+        product_id,
+        type,
+        name,
+        content,
+        price,
+        order_no,
+        countable,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
+        )
+        VALUES
+        (
+        #{productId},
+        #{type},
+        #{name},
+        #{content},
+        #{price},
+        #{orderNo},
+        "N",
+        now(),
+        #{userId},
+        now(),
+        #{userId}
+        )
+    </insert>
+
+    <insert id="insertProductSchedule" parameterType="RegProductScheduleDto">
+        INSERT INTO product_schedule
+        (
+        product_id,
+        start_date,
+        end_date,
+        price,
+        min_member,
+        max_member,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
+        )
+        VALUES
+        (
+        #{productId},
+        #{scheduleStartDate},
+        #{scheduleEndDate},
+        #{schedulePrice},
+        #{scheduleMinMember},
+        #{scheduleMaxMember},
+        now(),
+        #{userId},
+        now(),
+        #{userId}
         )
     </insert>
 </mapper>

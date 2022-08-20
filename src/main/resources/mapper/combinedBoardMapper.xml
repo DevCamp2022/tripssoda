@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
-<mapper namespace="com.devcamp.tripssoda.mapper.AdminBoardMapper">
+<mapper namespace="com.devcamp.tripssoda.mapper.CombinedBoardMapper">
 
     <select id="count" resultType="int">
         SELECT count(*) FROM combined_board
@@ -20,9 +20,9 @@
 
     <insert id="insert" parameterType="CombinedBoardDto">
         INSERT INTO combined_board
-            (title, content, user_id, menu_code, created_by)
+            (title, content, user_id, menu_code, created_by, updated_by)
         VALUES
-            (#{title}, #{content}, #{userId}, #{menuCode}, #{userId})
+            (#{title}, #{content}, #{userId}, #{menuCode}, #{userId}, #{userId} )
     </insert>
 
     <select id="selectAllBoard" resultType="CombinedBoardDto">
@@ -115,5 +115,11 @@
             menu_code = #{menuCode}
         </if>
 
+    </select>
+
+    <select id="getStatus" parameterType="int" resultType="int">
+        SELECT status
+        FROM combined_board
+        WHERE id = #{id}
     </select>
 </mapper>

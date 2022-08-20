@@ -1,3 +1,6 @@
+CKEDITOR.replace('unitContent',
+    {filebrowserUploadUrl:'/ckeditor/fileUploader'});
+
 $('#boardTitle').on('click',function(){
     $.ajax({
         type: 'get',
@@ -53,8 +56,13 @@ $('#bDelBtn').click(function(){
                 data : { idArr : checkArr ,
                          menuCode : menuCode },
                 success : function(data){
-                    alert("글이 삭제되었습니다");
-                    location.href = "/admin/boardList";
+                    if(data=="success"){
+                        alert("글이 삭제되었습니다");
+                        location.href = "/admin/boardList";
+                    }else if(data=="err"){
+                        alert("글 삭제에 실패했습니다");
+                    }
+
                 },
                 error : function(){
                     console.log(err);
@@ -85,5 +93,3 @@ $('table.combined-list-tb').on('click', "#writeBtn", function() {
 //
 //     $('.row_check').prop('checked',is_check);
 // })
-
-

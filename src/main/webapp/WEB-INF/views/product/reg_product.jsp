@@ -4,10 +4,12 @@
 <link href="/css/product/reg_product.css" rel='stylesheet' />
 <div class="content">
   <!-- <form action="/product/register" method="POST" onsubmit="return valid()"> -->
-  <form action="/product/register" method="POST">
+  <!-- form action="/product/register" method="POST"-->
+  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data">
   <!--나중에 hidden으로 바꿀것-->
+  <input type="text" name="userId" value="${sessionScope.userId}">
   <input type="text" name="partnerId" value="${sessionScope.partnerId}">
-  <table class="table-borderd">
+  <table class="table-borderd product-table">
     <!-- 상품 -->
     <tr>
       <th><span class="man-star">*</span>상품제목</th>
@@ -17,8 +19,8 @@
     </tr>
     <tr>
       <th><span class="man-star">*</span>대표썸네일</th>
-      <td>
-        <input type="file" name="thumbnail" id="thumbnail"/>
+      <td class="td-thumbnail">
+        <input type="file" name="uploadThumb" id="uploadThumb"/>
       </td>
     </tr>
     <tr>
@@ -44,7 +46,7 @@
     <tr>
       <th><span class="man-star">*</span>총 기간(단위:일)</th>
       <td>
-        <input type="text" name="dayCnt" id="dayCnt"/>
+        <input type="number" name="dayCnt" id="dayCnt" onblur="handleSchedule();"/>
       </td>
     </tr>
     <tr>
@@ -114,10 +116,14 @@
     <tr>
       <th>상품옵션</th>
       <td class="product-option">
-        <button type="button" id="add-product-option">상품옵션추가하기</button><br>
-        <input type="radio" name="regProductDtoList[0].type" value="S" checked>선택형
-        <input type="radio" name="regProductDtoList[0].type" value="A">단답형
-
+        <!-- 초기 상품옵션 추가버튼 -->
+        <button type="button" class="init-option-addBtn">상품옵션넣기</button>
+        <button type="button" class="init-option-delBtn">상품옵션삭제</button>
+        <div class="init-product-option">
+          <button type="button" id="add-product-option">상품옵션추가하기</button><br>
+          <input type="radio" id="init-type-s" name="regProductOptionListDto[0].type" value="S" checked >선택형
+          <input type="radio" id="init-type-a" name="regProductOptionListDto[0].type" value="A" >단답형
+        
         <!-- 선택형 checked -->
         <div class="type_sel_0">
           <table>
@@ -127,20 +133,20 @@
             </tr>
             <tr>
               <td>
-                <input type="text" name="regProductDtoList[0].name">
+                <input class="input-option-s-name_0" type="text"  name="regProductOptionListDto[0].name">
               </td>
               <td class="td-option-content_0">
-                <div class="option-content_0" name="regProductDtoList[0].content">
-                <input type="text" name="regProductDtoList[0].content">
-                <input type="number" name="regProductDtoList[0].price">
-                <input type="text" name="regProductDtoList[0].orderNo" value="0">
+                <div class="option-content_0" name="regProductOptionListDto[0].content">
+                <input class="input-option-s-content_0" type="text" name="regProductOptionListDto[0].content">
+                <input class="input-option-s-price_0" type="number" name="regProductOptionListDto[0].price">
+                <input type="text" name="regProductOptionListDto[0].orderNo" value="0">
                 <button type="button" class="add-option">옵션추가</button><br>
                 </div>
               </td>
             </tr>
           </table>
         </div>
-
+      </div>
         <!-- 단답형 checked -->
         <div class="type_ans_0" id="type_ans1">
           <table>
@@ -149,12 +155,42 @@
             </tr>
             <tr>
               <td>
-                <input type="text" name="regProductDtoList[0].name">
-                <input type="text" name="regProductDtoList[0].orderNo" value="0">
+                <input type="text" class="input-option-a-name_0" name="regProductOptionListDto[0].name">
+                <input type="text" name="regProductOptionListDto[0].orderNo" value="0">
               </td>
             </tr>
           </table>
         </div>
+      </td>
+    </tr>
+    <tr>
+      <th><span class="man-star">*</span>상품일정</th>
+      <td class="td-schedule">
+        <table>
+          <tr>
+            <th>여행상품 시작일</th>
+            <th>여행상품 종료일</th>
+          </tr>
+          <tr>
+            <td>
+              <input type="date" id="startDate">
+            </td>
+            <td class="td-schedule">
+              <input type="date" id="endDate">
+              <input type="text" name="dayCnt" id="dayCnt">
+            </td>
+          </tr>
+        </table>
+        <table class="table-schedule">
+          <tr>
+            <th>번호</th>
+            <th>시작여행일</th>
+            <th>가격</th>
+            <th>모집 최소인원</th>
+            <th>모집 최대인원</th>
+            <th>일정 삭제</th>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>

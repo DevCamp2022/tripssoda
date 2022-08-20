@@ -1,9 +1,7 @@
 package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.PartnerDto;
-import com.devcamp.tripssoda.dto.SampleDto;
 import com.devcamp.tripssoda.mapper.PartnerMapper;
-import com.devcamp.tripssoda.mapper.SampleMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

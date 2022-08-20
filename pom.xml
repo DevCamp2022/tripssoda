@@ -206,7 +206,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- 추가 Dependencies는 여기 아래에 추가해주시기 바랍니다. -->
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -218,8 +217,18 @@
 			<version>1.9.7</version>
 			<scope>runtime</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.14</version>
+		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
     <build>
         <plugins>
             <plugin>

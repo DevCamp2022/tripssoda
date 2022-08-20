@@ -1,0 +1,120 @@
+.div-category-button-wrap {
+  text-align: center;
+  /* margin: 0 auto; */
+}
+
+.div-category-button{
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 20px;
+  clear:both;
+}
+
+.div-category-button>img{
+  height: 50px;
+}
+
+.div-editor {
+  display: inline-block;
+  width: 250px;
+  height: 327.5px;
+  border-radius: 15px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(233, 233, 233);
+  box-shadow: rgb(0 0 0 / 7%) 1px 2px 30px;
+  margin: 11px 5.5px 11px 0px;
+}
+
+.div-list-wrap{
+  text-align: center;
+  width: 100%;
+  overflow:hidden;
+  border: 1px solid black;
+}
+
+.img-thumbnail{
+  width: 250px;
+  height: 190px;
+  border-radius: 15px;
+}
+
+.thumbnail-wrapper{
+  width: 250px;
+  height: 190px;
+}
+
+.main-tourTitle>h4{
+  color: rgb(37, 37, 37);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: left;
+  height: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 2;
+  margin: 0px 0px 6px;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.main-tourDate{
+  color: rgb(37, 37, 37);
+  font-size: 14px;
+  font-weight: normal;
+  margin: 8px 0px 0px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.main-tourPrice{
+  text-align: end;
+  margin: 20px 0px 0px;
+}
+
+.main-tourPrice>b{
+  color: rgb(0, 206, 124);
+  font-size: 19px;
+  font-weight: bold;
+  margin-right: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.txt_post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: box;
+  margin-top:1px;
+  max-height:80px;
+  overflow:hidden;
+  vertical-align:top;
+  text-overflow: ellipsis;
+  word-break:break-all;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3
+}
+
+.prevBtn, .nextBtn{
+  display: inline-block;
+  cursor: pointer;
+  background-color: gray;
+}
+
+.nextBtn{
+  display: inline-block;
+  cursor: pointer;
+}
+
+.foo{
+  animation-duration: 3s;
+  animation-name: slidein;
+}

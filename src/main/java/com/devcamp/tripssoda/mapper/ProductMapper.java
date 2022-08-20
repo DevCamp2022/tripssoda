@@ -1,18 +1,15 @@
 package com.devcamp.tripssoda.mapper;
 
-import com.devcamp.tripssoda.dto.ProductDto;
-import com.devcamp.tripssoda.dto.RegProductDto;
-import com.devcamp.tripssoda.dto.RegProductOptionDto;
-import com.devcamp.tripssoda.dto.RegProductOptionListDto;
+import com.devcamp.tripssoda.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ProductMapper {
-//    아래꺼 사용중
-//    public void insertProduct(RegProductDto dto);
     public void insertProduct(ProductDto dto);
-    public void insertProductOption(RegProductDto dto);
-    public void insertProductOptionList(RegProductOptionDto PODto);
-
-    public void insertProductSchedule(RegProductDto dto);
+    public void insertProductOption(RegProductOptionDto PODto);
+    public void insertProductSchedule(RegProductScheduleDto PSDto);
+    public List<ProductDto> selectCategoryList(String category);
+    public List<GetMainListProductDto> selectMainList(String category);
 }

@@ -2,16 +2,14 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.service.ProductService;
-import com.devcamp.tripssoda.util.ImageResize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
+import java.util.List;
 
 
 @Controller
@@ -26,8 +24,8 @@ public class ProductController {
 
     @GetMapping("/register")
     public String registerProduct(HttpSession session) {
-        session.setAttribute("userId", "1");
-        session.setAttribute("partnerId", "1");
+        session.setAttribute("userId", "2");
+        session.setAttribute("partnerId", "2");
         return "product/reg_product.mainTiles";
     }
 
@@ -40,36 +38,20 @@ public class ProductController {
             @ModelAttribute(value = "RegProductOptionListDto[]") RegProductOptionListDto regProductOptionListDto,
             @ModelAttribute(value = "RegProductScheduleListDto[]") RegProductScheduleListDto regProductScheduleListDto) {
 
-        String realPath = request.getServletContext().getRealPath("/thumbnail");
-        UUID uuid = UUID.randomUUID();
-        String uploadName = uuid + uploadThumb.getOriginalFilename();
-
-        File folder = new File(realPath);
-        if(uploadThumb.isEmpty())
-            dto.setThumbnail("Empty");
-        else {
-            dto.setThumbnail(uploadName);
-            if(!folder.exists()){
-                try{
-                    folder.mkdirs(); // 폴더 생성
-                }catch(Exception e){
-                    e.getStackTrace();
-                }
-            }
-            //실제 업로드
-            try {
-                File file = new File(realPath + File.separator + uploadName);
-                uploadThumb.transferTo(file);
-                ImageResize.thumbnailResize(realPath, uploadName);
-
-            } catch (IllegalStateException | IOException e) {
-            }
-
-        }
-
-        productService.regProductTwo(dto, regProductOptionListDto, regProductScheduleListDto);
-        return "redirect:/product/register";
+        System.out.println("[Controller]regProductScheduleListDto = " + regProductScheduleListDto);
+        productService.regProduct(dto, regProductOptionListDto, regProductScheduleListDto, request, uploadThumb);
+        return "redirect:/product/register"; //나중에 마이페이지 파트너 상품등록 확인뷰로 바꿀것
     }
 
+//    @GetMapping("/list")
+//    public String getCategoryList(Model model) {
+//        productService.aa(model);
+//        return "product/list_product.mainTiles";
+//    }
 
+    @GetMapping("/list")
+    public String getCategoryList(Model model) {
+        productService.getMainList(model);
+        return "product/list_product.mainTiles";
+    }
 }

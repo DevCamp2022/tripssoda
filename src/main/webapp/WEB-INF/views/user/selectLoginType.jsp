@@ -9,6 +9,7 @@
 <script>
     let msg = '${msg}'
     if(msg == "READ_INFO_ERR") alert("잘못된 접근입니다. 다시 로그인해주세요");
+    if(msg == "PWD_MOD_OK") alert("새로운 비밀번호가 설정되었습니다.");
 </script>
 <div class="main">
     <input class="to-url" type="hidden" value="${param.toURL}">

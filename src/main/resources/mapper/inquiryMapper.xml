@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.InquiryMapper">
+    <select id="selectUserInquiry" parameterType="int" resultType="InquiryDto">
+        SELECT *
+        FROM inquiry
+        WHERE id = #{id}
+    </select>
+    <select id="selectUserInquiryCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM inquiry
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectAllUserInquiry" parameterType="map" resultType="InquiryDto">
+        SELECT *
+        FROM inquiry
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+</mapper>

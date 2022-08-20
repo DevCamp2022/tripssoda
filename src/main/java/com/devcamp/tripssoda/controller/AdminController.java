@@ -3,7 +3,12 @@ package com.devcamp.tripssoda.controller;
 import com.devcamp.tripssoda.dto.CombinedBoardDto;
 import com.devcamp.tripssoda.dto.PageHandler;
 import com.devcamp.tripssoda.dto.SearchCondition;
+import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AdminBoardService;
+import com.devcamp.tripssoda.service.AdminUserService;
+import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.util.SkipChecking;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,31 +19,54 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@EnableAspectJAutoProxy
 @RequestMapping("/admin")
-public class AdminBoardController {
+public class AdminController {
     private final AdminBoardService adminBoardService;
+    private final AdminUserService adminUserService;
+    private final UserService userService;
 
-    public AdminBoardController(AdminBoardService adminBoardService){
+    public AdminController(AdminBoardService adminBoardService,
+                           AdminUserService adminUserService,
+                           UserService userService)
+    {
         this.adminBoardService = adminBoardService;
+        this.adminUserService = adminUserService;
+        this.userService = userService;
     }
 
+
+    //외부 url요청시 session id 체크해서 홈(로그인)으로 이동
+    @SkipChecking
+    @RequestMapping("/")
+    public static String toLoginPage() {
+        return "/";
+    }
+
+
+    //관리자페이지 메뉴바
     @GetMapping("/side")
     public String side(){
         return "admin/side";
     }
 
+
+    @GetMapping("/home")
+    public String adminHome(){
+        return "admin/admin_home.subTiles";
+    }
+
+    //관리자페이지 통합게시판 & 각 게시판 목록
     @GetMapping("/boardList")
     public String boardList(Model m,SearchCondition sc, @RequestParam(value="menuCode",defaultValue="0") String menuCode) throws Exception{
 
-        System.out.println("컨트롤menuCode = " + menuCode);
         try {
-//            int totalCnt = adminBoardService.getSearchResultCnt(sc);
+            //menuCode 게시판아이디 같이 보내준다
             int totalCnt = adminBoardService.getSearchResultCnt(sc, menuCode);
             m.addAttribute("totalCnt", totalCnt);
 
             PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
-//            List<CombinedBoardDto> list = adminBoardService.getSearchResultPage(sc);
             List<CombinedBoardDto> list = adminBoardService.getSearchResultPage(sc, menuCode);
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
@@ -54,9 +82,9 @@ public class AdminBoardController {
         return "admin/combined_board.subTiles";
     }
 
+    // 게시글 내용
     @GetMapping("/boardContent")
-    public String read(Model m, @RequestParam int id, SearchCondition sc) throws Exception{
-        System.out.println("id = " + id);
+    public String read(Model m, @RequestParam int id, SearchCondition sc) throws Exception{ //게시글id
         CombinedBoardDto combinedBoardDto = adminBoardService.read(id);
         m.addAttribute("combinedBoardDto",combinedBoardDto);
         m.addAttribute("searchCondition",sc);
@@ -64,24 +92,29 @@ public class AdminBoardController {
         return "admin/board_content.subTiles";
     }
 
+    // 게시글 수정
     @PostMapping("/boardModify")
     public String modify(CombinedBoardDto combinedBoardDto, SearchCondition sc, RedirectAttributes rattr, Model m, HttpSession session) {
-        System.out.println("combinedBoardDto.getContent() = " + combinedBoardDto.getContent());
-        int userId = 3;
+        System.out.println("combinedBoardDto.getMenuCode() = " + combinedBoardDto.getMenuCode());
+        System.out.println("combinedBoardDto.getId() = " + combinedBoardDto.getId());
 
-        try {
-            combinedBoardDto.setUserId(userId);
-            System.out.println("combinedBoardDto.getUserId() = " + combinedBoardDto.getUserId());
+        try{
+            if(session.getAttribute("id")==null){
+                throw new Exception("No session id");
+            }
 
-            int rowCnt = adminBoardService.modify(combinedBoardDto); //insert
-            System.out.println("rowCnt = " + rowCnt);
-            if(rowCnt!=1)
-                throw new Exception("Modify failed");
+            combinedBoardDto.setUserId((int)session.getAttribute("id"));
+            System.out.println("adminBoardService.modify(combinedBoardDto) = " + adminBoardService.modify(combinedBoardDto));
 
-            rattr.addFlashAttribute("msg","MOD_OK");
+            adminBoardService.modify(combinedBoardDto);
 
-            return "redirect:admin/boardList";
-        } catch (Exception e) {
+            m.addAttribute(combinedBoardDto);
+            m.addAttribute("sc",sc);
+            rattr.addFlashAttribute("msg","MOD_SUCCESS");
+
+            return "redirect:/admin/boardContent?id="+combinedBoardDto.getId();
+
+        }catch (Exception e) {
             e.printStackTrace();
             m.addAttribute(combinedBoardDto);
             m.addAttribute("sc",sc);
@@ -90,28 +123,27 @@ public class AdminBoardController {
         }
     }
 
+    // 글 등록 폼
     @GetMapping("/write")
     public String write(Model m) {
         m.addAttribute("mode", "new");
         return "admin/board_content.subTiles";
     }
 
+    // 게시글 등록
     @PostMapping("/write")
     public String write(CombinedBoardDto combinedBoardDto, String boardOption, RedirectAttributes rattr, Model m, HttpSession session) {
-//        int writer = (int)session.getAttribute("id");
-        String menuOption = boardOption;
-        System.out.println("\"왔ㄴ; ? ?   \" = " + "왔ㄴ; ? ?   ");
-        System.out.println("menuOption = " + menuOption);
 
-        int writer = 3;
+        int writer = (int)session.getAttribute("id");
+        String menuOption = boardOption;
         combinedBoardDto.setUserId(writer);
         combinedBoardDto.setMenuCode(menuOption);
 
         try {
             if (adminBoardService.write(combinedBoardDto) != 1)
-                throw new Exception("Write failed.");
+                throw new Exception("글 등록에 실패했습니다");
 
-            rattr.addFlashAttribute("msg", "WRT_OK");
+            rattr.addFlashAttribute("msg", "글이 정상적으로 등록되었습니다");
             return "redirect:/admin/boardList";
 
         } catch (Exception e) {
@@ -123,11 +155,9 @@ public class AdminBoardController {
         }
     }
 
-
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr){
 //        String writer = (String)session.getAttribute("id");
-        System.out.println(" 글내용 지웡ㄹ니얼이ㅏ러");
         int writer = 3;
         try {
             m.addAttribute("page",page);
@@ -146,16 +176,16 @@ public class AdminBoardController {
         return "redirect:/admin/combined_board.subTiles";
     }
 
+    // 선택된 게시글 삭제
     @PostMapping("/removeRows")
     @ResponseBody
     public String removeRows(HttpServletRequest request, String menuCode, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
+        //선택된 게시글id를 배열로 받아온다
         String[] id = request.getParameterValues("idArr");
-        System.out.println("선택한거지워줘");
-        System.out.println("\"??safsdfsdfs" + "???????????/");
-        System.out.println("id.length = " + id.length);
-        System.out.println("menuCode = " + menuCode);
 
-        int userId = 3;
+        System.out.println("session = " + session);
+        Integer userId = (Integer)session.getAttribute("id");
+        System.out.println("uuuuuuuuuuuuserId = " + userId);
 
         try {
             int totalCnt = adminBoardService.getSearchResultCnt(sc, menuCode);
@@ -168,20 +198,54 @@ public class AdminBoardController {
             m.addAttribute("ph", pageHandler);
 
             for(int i=0; i<id.length; i++) {
-                System.out.println("포문포문d = " + id[i]);
+
                 int rowCnt = adminBoardService.remove(Integer.parseInt(id[i]), userId);
 
                 if(rowCnt==0)
-                throw new Exception("board remove error");
+                    throw new Exception("글 삭제에 실패했습니다");
+
+                else if(rowCnt==4)
+                    throw new Exception("이미 삭제된 게시글입니다");
             }
 
-            rattr.addFlashAttribute("msg","DEL_OK");
         } catch (Exception e) {
             e.printStackTrace();
-            rattr.addFlashAttribute("msg","DEL_ERR");
+            return "err";
         }
+        return "success";
+    }
 
-        return "redirect:/admin/combined_board.subTiles";
+    //회원관리
+
+
+    @GetMapping("/userList")
+    public String userList(Model m, SearchCondition sc) throws Exception{
+
+        try{
+            int totalCnt = adminUserService.getAllUserCnt();
+            System.out.println("totalCnt = " + totalCnt);
+            m.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+            List<UserDto> list = adminUserService.searchSelectUser(sc);
+
+            m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            m.addAttribute("msg", "LIST_ERR");
+            m.addAttribute("totalCnt", 0);
+        }
+        return "admin/user_manage.subTiles";
+    }
+
+
+    @GetMapping("/partnerList")
+    public String partnerList(){
+
+        return "admin/partner_list.subTiles";
     }
 
 }

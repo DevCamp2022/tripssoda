@@ -207,6 +207,18 @@
 		</dependency>
 		<!-- 추가 Dependencies는 여기 아래에 추가해주시기 바랍니다. -->
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.7</version>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
     <build>
         <plugins>
@@ -232,7 +244,7 @@
 					<source>${java-version}</source>
 					<target>${java-version}</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
+                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>

@@ -48,7 +48,11 @@ public class QuestionController {
             e.printStackTrace();
             m.addAttribute(questionDto);
             m.addAttribute("msg", "MOD_ERR");
+<<<<<<< Updated upstream
             return "question/questionWrite";
+=======
+            return "question/questionWrite.mainTiles";
+>>>>>>> Stashed changes
         }
     }
 
@@ -65,7 +69,11 @@ public class QuestionController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+<<<<<<< Updated upstream
         return "question/questionWrite";
+=======
+        return "question/questionWrite.mainTiles";
+>>>>>>> Stashed changes
     }
 
     @PostMapping("/write")
@@ -93,14 +101,22 @@ public class QuestionController {
             m.addAttribute(questionDto);
             m.addAttribute("mode", "new");
             m.addAttribute("msg", "WRT_ERR");
+<<<<<<< Updated upstream
             return "question/questionWrite";
+=======
+            return "question/questionWrite.mainTiles";
+>>>>>>> Stashed changes
         }
     }
 
     @GetMapping("/write")
     public String write(Model m) {
         m.addAttribute("mode", "new");
+<<<<<<< Updated upstream
         return "question/questionWrite";
+=======
+        return "question/questionWrite.mainTiles";
+>>>>>>> Stashed changes
     }
 
     @PostMapping("/remove")
@@ -133,7 +149,11 @@ public class QuestionController {
 
             if(questionDto.equals(null))
                 throw new Exception("Read Failed");
+<<<<<<< Updated upstream
             return "question/question";
+=======
+            return "question/question.mainTiles";
+>>>>>>> Stashed changes
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "READ_ERR");
@@ -169,7 +189,11 @@ public class QuestionController {
             m.addAttribute("msg", "LIST_ERR");
             m.addAttribute("totalCnt", 0);
         }
+<<<<<<< Updated upstream
         return "question/questionList";
+=======
+        return "question/questionList.mainTiles";
+>>>>>>> Stashed changes
     }
 
     private boolean loginCheck(HttpServletRequest request) {

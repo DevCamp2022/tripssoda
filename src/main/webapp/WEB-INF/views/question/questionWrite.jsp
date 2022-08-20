@@ -108,6 +108,76 @@
         line-height: 50px;
         cursor: pointer;
     }
+<<<<<<< Updated upstream
+=======
+
+    * {box-sizing: border-box}
+    body {font-family: "Lato", sans-serif;}
+
+    .region-container {
+        width: 1200px;
+        height: 2000px;
+        border: 1px solid black;
+        margin: auto;
+    }
+    /* Style the tab */
+    .tab {
+        float: left;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 220px;
+        height: 390px;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        display: block;
+        background-color: inherit;
+        color: black;
+        padding: 22px 16px;
+        width: 220px;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current "tab button" class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        float: left;
+        padding: 0px 12px;
+        width: 900px;
+        border-left: none;
+        height: 300px;
+        line-height: 70px;
+    }
+    .country-btn {
+        width: 80px;
+        height: 40px;
+        margin-right: 30px;
+        cursor: pointer;
+        background-color: #fff;
+    }
+    .city-btn {
+        width: 50px;
+        height: 40px;
+        border: 1px solid black;
+        cursor: pointer;
+        background-color: #fff;
+    }
+>>>>>>> Stashed changes
 </style>
 <script>
     let msg = "${msg}";
@@ -120,7 +190,11 @@
             <h1>고정사진</h1>
         </div>
         <div class="search">
+<<<<<<< Updated upstream
             <h1>검색</h1>
+=======
+            검색
+>>>>>>> Stashed changes
         </div>
     </div>
     <form id="form" class="frm" action="" method="">
@@ -200,5 +274,9 @@
         });
     });
 </script>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 </body>
 </html>

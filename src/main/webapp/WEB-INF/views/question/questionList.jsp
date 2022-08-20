@@ -21,12 +21,19 @@
 
     .container {
         width: 1200px;
+<<<<<<< Updated upstream
         height: 2000px;
+=======
+>>>>>>> Stashed changes
         border: 1px solid black;
         margin: auto;
     }
     .container > .main-img {
+<<<<<<< Updated upstream
         width: 1200px;
+=======
+        width: 1100px;
+>>>>>>> Stashed changes
         height: 200px;
         border: 1px solid black;
         margin: auto;
@@ -37,7 +44,11 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+<<<<<<< Updated upstream
         width: 1200px;
+=======
+        width: 1100px;
+>>>>>>> Stashed changes
         height: 50px;
         border: 1px solid black;
         margin: auto;
@@ -58,8 +69,12 @@
     .qna-container {
         display: flex;
         flex-wrap: wrap;
+<<<<<<< Updated upstream
         width: 1200px;
         height: 800px;
+=======
+        width: 1100px;
+>>>>>>> Stashed changes
         border: 1px solid black;
         margin: auto;
     }
@@ -67,7 +82,11 @@
         width: 500px;
         height: 200px;
         border: 1px solid black;
+<<<<<<< Updated upstream
         margin-left: 50px;
+=======
+        margin-left: 30px;
+>>>>>>> Stashed changes
     }
     .region-bar {
         display: flex;
@@ -98,8 +117,13 @@
         line-height: 30px;
         text-align: center;
     }
+<<<<<<< Updated upstream
     .content {
         width: 300px;
+=======
+    .cont {
+        width: 500px;
+>>>>>>> Stashed changes
         height: 30px;
         border: 1px solid black;
         line-height: 30px;
@@ -131,7 +155,11 @@
         text-align: center;
     }
     .paging {
+<<<<<<< Updated upstream
         width: 1200px;
+=======
+        width: 800px;
+>>>>>>> Stashed changes
         height: 100px;
         margin: auto;
         text-align: center;
@@ -176,7 +204,11 @@
             <div class="title">
                 <a href="<c:url value='/question/read?id=${questionDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">제목 : ${questionDto.title}</a>
             </div>
+<<<<<<< Updated upstream
             <div class="content">
+=======
+            <div class="cont">
+>>>>>>> Stashed changes
                 <a href="<c:url value='/question/read?id=${questionDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">내용 : ${questionDto.content}</a>
             </div>
             <div class="hashtag">

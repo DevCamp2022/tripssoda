@@ -1,9 +1,11 @@
 package com.devcamp.tripssoda.mapper;
 
+import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -22,4 +24,7 @@ public interface UserMapper {
 
     public int updateUserCode(Map updateInfo);
 
+    public List<UserDto> searchSelectUser(SearchCondition sc);
+
+    public int count();
 }

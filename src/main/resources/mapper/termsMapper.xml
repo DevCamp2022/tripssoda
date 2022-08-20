@@ -4,8 +4,8 @@
         
 <mapper namespace="com.devcamp.tripssoda.mapper.TermsMapper">
     <insert id="insertTerms" parameterType="TermsDto">
-        INSERT INTO terms (title, content, necessary, order_no, user_code, apply_at, status)
-        VALUES (#{title}, #{content}, #{necessary}, #{orderNo}, #{userCode}, #{applyAt}, #{status})
+        INSERT INTO terms (title, content, necessary, order_no, user_code, apply_at, status, created_by, updated_by)
+        VALUES (#{title}, #{content}, #{necessary}, #{orderNo}, #{userCode}, #{applyAt}, #{status}, #{created_by}, #{updated_by})
     </insert>
 
     <select id="selectTerms" parameterType="map" resultType="TermsDto">

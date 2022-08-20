@@ -40,10 +40,16 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
-	<context:component-scan base-package="com.devcamp.tripssoda" />
-
 	<!-- 사진 업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-
+	<!-- Validator 설정-->
+	<context:component-scan base-package="com.devcamp.tripssoda" />
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>error_message</beans:value> <!-- /src/main/resources/error_message.properties -->
+			</beans:list>
+		</beans:property>
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+	</beans:bean>
 </beans:beans>

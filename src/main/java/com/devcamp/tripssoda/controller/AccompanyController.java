@@ -1,7 +1,6 @@
 package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
-import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,13 +140,29 @@ public class AccompanyController {
 //        System.out.println("accompanyDto.getHashtag() = " + accompanyDto.getHashtag());
         try {
             accompanyDto = accompanyService.read(id);
+            //1. endAt을 불러온다.
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
+            //2. 오늘 날짜를 구한다.
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date now = new Date();
+//            String nowTime = df.format(now);
+//            System.out.println("nowTime = " + nowTime);
+            long milliSeconds = now.getTime();
+            String strLong = Long.toString(milliSeconds);
+            System.out.println("milliSeconds = " + milliSeconds);
+
+            //3. 둘 다 milliseconds로 변환 후 오늘 날짜 - endAt<=0이면
+
+            //4. status를 1로 업데이트하고, 1은 지난여행을 뷰에 출력한다.
+
+
             m.addAttribute(accompanyDto);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
 
             if(accompanyDto.equals(null))
                 throw new Exception("Read Failed");
-            return "accompany/accompany";
+            return "accompany/accompany.mainTiles";
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "READ_ERR");

@@ -89,6 +89,13 @@
         margin: auto;
         text-align: center;
     }
+    .chat-url {
+        width: 600px;
+        height: 50px;
+        border: 1px solid black;
+        max-resolution: auto;
+        text-align: center;
+    }
 
     .wrap3 {
         display: flex;
@@ -162,6 +169,9 @@
         <div>
             <input name="hashtag" class="tag" type="text" value="<c:out value='${accompanyDto.hashtag}'/>" placeholder="해시태그를 입력해 주세요."><br>
         </div>
+        <div>
+            <input name="chatUrl" class="chat-url" type="text" value="<c:out value='${accompanyDto.chatUrl}'/>" placeholder="오픈채팅방 주소를 입력해 주세요.">
+        </div>
     </div>
     <div class="wrap3">
         <div>
@@ -182,12 +192,14 @@
     $(document).ready(function() {
         let formCheck = function() {
             let form = document.getElementById("form");
+
             if(form.title.value=="") {
                 alert("제목을 입력해 주세요.");
                 form.title.focus();
                 return false;
             }
             if(form.content.value=="") {
+            // if(CKEDITOR.instances.content.getData()==''){
                 alert("내용을 입력해 주세요.");
                 form.content.focus();
                 return false;
@@ -222,6 +234,9 @@
             form.submit();
         });
     });
+    // CKEDITOR.replace('content',
+    //     {filebrowserUploadUrl:'/ckeditor/fileUploader'
+    //     });
 </script>
 </body>
 </html>

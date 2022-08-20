@@ -15,58 +15,100 @@
         margin: 0px;
         padding: 0px;
         font-family: 'Noto Sans KR', sans-serif;
+        color: black;
     }
-    .main-img {
+
+    .main1 {
         width: 1200px;
-        height: 300px;
+        margin: auto;
+    }
+    .main1 > .main-img {
+        width: 1200px;
+        height: 400px;
         border: 1px solid black;
         margin: auto;
         text-align: center;
-
+        line-height: 100px;
     }
-    .search {
+    .main1 > .region {
         width: 1200px;
-        height: 300px;
+        height: 400px;
         border: 1px solid black;
-        margin: auto;
         text-align: center;
-
-
     }
-    .main-list {
-        /*display: flex;*/
-        /*width: 1280px;*/
-        /*height: 1000px;*/
-        /*border: 1px solid black;*/
-        /*margin: auto;*/
-        /*text-align: center;*/
+    .main1 > .date-bar {
+        width: 1200px;
+        height: 50px;
+        border: 1px solid black;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .date-bar > .date-word,
+    .start-date,
+    .end-date,
+    .search-btn {
+        margin: 0px 50px 0px 50px;
+    }
+    .sort-bar {
         display: flex;
         width: 1200px;
-        height: 1000px;
+        height: 50px;
         border: 1px solid black;
         margin: auto;
-        text-align: center;
-        flex-wrap: wrap;
-
-
+        font-size: 25px;
+        font-weight: bold;
+        justify-content: flex-end;
     }
-    .list-parent {
-        /*flex: 1;*/
-        margin-left: 55px;
+    .sort-word,
+    .sort-btn,
+    .recruit-btn {
+        margin-right: 30px;
+    }
+    .list-wrap-flex {
+        width: 1200px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: auto;
+    }
+    .list-wrap {
+        width: 250px;
+        height: 350px;
+        border: 1px solid black;
+        margin: 20px;
     }
     .thumbnail {
         width: 250px;
         height: 200px;
         border: 1px solid black;
+        margin: auto;
+
     }
-    .title {
-        width: 250px;
-        height: 30px;
+    .list-region {
+        width: 100px;
+        height: 50px;
         border: 1px solid black;
+
     }
-    .content {
+    .list-status-bar,
+    .list-content,
+    .profile-img-bar {
         width: 250px;
-        height: 30px;
+        height: 50px;
+        border: 1px solid black;
+        margin: auto;
+
+    }
+    .list-status-bar {
+        display: flex;
+    }
+    .profile-img-bar {
+        display: flex;
+    }
+
+    .wrt-btn {
+        width: 1200px;
+        height: 50px;
         border: 1px solid black;
     }
     .paging {
@@ -75,8 +117,8 @@
         margin: auto;
         text-align: center;
     }
-
 </style>
+<body>
 <script>
     let msg = "${msg}";
     if(msg=="LIST_ERR")  alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
@@ -86,28 +128,78 @@
     if(msg=="WRT_OK")    alert("성공적으로 등록되었습니다.");
     if(msg=="MOD_OK")    alert("성공적으로 수정되었습니다.");
 </script>
-<div class="main-img">
-    <h1>여행친구사진</h1>
-</div>
-<div class="search">
-    <h1>검색</h1>
-</div>
-<button id="write-btn" class="write-btn" onclick="location.href='<c:url value="/accompany/write"/>'">동행글쓰기</button>
-<div class="main-list">
-    <c:forEach var="accompanyDto" items="${list}">
-        <div class="list-parent">
-            <div class="thumbnail">
-                <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">썸네일</a>
+<div class="container">
+    <div class="main1">
+        <div class="wrt-btn">
+            <button id="write-btn" class="write-btn" onclick="location.href='<c:url value="/accompany/write"/>'">동행글쓰기</button>
+        </div>
+        <div class="main-img">
+            나와 맞는 여행동행과 이야기를 나누어 보아요!
+            <h1>여행 친구 찾기</h1>
+        </div>
+        <br><br>
+        <div class="region">
+            <h4>지역선택</h4>
+        </div>
+        <div class="date-bar">
+            <span class="date-word">날짜 선택</span>
+            <input type="date" class="start-date" value="${accompanyDto.startAt}">
+            -
+            <input type="date" class="end-date" value="${accompanyDto.endAt}">
+            <!-- 검색정보를 전송할 버튼 -->
+            <button type="button" class="search-btn">검색하기</button>
+        </div>
+    </div>
+
+    <div class="main2">
+        <div class="sort-bar">
+            <div class="sort-word">
+                정렬
             </div>
-            <div class="title">
-                <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.title}"/></a>
+            <div class="sort-btn">
+                최신순
             </div>
-            <div class="content">
-                <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.content}"/></a>
+            <div class="recruit-btn">
+                모집중인 글만 보기
             </div>
         </div>
 
-    </c:forEach>
+
+
+            <div class="list-wrap-flex">
+                <c:forEach var="accompanyDto" items="${list}">
+                <div class="list-wrap">
+                    <div class="thumbnail">
+                        <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><div class="list-region">
+                            지역${accompanyDto.regionCode}
+                        </div>썸네일</a>
+                    </div>
+                    <div class="list-status-bar">
+                        <div class="list-status">
+                            모집상태${accompanyDto.status}
+                        </div>
+                        <div class="list-title">
+                            <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.title}"/></a>
+                        </div>
+                    </div>
+                    <div class="list-content">
+                        <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.content}"/></a>
+                    </div>
+                    <div class="profile-img-bar">
+                        <div class="profile-img">
+                            프로필사진
+                        </div>
+                        <div class="nickname">
+                            닉네임${accompanyDto.nickname}
+                        </div>
+                        <div class="view-cnt">
+                            조회수${accompanyDto.viewCnt}
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
+            </div>
+    </div>
 </div>
 
 <br>

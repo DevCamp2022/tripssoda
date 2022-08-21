@@ -1,6 +1,9 @@
 package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.AnswerDto;
+import com.devcamp.tripssoda.dto.SearchCondition;
+import com.devcamp.tripssoda.mapper.AnswerMapper;
+import org.springframework.stereotype.Service;
 import com.devcamp.tripssoda.mapper.AnswerMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +14,32 @@ import java.util.Map;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
-    AnswerMapper answerMapper;
-    QuestionService questionService;
 
-    //생성자 주입
-    AnswerServiceImpl(AnswerMapper answerMapper, QuestionService questionService) {
+    private AnswerMapper answerMapper;
+
+    private QuestionService questionService;
+    public AnswerServiceImpl(AnswerMapper answerMapper, QuestionService questionService) {
         this.answerMapper = answerMapper;
         this.questionService = questionService;
+    }
+
+    @Override
+    public AnswerDto selectAnswer(Integer id) {
+        return answerMapper.selectAnswer(id);
+    }
+
+    @Override
+    public int selectAllUserAnswerCnt(Integer userId) {
+        return answerMapper.selectAllUserAnswerCnt(userId);
+    }
+
+    @Override
+    public List<AnswerDto> selectAllUserAnswer(Integer userId, SearchCondition sc) {
+        Map userIdAndSc = new HashMap();
+        userIdAndSc.put("userId", userId);
+        userIdAndSc.put("sc", sc);
+
+        return answerMapper.selectAllUserAnswer(userIdAndSc);
     }
 
     @Override

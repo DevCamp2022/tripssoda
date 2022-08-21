@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="com.devcamp.tripssoda.mapper.AccompanyMapper">
+    <select id="selectUserAccompanyCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM accompany
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectAllUserAccompany" parameterType="map" resultType="AccompanyDto">
+        SELECT *
+        FROM accompany
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
     <sql id="selectFromAccompany">
         SELECT id, user_id, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
         FROM accompany

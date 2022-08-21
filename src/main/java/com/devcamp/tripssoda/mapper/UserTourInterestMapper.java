@@ -10,6 +10,8 @@ public interface UserTourInterestMapper {
 
     public int insertUserTourInterest(UserTourInterestDto userTourInterestDto);
 
+    public List<String> selectAllUserTourInterestKeyword(Integer userId);
+
     public List<UserTourInterestDto> selectAllUserTourInterest(Integer userId);
 
     public int updateUserTourInterest(UserTourInterestDto userTourInterestDto);

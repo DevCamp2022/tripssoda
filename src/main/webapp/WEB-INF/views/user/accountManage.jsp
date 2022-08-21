@@ -1,83 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<title>tripssoda 이용약관</title>
+<title>계정 관리</title>
 <link rel="stylesheet" href="<c:url value="/css/user/accountManage.css"/>">
 
 <script>
     let msg = "${msg}";
     if(msg=="UPDATE_SUCCESS") alert("계정 정보가 수정되었습니다.");
+    if(msg=="UPDATE_USERINTEREST_SUCCESS") alert("여행 관심사가 수정되었습니다.");
+    if(msg=="UPDATE_USERINTEREST_FAILED") alert("여행 관심사 수정에 실패했습니다. 다시 시도해주세요");
+    if(msg=="INVALID_INFO_VALUE") alert("계정 정보 수정에 실패했습니다. 올바른 값을 입력해주세요.");
 </script>
 <div class="main">
     <div class="contents">
         <h2 class="title">계정 관리</h2>
-        <form action="<c:url value='/mypage/info/update'/>" class="user-info" method="post">
-            <input type="hidden" name="id" value="${userDto.id}">
-            <input type="hidden" name="email" value="${userDto.email}">
+        <input type="hidden" name="id" value="${userDto.id}">
+        <input type="hidden" name="email" value="${userDto.email}">
+        <form:form modelAttribute="userDto" action="/mypage/info/update" class="user-info" method="post">
+            <div class="msg"><form:errors path="pwd"/></div>
+            <div class="msg"><form:errors path="pwdConfirm"/></div>
+            <div class="msg"><form:errors path="tel"/></div>
+            <div class="msg"><form:errors path="nickname"/></div>
 
             <div class="img-wrap">
-                <img src="" class="profile-img" alt="프로필 이미지">
-            </div>
-            <div class="update-img-form" style="display: none;">
-                <input type="file" id="fileItem" name="" accept="image/*" multiple>
+                <img src="${pageContext.request.contextPath}/user/profileImg/${userDto.profileImg}" class="profile-img" alt="프로필 이미지">
             </div>
             <div class="user-interest-list">
-                <c:forEach var="userTourInterestDto" items="${userTourInterestDtoList}">
-                    <div class="user-interest"># ${userTourInterestDto.tourIntrCode}</div>
+                <c:forEach var="userTourInterest" items="${userTourInterestList}">
+                    <div class="user-interest"># ${userTourInterest}</div>
                 </c:forEach>
+                <button class="update-interest-btn" type="button">여행관심사 테스트 다시보기</button>
             </div>
             <div class="nickname-wrap wraps">
                 <p class="user-nickname">닉네임</p>
-                <input type="text" name="nickname" class="input-nickname" value="${userDto.nickname}" readonly>
+                <input type="text" name="nickname" class="input-nickname" value="${userDto.nickname}" readonly placeholder="닉네임 입력(4자~12자, 영대소문자와 숫자 조합)">
             </div>
             <div class="intro-wrap wraps">
                 <p class="user-intro">소개글</p>
-                <input type="text" name="intro" class="input-intro" value="${userDto.intro}" readonly>
+                <input type="text" name="intro" class="input-intro" value="${userDto.intro}" readonly maxlength="2000" placeholder="소개글을 입력해주세요(2000자 이내)">
             </div>
             <div class="instagram-wrap wraps">
                 <p class="user-instagram">인스타그램</p>
-                <input type="text" name="instagramId" class="input-instagram" value="${userDto.instagramId}" readonly placeholder="@를 제외한 user ID만 입력">
+                <input type="text" name="instagramId" class="input-instagram" value="${userDto.instagramId}" readonly placeholder="@를 제외한 user ID만 입력" maxlength="50">
             </div>
             <div class="tel-wrap wraps">
                 <p class="user-tel">휴대폰 번호</p>
-                <input type="text" name="tel" class="input-tel" value="${userDto.tel}" readonly>
+                <input type="text" name="tel" class="input-tel" value="${userDto.tel}" readonly placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
             </div>
             <div class="pwd-wrap wraps">
                 <p class="user-pwd">비밀번호</p>
-                <input type="password" name="pwd" class="input-pwd" value="${userDto.pwd}" readonly>
-            </div>
-            <div class="pwd-confirm-wrap wraps">
-                <p class="user-pwd-confirm">비밀번호 확인</p>
-                <input type="password" name="pwdConfirm" class="input-pwd" value="${userDto.pwd}" readonly>
             </div>
             <div class="button-wrap">
                 <button class="withdraw-btn" type="button">회원 탈퇴</button>
                 <button class="update-btn" type="button">수정</button>
-                <button class="update-complete-btn" style="display: none;">수정 완료</button>
             </div>
-        </form>
+        </form:form>
+        <input type="hidden" class="secured-pwd" value="${userDto.pwd}">
     </div>
     <script>
-
         // 수정 버튼을 눌렀을 때
         $(".update-btn").on("click", function() {
-            // 수정버튼을 누르면 readonly를 false로 바꿔줌
-            $("input[name=nickname]").attr('readonly', false);
-            $("input[name=intro]").attr('readonly', false);
-            $("input[name=instagramId]").attr('readonly', false);
-            $("input[name=tel]").attr('readonly', false);
-            $("input[name=pwd]").attr('readonly', false);
-            $("input[name=pwd-confirm]").attr('readonly', false);
-
-            // 수정 버튼 숨김
-            $(".update-btn").css("display", "none");
-            // 회원 탈퇴 버튼 숨김
-            $(".withdraw-btn").css("display", "none");
-            // 수정 완료 버튼 보여줌
-            $(".update-complete-btn").css("display", "block");
-            // 이미지 수정 form 보여줌
-            $(".update-img-form").css("display", "flex");
+            // 회원정보 수정 페이지로 이동
+            location.href="/mypage/info/update"
         });
 
         // 회원 탈퇴 버튼을 눌렀을 때
@@ -88,6 +74,11 @@
             form.attr("method", "post");
             form.submit();
         });
+
+        // 여행관심사 테스트 다시보기 버튼을 눌렀을 때
+        $(".update-interest-btn").on("click", function () {
+            location.href="/mypage/info/updateInterest";
+        })
     </script>
 </div>
 

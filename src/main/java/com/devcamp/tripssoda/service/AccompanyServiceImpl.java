@@ -1,6 +1,7 @@
 package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
+import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.mapper.AccompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,20 @@ public class AccompanyServiceImpl implements AccompanyService {
 
     AccompanyServiceImpl(AccompanyMapper accompanyMapper) {
            this.accompanyMapper = accompanyMapper;
+    }
+
+    @Override
+    public int selectUserAccompanyCnt(Integer userId) {
+        return accompanyMapper.selectUserAccompanyCnt(userId);
+    }
+
+    @Override
+    public List<AccompanyDto> selectAllUserAccompany(Integer userId, SearchCondition sc) {
+        Map userIdAndSc = new HashMap();
+        userIdAndSc.put("userId", userId);
+        userIdAndSc.put("sc", sc);
+
+        return accompanyMapper.selectAllUserAccompany(userIdAndSc);
     }
 
     @Override

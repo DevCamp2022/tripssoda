@@ -1,0 +1,66 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* main */
+.main {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contents {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+.input-name, .input-tel {
+    width: 100%;
+    height: 56px;
+    box-sizing: border-box;
+    border: 1px solid #e9e9e9;
+    font-size: 13px;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.find-btn {
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    height: 54px;
+    border: none;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+

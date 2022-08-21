@@ -20,7 +20,7 @@
                 <div class="row row-birthday">
                     <input name="reserverBirthYear" class="reserver-birth-year inp"/>
                     <input name="reserverBirthMonth" class="reserver-birth-month inp"/>
-                    <select name="reserverBirthDay" class="reserver-birth-day sel">
+                    <select name="reserverBirthDate" class="reserver-birth-date sel">
                     </select>
                 </div>
                 <div class="row row-tel">
@@ -45,11 +45,14 @@
                     <img class="thumbnail" src="/image/sample/sample_img.png"/>
                     <strong name="title" class="title">상품제목</strong>
                     <input name="productTitle" type="hidden"/>
+                    <input name="productId" class="product-id" readonly type="hidden"/>
+
                 </div>
                 <div class="detail-info-wrap">
                     <ul class="detail-info">
                         <li class="product-start-date">
                             <em class="detail-info-tit">날짜</em><span class="date">2000.01.01.</span>
+                            <input name="scheduleId" class="schedule-id" readonly type="hidden"/>
                         </li>
                         <li class="product-qty">
                             <em class="detail-info-tit">수량</em>
@@ -59,27 +62,32 @@
                                 <button type="button" class="btn-amount-plus" data-btn='product'>+</button>
                             </div>
                         </li>
-                        <li class="product-price"><em class="detail-info-tit">기본 가격</em>
-                            <span class="product-price">0</span>
-                            <input type="number" name="productPrice" type="" class="product-price" value="0"/></li>
-                        <li class="option-price"><em class="detail-info-tit">옵션 가격</em>
-                            <span class="option-price">0</span>
-                            <input type="number" name="optionPrice" type="" class="option-price" value="0"/>
+                        <li class="product-amount"><em class="detail-info-tit">기본 가격</em>
+                            <span class="product-amount">0</span>
+                            <input name="productAmount" type="hidden" class="product-amount" value="0" readonly />
+                        </li>
+                        <li class="option-amount"><em class="detail-info-tit">옵션 가격</em>
+                            <span class="option-amount">0</span>
+                            <input name="optionAmount" type="hidden" class="option-amount" value="0" readonly/>
                         </li>
                         <li class="reserver-point"><em class="detail-info-tit">적립금 사용</em>
                             <div class="section-point">
-                                <input type="number" class="inp" type="text" name="usedPoint" placeholder="적립금 사용금액 입력">
+                                <input type="number" class="inp" type="text" name="usedPoint" placeholder="적립금 사용금액 입력" >
                                 <p><span class="reserver-point">0</span>원</p>
                             </div>
                         </li>
                         <li class="line-top"><p class="pay-method">결제 방식<b>(필수)</b></p></li>
                         <li>
-                            <button class="simple-pay" type="button"><input type="radio">
+                            <button class="simple-pay" type="button"><input type="radio" name="payMethod" value="html5_inicis">
                                 <p>간편결제</p><img src="/images/common/icon/toss_logo.svg"></button>
                         </li>
-                        <li class="total-price"><em class="detail-info-tit">최종 가격</em>
-                            <span class="total-price">0</span>
-                            <input type="number" name="totalPrice" type="" class="total-price" value="0"/>
+                        <li>
+                            <button class="simple-pay" type="button"><input type="radio" name="payMethod" value="kakaopay">
+                                <p>카카오페이</p><img src="/images/common/icon/toss_logo.svg"></button>
+                        </li>
+                        <li class="total-amount"><em class="detail-info-tit">최종 가격</em>
+                            <span class="total-amount">0</span>
+                            <input type="hidden" name="totalAmount" type="" class="total-amount" value="0" readonly/>
                         </li>
 
                     </ul>
@@ -89,4 +97,6 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/payment/payment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/payment/importApi.js"></script>

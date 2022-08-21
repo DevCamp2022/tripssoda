@@ -42,23 +42,6 @@
         WHERE name = #{name} and email = #{email}
     </select>
 
-    <select id="searchSelectUser" parameterType="SearchCondition" resultType="UserDto">
-        SELECT *
-        FROM user_info
-        WHERE true
-        <choose>
-            <when test='option=="N"'>
-                AND name LIKE concat('%', #{keyword}, '%')
-            </when>
-            <otherwise>
-                AND (name LIKE concat('%', #{keyword}, '%')
-                OR nickname LIKE concat('%', #{keyword}, '%'))
-            </otherwise>
-        </choose>
-        ORDER BY id DESC
-        LIMIT #{offset}, #{pageSize}
-    </select>
-
     <update id="updateUser" parameterType="UserDto">
         UPDATE user_info
         SET profile_img = #{profileImg}, nickname = #{nickname}, intro = #{intro}, instagram_id = #{instagramId},

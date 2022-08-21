@@ -29,8 +29,44 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public int selectAllUserQuestionCnt(Integer userId) {
-
+    public int selectAllUserQuestionCnt(Integer userId){
         return questionMapper.selectAllUserQuestionCnt(userId);
+    }
+    @Override
+    public int getCount() throws Exception {
+        return questionMapper.count();
+    }
+    @Override
+    public int write(QuestionDto dto) throws Exception {
+        return questionMapper.insert(dto);
+    }
+    @Override
+    public QuestionDto read(Integer id) throws Exception {
+        QuestionDto dto = questionMapper.select(id);
+        questionMapper.increaseViewCnt(id);
+        return dto;
+    }
+    @Override
+    public int modify(QuestionDto dto) throws Exception {
+        return questionMapper.update(dto);
+    }
+    @Override
+    public int remove(Integer id, Integer userId) throws Exception {
+        Map map = new HashMap();
+        map.put("id", id);
+        map.put("userId", userId);
+        return questionMapper.delete(map);
+    }
+
+    @Override
+    public List<QuestionDto> getPage(Map map) throws Exception {
+        return questionMapper.selectPage(map);
+    }
+
+    public int modifyAnswerCnt(Integer questionId, Integer cnt) throws Exception {
+        Map map = new HashMap();
+        map.put("questionId", questionId);
+        map.put("cnt", cnt);
+        return questionMapper.updateAnswerCnt(map);
     }
 }

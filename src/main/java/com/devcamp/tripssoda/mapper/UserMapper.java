@@ -36,4 +36,7 @@ public interface UserMapper {
 
     public int updateUserCode(Map updateInfo);
 
+    public List<UserDto> searchSelectUser(SearchCondition sc);
+
+    public int count();
 }

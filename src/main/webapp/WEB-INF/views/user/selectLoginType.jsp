@@ -15,10 +15,11 @@
     <input class="to-url" type="hidden" value="${param.toURL}">
     <div class="contents">
         <div class="slogan">
+            <img class="character" src="${pageContext.request.contextPath}/user/characterImg/character.JPG">
             <p class="slogan-text">내 취향에 딱 맞는 여행, 트립쏘다</p>
         </div>
-        <button class="kakao-login-btn" type="button">카카오로 로그인</button>
-        <button class="email-login-btn" type="button">이메일로 로그인</button>
+        <button class="kakao-login-btn btn" type="button"><img class="kakao-logo" src="${pageContext.request.contextPath}/user/socialImg/kakao.JPG">카카오로 로그인</button>
+        <button class="email-login-btn btn" type="button">이메일로 로그인</button>
         <div class="ask-register">
             <p class="ask">아직 계정이 없으신가요?</p>
             <button class="register-btn" type="button">회원가입</button>

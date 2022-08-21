@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        
+
 <mapper namespace="com.devcamp.tripssoda.mapper.AnswerMapper">
-    <select id="selectAnswer" parameterType="int" resultType="AnswerDto">
+    <select id="count" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM answer
+        WHERE question_id = #{questionId}
+    </select>
+    <insert id="insert" parameterType="AnswerDto">
+        INSERT INTO answer
+            (question_id, content, user_id, created_at, updated_at)
+        VALUES
+            (#{questionId}, #{content}, #{userId}, now(), now())
+    </insert>
+    <select id="select" parameterType="int" resultType="AnswerDto">
         SELECT *
         FROM answer
         WHERE id = #{id}
@@ -22,4 +33,25 @@
         ORDER BY id DESC
         LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
+
+    <update id="update" parameterType="AnswerDto">
+        UPDATE answer
+        SET content = #{content},
+            updated_at = now()
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+    <delete id="delete" parameterType="map">
+        DELETE FROM answer
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+    <select id="selectAll" parameterType="int" resultType="AnswerDto">
+        SELECT id, question_id, content, user_id, created_at, updated_at
+        FROM answer
+        WHERE question_id = #{questionId}
+        ORDER BY id ASC
+    </select>
+    <delete id="deleteAll" parameterType="int">
+        DELETE FROM answer
+        WHERE question_id = #{questionId}
+    </delete>
 </mapper>

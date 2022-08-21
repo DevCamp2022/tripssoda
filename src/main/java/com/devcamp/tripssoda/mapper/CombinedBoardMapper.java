@@ -1,14 +1,13 @@
 package com.devcamp.tripssoda.mapper;
 
 import com.devcamp.tripssoda.dto.CombinedBoardDto;
-import com.devcamp.tripssoda.dto.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface AdminBoardMapper {
+public interface CombinedBoardMapper {
 
     CombinedBoardDto selectBoard(Integer id) throws Exception;
 
@@ -37,4 +36,5 @@ public interface AdminBoardMapper {
 //    List<CombinedBoardDto> searchSelectPage(SearchCondition sc, String menuCode) throws Exception;
     List<CombinedBoardDto> searchSelectPage(Map map) throws Exception;
 
+    public int getStatus(Integer id);
 }

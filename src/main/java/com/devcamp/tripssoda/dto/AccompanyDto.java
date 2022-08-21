@@ -97,7 +97,6 @@ public class AccompanyDto {
     public void setRegionCode(int regionCode) {
         this.regionCode = regionCode;
     }
-
     public String getThumbnail() {
         return thumbnail;
     }

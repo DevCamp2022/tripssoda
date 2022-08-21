@@ -94,4 +94,30 @@
         DELETE FROM user_info
         WHERE email = #{email}
     </delete>
+
+    <select id="searchSelectUser" parameterType="SearchCondition" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE true
+        <choose>
+            <when test='option=="NA"'>
+                AND name LIKE concat('%', #{keyword}, '%')
+            </when>
+
+            <when test='option=="NI"'>
+                AND nickname LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (name LIKE concat('%', #{keyword}, '%')
+                OR nickname LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        FROM user_info
+    </select>
 </mapper>

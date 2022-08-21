@@ -13,4 +13,15 @@ public interface QuestionMapper {
 
     public int selectAllUserQuestionCnt(Integer userId);
 
+    public int count() throws Exception;
+    public int insert(QuestionDto dto) throws Exception;
+    public QuestionDto select(Integer id) throws Exception;
+    public int update(QuestionDto dto) throws Exception;
+    public int delete(Map map) throws Exception;
+    public int increaseViewCnt(Integer id) throws Exception;
+    public int deleteAll() throws Exception;
+    public List<QuestionDto> selectAll() throws Exception;
+    public List<QuestionDto> selectPage(Map map) throws Exception;
+    public int updateAnswerCnt(Map map) throws Exception;
+
 }

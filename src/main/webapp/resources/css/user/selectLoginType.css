@@ -13,44 +13,56 @@ body {
 
 .contents {
     width: 723px;
-    border: 1px solid black;
-    margin: 0 auto;
+    border: 3px solid #00ce7c;
+    border-radius: 5px;
+    margin: 20px auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .slogan {
-    border: 1px solid black;
     margin: 20px auto;
+}
+.character {
+    display: block;
+    margin: 5px auto;
 }
 
 .slogan-text {
     text-align: center;
 }
 
-button {
+.btn {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
+    width: 430px;
+    height: 64px;
 }
 
 .kakao-login-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 430px;
     margin: 20px auto;
     background: #FEE500;
     cursor: pointer;
     border: none;
+}
+.kakao-logo {
+    width: 35px;
+    height: 35px;
+    background-color: #FEE500;
+    margin-right: 10px;
 }
 
 .email-login-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 430px;
     margin: 20px auto;
     cursor: pointer;
+    border: 1px solid #E9E9E9;
 }
 .ask-register {
     display: flex;
@@ -59,12 +71,14 @@ button {
 }
 
 .ask {
-    border: 1px solid black;
     margin-right: 10px;
+    font-size: 18px;
 }
 
 .register-btn {
+    display: block;
     font-size: 18px;
-    width: 83px;
+    width: 80px;
     cursor: pointer;
+    border: none;
 }

@@ -23,4 +23,58 @@
         WHERE user_id = #{userId}
     </select>
 
+    <sql id="selectFromQuestion">
+        SELECT id, user_id, nickname, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
+        FROM question
+    </sql>
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM question
+    </select>
+    <insert id="insert" parameterType="QuestionDto">
+        INSERT INTO question
+            (title, content, user_id, hashtag, region_code)
+        VALUES
+            (#{title}, #{content}, #{userId}, #{hashtag}, #{regionCode})
+    </insert>
+    <select id="select" parameterType="int" resultType="QuestionDto">
+        <include refid="selectFromQuestion"/>
+        WHERE id = #{id}
+    </select>
+    <update id="update" parameterType="QuestionDto">
+        UPDATE question
+        SET title = #{title},
+            content = #{content},
+            hashtag = #{hashtag},
+            region_code = #{regionCode},
+            updated_at = now()
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+    <delete id="delete" parameterType="map">
+        DELETE FROM question
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+    <update id="increaseViewCnt" parameterType="int">
+        UPDATE question
+        SET view_cnt = view_cnt + 1
+        WHERE id = #{id}
+    </update>
+    <select id="selectAll" resultType="QuestionDto">
+        <include refid="selectFromQuestion"/>
+        ORDER BY created_at DESC, id DESC
+    </select>
+    <delete id="deleteAll">
+        DELETE FROM question
+    </delete>
+    <select id="selectPage" parameterType="map" resultType="QuestionDto">
+        <include refid="selectFromQuestion"/>
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+    <update id="updateAnswerCnt" parameterType="map">
+        UPDATE question
+        SET ans_cnt = ans_cnt + #{cnt}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

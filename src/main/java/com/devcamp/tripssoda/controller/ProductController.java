@@ -2,6 +2,7 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.service.ProductService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,15 +44,19 @@ public class ProductController {
         return "redirect:/product/register"; //나중에 마이페이지 파트너 상품등록 확인뷰로 바꿀것
     }
 
-//    @GetMapping("/list")
-//    public String getCategoryList(Model model) {
-//        productService.aa(model);
-//        return "product/list_product.mainTiles";
-//    }
-
     @GetMapping("/list")
     public String getCategoryList(Model model) {
         productService.getMainList(model);
         return "product/list_product.mainTiles";
+    }
+
+    @GetMapping("/detail")
+    public String getProductDetail(GetDetailProductDto dto, Model model) {
+        GetDetailProductDto details = productService.getProductDetail(dto);
+        System.out.println("dto.getProductId() = " + dto.getProductId());
+        System.out.println("dto.getScheduleId() = " + dto.getScheduleId());
+        model.addAttribute("details", details);
+        System.out.println("details = " + details);
+        return "product/detail_product.mainTiles";
     }
 }

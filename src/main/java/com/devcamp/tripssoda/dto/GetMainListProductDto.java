@@ -7,11 +7,20 @@ import java.sql.Date;
 @Alias("GetMainListProductDto")
 public class GetMainListProductDto {
     private Integer productId;
+    private Integer scheduleId;
     private String thumbnail;
     private String title;
     private Integer rating;
     private Date startDate;
     private Integer price;
+
+    public Integer getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(Integer scheduleId) {
+        this.scheduleId = scheduleId;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -65,10 +74,11 @@ public class GetMainListProductDto {
     public String toString() {
         return "GetMainListProductDto{" +
                 "productId=" + productId +
+                ", scheduleId=" + scheduleId +
                 ", thumbnail='" + thumbnail + '\'' +
                 ", title='" + title + '\'' +
                 ", rating=" + rating +
-                ", startDate='" + startDate + '\'' +
+                ", startDate=" + startDate +
                 ", price=" + price +
                 '}';
     }

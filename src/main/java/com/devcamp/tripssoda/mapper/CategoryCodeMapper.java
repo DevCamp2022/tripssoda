@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface CategoryCodeMapper {
     public List<String> selectAllCategoryCode();
+    public String selectCategoryName(String categoryCode);
 }

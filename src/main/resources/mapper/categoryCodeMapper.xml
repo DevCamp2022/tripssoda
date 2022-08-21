@@ -6,4 +6,8 @@
     <select id="selectAllCategoryCode" resultType="String">
         SELECT category_code FROM category_code
     </select>
+
+    <select id="selectCategoryName" parameterType="String" resultType="String">
+        SELECT name FROM category_code where category_code=#{categoryCode}
+    </select>
 </mapper>

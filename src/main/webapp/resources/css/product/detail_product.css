@@ -1,0 +1,45 @@
+div.product-banner-wrap{
+  background-color: navy;
+  width:1190px;
+  height:600px;
+}
+
+p.showCategory{
+  color: #6a6a6a;
+  font-family: "NotoSanskr", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+span.showRating{
+  font-size: 14px;
+}
+
+div.detail-wrap{
+  text-align: center;
+}
+
+div.right-area{
+  clear: both;
+  display: inline-block;
+  border: 1px solid black;
+  width: 900px;
+}
+
+div.left-area{
+  display: inline-block;
+  border: 1px solid black;
+  width:295px;
+}
+
+div.purple-circle{
+  background-color: purple;
+  width: 200px;
+  height: 200px;
+
+  position: static; 
+}
+
+span.detail-title{
+  font-size: 18px;
+}

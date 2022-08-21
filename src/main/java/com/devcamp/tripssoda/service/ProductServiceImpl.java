@@ -116,80 +116,6 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-//    @Override
-//    public void regProductTwo(ProductDto dto
-//                              , RegProductOptionListDto regProductOptionListDto
-//                              , RegProductScheduleListDto regProductScheduleListDto
-//    ) {
-//        //product 등록
-//        productMapper.insertProduct(dto);
-//        System.out.println("dto = " + dto);
-//
-//        //product insert 후 반환된 productId 바인딩
-//        Integer pId = dto.getProductId();
-//        RegProductOptionDto PODto = new RegProductOptionDto();
-//        RegProductScheduleDto PSDto = new RegProductScheduleDto();
-//        PODto.setProductId(pId);
-//        PSDto.setProductId(pId);
-//
-//        //userId를 옵션과 스케쥴에 각각 바인딩
-//        Integer pUserId = dto.getUserId();
-//        PODto.setUserId(pUserId);
-//        PSDto.setUserId(pUserId);
-//
-//        //product_option 등록
-//        List<RegProductOptionDto> list = regProductOptionListDto.getRegProductOptionListDto();
-//        if(list.size()>0) {
-//            for (int i = 0; i < list.size(); i++) {
-//                if(list.get(i).getType()==null){
-//                    continue;
-//                }
-//                PODto.setType(list.get(i).getType());
-//                PODto.setName(list.get(i).getName());
-//                PODto.setContent(list.get(i).getContent());
-//                PODto.setPrice(list.get(i).getPrice());
-//                PODto.setOrderNo(list.get(i).getOrderNo());
-//                productMapper.insertProductOption(PODto);
-//                System.out.println("PODto" + "[" + i + "]" + PODto);
-//            }
-//        }
-//
-//        //product_schedule 등록
-//        List<RegProductScheduleDto> listSchedule = regProductScheduleListDto.getRegProductScheduleListDto();
-//        if(listSchedule == null)
-//            return;
-//
-//        for (int i = 0; i < listSchedule.size(); i++) {
-//            if (listSchedule.get(i).getStartDate() == null) {
-//                continue;
-//            }
-//            PSDto.setStartDate(listSchedule.get(i).getStartDate());
-//            PSDto.setSchedulePrice(listSchedule.get(i).getSchedulePrice());
-//            PSDto.setScheduleMinMember(listSchedule.get(i).getScheduleMinMember());
-//            PSDto.setScheduleMaxMember(listSchedule.get(i).getScheduleMaxMember());
-//            System.out.println("PSDto" + "[" + i + "]" + PSDto);
-//            productMapper.insertProductSchedule(PSDto);
-//        }
-//    }
-
-//    @Override
-//    public List<ProductDto> getCategoryList(String category) {
-//        return productMapper.selectCategoryList(category);
-//    }
-
-    @Override
-    public void aa(Model model) {
-        //카테고리 코드테이블 + 리스트 불러오기
-        List<String> ccdList = categoryCodeMapper.selectAllCategoryCode();
-        //반복문으로 코드를 리스트에 넣어주고, model에 담기
-        for(int i=0; i<ccdList.size(); i++) {
-            List<ProductDto> list = productMapper.selectCategoryList(ccdList.get(i));
-            if(list.size()==0){continue;}
-            model.addAttribute("list"+i, list);
-            System.out.println("list" + i + " = " + list);
-        }
-    }
-
     @Override
     public void getMainList(Model model) {
         List<String> ccdList = categoryCodeMapper.selectAllCategoryCode();
@@ -201,5 +127,13 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("list" + i + " = " + list);
         }
 
+    }
+
+    @Override
+    public GetDetailProductDto getProductDetail(GetDetailProductDto dto) {
+        GetDetailProductDto data = productMapper.selectProductDetail(dto);
+        String categoryCode = data.getCategory();
+        data.setCategory(categoryCodeMapper.selectCategoryName(categoryCode));
+        return data;
     }
 }

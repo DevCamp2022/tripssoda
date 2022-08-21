@@ -11,8 +11,6 @@ import java.util.Map;
 
 public interface ProductService {
     public void regProduct(ProductDto dto, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto, HttpServletRequest request, MultipartFile uploadThumb);
-//    public void regProductTwo(ProductDto dto, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto);
-
-    void aa(Model model);
     public void getMainList(Model model);
+    public GetDetailProductDto getProductDetail(GetDetailProductDto dto);
 }

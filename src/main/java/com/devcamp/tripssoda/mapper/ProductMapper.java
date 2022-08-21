@@ -12,4 +12,5 @@ public interface ProductMapper {
     public void insertProductSchedule(RegProductScheduleDto PSDto);
     public List<GetMainListProductDto> selectMainList(String category);
     public GetDetailProductDto selectProductDetail(GetDetailProductDto dto);
+    public List<ProductScheduleDto> selectScheduleList(Integer productId);
 }

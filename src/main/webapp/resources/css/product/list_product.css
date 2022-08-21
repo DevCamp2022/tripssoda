@@ -1,4 +1,6 @@
 .div-category-button-wrap {
+  margin-top: 150px;
+  margin-bottom: 150px;
   text-align: center;
   /* margin: 0 auto; */
 }
@@ -114,9 +116,4 @@
 .nextBtn{
   display: inline-block;
   cursor: pointer;
-}
-
-.foo{
-  animation-duration: 3s;
-  animation-name: slidein;
 }

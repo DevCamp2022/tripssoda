@@ -7,7 +7,7 @@
   <div class="div-category-button-wrap">
       <div class="div-category-button">
         <img src="https://tripsoda.com/images/common/icon/menu/store/editor.svg"><br>
-        <span>에디터 픽</span>
+        <p>에디터 픽</p>
       </div>
       
       <div class="div-category-button">

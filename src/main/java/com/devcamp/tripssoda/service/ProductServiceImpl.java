@@ -136,4 +136,9 @@ public class ProductServiceImpl implements ProductService {
         data.setCategory(categoryCodeMapper.selectCategoryName(categoryCode));
         return data;
     }
+
+    @Override
+    public List<ProductScheduleDto> getScheduleList(Integer productId) {
+        return productMapper.selectScheduleList(productId);
+    }
 }

@@ -55,7 +55,12 @@ public class ProductController {
         GetDetailProductDto details = productService.getProductDetail(dto);
         System.out.println("dto.getProductId() = " + dto.getProductId());
         System.out.println("dto.getScheduleId() = " + dto.getScheduleId());
+
+        Integer productId = dto.getProductId();
+        List<ProductScheduleDto> list = productService.getScheduleList(productId);
         model.addAttribute("details", details);
+        model.addAttribute("list", list);
+
         System.out.println("details = " + details);
         return "product/detail_product.mainTiles";
     }

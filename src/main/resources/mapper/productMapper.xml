@@ -147,4 +147,11 @@
         ON (p.id=ps.product_id)
         WHERE p.id=#{productId} AND ps.id=#{scheduleId};
     </select>
+
+    <select id="selectScheduleList" parameterType="int" resultType="ProductScheduleDto">
+        SELECT id as productScheduleId, product_id, start_date, current_member, min_member, max_member
+        FROM product_schedule
+        WHERE product_id=#{productId}
+        and date(start_date)>date(now()+INTERVAL 1 DAY);
+    </select>
 </mapper>

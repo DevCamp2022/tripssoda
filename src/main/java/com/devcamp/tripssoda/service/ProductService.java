@@ -13,4 +13,5 @@ public interface ProductService {
     public void regProduct(ProductDto dto, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto, HttpServletRequest request, MultipartFile uploadThumb);
     public void getMainList(Model model);
     public GetDetailProductDto getProductDetail(GetDetailProductDto dto);
+    public List<ProductScheduleDto> getScheduleList(Integer productId);
 }

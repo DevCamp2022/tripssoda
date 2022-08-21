@@ -439,11 +439,6 @@ function valid() {
         return false;
     }
 
-    if($("#dayCnt").val() == "") {
-        alert("총 기간을 설정해 주세요.");
-        return false;
-    }
-
     if($("#minMember").val() == "") {
         alert("모집 최소인원을 입력해 주세요.");
         return false;
@@ -478,6 +473,12 @@ function valid() {
         alert("환불정책을 입력해 주세요.");
         return false;
     }
+
+    if($("#dayCnt").val() == "") {
+        alert("총 기간을 설정해 주세요.");
+        return false;
+    }
+
 
     return true;
 }

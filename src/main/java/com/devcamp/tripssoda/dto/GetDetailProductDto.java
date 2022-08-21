@@ -33,17 +33,13 @@ public class GetDetailProductDto {
     private Integer totalLikes;
     private Integer saleStatus;
     private Integer approvalStatus;
-    private String startDate;
+    private Date startDate;
     private String endDate;
     private Integer schedulePrice;
     private Integer currentMember;
     private Integer scheduleMinMember;
     private Integer scheduleMaxMember;
     private Integer memberStatus;
-    private String scheduleCreatedAt;
-    private Integer scheduleCreatedBy;
-    private String scheduleUpdatedAt;
-    private Integer scheduleUpdatedBy;
 
     public Integer getProductId() {
         return productId;
@@ -261,11 +257,11 @@ public class GetDetailProductDto {
         this.approvalStatus = approvalStatus;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -317,37 +313,6 @@ public class GetDetailProductDto {
         this.memberStatus = memberStatus;
     }
 
-    public String getScheduleCreatedAt() {
-        return scheduleCreatedAt;
-    }
-
-    public void setScheduleCreatedAt(String scheduleCreatedAt) {
-        this.scheduleCreatedAt = scheduleCreatedAt;
-    }
-
-    public Integer getScheduleCreatedBy() {
-        return scheduleCreatedBy;
-    }
-
-    public void setScheduleCreatedBy(Integer scheduleCreatedBy) {
-        this.scheduleCreatedBy = scheduleCreatedBy;
-    }
-
-    public String getScheduleUpdatedAt() {
-        return scheduleUpdatedAt;
-    }
-
-    public void setScheduleUpdatedAt(String scheduleUpdatedAt) {
-        this.scheduleUpdatedAt = scheduleUpdatedAt;
-    }
-
-    public Integer getScheduleUpdatedBy() {
-        return scheduleUpdatedBy;
-    }
-
-    public void setScheduleUpdatedBy(Integer scheduleUpdatedBy) {
-        this.scheduleUpdatedBy = scheduleUpdatedBy;
-    }
 
     @Override
     public String toString() {
@@ -386,10 +351,6 @@ public class GetDetailProductDto {
                 ", scheduleMinMember=" + scheduleMinMember +
                 ", scheduleMaxMember=" + scheduleMaxMember +
                 ", memberStatus=" + memberStatus +
-                ", scheduleCreatedAt='" + scheduleCreatedAt + '\'' +
-                ", scheduleCreatedBy=" + scheduleCreatedBy +
-                ", scheduleUpdatedAt='" + scheduleUpdatedAt + '\'' +
-                ", scheduleUpdatedBy=" + scheduleUpdatedBy +
                 '}';
     }
 }

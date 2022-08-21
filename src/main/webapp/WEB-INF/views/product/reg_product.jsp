@@ -5,7 +5,7 @@
 <div class="content">
   <!-- <form action="/product/register" method="POST" onsubmit="return valid()"> -->
   <!-- form action="/product/register" method="POST"-->
-  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data">
+  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
   <!--나중에 hidden으로 바꿀것-->
   <input type="text" name="userId" value="${sessionScope.userId}">
   <input type="text" name="partnerId" value="${sessionScope.partnerId}">

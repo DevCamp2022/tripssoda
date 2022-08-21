@@ -1,10 +1,13 @@
 package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.*;
-import com.devcamp.tripssoda.mapper.ProductReviewMapper;
 import com.devcamp.tripssoda.service.*;
-import com.devcamp.tripssoda.util.ImageResize;
 import net.coobird.thumbnailator.Thumbnails;
+import com.devcamp.tripssoda.dto.UserDto;
+import com.devcamp.tripssoda.dto.UserTourInterestDto;
+import com.devcamp.tripssoda.dto.UserValidator;
+import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.service.UserTourInterestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -194,7 +197,6 @@ public class MyPageController {
                 }
 
             }
-
             // 유저 정보를 업데이트
             userService.updateUser(userDto, session);
 

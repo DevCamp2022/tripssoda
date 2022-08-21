@@ -15,6 +15,7 @@ public interface UserService {
 
     UserDto selectUser(String email);
 
+
     List<UserDto> selectAllUser();
 
     UserDto selectUserByNickname(String nickname);
@@ -31,7 +32,6 @@ public interface UserService {
     void updateUserPassword(String email, String pwd) throws Exception;
 
     void deleteUser(String email) throws Exception;
-
 
 //    @Transactional(rollbackFor = Exception.class)
 //    void txTest() throws Exception;

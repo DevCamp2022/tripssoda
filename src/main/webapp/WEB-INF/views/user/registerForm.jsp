@@ -313,6 +313,7 @@
         let month = $(".select-birth-month").val();
         let day = $(".input-birth-day").val();
         let birthday = year + "-" + month + "-" + day;
+
         let email = $(".input-email").val();
 
         $(".birthday").val(birthday);
@@ -332,5 +333,9 @@
             }
         });
     });
+        // let form = $(".input-list");
+        // form.attr("action", "/register/write?birthday=" + birthday);
+        // form.attr("method", "post");
+        // form.submit();
 
 </script>

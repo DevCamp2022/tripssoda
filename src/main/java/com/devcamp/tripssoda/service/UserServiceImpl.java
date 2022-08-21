@@ -211,6 +211,7 @@ public class UserServiceImpl implements UserService {
 
         // 최종수정 정보를 업데이트한다.
         int rowCnt2 = userMapper.setUpdatedBy(updateInfo);
+
         if(rowCnt2 != 1) {
             throw new Exception("Update system_info failed");
         }
@@ -263,7 +264,6 @@ public class UserServiceImpl implements UserService {
         String nickName = userEmail.substring(0, userEmail.indexOf('@'));
         return nickName;
     }
-
 
     // transaction 테스트
 

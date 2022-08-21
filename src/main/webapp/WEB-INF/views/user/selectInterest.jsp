@@ -44,6 +44,7 @@
 </div>
 <script>
 
+<<<<<<< Updated upstream
     function formCheck() {
         let firstInterest = $("select[name=firstInterest]").val();
         let secondInterest = $("select[name=secondInterest]").val();
@@ -60,3 +61,5 @@
 
 </script>
 
+=======
+>>>>>>> Stashed changes

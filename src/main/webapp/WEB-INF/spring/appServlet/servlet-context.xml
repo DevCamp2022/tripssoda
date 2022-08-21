@@ -40,8 +40,12 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+<<<<<<< Updated upstream
 	<!-- 사진 업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+=======
+
+>>>>>>> Stashed changes
 	<!-- Validator 설정-->
 	<context:component-scan base-package="com.devcamp.tripssoda" />
 	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -52,4 +56,8 @@
 		</beans:property>
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 </beans:beans>

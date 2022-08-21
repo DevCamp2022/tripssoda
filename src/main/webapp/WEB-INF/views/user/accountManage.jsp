@@ -51,53 +51,19 @@
             </div>
             <div class="pwd-wrap wraps">
                 <p class="user-pwd">비밀번호</p>
-<<<<<<< Updated upstream
-=======
-                <input type="password" name="pwd" class="input-pwd" readonly>
-            </div>
-            <div class="pwd-confirm-wrap wraps">
-                <p class="user-pwd-confirm">비밀번호 확인</p>
-                <input type="password" name="pwdConfirm" class="input-pwd" readonly>
->>>>>>> Stashed changes
             </div>
             <div class="button-wrap">
                 <button class="withdraw-btn" type="button">회원 탈퇴</button>
                 <button class="update-btn" type="button">수정</button>
             </div>
-<<<<<<< Updated upstream
         </form:form>
-=======
-        </form>
->>>>>>> Stashed changes
         <input type="hidden" class="secured-pwd" value="${userDto.pwd}">
     </div>
     <script>
         // 수정 버튼을 눌렀을 때
         $(".update-btn").on("click", function() {
-<<<<<<< Updated upstream
             // 회원정보 수정 페이지로 이동
             location.href="/mypage/info/update"
-=======
-            // 수정버튼을 누르면 readonly를 false로 바꿔줌
-            $("input[name=nickname]").attr('readonly', false);
-            $("input[name=intro]").attr('readonly', false);
-            $("input[name=instagramId]").attr('readonly', false);
-            $("input[name=tel]").attr('readonly', false);
-            $("input[name=pwd]").attr('readonly', false);
-            $("input[name=pwdConfirm]").attr('readonly', false);
-
-            // title을 회원 정보 수정으로 변경
-            $(".title").text("회원 정보 수정");
-
-            // 수정 버튼 숨김
-            $(".update-btn").css("display", "none");
-            // 회원 탈퇴 버튼 숨김
-            $(".withdraw-btn").css("display", "none");
-            // 수정 완료 버튼 보여줌
-            $(".update-complete-btn").css("display", "block");
-            // 이미지 수정 form 보여줌
-            $(".update-img-form").css("display", "flex");
->>>>>>> Stashed changes
         });
 
         // 회원 탈퇴 버튼을 눌렀을 때

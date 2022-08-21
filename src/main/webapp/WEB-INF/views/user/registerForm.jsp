@@ -329,7 +329,7 @@
                 emailVerfResult = result;
             },
             error: function() {
-                alert("이메일 인증 중 오류가 발생했습니다. 다시 시도해주세요");
+                alert("이메일 인증 중 오류가 발생했습니다. 이메일을 정확히 입력후 다시 시도해주세요");
             }
         });
     });

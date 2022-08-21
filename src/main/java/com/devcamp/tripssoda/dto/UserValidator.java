@@ -42,11 +42,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("pwd", "invalid.pwd");
         }
 
-<<<<<<< Updated upstream
-        // 비밀번호와 비밀번호 확인값이 다른지 검증
-=======
         // 비밀번호와 비밀번호 확인값이 다르면 예외를 던짐
->>>>>>> Stashed changes
         if(!userDto.getPwdConfirm().equals(userDto.getPwd())) {
             errors.rejectValue("pwdConfirm", "different.pwd");
         }

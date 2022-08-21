@@ -36,6 +36,6 @@ public class HomeController {
 
 		model.addAttribute("sample_img", "/image/sample_img.png");
 
-		return "home/home.subTiles";
+		return "home/home.mainTiles";
 	}
 }

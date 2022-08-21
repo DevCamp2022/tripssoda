@@ -8,6 +8,13 @@ import java.util.Map;
 
 @Mapper
 public interface AnswerMapper {
+
+    public AnswerDto selectAnswer(Integer id);
+
+    public int selectAllUserAnswerCnt(Integer userId);
+
+    public List<AnswerDto> selectAllUserAnswer(Map map);
+
     int count(Integer questionId) throws Exception;
 
     int insert(AnswerDto dto) throws Exception;
@@ -21,4 +28,5 @@ public interface AnswerMapper {
     List<AnswerDto> selectAll(Integer questionId) throws Exception;
 
     int deleteAll(Integer questionId) throws Exception;
+
 }

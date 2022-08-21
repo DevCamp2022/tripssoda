@@ -12,6 +12,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:property-placeholder location="/WEB-INF/config/config.properties" />
+	<context:property-placeholder order="2" ignore-unresolvable="true" location="/WEB-INF/config/smtp.properties"/>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -34,6 +35,24 @@
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="mailSender"
+		  class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="${mail.email}"/>
+		<property name="password" value="${mail.password}"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
+		</property>
 	</bean>
 
 <!--	<bean id="authorizationAspect" class="com.devcamp.tripssoda.util.AuthorityAspect"></bean>-->

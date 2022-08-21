@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.EmailVerificationMapper">
+    <insert id="insertEmailVerification" parameterType="EmailVerificationDto">
+        INSERT INTO email_verification (user_email, verf_code, valid_time)
+        VALUES (#{userEmail}, #{verfCode}, #{validTime})
+    </insert>
+
+    <select id="selectEmailVerification" parameterType="String" resultType="EmailVerificationDto">
+        SELECT * FROM email_verification
+        WHERE user_email = #{userEmail}
+    </select>
+
+    <update id="updateEmailVerification" parameterType="EmailVerificationDto">
+        UPDATE email_verification
+        SET verf_code = #{verfCode}, valid_time = #{validTime}
+        WHERE user_email = #{userEmail}
+    </update>
+
+    <update id="updateEmailVerificationStatus" parameterType="EmailVerificationDto">
+        UPDATE email_verification
+        SET status = #{status}
+        WHERE user_email = #{userEmail}
+    </update>
+
+    <delete id="deleteEmailVerification" parameterType="String">
+        DELETE FROM email_verification
+        WHERE user_email = #{userEmail}
+    </delete>
+</mapper>

@@ -48,7 +48,7 @@
 			<section class="sub-nav-tap" id="sub_menu02">
 				<nav class="sub-nav-tap-menu" role="navigation">
 					<ul>
-						<li><a href="./">여행지 둘러보기</a></li>
+						<li><a href="/product/list">여행지 둘러보기</a></li>
 						<li><a href="./">제주</a></li>
 						<li><a href="./">프랑스</a></li>
 						<li><a href="./">스페인</a></li>

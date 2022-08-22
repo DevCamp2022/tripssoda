@@ -5,7 +5,7 @@
 <div class="content">
   <!-- <form action="/product/register" method="POST" onsubmit="return valid()"> -->
   <!-- form action="/product/register" method="POST"-->
-  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data">
+  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
   <!--나중에 hidden으로 바꿀것-->
   <input type="text" name="userId" value="${sessionScope.userId}">
   <input type="text" name="partnerId" value="${sessionScope.partnerId}">
@@ -18,9 +18,23 @@
       </td>
     </tr>
     <tr>
+      <th><span class="man-star">*</span>상품 카테고리 선택</th>
+      <td>
+        <select name="category">
+          <option>카테고리를 선택해주세요</option>
+          <option value="C001">에디터 픽</option>
+          <option value="C002">프라이빗 투어</option>
+          <option value="C003">소규모 데이투어</option>
+          <option value="C004">버스데이투어</option>
+          <option value="C005">이색투어</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
       <th><span class="man-star">*</span>대표썸네일</th>
       <td class="td-thumbnail">
         <input type="file" name="uploadThumb" id="uploadThumb"/>
+        <div class="div-thumbnail"></div>
       </td>
     </tr>
     <tr>
@@ -43,22 +57,22 @@
         <input type="text" name="refundAmount" id="refundAmount"/>
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <th><span class="man-star">*</span>총 기간(단위:일)</th>
       <td>
         <input type="number" name="dayCnt" id="dayCnt" onblur="handleSchedule();"/>
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <th><span class="man-star">*</span>모집 최소인원</th>
       <td>
-        <input type="number" name="minMember" id="minMember" />
+        <input type="number" name="minMember" id="minMember" /> 명
       </td>
     </tr>
     <tr>
       <th><span class="man-star">*</span>모집 최대인원</th>
       <td>
-        <input type="number" name="maxMember" id="maxMember"/>
+        <input type="number" name="maxMember" id="maxMember"/> 명
       </td>
     </tr>
     <tr>
@@ -73,22 +87,43 @@
         <textarea id="courseIntro" name="courseIntro"></textarea>
       </td>
     </tr>
-    <tr>
-      <th><span class="man-star">*</span>만나는 장소</th>
-      <td>
-        <input type="text" name="meetingPoint" id="meetingPoint"/>
-      </td>
-    </tr>
+    
     <tr>
       <th><span class="man-star">*</span>필수안내</th>
-      <td>
+      <td class="td-manGuide">
         <input type="text" name="mandatoryGuidance" id="mandatoryGuidance"/>
+        <button type="button" id="add-manGuide">추가하기</button><br>
       </td>
     </tr>
     <tr>
       <th><span class="man-star">*</span>환불정책</th>
-      <td>
+      <td class="td-refund">
         <input type="text" name="refundPolicy" id="refundPolicy"/>
+        <button type="button" id="add-refund">추가하기</button><br>
+      </td>
+    </tr>
+    <tr>
+      <th>픽업정보</th>
+      <td>
+        <table class="table-pickupInfo">
+          <tr>
+            <th><input type="radio" id="pickup-type-s" name="pickupType" value="S" checked >선택형</th>
+            <th><input type="radio" id="pickup-type-a" name="pickupType" value="A" >단답형</th>
+            <th><input type="radio" id="pickup-type-f" name="pickupType" value="F" >고정형</th>
+          </tr>
+          <tr class="tr-pickupOption">
+            <td colspan="3">
+              <input type="text" name="pickupOption"><button type="button" class="pickOption-addBtn">픽업옵션추가</button>
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <th><span class="man-star">*</span>만나는 장소 / 픽업장소</th>
+      <td>
+        <textarea name="meetingPoint" id="meetingPoint"></textarea>
       </td>
     </tr>
     <tr>

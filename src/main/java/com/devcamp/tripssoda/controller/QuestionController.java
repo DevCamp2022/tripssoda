@@ -48,7 +48,6 @@ public class QuestionController {
             e.printStackTrace();
             m.addAttribute(questionDto);
             m.addAttribute("msg", "MOD_ERR");
-
             return "question/questionWrite.mainTiles";
         }
     }
@@ -94,7 +93,6 @@ public class QuestionController {
             m.addAttribute(questionDto);
             m.addAttribute("mode", "new");
             m.addAttribute("msg", "WRT_ERR");
-
             return "question/questionWrite.mainTiles";
         }
     }
@@ -102,7 +100,6 @@ public class QuestionController {
     @GetMapping("/write")
     public String write(Model m) {
         m.addAttribute("mode", "new");
-
         return "question/questionWrite.mainTiles";
     }
 
@@ -136,9 +133,7 @@ public class QuestionController {
 
             if(questionDto.equals(null))
                 throw new Exception("Read Failed");
-
             return "question/question.mainTiles";
-
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "READ_ERR");

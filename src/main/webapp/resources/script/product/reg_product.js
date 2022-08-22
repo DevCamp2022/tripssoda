@@ -3,18 +3,19 @@
 //thumbnail upload
 $("#uploadThumb").change(function(){
     //정규표현식
-    var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+    // var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
     var f = $(this)[0].files[0]; //현재 선택한 파일
-    if(!f.type.match(reg)){
-        alert("유효한 확장자가 아닙니다.");
-        return;
-    }
+    // if(!f.type.match(reg)){
+    //     alert("유효한 확장자가 아닙니다.");
+    //     return;
+    // }
     
     var reader = new FileReader();
     reader.onload = function(e){
         let newImg = document.createElement('img');
         newImg.setAttribute("src", e.target.result);
-        $(".td-thumbnail").append(newImg);
+        newImg.setAttribute("width",500);
+        $(".div-thumbnail").html(newImg);
     }
     reader.readAsDataURL($(this)[0].files[0]);
 });
@@ -24,6 +25,9 @@ CKEDITOR.replace('prdIntro',
     {filebrowserUploadUrl:'/ckeditor/fileUploader'
 });
 CKEDITOR.replace('courseIntro',
+    {filebrowserUploadUrl:'/ckeditor/fileUploader'
+});
+CKEDITOR.replace('meetingPoint',
     {filebrowserUploadUrl:'/ckeditor/fileUploader'
 });
 
@@ -47,7 +51,21 @@ $(document).on("click",".hashes .delBtn",function(){
     $(".hashes .delBtn").eq(idx).parent().remove();
 });
 
-//포함사항, 미포함사항, 추가사항 항목 추가 버튼이벤트
+//필수안내, 환불정책, 포함사항, 미포함사항, 추가사항 항목 추가 버튼이벤트
+$("#add-manGuide").click(function(){
+    let s = '<div class="manGuide">';
+    s += '<input type="text" name="mandatoryGuidance"/>';
+    s += '<button type="button" class="manGuide-delBtn">삭제하기</button><br></div>';
+    $(".td-manGuide").append(s);
+});
+
+$("#add-refund").click(function(){
+    let s = '<div class="refundPolicy">';
+    s += '<input type="text" name="refundPolicy" id="refundPolicy"/>';
+    s += '<button type="button" class="refundPolicy-delBtn">삭제하기</button><br></div>';
+    $(".td-refund").append(s);
+});
+
 $("#add-inclusion").click(function(){
     let s = '<div class="inclusion">';
     s += '<input type="text" name="inclusion" id="inclusion"/>';
@@ -69,7 +87,17 @@ $("#add-additionalInfo").click(function(){
     $(".td-additionalInfo").append(s);
 });
 
-//포함사항, 미포함사항, 추가사항 항목 삭제 이벤트
+//필수안내, 환불정책, 포함사항, 미포함사항, 추가사항 항목 삭제 이벤트
+$(document).on("click",".manGuide .manGuide-delBtn",function(){
+    let idx = $(".manGuide .manGuide-delBtn").index(this);
+    $(".manGuide .manGuide-delBtn").eq(idx).parent().remove();
+});
+
+$(document).on("click",".refundPolicy .refundPolicy-delBtn",function(){
+    let idx = $(".refundPolicy .refundPolicy-delBtn").index(this);
+    $(".refundPolicy .refundPolicy-delBtn").eq(idx).parent().remove();
+});
+
 $(document).on("click",".inclusion .inclusion-delBtn",function(){
     let idx = $(".inclusion .inclusion-delBtn").index(this);
     $(".inclusion .inclusion-delBtn").eq(idx).parent().remove();
@@ -85,7 +113,39 @@ $(document).on("click",".additionalInfo .additionalInfo-delBtn",function(){
     $(".additionalInfo .additionalInfo-delBtn").eq(idx).parent().remove();
 });
 
-
+//픽업정보 타입선택 이벤트
+$("input[name='pickupType']").change(function(){
+    if($("input[name='pickupType']:checked").val() == "S") {
+        console.log("픽업타입 : 선택형");
+        $(".tr-pickupOption").show();
+        $("input[name=pickupOption]").attr("disabled", false);
+    };
+    if($("input[name='pickupType']:checked").val() == "A") {
+        console.log("픽업타입 : 단답형");
+        $(".tr-pickupOption").hide();
+        $("input[name=pickupOption]").attr("disabled", true);
+    };
+    if($("input[name='pickupType']:checked").val() == "F") {
+        console.log("픽업타입 : 고정형");
+        $(".tr-pickupOption").hide();
+        $("input[name=pickupOption]").attr("disabled", true);
+    };
+})
+// $(document).on("click", ".pickOption-addBtn", function(){
+$(".pickOption-addBtn").click(function(){
+    let s = "";
+    s += "<tr class='optional-pickupOption'>"
+    s += "<td class='td-additional-option' colspan='3'>";
+    s += "<input type='text' name='pickupOption'>";
+    s += "<button type='button' class='pickupOption-delBtn'>삭제</button>";
+    s += "</td>";
+    s += "</tr>";
+    $(".table-pickupInfo").append(s);
+})
+$(document).on("click",".optional-pickupOption .pickupOption-delBtn",function(){
+    let idx = $(".optional-pickupOption .pickupOption-delBtn").index(this);
+    $(".optional-pickupOption .pickupOption-delBtn").eq(idx).parent().remove();
+});
 
 //상품옵션-선택형-옵션추가 이벤트
 $(document).on("click",".add-option", function() {
@@ -93,8 +153,8 @@ $(document).on("click",".add-option", function() {
 
     let s = '';
     s += "<div class='content-wrapper'>";
-    s += "<input name='regProductDtoList[" + numOfParent + "].content'>";
-    s += "<input name='regProductDtoList[" + numOfParent + "].price'>";
+    s += "<input name='regProductOptionListDto[" + numOfParent + "].content'>";
+    s += "<input name='regProductOptionListDto[" + numOfParent + "].price'>";
     s += '<button type="button" class="content-delBtn">옵션삭제</button>';
     s += '<br></div>';
     $('.option-content_' + numOfParent).append(s);
@@ -300,7 +360,7 @@ function getScheduleList() {
         s += "<td>" + (scheduleCnt + 1) + "</td>";
         s += "<td>";
         s += realStart + " " + startDate.toString().slice(0, 3);
-        s += "<input type='text' name='regProductScheduleListDto[" + scheduleCnt + "].startDate' value='" + realStart + "'>";
+        s += "<input type='text' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleStartDate' value='" + realStart + "'>";
         s += "</td>";
         s += "<td>";
         s += "<input type='text' class='schedulePrice_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].schedulePrice'>";
@@ -379,11 +439,6 @@ function valid() {
         return false;
     }
 
-    if($("#dayCnt").val() == "") {
-        alert("총 기간을 설정해 주세요.");
-        return false;
-    }
-
     if($("#minMember").val() == "") {
         alert("모집 최소인원을 입력해 주세요.");
         return false;
@@ -418,6 +473,12 @@ function valid() {
         alert("환불정책을 입력해 주세요.");
         return false;
     }
+
+    if($("#dayCnt").val() == "") {
+        alert("총 기간을 설정해 주세요.");
+        return false;
+    }
+
 
     return true;
 }

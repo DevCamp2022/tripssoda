@@ -2,10 +2,12 @@ package com.devcamp.tripssoda.dto;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("ProductDto")
-public class ProductDto {
-    private Integer userId;
+import java.sql.Date;
+
+@Alias("GetDetailProductDto")
+public class GetDetailProductDto {
     private Integer productId;
+    private Integer scheduleId;
     private Integer partnerId;
     private String title;
     private String category;
@@ -31,18 +33,13 @@ public class ProductDto {
     private Integer totalLikes;
     private Integer saleStatus;
     private Integer approvalStatus;
-    private String createdAt;
-    private Integer createdBy;
-    private String updatedAt;
-    private Integer updatedBy;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private Date startDate;
+    private String endDate;
+    private Integer schedulePrice;
+    private Integer currentMember;
+    private Integer scheduleMinMember;
+    private Integer scheduleMaxMember;
+    private Integer memberStatus;
 
     public Integer getProductId() {
         return productId;
@@ -50,6 +47,14 @@ public class ProductDto {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public Integer getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(Integer scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public Integer getPartnerId() {
@@ -252,43 +257,68 @@ public class ProductDto {
         this.approvalStatus = approvalStatus;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public Integer getSchedulePrice() {
+        return schedulePrice;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setSchedulePrice(Integer schedulePrice) {
+        this.schedulePrice = schedulePrice;
     }
 
-    public Integer getUpdatedBy() {
-        return updatedBy;
+    public Integer getCurrentMember() {
+        return currentMember;
     }
 
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setCurrentMember(Integer currentMember) {
+        this.currentMember = currentMember;
     }
+
+    public Integer getScheduleMinMember() {
+        return scheduleMinMember;
+    }
+
+    public void setScheduleMinMember(Integer scheduleMinMember) {
+        this.scheduleMinMember = scheduleMinMember;
+    }
+
+    public Integer getScheduleMaxMember() {
+        return scheduleMaxMember;
+    }
+
+    public void setScheduleMaxMember(Integer scheduleMaxMember) {
+        this.scheduleMaxMember = scheduleMaxMember;
+    }
+
+    public Integer getMemberStatus() {
+        return memberStatus;
+    }
+
+    public void setMemberStatus(Integer memberStatus) {
+        this.memberStatus = memberStatus;
+    }
+
 
     @Override
     public String toString() {
-        return "ProductDto{" +
-                "userId=" + userId +
-                ", productId=" + productId +
+        return "GetDetailProductDto{" +
+                "productId=" + productId +
+                ", scheduleId=" + scheduleId +
                 ", partnerId=" + partnerId +
                 ", title='" + title + '\'' +
                 ", category='" + category + '\'' +
@@ -314,10 +344,13 @@ public class ProductDto {
                 ", totalLikes=" + totalLikes +
                 ", saleStatus=" + saleStatus +
                 ", approvalStatus=" + approvalStatus +
-                ", createdAt='" + createdAt + '\'' +
-                ", createdBy=" + createdBy +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", updatedBy=" + updatedBy +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", schedulePrice=" + schedulePrice +
+                ", currentMember=" + currentMember +
+                ", scheduleMinMember=" + scheduleMinMember +
+                ", scheduleMaxMember=" + scheduleMaxMember +
+                ", memberStatus=" + memberStatus +
                 '}';
     }
 }

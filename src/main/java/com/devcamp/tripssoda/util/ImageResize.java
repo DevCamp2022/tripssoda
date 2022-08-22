@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 public class ImageResize {
     /* 파일 정보와 리사이즈 값 정하는 메소드 */
-    public static void thumbnailResize(String path, String fileName) throws IOException {
+    public static String thumbnailResize(String path, String fileName) throws IOException {
         File file = new File(path + File.separator + fileName);  //리사이즈할 파일 경로
         InputStream inputStream = new FileInputStream(file);
         Image img = new ImageIcon(file.toString()).getImage(); // 파일 정보 추출
@@ -26,12 +26,15 @@ public class ImageResize {
 
         if(img.getWidth(null)>500) {
             BufferedImage resizedImage = resize(inputStream, width, height);
+            String resizedName = "resized_" + fileName;
             // 리사이즈 실행 메소드에 값을 넘겨준다.
-            ImageIO.write(resizedImage, "jpg", new File(path + File.separator + "resized" + fileName));
+            ImageIO.write(resizedImage, "jpg", new File(path + File.separator + resizedName));
             // 리사이즈된 파일, 포맷, 저장할 파일경로
             file.delete();
-            return;
-        } return;
+            return resizedName;
+        } else {
+            return fileName;
+        }
     }
 
     /* 리사이즈 실행 메소드 */

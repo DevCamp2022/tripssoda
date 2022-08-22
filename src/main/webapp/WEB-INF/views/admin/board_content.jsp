@@ -138,7 +138,8 @@
                 return ;
             }
 
-            if(form.content.value=="") {
+            if(CKEDITOR.instances.unitContent.getData()==''
+                ||CKEDITOR.instances.unitContent.getData().length==0) {
                 alert("내용을 입력해 주세요.");
                 form.content.focus();
                 return ;

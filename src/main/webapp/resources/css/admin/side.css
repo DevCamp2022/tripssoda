@@ -1,17 +1,19 @@
-*{
-    text-decoration: none;
-}
-
 .side-container-board{
     text-align: center;
     margin: 50px 0;
 
 }
 
+
+.side-container ul:nth-child(1){
+    text-align: left;
+    margin-bottom: 30px;
+}
+
 .side-container-board li{
-    background: aliceblue;
-    border-radius: 10px;
-    margin-bottom: 7px;
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .side-container-board a{
@@ -20,7 +22,7 @@
     width: 170px;
     text-decoration: none ;
     color: black;
-    padding: 26px 30px;
+    padding: 18px 30px;
 }
 
 
@@ -35,10 +37,16 @@
     width: 170px;
     text-decoration: none ;
     color: black;
-    padding: 26px 30px;
+    padding: 18px 30px;
 }
 .side-container-stats li{
     background: whitesmoke;
-    border-radius: 10px;
-    margin-bottom: 7px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.side-container label{
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-left: 7px;
 }

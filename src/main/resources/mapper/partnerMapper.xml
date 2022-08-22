@@ -40,5 +40,28 @@
         )
     </insert>
 
+    <select id="searchSelectPartner" resultType="PartnerDto"   >
+        select * from partner
+    </select>
+
+    <select id="selectOnPartner" resultType="PartnerDto">
+        select * from partner
+        where on_partnership = 1
+    </select>
+
+    <select id="selectOnApplicant" resultType="PartnerDto">
+        select * from partner
+        where on_partnership = 0
+    </select>
+
+    <update id="updateToPartner" parameterType="PartnerDto">
+        UPDATE partner
+        SET 'on_partnership' = 1
+    </update>
+
+    <select id="selectPartnerInfo" parameterType="int" resultType="PartnerDto">
+        select * from partner
+        where id = #{id}
+    </select>
 
 </mapper>

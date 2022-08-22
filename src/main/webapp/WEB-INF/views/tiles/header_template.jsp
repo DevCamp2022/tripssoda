@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '' : pageContext.request.session.getAttribute('id')}"/>
+<c:set var="loginOutLink" value="${loginId=='' || loginId==null ? '/login' : '/logout'}"/>
+<c:set var="loginOut" value="${loginId=='' || loginId==null ? '로그인' : '로그아웃'}"/>
+
+
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ropa+Sans">
 <link rel="stylesheet" href="/css/main/normalize.css">
 <link rel="stylesheet" href="/css/main/header.css">
@@ -27,8 +32,13 @@
 					<li>
 						<button type="button">검색</button>
 					</li>
-					<li><a href="/login" class="">로그인</a></li>
-					<li><a href="/register" class="">회원가입</a></li>
+					<li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+					<c:if test="${loginId!=null}">
+						<li><a href="<c:url value="/mypage/info"/>">마이페이지</a></li>
+					</c:if>
+					<c:if test="${loginId==null}">
+						<li><a href="/register" class="">회원가입</a></li>
+					</c:if>
 					<li><a href="/admin/home" class="">관리자</a></li>
 				</ul>
 			</nav>

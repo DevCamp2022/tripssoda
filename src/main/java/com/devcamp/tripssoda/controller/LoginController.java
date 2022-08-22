@@ -85,8 +85,10 @@ public class LoginController {
         //  세션 객체에 id와 email을 저장
         UserDto userDto = userService.selectUser(email);
         Integer userId = userDto.getId();
+        String userCode = userDto.getUserCode();
         session.setAttribute("id", userId);
         session.setAttribute("email", email);
+        session.setAttribute("userCode", userCode);
 
         // 로그인 기록을 저장
         UserHistoryDto userHistoryDto = new UserHistoryDto(userId, "로그인", userId);

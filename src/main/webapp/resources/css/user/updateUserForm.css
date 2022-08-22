@@ -9,33 +9,39 @@ ol, ul, li {
 a {
     text-decoration: none;
 }
-
+/* body */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 /* main */
 .main {
     width: 840px;
     margin: 0 auto;
+    background-color: white;
 }
 
 .contents {
     width: 100%;
     margin: 0 auto;
+    border: 1px solid #e9e9e9;
 }
 
 .title {
     font-size: 22px;
     font-weight: bold;
     width: 754px;
-    padding-left: 10px;
+    padding: 40px 0 15px 15px;
     box-sizing: border-box;
-    margin: 10px auto;
-    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .user-info {
     width: 754px;
-    border: 2px solid black;
+    border: 1px solid #e9e9e9;
     margin: 20px auto;
     box-sizing: border-box;
+    border-radius: 4px;
 }
 .img-wrap {
     display: flex;
@@ -51,25 +57,46 @@ a {
 
 .update-img-form {
     display: flex;
+    align-items: center;
     justify-content: center;
+}
+#uploadThumb {
+    padding-left: 90px;
 }
 
 .user-interest-list {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 10px auto;
-}
-
-.msg {
-    margin: 0 auto;
-    color: red;
-    font-weight: bold;
-    text-align: center;
 }
 
 .user-interest {
     border: 1px solid lightgray;
+    border-radius: 4px;
+    height: 23px;
     margin: 5px;
+    line-height: 23px;
+}
+.user-interest > span {
+    color: #00ce7c;
+    font-weight: bold;
+}
+
+.update-interest-btn {
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: 500;
+    width: 150px;
+    height: 54px;
+    border: none;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-left: 20px
 }
 .wraps {
     width: 700px;
@@ -86,20 +113,115 @@ a {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    box-sizing: border-box;
 }
-.wraps > p {
-    width: 500px;
-    margin: 5px auto;
-}
-input[type=text], input[type=password] {
-    width: 500px;
+
+.inputs {
+    width: 700px;
     margin: 5px auto;
     padding-left: 10px;
     box-sizing: border-box;
 }
 
+.user-nickname {
+    width: 480px;
+    margin: 5px auto;
+    padding-left: 17px;
+    font-size: 17px;
+}
+.input-nickname {
+    width: 480px;
+    margin: 5px auto;
+    border-radius: 27px;
+    border: 1px solid #e9e9e9;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.nickname-check {
+    width: 480px;
+    margin: 0 auto;
+    padding-left: 17px;
+}
+
+.intro-wrap {
+
+}
+.user-intro {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 5px;
+}
 .input-intro {
     height: 100px;
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+.instagram-wrap {
+
+}
+
+.user-instagram {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 5px;
+}
+.user-instagram > i {
+    padding: 0 5px 0 3px;
+}
+
+.input-instagram {
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    padding: 16px 20px;
+}
+.tel-wrap {
+
+}
+
+.user-tel {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 5px;
+}
+
+.input-tel {
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    padding: 16px 20px;
+}
+.tel-check {
+    padding-left: 10px;
+}
+.user-pwd {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 5px;
+}
+.input-pwd {
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    padding: 16px 20px;
+}
+.pwd-check {
+    padding-left: 10px;
+}
+.pwd-confirm {
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+.user-pwd-confirm {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 5px;
+}
+.pwd-confirm-check {
+    padding-left: 10px;
 }
 
 .button-wrap {
@@ -109,7 +231,19 @@ input[type=text], input[type=password] {
 }
 
 .button-wrap > button {
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: 500;
+    width: 100px;
+    height: 54px;
+    border: none;
     margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-left: 20px
 }
 
 

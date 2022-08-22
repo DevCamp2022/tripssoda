@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 /* 초기화 */
 ol, ul, li {
     list-style: none;
@@ -8,31 +9,39 @@ ol, ul, li {
 a {
     text-decoration: none;
 }
-
+/* body */
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
 }
-
+/* main */
 .main {
     width: 840px;
-    margin: 0 auto;
+    margin: 100px auto;
+    background-color: white;
 }
 
 .contents {
     width: 100%;
+    margin: 0 auto;
+    border: 1px solid #e9e9e9;
+    border-radius: 4px;
 }
 
 .title {
-    width: 90%;
-    margin: 10px auto;
-    border: 1px solid black;
+    font-size: 22px;
+    font-weight: bold;
+    width: 754px;
+    padding: 40px 0 15px 0px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9e9e9;
+    box-sizing: border-box;
 }
 
 .accompany {
     width: 90%;
     margin: 10px auto;
-    border: 1px solid black;
+    border: 1px solid #e9e9e9;
     overflow: hidden;
 }
 
@@ -50,12 +59,12 @@ body {
     float: left;
     width: 80%;
     box-sizing: border-box;
-    border: 1px solid black;
+    padding: 20px;
 }
 
 .status {
-    color: green;
-    font-weight: bold;
+    color: #00ce7c;
+    font-weight: 500;
 }
 
 .accompany-title {
@@ -63,11 +72,13 @@ body {
 }
 
 .region-and-date {
-
+    margin-top: 30px;
+    color: #939090;
+    font-size: 14px;
 }
 
 .region {
-
+    padding-left: 5px;
 }
 
 .start-date {
@@ -79,19 +90,31 @@ body {
 }
 
 .btn-and-cnt-wrap {
-
+    display: flex;
+    align-items: center;
 }
 
 .btn {
-
+    padding-left: 5px;
+    border:none;
+    color: grey;
+    background-color: white;
 }
 
 .view-cnt {
-
+    float: right;
+    color: grey;
+    padding-right: 5px;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
 .answer-cnt {
-
+    float: right;
+    color: grey;
+    padding-right: 5px;
+    font-size: 12px;
+    margin-left: 5px;
 }
 
 .paging-container {
@@ -99,4 +122,13 @@ body {
     margin: 10px auto;
     text-align: center;
     float: none;
+}
+
+.page {
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    color: #00ce7c;
+    font-weight: bold;
 }

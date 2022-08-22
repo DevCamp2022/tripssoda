@@ -17,50 +17,78 @@ body {
 .main {
     width: 840px;
     margin: 0 auto;
+    background-color: white;
+    margin: 100px auto;
 }
 
 .contents {
     width: 100%;
+    margin: 0 auto;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
 }
 
 .title {
-    width: 90%;
+    font-size: 22px;
+    font-weight: bold;
+    width: 754px;
+    padding: 40px 0 15px 0px;
+    box-sizing: border-box;
     margin: 0 auto;
-    padding: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .point-status-wrap {
     overflow: hidden;
     width: 90%;
     margin: 10px auto;
-    border: 1px solid black;
 }
 
 .point {
     float: left;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
+    padding: 10px 16px;
 }
 
 .reg-coupon-btn {
     float: right;
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: 500;
+    width: 150px;
+    height: 46px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-left: 20px
 }
 
 .thead-wrap {
+    display: flex;
+    align-items: center;
     overflow: hidden;
     width: 90%;
-    margin: 10px auto;
-    border: 1px solid black;
+    height: 57px;
+    margin: 10px auto 0 auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #e9e9e9;
+    background-color: rgba(220, 220, 220, 0.31);
     text-align: center;
 }
 
 .thead-id {
     float: left;
-    width: 10%;
+    width: 15%;
 }
 
 .thead-detail {
     float: left;
-    width: 60%;
+    width: 55%;
 }
 .thead-price {
     float: left;
@@ -70,28 +98,48 @@ body {
 .td-wrap {
     overflow: hidden;
     width: 90%;
-    margin: 10px auto;
-    border: 1px solid black;
-    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9e9e9;
+    display: flex;
+    align-items: center;
 }
 
 .td-id {
     float: left;
-    width: 10%;
+    width: 15%;
+    text-align: center;
 }
 
 .td-detail {
     float: left;
-    width: 60%;
+    width: 55%;
+    text-align: left;
+}
+.td-title {
+
+}
+.td-date {
+    color: #bcbcbc;
+    font-size: 13px;
 }
 
 .td-price {
     float: left;
     width: 30%;
+    text-align: center;
 }
 
 .paging-container {
     width: 90%;
     margin: 10px auto;
     text-align: center;
+}
+
+.page {
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    color: #00ce7c;
+    font-weight: bold;
 }

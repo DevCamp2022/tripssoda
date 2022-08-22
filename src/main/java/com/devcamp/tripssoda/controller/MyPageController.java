@@ -9,7 +9,6 @@ import com.devcamp.tripssoda.dto.UserValidator;
 import com.devcamp.tripssoda.service.UserService;
 import com.devcamp.tripssoda.service.UserTourInterestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -211,13 +209,6 @@ public class MyPageController {
         return "redirect:/mypage/info";
     }
 
-//    // 여행관심사 선택 페이지로 이동(회원 여행관심사 수정에 사용할 수도?)
-//    @GetMapping("/mypage/info/updateInterest")
-//    public String selectUserInterest() {
-//
-//        return "user/selectInterest.subTiles";
-//    }
-
     // 회원 탈퇴
     @PostMapping("/mypage/delete")
     public String deleteUser(HttpSession session, RedirectAttributes rattr) throws Exception {
@@ -246,7 +237,7 @@ public class MyPageController {
         List<TourInterestCodeDto> tourInterestCodeDtoList = tourInterestCodeService.selectAllTourInterestCode();
         model.addAttribute("tourInterestCodeDtoList", tourInterestCodeDtoList);
 
-        return "user/selectInterest.subTiles";
+        return "user/selectInterest.mainTiles";
     }
 
     // 닉네임 중복 체크

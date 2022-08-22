@@ -12,7 +12,7 @@
             <li class="point-manage"><a href="<c:url value="/mypage/pointHistory"/>">적립 내역</a></li>
             <li class="review-manage"><a href="<c:url value="/mypage/tourReviewList"/>">여행 후기</a></li>
             <li class="reservation-manage"><a href="<c:url value="/mypage/reservationList"/>">예약 내역</a></li>
-            <li class="qna-manage"><a href="<c:url value="/mypage/qnaList"/>">내 QnA</a></li>
+            <li class="qna-manage"><a href="<c:url value="/mypage/qnaList"/>">내 Q&A</a></li>
             <li class="accompany-manage"><a href="<c:url value="/mypage/accompanyList"/>">내 동행게시글</a></li>
             <li class="inquire-manage"><a href="<c:url value="/mypage/inquiryList"/>">내 1:1문의</a></li>
             <li class="wishlist-manage"><a href="<c:url value="/mypage/wishList"/>">내 위시리스트</a></li>

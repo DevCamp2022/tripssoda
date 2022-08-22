@@ -10,11 +10,11 @@
     let msg = '${msg}';
     if(msg == "USER_WRITE_ERR") alert("잘못된 값을 입력하셨거나, 약관에 동의하지 않으셨습니다. 다시 회원가입 페이지로 이동합니다.");
     if(msg == 'USER_REGISTER_ERR') alert("회원가입에 실패했습니다. 다시 작성해주세요");
+    if(msg == 'IllegalAccess') alert("잘못된 접근입니다. 회원가입 양식을 다시 작성해주세요");
 </script>
 <div class="main">
     <div class="contents">
         <h3 class="title">회원가입</h3>
-        <p class="form-title">입력사항</p>
         <form:form modelAttribute="userDto" action="/register/write" class="input-list" onsubmit="return formCheck()">
             <div class="msg"><form:errors path="email"/></div>
             <div class="msg"><form:errors path="pwd"/></div>
@@ -31,49 +31,60 @@
                 <button class="confirm-verf-num" type="button">인증번호 확인</button>
             </div>
             <p class="row-title">비밀번호</p>
-            <input type="password" class="input-password" name="pwd" placeholder="비밀번호(8자~12자, 영문 문자+숫자+특수문자 사용)" maxlength="14">
-            <p class="pwd-check check-text"></p>
-            <input type="password" class="input-password" name="pwdConfirm" placeholder="비밀번호 확인" maxlength="14">
-            <p class="pwd-confirm-check check-text"></p>
+            <div class="pwd-wrap">
+                <input type="password" class="input-password" name="pwd" placeholder="비밀번호(8자~12자, 영문 문자+숫자+특수문자 사용)" maxlength="14">
+                <p class="pwd-check check-text"></p>
+                <input type="password" class="input-password pwd-confirm" name="pwdConfirm" placeholder="비밀번호 확인" maxlength="14">
+                <p class="pwd-confirm-check check-text"></p>
+            </div>
             <p class="row-title">이름</p>
-            <input type="text" class="input-name" name="name" placeholder="이름(2~6자)">
-            <p class="name-check check-text"></p>
+            <div class="name-wrap">
+                <input type="text" class="input-name" name="name" placeholder="이름(2~6자)">
+                <p class="name-check check-text"></p>
+            </div>
             <p class="row-title">휴대폰 번호</p>
-            <input type="text" class="input-phone-number" name="tel" placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
-            <p class="tel-check check-text"></p>
+            <div class="tel-wrap">
+                <input type="text" class="input-phone-number" name="tel" placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
+                <p class="tel-check check-text"></p>
+            </div>
             <p class="row-title">성별</p>
-            <select name="gender" class="select-gender">
-                <option value="M">남자</option>
-                <option value="F">여자</option>
-            </select>
+            <div class="gender-wrap">
+                <select name="gender" class="select-gender">
+                    <option value="M">남자</option>
+                    <option value="F">여자</option>
+                </select>
+            </div>
             <p class="row-title">생일</p>
-            <input type="text" class="input-birth-year" name="year" placeholder="년(4자, 예시 : 1992)" maxlength="4">
-            <select name="month" class="select-birth-month">
-                <option value="">월</option>
-                <c:forEach begin="1" end="12" step="1" varStatus="month">
-                    <option value="${month.count}">${month.count}월</option>
-                </c:forEach>
-            </select>
-            <input type="text" class="input-birth-day" name="day" placeholder="일(예시 : 30)" maxlength="2">
-            <p class="birthday-check check-text"></p>
-            <input type="hidden" name="birthday" class="birthday">
+            <div class="birthday-wrap">
+                <input type="text" class="input-birth-year" name="year" placeholder="년(4자, 예시 : 1992)" maxlength="4">
+                <select name="month" class="select-birth-month">
+                    <option value="">월</option>
+                    <c:forEach begin="1" end="12" step="1" varStatus="month">
+                        <option value="${month.count}">${month.count}월</option>
+                    </c:forEach>
+                </select>
+                <input type="text" class="input-birth-day" name="day" placeholder="일(예시 : 30)" maxlength="2">
+                <p class="birthday-check check-text"></p>
+                <input type="hidden" name="birthday" class="birthday">
+            </div>
             <p class="row-title">이용약관</p>
             <div class="terms-wrap">
                 <li class="terms-list">
-                    <input type="checkbox" class="terms-checkbox" name="firstTermsStatus" value="1"/><p class="terms-title">(필수) 서비스 이용약관 동의</p>
+                    <p class="terms-title"><label><input type="checkbox" class="terms-checkbox" name="firstTermsStatus" value="1"/>(필수) 서비스 이용약관 동의</label></p>
                     <a class="first-terms-link terms-link" target="_blank" href="<c:url value='/terms/service'/>">약관보기</a>
                 </li>
                 <li class="terms-list">
-                    <input type="checkbox" class="terms-checkbox" name="secondTermsStatus" value="1"/><p class="terms-title">(필수) 개인정보처리방침 동의</p>
+                    <p class="terms-title"><label><input type="checkbox" class="terms-checkbox" name="secondTermsStatus" value="1"/>(필수) 개인정보처리방침 동의</label></p>
                     <a class="second-terms-link terms-link" target="_blank" href="<c:url value='/terms/privacy'/>">약관보기</a>
                 </li>
                 <li class="terms-list">
-                    <input type="checkbox" class="terms-checkbox" name="thirdTermsStatus" value="1"/><p class="terms-title">(선택) 마케팅 정보 활용 동의</p>
+                    <p class="terms-title"><label><input type="checkbox" class="terms-checkbox" name="thirdTermsStatus" value="1"/>(선택) 마케팅 정보 활용 동의</label></p>
                     <a class="third-terms-link terms-link" target="_blank" href="<c:url value='/terms/marketing'/>">약관보기</a>
                 </li>
             </div>
             <button type="submit" class="register-btn">회원가입</button>
         </form:form>
+
     </div>
 </div>
 
@@ -94,6 +105,11 @@
             $('.pwd-check').text('올바른 비밀번호를 입력해주세요');
             $('.pwd-check').css('color', 'red');
             return false;
+        } else if(!pwdConfirmResult) {
+            $('input[name=pwdConfirm]').focus();
+            $('.pwd-confirm-check').text('올바른 비밀번호를 입력해주세요');
+            $('.pwd-confirm-check').css('color', 'red');
+            return false;
         } else if(!nameResult) {
             $('input[name=name]').focus();
             $('.name-check').text('정확한 이름을 입력해주세요');
@@ -105,14 +121,8 @@
             $('.tel-check').css('color', 'red');
             return false;
         } else if(!birthResult) {
-            $('input[name=year]').focus();
             $('.birthday-check').text('올바른 생년월일을 입력해주세요');
             $('.birthday-check').css('color', 'red');
-            return false;
-        } else if(!pwdConfirmResult) {
-            $('input[name=pwd]').focus();
-            $('.pwd-confirm-check').text('올바른 비밀번호를 입력해주세요');
-            $('.pwd-confirm-check').css('color', 'red');
             return false;
         } else if(!emailVerfResult) {
             alert("이메일 인증을 완료해야 합니다");
@@ -148,6 +158,7 @@
             cache : false,
             success :function(result){
                 if(result == "success") {
+                    emailVerfResult = true;
                     alert("인증에 성공하였습니다.");
                 } else if(result == "fail") {
                     alert("유효시간이 지나 인증에 실패했습니다. 인증을 다시 진행해주세요.")
@@ -180,7 +191,7 @@
     let emailVerfResult = false;
 
     // 비밀번호 유효성 검사
-    $("input[name=pwd]").blur(function() {
+    $("input[name=pwd]").keyup(function() {
         // 비밀번호 유효성 검사결과를 변수에 저장
         pwdResult = pwdJ.test($('input[name=pwd]').val());
 
@@ -194,7 +205,7 @@
     });
 
     // 비밀번호확인 유효성 검사
-    $("input[name=pwdConfirm]").blur(function() {
+    $("input[name=pwdConfirm]").keyup(function() {
         // 비밀번호확인 유효성 검사결과를 변수에 저장
         pwdConfirmResult = pwdJ.test($('input[name=pwdConfirm]').val());
         let pwd = $('input[name=pwd]').val();
@@ -214,7 +225,7 @@
     });
 
     // 이름 유효성 검사
-    $("input[name=name]").blur(function() {
+    $("input[name=name]").keyup(function() {
         // 비밀번호 유효성 검사결과를 변수에 저장
         nameResult = nameJ.test($('input[name=name]').val());
 
@@ -228,7 +239,7 @@
     });
 
     // 휴대폰번호 유효성 검사
-    $("input[name=tel]").blur(function() {
+    $("input[name=tel]").keyup(function() {
         // 비밀번호 유효성 검사결과를 변수에 저장
         telResult = telJ.test($('input[name=tel]').val());
 
@@ -242,7 +253,7 @@
     });
 
     // 생일 유효성 검사
-    $("input[name=day]").blur(function() {
+    $("input[name=day]").keyup(function() {
         let today = new Date();
         let year = today.getFullYear(); // 년도
         let month = today.getMonth() + 1;  // 월
@@ -314,24 +325,25 @@
         let day = $(".input-birth-day").val();
         let birthday = year + "-" + month + "-" + day;
 
-        let email = $(".input-email").val();
+        // let email = $(".input-email").val();
 
         $(".birthday").val(birthday);
 
-        // 인증상태를 확인하는 Ajax
-        $.ajax({
-            type:"POST",
-            url:"/register/confirmVerfStatus",
-            data: {email:email},
-            async : false,
-            cache : false,
-            success :function(result){
-                emailVerfResult = result;
-            },
-            error: function() {
-                alert("이메일 인증 중 오류가 발생했습니다. 이메일을 정확히 입력후 다시 시도해주세요");
-            }
-        });
+        // // 인증상태를 확인하는 Ajax
+        // $.ajax({
+        //     type:"POST",
+        //     url:"/register/confirmVerfStatus",
+        //     data: {email:email},
+        //     async : false,
+        //     cache : false,
+        //     success :function(result){
+        //         emailVerfResult = result;
+        //     },
+        //     error: function() {
+        //         alert("이메일 인증을 완료해야 합니다");
+        //         return false;
+        //     }
+        // });
     });
         // let form = $(".input-list");
         // form.attr("action", "/register/write?birthday=" + birthday);

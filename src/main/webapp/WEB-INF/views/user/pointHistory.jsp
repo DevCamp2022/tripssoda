@@ -5,6 +5,7 @@
 
 <title>적립 내역</title>
 <link rel="stylesheet" href="<c:url value="/css/user/pointHistory.css"/>">
+<script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 
 <div class="main">
     <div class="contents">
@@ -21,7 +22,7 @@
         <c:forEach var="userPointHistoryDto" items="${userPointHistoryDtoList}">
             <div class="td-wrap">
                 <div class="td-id">${userPointHistoryDto.id}</div>
-                <div class="td-detail">${userPointHistoryDto.processDetail}<br><fmt:formatDate value="${userPointHistoryDto.processAt}" pattern="yyyy-MM-dd"/></div>
+                <div class="td-detail"><div class="td-title">${userPointHistoryDto.processDetail}</div><div class="td-date"><fmt:formatDate value="${userPointHistoryDto.processAt}" pattern="yyyy-MM-dd"/></div></div>
                 <div class="td-price"><fmt:formatNumber value="${userPointHistoryDto.amount}"/>원</div>
             </div>
         </c:forEach>
@@ -32,13 +33,13 @@
                 </c:if>
                 <c:if test="${totalCnt!=null && totalCnt!=0}">
                     <c:if test="${ph.showPrev}">
-                        <a class="page" href="<c:url value="/mypage/pointHistory${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>
+                        <a class="page" href="<c:url value="/mypage/pointHistory${ph.sc.getQueryString(ph.beginPage-1)}"/>"><i class="fa-solid fa-circle-arrow-left"></i></a>
                     </c:if>
                     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
                         <a class="page ${i==ph.sc.page? "paging-active" : ""}" href="<c:url value="/mypage/pointHistory${ph.sc.getQueryString(i)}"/>">${i}</a>
                     </c:forEach>
                     <c:if test="${ph.showNext}">
-                        <a class="page" href="<c:url value="/mypage/pointHistory${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>
+                        <a class="page" href="<c:url value="/mypage/pointHistory${ph.sc.getQueryString(ph.endPage+1)}"/>"><i class="fa-solid fa-circle-arrow-right"></i></a>
                     </c:if>
                 </c:if>
             </div>

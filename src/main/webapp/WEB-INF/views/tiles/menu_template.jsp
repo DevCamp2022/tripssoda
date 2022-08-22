@@ -5,7 +5,8 @@
 
 <%--관리자페이지시작--%>
 
-<jsp:include page="/admin/side"/>
+<%--<jsp:include page="/admin/side"/>--%>
+<jsp:include page="/mypage/side"/>
 
 <%--관리자페이지끝--%>
 

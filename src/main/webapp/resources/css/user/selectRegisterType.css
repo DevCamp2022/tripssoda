@@ -13,8 +13,6 @@ body {
 
 .contents {
     width: 723px;
-    border: 3px solid #00ce7c;
-    border-radius: 5px;
     margin: 20px auto;
     padding: 20px;
     display: flex;

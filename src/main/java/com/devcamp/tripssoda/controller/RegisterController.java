@@ -90,9 +90,12 @@ public class RegisterController {
             List<TourInterestCodeDto> tourInterestCodeDtoList = tourInterestCodeService.selectAllTourInterestCode();
             model.addAttribute("tourInterestCodeDtoList", tourInterestCodeDtoList);
 
-        } catch (Exception e) {
+        } catch (IllegalAccessException e) {
+            rattr.addFlashAttribute("msg", "IllegalAccess");
+            return "redirect:/register/write";
+        } catch(Exception e2) {
             // 에러가 발생했을 경우 메세지를 표시하고 회원가입 양식 페이지로 이동
-            e.printStackTrace();
+            e2.printStackTrace();
             rattr.addFlashAttribute("msg", "USER_WRITE_ERR");
             return "redirect:/register/write";
         }

@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 /* 초기화 */
 ol, ul, li {
     list-style: none;
@@ -8,36 +9,46 @@ ol, ul, li {
 a {
     text-decoration: none;
 }
-
+/* body */
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
 }
-
+/* main */
 .main {
     width: 840px;
-    margin: 0 auto;
+    margin: 100px auto;
+    background-color: white;
 }
 
 .contents {
     width: 100%;
-    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #e9e9e9;
+    border-radius: 4px;
 }
 
 .title {
-    text-align: left;
-    width: 90%;
-    padding-left: 10px;
-    margin: 10px auto;
-    border: 1px solid black;
+    font-size: 22px;
+    font-weight: bold;
+    width: 754px;
+    padding: 40px 0 15px 0px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
 
 .thead-wrap {
-    width: 90%;
-    margin: 0 auto;
-    border: 1px solid black;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    width: 90%;
+    height: 57px;
+    margin: 10px auto 0 auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #e9e9e9;
+    background-color: rgba(220, 220, 220, 0.31);
+    text-align: center;
 }
 
 .thead-id {
@@ -62,10 +73,13 @@ body {
 }
 
 .td-wrap {
+    overflow: hidden;
     width: 90%;
     margin: 0 auto;
-    border: 1px solid black;
-    overflow: hidden;
+    border-bottom: 1px solid #e9e9e9;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .td-id {
@@ -95,4 +109,13 @@ body {
     margin: 10px auto;
     text-align: center;
     float: none;
+}
+
+.page {
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    color: #00ce7c;
+    font-weight: bold;
 }

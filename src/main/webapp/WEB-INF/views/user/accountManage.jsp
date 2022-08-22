@@ -5,6 +5,7 @@
 
 <title>계정 관리</title>
 <link rel="stylesheet" href="<c:url value="/css/user/accountManage.css"/>">
+<script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 
 <script>
     let msg = "${msg}";
@@ -29,25 +30,25 @@
             </div>
             <div class="user-interest-list">
                 <c:forEach var="userTourInterest" items="${userTourInterestList}">
-                    <div class="user-interest"># ${userTourInterest}</div>
+                    <div class="user-interest"><span>#</span> ${userTourInterest}</div>
                 </c:forEach>
-                <button class="update-interest-btn" type="button">여행관심사 테스트 다시보기</button>
             </div>
+            <button class="update-interest-btn" type="button">여행관심사 테스트 다시보기</button>
             <div class="nickname-wrap wraps">
                 <p class="user-nickname">닉네임</p>
-                <input type="text" name="nickname" class="input-nickname" value="${userDto.nickname}" readonly placeholder="닉네임 입력(4자~12자, 영대소문자와 숫자 조합)">
+                <input type="text" name="nickname" class="input-nickname inputs" value="${userDto.nickname}" readonly placeholder="닉네임 입력(4자~12자, 영대소문자와 숫자 조합)">
             </div>
             <div class="intro-wrap wraps">
                 <p class="user-intro">소개글</p>
-                <input type="text" name="intro" class="input-intro" value="${userDto.intro}" readonly maxlength="2000" placeholder="소개글을 입력해주세요(2000자 이내)">
+                <input type="text" name="intro" class="input-intro inputs" value="${userDto.intro}" readonly maxlength="2000">
             </div>
             <div class="instagram-wrap wraps">
-                <p class="user-instagram">인스타그램</p>
-                <input type="text" name="instagramId" class="input-instagram" value="${userDto.instagramId}" readonly placeholder="@를 제외한 user ID만 입력" maxlength="50">
+                <p class="user-instagram"><i class="fa-brands fa-instagram"></i>인스타그램</p>
+                <input type="text" name="instagramId" class="input-instagram inputs" value="${userDto.instagramId}" readonly maxlength="50">
             </div>
             <div class="tel-wrap wraps">
                 <p class="user-tel">휴대폰 번호</p>
-                <input type="text" name="tel" class="input-tel" value="${userDto.tel}" readonly placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
+                <input type="text" name="tel" class="input-tel inputs" value="${userDto.tel}" readonly placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
             </div>
             <div class="pwd-wrap wraps">
                 <p class="user-pwd">비밀번호</p>

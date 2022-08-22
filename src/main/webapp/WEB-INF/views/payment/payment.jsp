@@ -10,20 +10,21 @@
             <div class="reservation-info">
                 <div class="necessary"><h1>입력사항<b>(필수)</b></h1></div>
                 <div class="payment-title">예약자 정보<p>틀린 정보는 없나요? 꼼꼼하게 확인해주세요 👀</p></div>
-                <div class="row row-name">
+                <hr class='separator'>
+                <div class="rows rows-name">
                     <input name="reserverName" class="reserver-name inp"/>
                     <select name="reserverGender" class="reserver-gender sel">
                         <option value="M">남</option>
                         <option value="F">여</option>
                     </select>
                 </div>
-                <div class="row row-birthday">
+                <div class="rows rows-birthday">
                     <input name="reserverBirthYear" class="reserver-birth-year inp"/>
                     <input name="reserverBirthMonth" class="reserver-birth-month inp"/>
                     <select name="reserverBirthDate" class="reserver-birth-date sel">
                     </select>
                 </div>
-                <div class="row row-tel">
+                <div class="rows rows-tel">
                     <select name="reserverCntryCode" class="reserver-ctry-code sel">
                         <option value="+82">+82 대한민국</option>
                         <option value="+61">+61 호주</option>
@@ -32,7 +33,7 @@
                     </select>
                     <input name="reserverTel" class="reserver-tel inp"/>
                 </div>
-                <div class="row row-email">
+                <div class="rows rows-email">
                     <input name="reserverEmail" class="reserver-email inp"/>
                 </div>
                 <div class="pickup-info"></div>
@@ -63,30 +64,34 @@
                             </div>
                         </li>
                         <li class="product-amount"><em class="detail-info-tit">기본 가격</em>
-                            <span class="product-amount">0</span>
-                            <input name="productAmount" type="hidden" class="product-amount" value="0" readonly />
+                            <span class="product-amount">0<span>원</span></span>
+                            <input name="productAmount" type="hidden" class="product-amount" value="0" readonly/>
                         </li>
                         <li class="option-amount"><em class="detail-info-tit">옵션 가격</em>
-                            <span class="option-amount">0</span>
+                            <span class="option-amount">0<span>원</span></span>
                             <input name="optionAmount" type="hidden" class="option-amount" value="0" readonly/>
                         </li>
                         <li class="reserver-point"><em class="detail-info-tit">적립금 사용</em>
                             <div class="section-point">
-                                <input type="number" class="inp" type="text" name="usedPoint" placeholder="적립금 사용금액 입력" >
-                                <p><span class="reserver-point">0</span>원</p>
+                                <input type="number" class="inp" type="text" name="usedPoint" value="0" placeholder="적립금 입력">
+                                <p>보유 포인트: <span class="reserver-point">0</span>원</p>
                             </div>
                         </li>
                         <li class="line-top"><p class="pay-method">결제 방식<b>(필수)</b></p></li>
                         <li>
-                            <button class="simple-pay" type="button"><input type="radio" name="payMethod" value="html5_inicis">
-                                <p>간편결제</p><img src="/images/common/icon/toss_logo.svg"></button>
+                            <button name="payMethod" class="simple-pay pay-method" type="button">
+                                <input type="radio" name="payMethod" value="html5_inicis">
+                                <p>신용/체크카드 간편결제</p></button>
                         </li>
                         <li>
-                            <button class="simple-pay" type="button"><input type="radio" name="payMethod" value="kakaopay">
-                                <p>카카오페이</p><img src="/images/common/icon/toss_logo.svg"></button>
+                            <button name="payMethod" class="simple-pay pay-method" type="button">
+                                <input type="radio" name="payMethod" value="kakaopay">
+                                <p>카카오페이</p><img src="/image/payment/kakaopay_small.png" width="75px"></button>
                         </li>
-                        <li class="total-amount"><em class="detail-info-tit">최종 가격</em>
-                            <span class="total-amount">0</span>
+                        <hr class='separator total-amount'>
+                        <li class="total-amount">
+                            <em class="detail-info-tit">최종 결제 금액</em>
+                            <span class="total-amount">0<span>원</span></span>
                             <input type="hidden" name="totalAmount" type="" class="total-amount" value="0" readonly/>
                         </li>
 

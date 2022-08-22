@@ -43,7 +43,8 @@ function updatePaymentInfo(paymentInfo) {
 
     selector("li.product-start-date > span.date").innerText = paymentInfo.startDate.replaceAll("-", ".");
     selector("li.product-amount > span.product-amount").setAttribute("data-unitPrice", paymentInfo.schedulePrice);
-    selector("li.product-amount > span.product-amount").innerText = paymentInfo.schedulePrice;
+    const productAmountHtml = `<span class="product-amount">${paymentInfo.schedulePrice}<span>원</span></span>`
+    selector("li.product-amount > span.product-amount").innerHTML = productAmountHtml;
     selector("li.product-amount > input[name='productAmount']").value = paymentInfo.schedulePrice;
 
     selector("li.total-amount > span.total-amount").innerText = paymentInfo.schedulePrice;
@@ -58,7 +59,7 @@ function updatePaymentInfo(paymentInfo) {
 
     if (paymentInfo.pickupType !== null) {
         const pickupTitle = "<div class='payment-title'>픽업 정보<p>곧 모시러 갈께요! 부릉부릉 🚐💨💨</p></div><hr class='separator'>" +
-            `<div class='row meeting_place'><span>${paymentInfo.meetingPoint}</span></div>`;
+            `<div class='rows meeting_place'><span>${paymentInfo.meetingPoint}</span></div>`;
         selector('div.pickup-info').insertAdjacentHTML('beforeend', pickupTitle);
         //A == 단답형, S == 선택형, F == 고정형
         if (paymentInfo.pickupType === 'A') {
@@ -83,7 +84,7 @@ function updatePaymentInfo(paymentInfo) {
 
         for (let i = 0; i < optList.length; i++) {
             optionTag += `<div class="option">`;
-            optionTag += `<h1>옵션 ${i + 1}.</h1>`;
+            // optionTag += `<h1>옵션 ${i + 1}.</h1>`;
             optionTag += `<input type="hidden" name="optionId" value="${optList[i].optionId}">`
             if (optList[i].type === 'A') {
                 optionTag += `<input name='optionDetail' class='reserver-option ${optList[i].type === 'S' ? 'sel': optList[i].type === 'A' ? 'inp':''}'
@@ -107,64 +108,6 @@ function updatePaymentInfo(paymentInfo) {
     }
 }
 
-// let prevPrice;
-//
-// $('div.reservation-info').on("click", "[name='optionDetail']", function () {
-//     if($(this).hasClass("sel")){
-//         prevPrice = Number.parseInt($(this).children(':selected').data("unitprice"));
-//         prevPrice = isNaN(prevPrice) ? 0: prevPrice;
-//     } else if($(this).hasClass("inp")){
-//         prevPrice= Number.parseInt($(this).data("unitprice"));
-//     }})
-//
-// $('div.reservation-info').on("change", "[name='optionDetail']", function () {
-//     let unitPrice;
-//     if($(this).hasClass("sel")){
-//         unitPrice = Number.parseInt($(this).children(':selected').data("unitprice"));
-//         unitPrice = isNaN(unitPrice) ? 0: unitPrice;
-//     } else if($(this).hasClass("inp")){
-//         unitPrice= Number.parseInt($(this).data("unitprice"));
-//     }
-//         const currentAmount = Number.parseInt($("input[name='optionAmount']").val());
-//     const qty = Number.parseInt($("input[name='productQty']").val());
-//
-//
-//         // $(this).siblings("div.option-qty").remove();
-//
-//
-//         if($(this).val()===''){
-//             $("span.option-amount").text(currentAmount-prevPrice);
-//             $("input[name='optionAmount']").val(currentAmount-prevPrice);
-//             return;
-//         } else {
-//             $("span.option-amount").text((currentAmount-prevPrice)+unitPrice);
-//             $("input[name='optionAmount']").val((currentAmount-prevPrice)+unitPrice);
-//         }
-//
-//
-//         // if ($(this).data("countable") === true) {
-//         //     const optionCount = "<div class='option-qty'>" +
-//         //         "<em class='detail-info-tit'>수량</em>" +
-//         //         "<div class='qty-wrap'>" +
-//         //         "<button type='button' class='btn-amount-minus' data-btn='option'>-</button>" +
-//         //         "<input type='number' type='text' name='optionQty' value='1'>" +
-//         //         "<button type='button' class='btn-amount-plus' data-btn='option'>+</button></div></div>";
-//         //     $(this).parent().append(optionCount);
-//         //
-//         //     $("span.option-amount").text(unitPrice)
-//         //     $("input[name='optionAmount']").val(unitPrice);
-//         // }
-//
-//
-//
-//         calTotalAmount()
-//
-//
-//     //옵션 선택 해제 했을 때 가격을 0원처리
-//     //0원짜리 옵션일 경우 리셋안되게 처리.....
-// })
-
-
 $('div.reservation-info').on("change", "[name='optionDetail']", function () {
 
     $("span.option-amount").text(0);
@@ -179,7 +122,8 @@ $('div.reservation-info').on("change", "[name='optionDetail']", function () {
         optionAmount+=Number.parseInt(option.data("unitprice"));
     }
 
-    $("span.option-amount").text(optionAmount);
+    const optionAmountHtml = `<span class="option-amount">${optionAmount}<span>원</span></span>`;
+    $("span.option-amount").html(optionAmountHtml);
     $("input[name='optionAmount']").val(optionAmount);
 
         calTotalAmount()
@@ -211,7 +155,8 @@ $("div.reservation-wrap").on("click", ".btn-amount-plus", function () {
     qtyInpElement.val(currentQty + 1)
 
     currentAmount = Number.parseInt(amountTxtElement.text());
-    amountTxtElement.text(currentAmount + unitPrice);
+    const productAmountHtml = `<span class="product-amount">${currentAmount + unitPrice}<span>원</span></span>`
+    amountTxtElement.html(productAmountHtml);
     amountInpElement.val(currentAmount + unitPrice);
     calTotalAmount()
     appendOption();
@@ -255,11 +200,14 @@ $("div.reservation-wrap").on("click", ".btn-amount-minus", function () {
     qtyInpElement.val(currentQty - 1)
 
     currentProductAmount = Number.parseInt(amountTxtElement.text());
-    amountTxtElement.text(currentProductAmount - unitPrice);
+    const productAmountHtml = `<span class="product-amount">${currentProductAmount - unitPrice}<span>원</span></span>`
+    amountTxtElement.html(productAmountHtml);
     amountInpElement.val(currentProductAmount - unitPrice);
 
     currentOptionAmount = Number.parseInt(optionTxtElement.text());
-    optionTxtElement.text(currentOptionAmount - totalOptionAmount);
+
+    const optionAmountHtml = `<span class="option-amount">${currentOptionAmount - totalOptionAmount}<span>원</span></span>`
+    optionTxtElement.html(optionAmountHtml);
     optionInpElement.val(currentOptionAmount - totalOptionAmount);
     $("div.option-wrap").last().remove();
     calTotalAmount()
@@ -293,7 +241,8 @@ function calTotalAmount() {
         totalAmount -= Number.parseInt(usedPoint);
     }
 
-    $("span.total-amount").text(totalAmount);
+    const totalAmountHtml = `<span class="total-amount">${totalAmount}<span>원</span></span>`
+    $("span.total-amount").html(totalAmountHtml);
     $("input[name='totalAmount']").val(totalAmount);
 }
 
@@ -336,3 +285,11 @@ function objectifyPaymentDetail(){
     formObj.reserverBirthday=reserverBirthday;
     return formObj;
 }
+
+function checkEmptyForm(){
+    const inputElement = $("input");
+}
+
+$("ul.detail-info").on("click", "button[name='payMethod']",function (){
+    $(this).children("input[type='radio']").prop('checked', true);
+})

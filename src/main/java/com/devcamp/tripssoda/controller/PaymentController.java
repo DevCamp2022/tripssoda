@@ -42,7 +42,6 @@ public class PaymentController {
     @GetMapping("/paymentDetail")
     @ResponseBody
     public PaymentInitialInfoDto paymentDetail(HttpSession session, Integer productId, Integer scheduleId) {
-        session.setAttribute("id", 40);
         Integer userId = (Integer) session.getAttribute("id");
         return paymentService.selectPaymentInitialInfo(userId, productId, scheduleId);
     }

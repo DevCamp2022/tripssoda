@@ -2,7 +2,11 @@
 
 /* Base */
 html { font-family: "Ropa Sans", sans-serif; font-size: 16px; line-height: 1.5; }
-body { background-color: rgb(240, 240, 240); color: rgb(0, 0, 0); min-width: 1200px; padding-top: 20px; }
+body {
+    /*background-color: rgb(240, 240, 240); */
+    color: rgb(0, 0, 0);
+    min-width: 1200px;
+}
 h1, h2, h3, p, ul { margin: 0; }
 ul { padding-left: 0; }
 ul li { list-style-type: none; }
@@ -13,8 +17,8 @@ img { vertical-align: middle; }
 
 .page-header {
     background-color: rgb(255, 255, 255);
-    height:130px;  width: 100%;  min-width: 1200px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    height:142px;  width: 100%;  min-width: 1200px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
     position:absolute; /*아래 dummy 텍스트와의 공백을 없애기 위해*/
     z-index: 9999999999;
 }

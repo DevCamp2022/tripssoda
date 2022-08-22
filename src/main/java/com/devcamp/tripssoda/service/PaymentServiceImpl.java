@@ -56,9 +56,9 @@ public class PaymentServiceImpl implements PaymentService {
     public String insertPayment(PaymentDetailDto paymentDetailDto) throws Exception {
 
         //사용자 편의를 위한 placeholder 때문에 usedPoint 값이 null로 오는걸 방지하기 위함.
-        if (Objects.isNull(paymentDetailDto.getUsedPoint())) {
-            paymentDetailDto.setUsedPoint(0);
-        }
+        //if (Objects.isNull(paymentDetailDto.getUsedPoint())) {
+        //    paymentDetailDto.setUsedPoint(0);
+        //}
 
         try {
             //요청된 가격과 실제 서버에서의 가격이 동일한지 체크

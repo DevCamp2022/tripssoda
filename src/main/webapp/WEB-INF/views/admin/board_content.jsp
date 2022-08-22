@@ -189,7 +189,8 @@
             }
         });
 
-        $("#removeBtn").on("click", function(){
+        //삭제버튼 눌렀을때
+        $("#conDelBtn").on("click", function(){
             if(!confirm("정말로 삭제하시겠습니까?")) return;
 
             let form = $("#form");
@@ -210,9 +211,9 @@
             }
         });
 
-        $('#conDelBtn').on('click', function(){
-            location.href="<c:url value='/admin/remove${searchCondition.queryString}'/>";
-        })
+        <%--$('#conDelBtn').on('click', function(){--%>
+        <%--    location.href="<c:url value='/admin/remove${searchCondition.queryString}'/>";--%>
+        <%--})--%>
 
     });
 </script>

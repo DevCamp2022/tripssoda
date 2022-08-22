@@ -5,6 +5,15 @@
 <link rel="stylesheet" href="/css/admin/combined_board.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
+
+<script>
+    let msg = "${msg}";
+    if(msg=="DEL_OK") alert("게시물이 삭제되었습니다.");
+    if(msg=="DEL_ERR") alert("게시물 삭제에 실패했습니다. 다시 시도해 주세요.");
+
+</script>
+
+
 <div class="combined-wrap">
     <div class="b-tit">
         <c:if test='${param.menuCode==null}'><h1>Combined Board</h1></c:if>

@@ -78,9 +78,9 @@
         LEFT JOIN
              product_option AS po
         ON
-            ps.product_id AND po.product_id
+            ps.product_id = po.product_id
         WHERE ps.id = #{scheduleId}
-          AND po.product_id = #{productId};
+          AND ps.product_id = #{productId};
     </select>
 
     <resultMap id="PriceProductMap" type="PriceProductDto">

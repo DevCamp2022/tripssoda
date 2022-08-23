@@ -7,9 +7,9 @@
 <div class="content">
     <div class="reservation-wrap">
         <form id="frm">
+            <div class="necessary"><h1>입력사항<b>(필수)</b></h1></div>
             <div class="reservation-info">
-                <div class="necessary"><h1>입력사항<b>(필수)</b></h1></div>
-                <div class="payment-title">예약자 정보<p>틀린 정보는 없나요? 꼼꼼하게 확인해주세요 👀</p></div>
+                <div class="payment-title first">예약자 정보<p>틀린 정보는 없나요? 꼼꼼하게 확인해주세요 👀</p></div>
                 <hr class='separator'>
                 <div class="rows rows-name">
                     <input name="reserverName" class="reserver-name inp"/>

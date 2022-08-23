@@ -4,7 +4,14 @@ div.content-wrap{
     background-color: #f8f8f8;
     padding-top: 20px;
 }
-
+#frm{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
 em.detail-info-tit{
     color: #919191;
 }
@@ -30,11 +37,11 @@ div.reservation-info {
     justify-content: flex-start;
 }
 
-div.reservation-info > div.necessary h1{
+div.necessary h1{
     position: absolute;
     left: 20px;
     bottom: 100%;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
     font-weight: 500;
 }
@@ -65,7 +72,6 @@ div.reservation-wrap > form > div.reservation-info{
 }
 
 div.reservation-wrap > form > div.reservation-detail {
-    position: absolute;
     background-color: #ffffff;
     display: inline-block;
     padding: 30px 20px;
@@ -152,9 +158,10 @@ input, select {
 div.payment-title{
     font-size: 22px;
     font-weight: 600;
+    margin-top: 30px;
 }
-div.payment-title:first-child{
-    margin-top: 40px;
+div.payment-title.first{
+    margin-top: 0px;
 }
 
 div.payment-title > p {

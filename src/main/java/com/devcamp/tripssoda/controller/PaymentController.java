@@ -48,7 +48,7 @@ public class PaymentController {
 
     @PostMapping("/complete")
     @ResponseBody
-    public ResponseEntity<String> init(@RequestBody String paymentDetail, HttpSession session) {
+    public ResponseEntity<String> complete(@RequestBody String paymentDetail, HttpSession session) {
 
         PaymentDetailDto paymentDetailDto = null;
         ObjectMapper objectMapper = new ObjectMapper()
@@ -57,6 +57,7 @@ public class PaymentController {
         try {
             paymentDetailDto = objectMapper.readValue(paymentDetail, PaymentDetailDto.class);
 
+            System.out.println("paymentDetail = " + paymentDetail);
             Integer userId = (Integer) session.getAttribute("id");
             paymentDetailDto.setUserId(userId);
 
@@ -79,6 +80,12 @@ public class PaymentController {
             }
         }
         return new ResponseEntity<String>("payment success", HttpStatus.OK);
+    }
+
+    @GetMapping("/success")
+    public String success(HttpSession session, String reservationId){
+        Integer userId = (Integer) session.getAttribute("id");
+        return "payment/success.mainTiles";
     }
 
 //    @PostMapping

@@ -28,17 +28,24 @@ public class ReservationServiceImpl implements ReservationService {
         reservationDetail.put("userId",paymentDetailDto.getUserId());
 
         Map<String, String> optionDetail = paymentDetailDto.getOptionDetail();
-        for (int i = 0; i < optionDetail.size(); i++) {
-            String[] option = optionDetail.get("" + i).split("#");
-            Integer optionId = Integer.valueOf(option[0]);
-            String optionValue = option[1];
-            reservationDetail.put("productOptionId",optionId);
-            reservationDetail.put("content",optionValue);
+        if (optionDetail!=null) {
+            for (int i = 0; i < optionDetail.size(); i++) {
+                String[] option = optionDetail.get("" + i).split("#");
+                Integer optionId = Integer.valueOf(option[0]);
+                String optionValue = option[1];
+                reservationDetail.put("productOptionId", optionId);
+                reservationDetail.put("content", optionValue);
+                rowCnt = reservationMapper.insertReservationDetail(reservationDetail);
+                if (rowCnt != 1)
+                    throw new InsertException("Error occurred while inserting reservation detail");
+            }
+        } else {
+            reservationDetail.put("productOptionId", 0);
+            reservationDetail.put("content", "선택된 옵션이 없습니다.");
             rowCnt = reservationMapper.insertReservationDetail(reservationDetail);
             if (rowCnt != 1)
                 throw new InsertException("Error occurred while inserting reservation detail");
         }
-
         return 1;
     }
 }

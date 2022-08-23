@@ -1,25 +1,96 @@
 @charset "utf-8";
 
-div.reservation-wrap {
+div.content-wrap{
+    background-color: #f8f8f8;
+    padding-top: 20px;
 }
-
-div.reservation-wrap > form {
+#frm{
     display: flex;
     align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+em.detail-info-tit{
+    color: #919191;
+}
+
+div.reservation-wrap{
+    margin-top: 40px;
+    position: relative;
+}
+
+div.reservation-info {
+    background-color: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #e9e9e9;
+}
+
+.rows{
+    --bs-gutter-y: 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
+
+div.necessary h1{
+    position: absolute;
+    left: 20px;
+    bottom: 100%;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+div.necessary b {
+    color: #00ce7c;
+}
+
+div.payment-title > p{
+    font-size: 16px;
+    font-weight: 500;
+    color: #919191;
+
+}
+
+p.pay-method {
+    font-weight: 500;
+}
+p.pay-method > b {
+    color: #00ce7c;
+    font-weight: 800;
 }
 
 div.reservation-wrap > form > div.reservation-info{
     display: inline-block;
     width: 740px;
     padding: 32px 42px;
-    margin: 0;
+    margin: 0px 20px 20px 20px;
 }
 
 div.reservation-wrap > form > div.reservation-detail {
+    background-color: #ffffff;
     display: inline-block;
-    width: 330px;
     padding: 30px 20px;
-    margin: 0;
+    margin: 0px 20px 20px 20px;
+    border-radius: 6px;
+    border: 1px solid #e9e9e9;
+}
+
+div.option-wrap {
+    margin-bottom: 30px;
+}
+
+div.option-wrap:last-child {
+    margin-bottom: 0px;
+}
+
+
+div.option > h1{
+    font-size: 20px;
 }
 
 div.reservation-detail > div.detail-header {
@@ -27,10 +98,15 @@ div.reservation-detail > div.detail-header {
     overflow: hidden;
 }
 
+div.detail-header > strong.title{
+    font-size: 20px;
+}
 div.detail-header > img.thumbnail{
     max-width: 100%;
     vertical-align: top;
     object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 ul.detail-info > li {
@@ -47,27 +123,163 @@ div.reservation-info .sel, div.reservation-info .inp{
 width: 100%;
 }
 
-div.row.row-name > * {
-    width: 40%;
+div.rows.rows-name > * {
+    width: 45%;
 }
 
-div.row.row-birthday > input.reserver-birth-year {
-    width: 40%;
-}
-div.row.row-birthday > * {
-    width: 20%;
+div.rows.rows-birthday > input.reserver-birth-year {
+    width: 45%;
 }
 
-div.row.row-tel > select.reserver-ctry-code{
-    width: 20%;
+div.rows.rows-birthday > * {
+    width: 141.7px;
 }
 
-div.row.row-tel > input.reserver-tel{
-    width: 60%;
+div.rows.rows-tel > * {
+    width: 45%;
 }
-
+input.reserver-email.inp {
+    width: 91.5%;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+input, select {
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
+}
+
+div.payment-title{
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+div.payment-title.first{
+    margin-top: 0px;
+}
+
+div.payment-title > p {
+    margin-top: 5px;
+}
+
+hr.separator{
+    color: #999999;
+}
+
+input[name='productQty']{
+    width: 100px;
+    text-align: center;
+    height: 40px;
+}
+
+span.product-amount{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+div.section-point{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+div.qty-wrap{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+button{
+    border: none;
+    background: none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+button.btn-amount-plus, button.btn-amount-minus {
+    width: 2rem;
+    height: 2rem;
+    font-size: 20px;
+    font-weight: 600;
+    color: #919191;
+}
+
+div.section-point > input[name='usedPoint']{
+    margin:0px;
+    width: 80%;
+    padding: 9px 20px 9px 20px;
+    text-align: right;
+}
+
+div.section-point > p {
+    color: #919191;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+button.pay-method{
+    /*position: relative;*/
+    width: 100%;
+    padding: 25px 15px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: center;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+}
+
+button.pay-method:focus {
+    outline: 2px solid #00ce7c;
+}
+
+button#payBtn{
+    width: 100%;
+    line-height: 20px;
+    border-radius: 4px;
+    background-color: #00ce7c;
+    font-size: 14px;
+    color: #fff;
+    box-sizing: border-box;
+    height: 50px;
+}
+
+button.pay-method > p{
+    /*position: absolute;*/
+    left:30px;
+}
+
+button.pay-method > img{
+    margin-left: 10px;
+}
+
+hr.separator.total-amount {
+    margin: 35px 0 20px 0;
+}
+
+ul.detail-info > li.total-amount{
+    padding: 0;
+    font-size: 27px;
+    font-weight: 800;
+    justify-content: space-between;
+}
+
+li.total-amount > em.detail-info-tit {
+    font-size: 18px;
+}
+li.total-amount > span.total-amount{
+    text-align: right;
+    margin-bottom: 30px;
 }

@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+body,
+input,
+button,
+textarea,
+select {
+    font-family: "NotoSanskr", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+}
+
+
 div.wrap{
     background: white;
 }
@@ -21,7 +33,6 @@ div.header{
 }
 
 div.content-wrap{
-    /*background-color: yellow;*/
     width:100%;
     min-width: 1200px;
 }
@@ -34,7 +45,6 @@ div.image-banner {
 }
 
 div.content{
-    background-color: greenyellow;
     width: 1200px;
     margin: 0 auto;
 }

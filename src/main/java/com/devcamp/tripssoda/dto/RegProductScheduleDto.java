@@ -9,8 +9,8 @@ public class RegProductScheduleDto implements Serializable {
     private Integer userId;
     private Integer productId;
     private Integer productScheduleId;
-    private String startDate;
-    private String endDate;
+    private String scheduleStartDate;
+    private String scheduleEndDate;
     private Integer schedulePrice;
     private Integer currentMember;
     private Integer scheduleMinMember;
@@ -45,20 +45,20 @@ public class RegProductScheduleDto implements Serializable {
         this.productScheduleId = productScheduleId;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getScheduleStartDate() {
+        return scheduleStartDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setScheduleStartDate(String scheduleStartDate) {
+        this.scheduleStartDate = scheduleStartDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getScheduleEndDate() {
+        return scheduleEndDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setScheduleEndDate(String scheduleEndDate) {
+        this.scheduleEndDate = scheduleEndDate;
     }
 
     public Integer getSchedulePrice() {
@@ -139,8 +139,8 @@ public class RegProductScheduleDto implements Serializable {
                 "userId=" + userId +
                 ", productId=" + productId +
                 ", productScheduleId=" + productScheduleId +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
+                ", scheduleStartDate='" + scheduleStartDate + '\'' +
+                ", scheduleEndDate='" + scheduleEndDate + '\'' +
                 ", schedulePrice=" + schedulePrice +
                 ", currentMember=" + currentMember +
                 ", scheduleMinMember=" + scheduleMinMember +

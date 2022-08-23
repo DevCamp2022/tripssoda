@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+body, input, button, textarea, select {
+    font-family: "NotoSanskr", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+}
+
 div.header-wrap{
     /*background-color: skyblue;*/
     width:100%;

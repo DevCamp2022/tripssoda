@@ -23,6 +23,7 @@ public class PaymentDetailDto {
     private String reserverEmail;
     private String productTitle;
     private Integer productQty;
+    private Integer productPrice;
     private Integer productAmount;
     private Map<String, String> optionDetail;
     private Integer optionAmount;
@@ -54,6 +55,7 @@ public class PaymentDetailDto {
                 ", reserverEmail='" + reserverEmail + '\'' +
                 ", productTitle='" + productTitle + '\'' +
                 ", productQty=" + productQty +
+                ", productPrice=" + productPrice +
                 ", productAmount=" + productAmount +
                 ", optionDetail=" + optionDetail +
                 ", optionAmount=" + optionAmount +
@@ -66,6 +68,14 @@ public class PaymentDetailDto {
                 ", updateBy=" + updateBy +
                 ", receiptUrl='" + receiptUrl + '\'' +
                 '}';
+    }
+
+    public Integer getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Integer productPrice) {
+        this.productPrice = productPrice;
     }
 
     public String getReserverPickup() {

@@ -38,13 +38,12 @@
 <%--  여기 조건문 손봐야함  --%>
         <c:if test="${mode ne 'new'}">
             <tr>
-                <td colspan="10">
-                    <button type="button" id="modifyBtn">수정</button>
-                    <button id="conDelBtn" type="button">삭제</button>
-                    <button type="button" id="listBtn"> 목록</button>
+                <td colspan="10" class="bc-button-wrap">
+                    <button class="bc-btn" type="button" id="modifyBtn">수정</button>
+                    <button class="bc-btn" id="conDelBtn" type="button">삭제</button>
+                    <button class="bc-btn" type="button" id="listBtn"> 목록</button>
                 </td>
             </tr>
-
 <%--            <c:if test="${dto.id eq id}">--%>
 <%--                <tr>--%>
 <%--                    <td colspan="10">--%>
@@ -86,7 +85,9 @@
 <%--                    </c:if>--%>
 <%--                </td>--%>
 <%--            </tr>--%>
-
+        <tr>
+            <td><span class="img-length"></span>글자수</td>
+        </tr>
 
     </table>
 <%--            <c:if test="${mode eq 'new'}">--%>
@@ -159,7 +160,6 @@
                 if (!confirm("등록하시겠습니까?"))
                     return;
                 else {
-                    alert("url타쟈");
                     form.attr("action", '/admin/write');
                     form.attr("method", "post");
                     form.submit();
@@ -214,6 +214,79 @@
         <%--$('#conDelBtn').on('click', function(){--%>
         <%--    location.href="<c:url value='/admin/remove${searchCondition.queryString}'/>";--%>
         <%--})--%>
+
+
+        CKEDITOR.instances.unitContent.on('keyup',function(e) {
+
+            console.log("키업!");
+            alert("sdf");
+            // var content = $(this).val();
+            // $("#textLengthCheck").text("(" + content.length + " / 최대 45자)"); //실시간 글자수 카운팅
+            // if (content.length > 45) {
+            //     alert("최대 45자까지 입력 가능합니다.");
+            //     $(this).val(content.substring(0, 45));
+            //     $('#textLengthCheck').text("(45 / 최대 45자)");
+            // }
+        });
+
+
+
+
+        ///
+
+        //editor 의 id 값을 넣어줍니다.
+        var editorStatus = false;
+        var editor = CKEDITOR.instances.unitContent;
+
+        //editor 텍스트가 변경되면 setContentsLength() 를 호출 경고창을 계속 띄운다.
+        editor.on('change', function (event) {
+            console.log('ggogogo');
+            setContentsLength(this, 5, 300);
+        });
+
+        function setContentsLength(obj, imgMax, textMax) {
+            var str = obj.getData();
+            var status = false;
+            var results = str.match(/<img/g);
+            var imgCnt = 0;
+            var textCnt = 0;
+            var editorText = f_SkipTags_html(str);
+            editorText = editorText.replace(/\s/gi,"");
+            editorText = editorText.replace(/&nbsp;/gi, "");
+
+            if(results != null) {
+                imgCnt = results.length;
+                $('.img-length').text(imgCnt+"장");
+                if(imgCnt > imgMax) {
+                    status = true;
+                }
+            }
+
+            if(textCnt > textMax) {
+                status = true;
+            }
+
+            if(status) {
+                var msg = "등록오류\n글자수는 최대 "+textMax+"까지 등록이 가능합니다.\n현재 글자수 : "+textCnt+"자";
+                if(obj.name == "ideaDetail3") {
+                    msg = "등록오류\n글자수는 최대 "+textMax+"자, 이미지는 "+imgMax+"장까지만 사용이 가능합니다.\n총 글자수 : "+textCnt+"자, 총 이미지수 : "+imgCnt+"장";
+                }
+                alert(msg);
+            }
+
+            //추후 form submit할때 체크할 데이터(true 일 경우 데이터 넘기지 않음-오류)
+            editorStatus = status;
+        }
+
+//태그제거용
+        function f_SkipTags_html(input, allowed) {
+            allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+            var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+                commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+            return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+                return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+            });
+        }
 
     });
 </script>

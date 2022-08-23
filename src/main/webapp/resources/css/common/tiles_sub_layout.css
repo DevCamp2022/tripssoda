@@ -8,7 +8,6 @@ div.header-wrap{
 }
 
 div.header{
-    /*background-color: aqua;*/
     /*width: 1200px;*/
     width: 100%;
     height: 100%;
@@ -35,10 +34,12 @@ div.content-wrap{
 
 div.left-wrap{
     float: left;
+
 }
 div.left-wrap > div.menu{
     width: 320px;
-    /*background-color: deepskyblue;*/
+    width: 30%;
+
 }
 
 div.right-wrap{
@@ -47,6 +48,7 @@ div.right-wrap{
 
 div.right-wrap > div.content{
     width: 840px;
+    width: 95%;
 }
 
 

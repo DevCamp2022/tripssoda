@@ -39,50 +39,54 @@
 
     <form name="boardListForm">
         <table class="combined-list-tb">
-            <tr>
-                <td colspan="7">
-                    <button disabled>전체선택</button>
-<%--                    <button type="button" id="listBtn">전체목록</button>--%>
+            <tr >
+                <td colspan="11"  class="board-btns">
                     <button type="button" id="writeBtn">글쓰기</button>
-                </td>
-                <td colspan="3">
-                    <button id="bDelBtn" type="button">삭제</button>
+                    <button type="button" id="bDelBtn" >삭제</button>
                 </td>
             </tr>
             <tr>
                 <th class="titb" ><input type="checkbox" id="all_check"></th>
-                <th class="titb" >번호</th>
-                <th class="tit" >게시판코드</th>
-
-                <th class="titt" >제목</th>
-    <%--            <th>내용</th>--%>
+                <th class="tit">번호</th>
+                <th class="tit">구분</th>
+                <th class="titt">제목</th>
                 <th class="tit">조회수</th>
                 <th class="tit">상태</th>
-                <th class="tit">생성일시</th>
+                <th class="tit">생성일</th>
                 <th class="tit">작성자</th>
-                <th class="tit">수정일시</th>
+                <th class="tit">수정일</th>
                 <th class="tit">수정자</th>
             </tr>
 
-    <%--        ${requestScope.list}--%>
             <c:forEach var="dto" items="${list}">
                 <tr class="con-td">
                     <td class="con"><input type="checkbox" class="row_check" name="row_check" data-user-id="${dto.id}"></td>
                     <td class="con" name="id">${dto.id}</td>
-                    <td class="con" id="menuCode" data-menu-code="${dto.menuCode}">${dto.menuCode}</td>
-                    <td class="con"><a href="/admin/boardContent${searchCondition.queryString}&id=${dto.id}" >${dto.title}</a></td>
+                    <td class="con" id="menuCode" data-menu-code="${dto.menuCode}">
+                        <c:if test="${dto.menuCode eq 'M001'}">
+                            공지사항
+                        </c:if>
+                        <c:if test="${dto.menuCode eq 'M002'}">
+                            프로모션
+                        </c:if>
+                        <c:if test="${dto.menuCode eq 'M003'}">
+                            FAQ
+                        </c:if>
+<%--                            ${dto.menuCode}--%>
+                    </td>
+                    <td class="con contitle ellipsis"><a href="/admin/boardContent${searchCondition.queryString}&id=${dto.id}" ><span>${dto.title}</span></a></td>
                     <%--<td>${dto.content}</td>--%>
                     <td class="con">${dto.viewCnt}</td>
-                    <td class="con"> ${dto.status==1? '게시중' : '삭제된글'} </td>
+                    <td class="con"> ${dto.status==1? '게시중' : '삭제'} </td>
 
                     <td class="con">
                         <fmt:formatDate value="${dto.createdAt}" pattern="yy-MM-dd" type="date"/>
-                        <fmt:formatDate value="${dto.createdAt}" pattern="HH:mm" type="time"/>
+<%--                        <fmt:formatDate value="${dto.createdAt}" pattern="HH:mm" type="time"/>--%>
                     </td>
                     <td class="con">${dto.createdBy}</td>
                     <td class="con">
                         <fmt:formatDate value="${dto.updatedAt}" pattern="yy-MM-dd" type="date"/>
-                        <fmt:formatDate value="${dto.updatedAt}" pattern="HH:mm" type="time"/>
+<%--                        <fmt:formatDate value="${dto.updatedAt}" pattern="HH:mm" type="time"/>--%>
                     </td>
                     <td class="con">${dto.updatedBy}</td>
                 </tr>

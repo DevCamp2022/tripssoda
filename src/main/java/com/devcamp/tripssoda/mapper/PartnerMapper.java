@@ -19,4 +19,6 @@ public interface PartnerMapper {
     Integer updateToPartner(Integer id);
 
     PartnerDto selectPartnerInfo(Integer id);
+
+    public int count();
 }

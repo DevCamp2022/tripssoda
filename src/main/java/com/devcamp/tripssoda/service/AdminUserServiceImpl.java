@@ -56,5 +56,20 @@ public class AdminUserServiceImpl implements AdminUserService{
         return partnerMapper.selectPartnerInfo(id);
     }
 
+    @Override
+    public int getAllPartnerCnt() {
+        return partnerMapper.count();
+    }
+
+    @Override
+    public int getInquiryCnt() {
+        return 0; 1
+    }
+
+    @Override
+    public List<UserDto> selectInquiryList(SearchCondition sc) {
+        return null;
+    }
+
 
 }

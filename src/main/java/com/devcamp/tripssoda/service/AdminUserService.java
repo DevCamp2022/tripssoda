@@ -20,4 +20,10 @@ public interface AdminUserService {
     Integer partnerApprove(Integer id);
 
     PartnerDto selectPartnerInfo(Integer id);
+
+    int getAllPartnerCnt();
+
+    public int getInquiryCnt();
+
+    public List<UserDto> selectInquiryList(SearchCondition sc);
 }

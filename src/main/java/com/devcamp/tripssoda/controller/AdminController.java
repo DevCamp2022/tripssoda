@@ -185,8 +185,6 @@ public class AdminController {
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
 
-
-
                 int rowCnt = adminBoardService.remove(id, userId);
 
                 if(rowCnt==0)
@@ -241,6 +239,30 @@ public class AdminController {
         return "success";
     }
 
+    //1:1
+    @GetMapping
+    public String inquiryList(Model m, SearchCondition sc) throws Exception{
+        try{
+            int totalCnt = adminUserService.getInquiryCnt();
+            System.out.println("totalCnt = " + totalCnt);
+            m.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+            List<UserDto> list = adminUserService.selectInquiryList(sc);
+
+            m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            m.addAttribute("msg", "LIST_ERR");
+            m.addAttribute("totalCnt", 0);
+        }
+
+        return "inquiry";
+    }
+
     //회원관리
     @GetMapping("/userList")
     public String userList(Model m, SearchCondition sc) throws Exception{
@@ -270,17 +292,17 @@ public class AdminController {
     public String partnerList(Model m, SearchCondition sc) throws Exception{
 
             try{
-                int totalCnt = adminUserService.getAllUserCnt();
-                System.out.println("totalCnt = " + totalCnt);
+                int totalCnt = adminUserService.getAllPartnerCnt();
+                System.out.println("partner - totalCnt = " + totalCnt);
                 m.addAttribute("totalCnt", totalCnt);
 
                 PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
-                List<PartnerDto> list = adminUserService.searchSelectPartner(sc);
+//                List<PartnerDto> list = adminUserService.searchSelectPartner(sc);
                 List<PartnerDto> partnerList = adminUserService.selectOnPartner(sc);
                 List<PartnerDto> applicantList = adminUserService.selectOnApplicant(sc);
 
-                m.addAttribute("list", list);
+//                m.addAttribute("list", list);
                 m.addAttribute("partnerList", partnerList);
                 m.addAttribute("applicantList", applicantList);
 

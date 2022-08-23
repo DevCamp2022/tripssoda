@@ -38,5 +38,5 @@ public interface UserMapper {
 
     public int count();
 
-
+    List<UserDto> searchSelectUser(SearchCondition sc);
 }

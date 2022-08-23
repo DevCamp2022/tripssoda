@@ -47,12 +47,11 @@
                     <strong name="title" class="title">상품제목</strong>
                     <input name="productTitle" type="hidden"/>
                     <input name="productId" class="product-id" readonly type="hidden"/>
-
                 </div>
                 <div class="detail-info-wrap">
                     <ul class="detail-info">
                         <li class="product-start-date">
-                            <em class="detail-info-tit">날짜</em><span class="date">2000.01.01.</span>
+                            <em class="detail-info-tit">여행 날짜</em><span class="date">2000.01.01.</span>
                             <input name="scheduleId" class="schedule-id" readonly type="hidden"/>
                         </li>
                         <li class="product-qty">
@@ -66,6 +65,7 @@
                         <li class="product-amount"><em class="detail-info-tit">기본 가격</em>
                             <span class="product-amount">0<span>원</span></span>
                             <input name="productAmount" type="hidden" class="product-amount" value="0" readonly/>
+<%--                            <input name="productPrice" type="hidden" class="product-price" value="0" readonly/>--%>
                         </li>
                         <li class="option-amount"><em class="detail-info-tit">옵션 가격</em>
                             <span class="option-amount">0<span>원</span></span>
@@ -78,7 +78,7 @@
                             </div>
                         </li>
                         <li class="line-top"><p class="pay-method">결제 방식<b>(필수)</b></p></li>
-                        <input name="payMethod" type="hidden" class="pay-method"/>
+                        <input name="payMethod" type="hidden" class="pay-method" readonly/>
                         <li>
                             <button name="btnPayMethod" class="simple-pay pay-method" type="button">
                                 <input type="radio" name="payMethodOption" value="html5_inicis">

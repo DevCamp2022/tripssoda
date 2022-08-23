@@ -58,11 +58,16 @@
 	<tx:annotation-driven/>
 	<aop:aspectj-autoproxy/>
 
+	<bean id="importClient" class="com.siot.IamportRestClient.IamportClient">
+		<constructor-arg value="${iamport.key}"/>
+		<constructor-arg value="${iamport.secret}"/>
+	</bean>
 
 	<mybatis:scan base-package="com.devcamp.tripssoda.mapper"/>
 	<context:component-scan base-package="com.devcamp.tripssoda.service"/>
 	<context:component-scan base-package="com.devcamp.tripssoda.util"/>
 	<context:component-scan base-package="com.devcamp.tripssoda.exception"/>
+	
 
 
 </beans>

@@ -324,6 +324,8 @@ function checkEmptyForm() {
     return true;
 }
 
-$("ul.detail-info").on("click", "button[name='payMethod']", function () {
-    $(this).children("input[type='radio']").prop('checked', true);
+$("ul.detail-info").on("click", "button[name='btnPayMethod']", function () {
+    const checkedpayMethod = $(this).children("input[type='radio']").prop('checked', true);
+    $("input[name='payMethod']").val(checkedpayMethod.val());
+    console.log(checkedpayMethod.val());
 })

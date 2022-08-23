@@ -4,7 +4,7 @@ IMP.init("imp98050032"); // 예: imp00000000
 $("#payBtn").click(function () {
     if (checkEmptyForm()) {
 // IMP.request_pay(param, callback) 결제창 호출
-        const payMethod = $("input[name='payMethod']:checked").val();
+        const payMethod = $("input[name='payMethod']").val();
         if (payMethod===undefined){
             alert("결제 수단을 선택해주시기 바랍니다.")
             return;
@@ -17,7 +17,7 @@ $("#payBtn").click(function () {
             amount: $("input[name='totalAmount']").val(),
             buyer_email: $("input[name='reserverEmail']").val(),
             buyer_name: $("input[name='reserverName']").val(),
-            buyer_tel: $("input[name='reserverEmail']").val()
+            buyer_tel: $("input[name='reserverTel']").val()
         }, function (rsp) { // callback
             console.log(rsp);
             const paymentDetailObj = objectifyPaymentDetail();

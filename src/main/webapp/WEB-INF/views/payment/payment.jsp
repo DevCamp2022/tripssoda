@@ -78,14 +78,15 @@
                             </div>
                         </li>
                         <li class="line-top"><p class="pay-method">결제 방식<b>(필수)</b></p></li>
+                        <input name="payMethod" type="hidden" class="pay-method"/>
                         <li>
-                            <button name="payMethod" class="simple-pay pay-method" type="button">
-                                <input type="radio" name="payMethod" value="html5_inicis">
+                            <button name="btnPayMethod" class="simple-pay pay-method" type="button">
+                                <input type="radio" name="payMethodOption" value="html5_inicis">
                                 <p>신용/체크카드 간편결제</p></button>
                         </li>
                         <li>
-                            <button name="payMethod" class="simple-pay pay-method" type="button">
-                                <input type="radio" name="payMethod" value="kakaopay">
+                            <button name="btnPayMethod" class="simple-pay pay-method" type="button">
+                                <input type="radio" name="payMethodOption" value="kakaopay">
                                 <p>카카오페이</p><img src="/image/payment/kakaopay_small.png" width="75px"></button>
                         </li>
                         <hr class='separator total-amount'>

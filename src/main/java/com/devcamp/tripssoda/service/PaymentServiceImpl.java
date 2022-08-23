@@ -71,20 +71,22 @@ public class PaymentServiceImpl implements PaymentService {
             Integer usedPoint = paymentDetailDto.getUsedPoint();
             Integer userId = paymentDetailDto.getUserId();
 
-            //사용한 포인트 만큼 실제로 보유중인지 확인
-            int availablePoint = userPointService.isAvailablePoint(usedPoint, userId);
-            if (availablePoint == -1) {
-                throw new NotEnoughPointException("Not enough user point");
-            }
+            int rowCnt =0;
+            //포인트가 사용됐을때만, 사용한 포인트 만큼 실제로 보유중인지 확인
+            if(paymentDetailDto.getUsedPoint()>0) {
+                int availablePoint = userPointService.isAvailablePoint(usedPoint, userId);
+                if (availablePoint == -1) {
+                    throw new NotEnoughPointException("Not enough user point");
+                }
 
-            //충분한 포인트 보유 중이면, 사용한 만큼 포인트 차감.
-            Integer newPoint = availablePoint - usedPoint;
-            int rowCnt = userPointService.updateUserPoint(userId, newPoint, -usedPoint, "포인트 사용");
-            if (rowCnt == -1) {
-                throw new InsertException("Error occurred while updating point");
+                //충분한 포인트 보유 중이면, 사용한 만큼 포인트 차감.
+                Integer newPoint = availablePoint - usedPoint;
+                rowCnt = userPointService.updateUserPoint(userId, newPoint, -usedPoint, "포인트 사용");
+                if (rowCnt == -1) {
+                    throw new InsertException("Error occurred while updating point");
+                }
+                System.out.println("BEFORE paymentDetailDto = " + paymentDetailDto);
             }
-            System.out.println("BEFORE paymentDetailDto = " + paymentDetailDto);
-
             rowCnt = paymentMapper.insertPayment(paymentDetailDto);
             System.out.println("AFTER paymentDetailDto = " + paymentDetailDto);
 
@@ -125,7 +127,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     public boolean isValidPrice(PaymentDetailDto paymentDetailDto) throws NotValidAmountException {
-
+        System.out.println("paymentDetailDto = " + paymentDetailDto);
         try {
             //imp_uuid를 통해 아임포트 서버에서 결제정보를 읽어온다
             IamportResponse<Payment> payment = iamportClient.paymentByImpUid(paymentDetailDto.getImpUid());
@@ -136,6 +138,7 @@ public class PaymentServiceImpl implements PaymentService {
             Integer productAmount = paymentDetailDto.getProductAmount();
             Integer optionAmount = paymentDetailDto.getOptionAmount();
             Integer usedPointAmount = paymentDetailDto.getUsedPoint();
+            Integer realTotalOptionPrice = 0;
 
             Map<String, Integer> productInfo = new HashMap<>();
             productInfo.put("productId", paymentDetailDto.getProductId());
@@ -143,45 +146,53 @@ public class PaymentServiceImpl implements PaymentService {
 
             //DB에서 읽어온 상품에 대한 실제 가격 정보.
             PriceProductDto priceFromDB = paymentMapper.selectPriceProduct(productInfo);
+            System.out.println("priceFromDB = " + priceFromDB);
+            System.out.println("priceFromDB.getPriceOptionList() = " + priceFromDB.getPriceOptionList());
+
             if (priceFromDB == null) {
                 throw new Exception("Product info not found");
-            } else if (priceFromDB.getPriceOptionList() == null) {
-                throw new Exception("Option info not found");
             }
+            //상품 단가에 대한 가격 저장
+            paymentDetailDto.setProductPrice(priceFromDB.getProductPrice());
 
-            //DB에서 읽어온 옵션에 대한 실제 가격정보
-            List<PriceOptionDto> priceOptFromDB = priceFromDB.getPriceOptionList();
-
-            //optionId에 맞도록 Map에 옵션 내용과 가격정보를 담는다.
-            Map<String, Map<String, String>> optPriceMap = new HashMap<>();
-            for (int i = 0; i < priceOptFromDB.size(); i++) {
-                PriceOptionDto priceOptDto = priceOptFromDB.get(i);
-                String[] optContents = priceOptDto.getOptionContent().split(",");
-                String[] optPrices = priceOptDto.getOptionPrice().split(",");
-
-                Map<String, String> tmpOpt = new HashMap<>();
-                for (int j = 0; j < optContents.length; j++) {
-                    tmpOpt.put(optContents[j], optPrices[j]);
+            if (paymentDetailDto.getOptionDetail()!=null) {
+                if (priceFromDB.getPriceOptionList().size() == 0) {
+                    throw new Exception("Option info not found");
                 }
-                optPriceMap.put(priceOptDto.getOptionId(), tmpOpt);
+                //DB에서 읽어온 옵션에 대한 실제 가격정보
+                List<PriceOptionDto> priceOptFromDB = priceFromDB.getPriceOptionList();
+
+                //optionId에 맞도록 Map에 옵션 내용과 가격정보를 담는다.
+                Map<String, Map<String, String>> optPriceMap = new HashMap<>();
+                for (int i = 0; i < priceOptFromDB.size(); i++) {
+                    PriceOptionDto priceOptDto = priceOptFromDB.get(i);
+                    String[] optContents = priceOptDto.getOptionContent().split(",");
+                    String[] optPrices = priceOptDto.getOptionPrice().split(",");
+
+                    Map<String, String> tmpOpt = new HashMap<>();
+                    for (int j = 0; j < optContents.length; j++) {
+                        tmpOpt.put(optContents[j], optPrices[j]);
+                    }
+                    optPriceMap.put(priceOptDto.getOptionId(), tmpOpt);
+                }
+
+                //사용자가 선택한 옵션 정보.
+                Map<String, String> optDetail = paymentDetailDto.getOptionDetail();
+
+                //DB에서 가져온 옵션 정보와 사용자가 선택한 옵션 정보를 비교
+                //선택한 옵션들의 id와 내용들을 비교하여 실제 총 가격을 연산한다.
+                for (int i = 0; i < optDetail.size(); i++) {
+                    String[] detail = optDetail.get("" + i).split("#");
+                    String optId = detail[0];
+                    String optContent = detail[1];
+                    optContent = optContent.contains("(단답형)") ? "X" : optContent;
+
+                    Map<String, String> tmp = optPriceMap.get(optId);
+                    Integer realPrice = Integer.parseInt(tmp.get(optContent));
+                    realTotalOptionPrice += realPrice;
+                }
             }
 
-            //사용자가 선택한 옵션 정보.
-            Map<String, String> optDetail = paymentDetailDto.getOptionDetail();
-
-            //DB에서 가져온 옵션 정보와 사용자가 선택한 옵션 정보를 비교
-            //선택한 옵션들의 id와 내용들을 비교하여 실제 총 가격을 연산한다.
-            Integer realTotalOptionPrice = 0;
-            for (int i = 0; i < optDetail.size(); i++) {
-                String[] detail = optDetail.get("" + i).split("#");
-                String optId = detail[0];
-                String optContent = detail[1];
-                optContent = optContent.contains("(단답형)") ? "X" : optContent;
-
-                Map<String, String> tmp = optPriceMap.get(optId);
-                Integer realPrice = Integer.parseInt(tmp.get(optContent));
-                realTotalOptionPrice += realPrice;
-            }
 
             Integer realTotalAmount = (priceFromDB.getProductPrice() * productQty) + realTotalOptionPrice - usedPointAmount;
 
@@ -205,6 +216,10 @@ public class PaymentServiceImpl implements PaymentService {
             throw new NotValidAmountException("Payment amount validation failed");
         }
         return false;
+    }
+
+    public PaymentSuccessDto selectPaymentSuccessDetail(Map<String,  Integer> paymentInfo){
+        return paymentMapper.selectPaymentSuccessDetail(paymentInfo);
     }
 }
 

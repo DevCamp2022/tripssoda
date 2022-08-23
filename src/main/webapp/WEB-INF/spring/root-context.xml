@@ -55,8 +55,6 @@
 		</property>
 	</bean>
 
-<!--	<bean id="authorizationAspect" class="com.devcamp.tripssoda.util.AuthorityAspect"></bean>-->
-
 	<tx:annotation-driven/>
 	<aop:aspectj-autoproxy/>
 
@@ -69,6 +67,5 @@
 	<context:component-scan base-package="com.devcamp.tripssoda.service"/>
 	<context:component-scan base-package="com.devcamp.tripssoda.util"/>
 	<context:component-scan base-package="com.devcamp.tripssoda.exception"/>
-	
 
 </beans>

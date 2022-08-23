@@ -1,9 +1,6 @@
 package com.devcamp.tripssoda.mapper;
 
-import com.devcamp.tripssoda.dto.PaymentDetailDto;
-import com.devcamp.tripssoda.dto.PaymentInitialInfoDto;
-import com.devcamp.tripssoda.dto.PriceProductDto;
-import com.devcamp.tripssoda.dto.ReserverDto;
+import com.devcamp.tripssoda.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;
@@ -14,4 +11,5 @@ public interface PaymentMapper {
     public PaymentInitialInfoDto selectPaymentInitialInfo(Map<String, Integer> productInfo);
     public PriceProductDto selectPriceProduct(Map<String, Integer> productInfo);
     public Integer insertPayment(PaymentDetailDto paymentDetailDto);
+    public PaymentSuccessDto selectPaymentSuccessDetail(Map<String,  Integer> paymentInfo);
 }

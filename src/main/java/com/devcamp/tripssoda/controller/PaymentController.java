@@ -91,4 +91,23 @@ public class PaymentController {
         return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/success")
+    public String success(Integer paymentId){
+        return "payment/success.mainTiles";
+    }
+
+    @GetMapping("/successInfo")
+    public ResponseEntity<PaymentSuccessDto> successInfo(HttpSession session, Integer paymentId){
+        Integer userId = (Integer) session.getAttribute("id");
+
+        Map<String, Integer> paymentInfo = new HashMap<>();
+        paymentInfo.put("userId", userId);
+        paymentInfo.put("paymentId", paymentId);
+
+        PaymentSuccessDto successDetailDto = paymentService.selectPaymentSuccessDetail(paymentInfo);
+        if (successDetailDto==null){
+            return new ResponseEntity<PaymentSuccessDto>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<PaymentSuccessDto>(successDetailDto, HttpStatus.OK);
+    }
 }

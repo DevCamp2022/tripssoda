@@ -269,11 +269,13 @@ function calTotalAmount() {
 }
 
 function appendOption() {
-    let optionElement = "<div class='option-wrap'>";
-    optionElement += $("div.option-wrap").html();
-    optionElement += "</div>";
+    if($("div.option-wrap").length!==0) {
+        let optionElement = "<div class='option-wrap'>";
+        optionElement += $("div.option-wrap").html();
+        optionElement += "</div>";
 
-    $("div.option-info").append(optionElement);
+        $("div.option-info").append(optionElement);
+    }
 }
 
 function objectifyForm(formArray) {
@@ -286,10 +288,9 @@ function objectifyForm(formArray) {
 }
 
 function objectifyPaymentDetail() {
+    let reserverBirthday = $("input[name='reserverBirthYear']").val() + "-" + $("input[name='reserverBirthMonth']").val() + "-" + $("select[name='reserverBirthDate']").val();
 
     let formObj = objectifyForm(selector("#frm"));
-
-    let reserverBirthday = $("input[name='reserverBirthYear']").val() + "-" + $("input[name='reserverBirthMonth']").val() + "-" + $("select[name='reserverBirthDate']").val();
 
     let optionDetail = $("[name=optionDetail]");
     if(optionDetail.length!=0) {
@@ -313,9 +314,7 @@ function objectifyPaymentDetail() {
 function checkEmptyForm() {
     const optionTags = $("div.option-wrap").children();
     for (let i = 0; i < optionTags.length; i++) {
-        console.log($(optionTags[i]).children("[name='optionDetail']").val())
         if ($(optionTags[i]).children("[name='optionDetail']").val() === '') {
-            console.log($(optionTags[i]).children("[name='optionDetail']"));
             alert("입력하지 않은 옵션 정보가 있습니다.");
             $(optionTags[1]).children("[name='optionDetail']").focus();
             return false;
@@ -327,5 +326,4 @@ function checkEmptyForm() {
 $("ul.detail-info").on("click", "button[name='btnPayMethod']", function () {
     const checkedpayMethod = $(this).children("input[type='radio']").prop('checked', true);
     $("input[name='payMethod']").val(checkedpayMethod.val());
-    console.log(checkedpayMethod.val());
 })

@@ -44,7 +44,7 @@ public class CntInterceptor implements HandlerInterceptor {
         Integer userId = Integer.valueOf(SessionUtil.getLoginUserId(session));
         System.out.println("###userId = " + userId);
 
-        int count = accompanyMapper.selectUserAccompanyCnt(userId);
+        int count = accompanyMapper.selectUserAccompanyCntToday(userId);
         System.out.println("###인터셉 count = " + count);
 
         if(count >=5) {

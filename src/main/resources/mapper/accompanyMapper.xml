@@ -63,4 +63,11 @@
         ORDER BY created_at DESC, id DESC
         LIMIT #{offset}, #{pageSize}
     </select>
+
+<!--    도배글차단카운트-->
+    <select id="selectUserAccompanyCntToday" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM accompany
+        WHERE user_id = #{userId} and created_at = current_date ()
+    </select>
 </mapper>

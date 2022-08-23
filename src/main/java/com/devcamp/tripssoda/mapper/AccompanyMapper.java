@@ -19,4 +19,5 @@ public interface AccompanyMapper {
     public int deleteAll() throws Exception;
     public List<AccompanyDto> selectPage(Map map);
     public List<AccompanyDto> selectAll();
+    public int selectUserAccompanyCntToday(Integer userId);
 }

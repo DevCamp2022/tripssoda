@@ -50,7 +50,7 @@ public class AuthorizationAspect {
         HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.currentRequestAttributes())).getRequest().getSession();
         String userCode = SessionUtil.getLoginUserId(session);
 
-        if(userCode==null || !userCode.equals("U002")){
+        if(userCode==null || !userCode.equals("U002") || !userCode.equals("U003")){
             logger.info("partnerCode is not present. Go to login page");
             System.out.println("partnerCode Code is not present. Go to login page");
             return "redirect:/";

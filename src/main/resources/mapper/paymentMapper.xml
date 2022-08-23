@@ -97,7 +97,7 @@
     
     <insert id="insertPayment" parameterType="PaymentDetailDto" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-            payment (imp_uid, merchant_uid, user_id, product_id, product_schedule_id, title, method, qty,
+            payment (imp_uid, merchant_uid, user_id, product_id, product_schedule_id, title, method, product_price, qty,
                      option_amount, used_point, total_amount, reserver_name, reserver_gender, reserver_birthday,
                      reserver_email, reserver_cntry_code, reserver_tel, status, approval_at,
                      receipt_url, created_at, created_by, updated_at, updated_by)
@@ -109,6 +109,7 @@
                 #{scheduleId},
                 #{productTitle},
                 #{payMethod},
+                #{productPrice},
                 #{productQty},
                 #{optionAmount},
                 #{usedPoint},
@@ -127,4 +128,30 @@
                 now(),
                 #{userId});
     </insert>
+
+    <select id="selectPaymentSuccessDetail" parameterType="Map" resultType="PaymentSuccessDto">
+        SELECT
+            pm.id,
+            pm.title,
+            pm.product_price,
+            pm.qty,
+            pm.option_amount,
+            pm.used_point,
+            pm.total_amount,
+            pm.receipt_url,
+            p.thumbnail,
+            ps.start_date
+        FROM
+            payment AS pm
+        LEFT JOIN
+            product AS p
+        ON
+            pm.product_id = p.id
+        LEFT JOIN
+            product_schedule AS ps
+        ON
+            pm.product_schedule_id = ps.id
+        WHERE
+            pm.id = #{paymentId} AND pm.user_id=#{userId};
+    </select>
 </mapper>

@@ -152,6 +152,8 @@ public class PaymentServiceImpl implements PaymentService {
             if (priceFromDB == null) {
                 throw new Exception("Product info not found");
             }
+            //상품 단가에 대한 가격 저장
+            paymentDetailDto.setProductPrice(priceFromDB.getProductPrice());
 
             if (paymentDetailDto.getOptionDetail()!=null) {
                 if (priceFromDB.getPriceOptionList().size() == 0) {
@@ -214,6 +216,10 @@ public class PaymentServiceImpl implements PaymentService {
             throw new NotValidAmountException("Payment amount validation failed");
         }
         return false;
+    }
+
+    public PaymentSuccessDto selectPaymentSuccessDetail(Map<String,  Integer> paymentInfo){
+        return paymentMapper.selectPaymentSuccessDetail(paymentInfo);
     }
 }
 

@@ -41,7 +41,7 @@ body {
 .point-status-wrap {
     overflow: hidden;
     width: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 .point {
@@ -65,7 +65,7 @@ body {
     cursor: pointer;
     box-sizing: border-box;
     border-radius: 8px;
-    margin-left: 20px
+    margin-left: 20px;
 }
 
 .thead-wrap {
@@ -77,8 +77,9 @@ body {
     margin: 10px auto 0 auto;
     border-top: 1px solid black;
     border-bottom: 1px solid #e9e9e9;
-    background-color: rgba(220, 220, 220, 0.31);
+    background-color: rgb(238, 255, 244);
     text-align: center;
+    color: gray;
 }
 
 .thead-id {
@@ -102,6 +103,7 @@ body {
     border-bottom: 1px solid #e9e9e9;
     display: flex;
     align-items: center;
+    padding: 10px 0;
 }
 
 .td-id {
@@ -131,7 +133,7 @@ body {
 
 .paging-container {
     width: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: center;
 }
 

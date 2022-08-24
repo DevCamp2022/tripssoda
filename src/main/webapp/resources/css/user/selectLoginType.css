@@ -79,4 +79,8 @@ body {
     width: 80px;
     cursor: pointer;
     border: none;
+    background-color: #00ce7c;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
 }

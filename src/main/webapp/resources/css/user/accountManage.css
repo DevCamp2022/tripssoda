@@ -17,14 +17,14 @@ body {
 .main {
     width: 840px;
     margin: 100px auto;
-    background-color: white;
 }
 
 .contents {
     width: 100%;
     margin: 0 auto;
     border: 1px solid #e9e9e9;
-    border-radius: 4px;
+    border-radius: 8px;
+    background-color: white;
 }
 
 .title {
@@ -47,13 +47,14 @@ body {
 .img-wrap {
     display: flex;
     justify-content: center;
-    margin: 10px auto;
+    margin: 30px auto 10px auto;
     width: 5.5rem;
     height: 5.5rem;
 }
 .profile-img {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
 }
 
 .update-img-form {
@@ -90,7 +91,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: 8px;
     margin: 10px auto 10px auto;
 }
 .wraps {
@@ -133,6 +134,7 @@ body {
     padding: 16px 20px;
     margin-bottom: 20px;
     box-sizing: border-box;
+    font-weight: lighter;
 }
 .intro-wrap {
 
@@ -148,6 +150,8 @@ body {
     border-radius: 4px;
     border: 1px solid #e9e9e9;
     box-sizing: border-box;
+    padding-left: 20px;
+    font-weight: lighter;
 }
 .instagram-wrap {
 
@@ -167,6 +171,7 @@ body {
     border: 1px solid #e9e9e9;
     box-sizing: border-box;
     padding: 16px 20px;
+    font-weight: lighter;
 }
 .tel-wrap {
 
@@ -183,6 +188,7 @@ body {
     border: 1px solid #e9e9e9;
     box-sizing: border-box;
     padding: 16px 20px;
+    font-weight: lighter;
 }
 .user-pwd {
     font-size: 17px;
@@ -207,7 +213,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: 8px;
     margin-left: 20px
 }
 

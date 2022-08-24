@@ -18,7 +18,7 @@ body {
 
 .main {
     width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto;
 }
 
 .contents {
@@ -91,31 +91,31 @@ input::placeholder {
     margin-top: 10px;
 }
 .check-text {
-    margin-left: 5px;
+    margin: 5px;
 }
 .pwd-confirm {
-    margin-bottom: 10px;
+
 }
 
 .input-name {
     width: 450px;
     height: 24px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
 }
 
 .input-phone-number {
     width: 450px;
     height: 24px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
 }
 
 .select-gender {
     width: 450px;
     height: 56px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
     padding-left: 16px;
     border: 1px solid #e9e9e9;
     border-radius: 4px;
@@ -125,14 +125,14 @@ input::placeholder {
     width: 40%;
     height: 24px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
 }
 
 .select-birth-month {
     width: 28.4%;
     height: 54px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
     padding-left: 16px;
     border: 1px solid #e9e9e9;
     border-radius: 4px;
@@ -142,7 +142,7 @@ input::placeholder {
     width: 30%;
     height: 24px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+
 }
 
 .terms-wrap {

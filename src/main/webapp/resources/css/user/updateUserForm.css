@@ -53,6 +53,7 @@ body {
 .profile-img {
     width: 100%;
     height: 100%;
+    border-radius: 200px;
 }
 
 .update-img-form {

@@ -19,6 +19,21 @@
         FROM answer
         WHERE id = #{id}
     </select>
+
+    <select id="selectAllUserAnswerCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM answer
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectAllUserAnswer" parameterType="map" resultType="AnswerDto">
+        SELECT *
+        FROM answer
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
     <update id="update" parameterType="AnswerDto">
         UPDATE answer
         SET content = #{content},

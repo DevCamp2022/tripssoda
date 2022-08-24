@@ -9,6 +9,8 @@ import java.util.Map;
 
 @Mapper
 public interface AccompanyMapper {
+    public int selectUserAccompanyCnt(Integer userId);
+    public List<AccompanyDto> selectAllUserAccompany(Map map);
     public int count() throws Exception;
     public int insert(AccompanyDto dto) throws Exception;
     public AccompanyDto select(Integer id) throws Exception;

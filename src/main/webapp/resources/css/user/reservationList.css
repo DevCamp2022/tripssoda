@@ -1,0 +1,96 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+}
+
+.main {
+    width: 840px;
+    margin: 0 auto;
+}
+
+.contents {
+    width: 100%;
+}
+
+.title {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.search-condition {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.search-wrap {
+    overflow: hidden;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.search-date {
+
+}
+
+.search-btn {
+
+}
+
+.reserv-info {
+    overflow: hidden;
+    width: 90%;
+    margin: 10px auto;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.reserv-id {
+    float: left;
+    border: 1px solid black;
+}
+
+.reserv-date {
+    float: left;
+    border: 1px solid black;
+}
+
+.reserv-status {
+    float: right;
+}
+
+.product-info {
+    overflow: hidden;
+    width: 90%;
+    margin: 10px auto;
+    border: 2px solid blue;
+}
+
+.img-wrap {
+    float: left;
+}
+
+.info-wrap {
+    float: left;
+    border: 1px solid red;
+}
+
+.write-review-btn {
+    float: right;
+}
+
+.paging-container {
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+}

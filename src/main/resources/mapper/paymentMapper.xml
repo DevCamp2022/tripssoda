@@ -1,74 +1,157 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        
+
 <mapper namespace="com.devcamp.tripssoda.mapper.PaymentMapper">
     <select id="selectReserverInfo" parameterType="int" resultType="ReserverDto">
-		SELECT
-		    id,
-		    name,
-		    email,
-		    tel,
-		    gender,
-		    birthday,
-		    point
-		FROM
-		    user_info
-		WHERE
-		    id=#{userId};
+        SELECT id,
+               name,
+               email,
+               tel,
+               gender,
+               birthday,
+               point
+        FROM user_info
+        WHERE id = #{userId};
     </select>
-	<select id="selectPaymentInitialInfo" parameterType="map" resultMap="PaymentInitialInfoResultMap">
-		SELECT
-			p.id AS product_id,
-			p.title,
-			p.thumbnail,
-		    p.meeting_point,
-		    p.pickup_option,
-			p.pickup_type,
-		    p.limit_qty,
-			ps.id AS schedule_id,
-			ps.price AS schedule_price,
-			ps.start_date,
-			po.id AS option_id,
-			po.type,
-			po.countable,
-			po.name,
-			po.content,
-			po.price,
-			po.order_no
-		FROM
-			product AS p
-		LEFT JOIN
-			product_schedule AS ps
-			ON p.id = ps.product_id
-		LEFT JOIN
-			product_option AS po
-			ON p.id = po.product_id
-		WHERE
-			p.id = #{productId, jdbcType=VARCHAR} AND ps.id = #{scheduleId, jdbcType=VARCHAR}
-		ORDER BY
-			po.order_no ASC ;
-	</select>
-	<resultMap id="PaymentInitialInfoResultMap" type="PaymentInitialInfoDto">
-		<id column="product_id" property="productId"/>
-		<result column="title" property="title"/>
-		<result column="thumbnail" property="thumbnail"/>
-		<result column="schedule_id" property="scheduleId"/>
-		<result column="schedule_price" property="schedulePrice"/>
-		<result column="option_id" property="optionId"/>
-		<result column="start_date" property="startDate"/>
-		<result column="meeting_point" property="meetingPoint"/>
-		<result column="pickup_option" property="pickupOption"/>
-		<result column="pickup_type" property="pickupType"/>
-		<result column="limit_qty" property="limitQty"/>
-		<collection property="optionList" ofType="ProductOptionDto" javaType="java.util.List">
-			<id column="option_id" property="productOptionId"/>
-			<result column="type" property="type"/>
-			<result column="countable" property="countable"/>
-			<result column="name" property="name"/>
-			<result column="content" property="content"/>
-			<result column="price" property="price"/>
-			<result column="order_no" property="orderNo"/>
-		</collection>
-	</resultMap>
+
+    <select id="selectPaymentInitialInfo" parameterType="map" resultMap="PaymentInitialInfoResultMap">
+        SELECT p.id     AS product_id,
+               p.title,
+               p.thumbnail,
+               p.meeting_point,
+               p.pickup_option,
+               p.pickup_type,
+               p.limit_qty,
+               ps.id    AS schedule_id,
+               ps.price AS schedule_price,
+               ps.start_date,
+               po.id    AS option_id,
+               po.type,
+               po.name,
+               po.content,
+               po.price,
+               po.order_no
+        FROM product AS p
+                 LEFT JOIN
+             product_schedule AS ps
+             ON p.id = ps.product_id
+                 LEFT JOIN
+             product_option AS po
+             ON p.id = po.product_id
+        WHERE p.id = #{productId, jdbcType=VARCHAR}
+          AND ps.id = #{scheduleId, jdbcType=VARCHAR}
+        ORDER BY po.order_no ASC;
+    </select>
+
+    <resultMap id="PaymentInitialInfoResultMap" type="PaymentInitialInfoDto">
+        <id column="product_id" property="productId"/>
+        <result column="title" property="title"/>
+        <result column="thumbnail" property="thumbnail"/>
+        <result column="schedule_id" property="scheduleId"/>
+        <result column="schedule_price" property="schedulePrice"/>
+        <result column="option_id" property="optionId"/>
+        <result column="start_date" property="startDate"/>
+        <result column="meeting_point" property="meetingPoint"/>
+        <result column="pickup_option" property="pickupOption"/>
+        <result column="pickup_type" property="pickupType"/>
+        <result column="limit_qty" property="limitQty"/>
+        <collection property="optionList" ofType="ProductOptionDto" javaType="java.util.List">
+            <id column="option_id" property="optionId"/>
+            <result column="type" property="type"/>
+            <result column="name" property="name"/>
+            <result column="content" property="content"/>
+            <result column="price" property="price"/>
+            <result column="order_no" property="orderNo"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectPriceProduct" parameterType="Map" resultMap="PriceProductMap">
+        SELECT ps.product_id,
+               ps.id      AS schedule_id,
+               ps.price   AS product_price,
+               po.id      as option_id,
+               po.name    as option_name,
+               po.content as option_content,
+               po.price   AS option_price
+        FROM product_schedule AS ps
+        LEFT JOIN
+             product_option AS po
+        ON
+            ps.product_id = po.product_id
+        WHERE ps.id = #{scheduleId}
+          AND ps.product_id = #{productId};
+    </select>
+
+    <resultMap id="PriceProductMap" type="PriceProductDto">
+        <id column="product_id" property="productId"/>
+        <result column="schedule_id" property="scheduleId"/>
+        <result column="product_price" property="productPrice"/>
+        <collection property="priceOptionList" ofType="PriceOptionDto" javaType="java.util.List">
+            <id column="option_id" property="optionId"/>
+            <result column="option_name" property="optionName"/>
+            <result column="option_content" property="optionContent"/>
+            <result column="option_price" property="optionPrice"/>
+        </collection>
+    </resultMap>
+    
+    <insert id="insertPayment" parameterType="PaymentDetailDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            payment (imp_uid, merchant_uid, user_id, product_id, product_schedule_id, title, method, product_price, qty,
+                     option_amount, used_point, total_amount, reserver_name, reserver_gender, reserver_birthday,
+                     reserver_email, reserver_cntry_code, reserver_tel, status, approval_at,
+                     receipt_url, created_at, created_by, updated_at, updated_by)
+        values (
+                #{impUid},
+                #{merchantUid},
+                #{userId},
+                #{productId},
+                #{scheduleId},
+                #{productTitle},
+                #{payMethod},
+                #{productPrice},
+                #{productQty},
+                #{optionAmount},
+                #{usedPoint},
+                #{totalAmount},
+                #{reserverName},
+                #{reserverGender},
+                #{reserverBirthday},
+                #{reserverEmail},
+                #{reserverCntryCode},
+                #{reserverTel},
+                1,
+                now(),
+                #{receiptUrl},
+                now(),
+                #{userId},
+                now(),
+                #{userId});
+    </insert>
+
+    <select id="selectPaymentSuccessDetail" parameterType="Map" resultType="PaymentSuccessDto">
+        SELECT
+            pm.id,
+            pm.title,
+            pm.product_price,
+            pm.qty,
+            pm.option_amount,
+            pm.used_point,
+            pm.total_amount,
+            pm.receipt_url,
+            p.thumbnail,
+            ps.start_date
+        FROM
+            payment AS pm
+        LEFT JOIN
+            product AS p
+        ON
+            pm.product_id = p.id
+        LEFT JOIN
+            product_schedule AS ps
+        ON
+            pm.product_schedule_id = ps.id
+        WHERE
+            pm.id = #{paymentId} AND pm.user_id=#{userId};
+    </select>
 </mapper>

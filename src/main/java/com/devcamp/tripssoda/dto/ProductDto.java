@@ -8,6 +8,7 @@ public class ProductDto {
     private Integer productId;
     private Integer partnerId;
     private String title;
+    private String category;
     private String thumbnail;
     private Integer rating;
     private Integer reqTime;
@@ -19,6 +20,8 @@ public class ProductDto {
     private Integer maxMember;
     private String prdIntro;
     private String courseIntro;
+    private String pickupType;
+    private String pickupOption;
     private String inclusion;
     private String exclusion;
     private String additionalInfo;
@@ -63,6 +66,14 @@ public class ProductDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getThumbnail() {
@@ -151,6 +162,22 @@ public class ProductDto {
 
     public void setCourseIntro(String courseIntro) {
         this.courseIntro = courseIntro;
+    }
+
+    public String getPickupType() {
+        return pickupType;
+    }
+
+    public void setPickupType(String pickupType) {
+        this.pickupType = pickupType;
+    }
+
+    public String getPickupOption() {
+        return pickupOption;
+    }
+
+    public void setPickupOption(String pickupOption) {
+        this.pickupOption = pickupOption;
     }
 
     public String getInclusion() {
@@ -260,9 +287,11 @@ public class ProductDto {
     @Override
     public String toString() {
         return "ProductDto{" +
-                "productId=" + productId +
+                "userId=" + userId +
+                ", productId=" + productId +
                 ", partnerId=" + partnerId +
                 ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
                 ", rating=" + rating +
                 ", reqTime=" + reqTime +
@@ -274,6 +303,8 @@ public class ProductDto {
                 ", maxMember=" + maxMember +
                 ", prdIntro='" + prdIntro + '\'' +
                 ", courseIntro='" + courseIntro + '\'' +
+                ", pickupType='" + pickupType + '\'' +
+                ", pickupOption='" + pickupOption + '\'' +
                 ", inclusion='" + inclusion + '\'' +
                 ", exclusion='" + exclusion + '\'' +
                 ", additionalInfo='" + additionalInfo + '\'' +
@@ -286,6 +317,7 @@ public class ProductDto {
                 ", createdAt='" + createdAt + '\'' +
                 ", createdBy=" + createdBy +
                 ", updatedAt='" + updatedAt + '\'' +
+                ", updatedBy=" + updatedBy +
                 '}';
     }
 }

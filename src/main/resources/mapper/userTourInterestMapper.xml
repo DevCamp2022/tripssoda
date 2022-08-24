@@ -4,9 +4,18 @@
         
 <mapper namespace="com.devcamp.tripssoda.mapper.UserTourInterestMapper">
     <insert id="insertUserTourInterest" parameterType="UserTourInterestDto">
-        INSERT INTO user_tour_interest (user_id, tour_intr_code, tour_intr_rank)
-        VALUES (#{userId}, #{tourIntrCode}, #{tourIntrRank})
+        INSERT INTO user_tour_interest (user_id, tour_intr_code, tour_intr_rank, created_by, updated_by)
+        VALUES (#{userId}, #{tourIntrCode}, #{tourIntrRank}, #{userId}, #{userId})
     </insert>
+
+    <select id="selectAllUserTourInterestKeyword" parameterType="int" resultType="String">
+        SELECT tour_interest_code.tour_intr_keyword
+        FROM user_tour_interest
+        RIGHT JOIN tour_interest_code
+        ON user_tour_interest.tour_intr_code = tour_interest_code.tour_intr_code
+        WHERE user_tour_interest.user_id = #{userId}
+        ORDER BY user_tour_interest.tour_intr_rank ASC;
+    </select>
 
     <select id="selectAllUserTourInterest" parameterType="int" resultType="UserTourInterestDto">
         SELECT *
@@ -17,7 +26,7 @@
 
     <update id="updateUserTourInterest" parameterType="UserTourInterestDto">
         UPDATE user_tour_interest
-        SET tour_intr_code = #{tourIntrCode}, tour_intr_rank = #{tourIntrRank}
+        SET tour_intr_code = #{tourIntrCode}
         WHERE user_id = #{userId}
         AND tour_intr_rank = #{tourIntrRank}
     </update>

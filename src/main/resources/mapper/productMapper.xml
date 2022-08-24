@@ -6,115 +6,152 @@
     <insert id="insertProduct" parameterType="ProductDto" useGeneratedKeys="true" keyProperty="productId">
 		INSERT INTO product
         (
-        partner_id,
-        title,
-        thumbnail,
-        req_time,
-        keyword,
-        refund_amount,
-        day_cnt,
-        min_member,
-        max_member,
-        prd_intro,
-        course_intro,
-        inclusion,
-        exclusion,
-        additional_info,
-        meeting_point,
-        mandatory_guidance,
-        refund_policy,
-        sale_status,
-        approval_status,
-        created_at,
-        created_by,
-        updated_at,
-        updated_by
+            partner_id,
+            title,
+            category,
+            thumbnail,
+            req_time,
+            keyword,
+            refund_amount,
+            day_cnt,
+            min_member,
+            max_member,
+            prd_intro,
+            course_intro,
+            pickup_type,
+            pickup_option,
+            inclusion,
+            exclusion,
+            additional_info,
+            meeting_point,
+            mandatory_guidance,
+            refund_policy,
+            sale_status,
+            approval_status,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by
         )
         VALUES
         (
-        #{partnerId},
-        #{title},
-        #{thumbnail},
-        #{reqTime},
-        #{keyword},
-        #{refundAmount},
-        #{dayCnt},
-        #{minMember},
-        #{maxMember},
-        #{prdIntro},
-        #{courseIntro},
-        #{inclusion},
-        #{exclusion},
-        #{additionalInfo},
-        #{meetingPoint},
-        #{mandatoryGuidance},
-        #{refundPolicy},
-        0,
-        0,
-        now(),
-        #{userId},
-        now(),
-        #{userId}
+            #{partnerId},
+            #{title},
+            #{category},
+            #{thumbnail},
+            #{reqTime},
+            #{keyword},
+            #{refundAmount},
+            #{dayCnt},
+            #{minMember},
+            #{maxMember},
+            #{prdIntro},
+            #{courseIntro},
+            #{pickupType},
+            #{pickupOption},
+            #{inclusion},
+            #{exclusion},
+            #{additionalInfo},
+            #{meetingPoint},
+            #{mandatoryGuidance},
+            #{refundPolicy},
+            0,
+            0,
+            now(),
+            #{userId},
+            now(),
+            #{userId}
         )
     </insert>
 
-    <insert id="insertProductOptionList" parameterType="RegProductOptionDto">
+    <insert id="insertProductOption" parameterType="RegProductOptionDto">
         INSERT INTO product_option
         (
-        product_id,
-        type,
-        name,
-        content,
-        price,
-        order_no,
-        countable,
-        created_at,
-        created_by,
-        updated_at,
-        updated_by
+            product_id,
+            type,
+            name,
+            content,
+            price,
+            order_no,
+            countable,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by
         )
         VALUES
         (
-        #{productId},
-        #{type},
-        #{name},
-        #{content},
-        #{price},
-        #{orderNo},
-        "N",
-        now(),
-        #{userId},
-        now(),
-        #{userId}
+            #{productId},
+            #{type},
+            #{name},
+            #{content},
+            #{price},
+            #{orderNo},
+            "N",
+            now(),
+            #{userId},
+            now(),
+            #{userId}
         )
     </insert>
 
     <insert id="insertProductSchedule" parameterType="RegProductScheduleDto">
         INSERT INTO product_schedule
         (
-        product_id,
-        start_date,
-        end_date,
-        price,
-        min_member,
-        max_member,
-        created_at,
-        created_by,
-        updated_at,
-        updated_by
+            product_id,
+            start_date,
+            end_date,
+            price,
+            min_member,
+            max_member,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by
         )
         VALUES
         (
-        #{productId},
-        #{scheduleStartDate},
-        #{scheduleEndDate},
-        #{schedulePrice},
-        #{scheduleMinMember},
-        #{scheduleMaxMember},
-        now(),
-        #{userId},
-        now(),
-        #{userId}
+            #{productId},
+            #{scheduleStartDate},
+            #{scheduleEndDate},
+            #{schedulePrice},
+            #{scheduleMinMember},
+            #{scheduleMaxMember},
+            now(),
+            #{userId},
+            now(),
+            #{userId}
         )
     </insert>
+
+    <select id="selectMainList" parameterType="String" resultType="GetMainListProductDto">
+        SELECT
+            p.id AS productId,
+            ps.id AS scheduleId,
+            p.thumbnail,
+            p.title,
+            p.rating,
+            ps.start_date,
+            ps.price
+        FROM product AS p
+        INNER JOIN product_schedule AS ps
+        ON (p.id=ps.product_id)
+        WHERE date(start_date) >= date(now()) AND category=#{category} GROUP BY p.id
+        LIMIT 0, 4;
+    </select>
+
+    <select id="selectProductDetail" parameterType="GetDetailProductDto" resultType="GetDetailProductDto">
+        SELECT *
+        FROM product AS p
+        INNER JOIN product_schedule AS ps
+        ON (p.id=ps.product_id)
+        WHERE p.id=#{productId} AND ps.id=#{scheduleId};
+    </select>
+
+    <select id="selectScheduleList" parameterType="int" resultType="ProductScheduleDto">
+        SELECT id as productScheduleId, product_id, start_date, current_member, min_member, max_member
+        FROM product_schedule
+        WHERE product_id=#{productId}
+        and date(start_date)>date(now()+INTERVAL 1 DAY);
+    </select>
 </mapper>

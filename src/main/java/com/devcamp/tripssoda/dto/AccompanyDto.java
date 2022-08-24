@@ -10,8 +10,8 @@ public class AccompanyDto {
     private Integer userId;
     private String nickname;
     private int regionCode;
-    private String startAt;
-    private String endAt;
+    private Date startAt;
+    private Date endAt;
     private String thumbnail;
     private int status;
     private String title;
@@ -31,7 +31,7 @@ public class AccompanyDto {
 
     public AccompanyDto() {}
 
-    public AccompanyDto(int regionCode, String startAt, String endAt, String thumbnail, String title, String content, int memberCnt, String hashtag) {
+    public AccompanyDto(int regionCode, Date startAt, Date endAt, String thumbnail, String title, String content, int memberCnt, String hashtag) {
         this.regionCode = regionCode;
         this.startAt = startAt;
         this.endAt = endAt;
@@ -40,6 +40,30 @@ public class AccompanyDto {
         this.content = content;
         this.memberCnt = memberCnt;
         this.hashtag = hashtag;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Date getStartAt() {
+        return startAt;
+    }
+
+    public void setStartAt(Date startAt) {
+        this.startAt = startAt;
+    }
+
+    public Date getEndAt() {
+        return endAt;
+    }
+
+    public void setEndAt(Date endAt) {
+        this.endAt = endAt;
     }
 
     public int getId() {
@@ -73,23 +97,6 @@ public class AccompanyDto {
     public void setRegionCode(int regionCode) {
         this.regionCode = regionCode;
     }
-
-    public String getStartAt() {
-        return startAt;
-    }
-
-    public void setStartAt(String startAt) {
-        this.startAt = startAt;
-    }
-
-    public String getEndAt() {
-        return endAt;
-    }
-
-    public void setEndAt(String endAt) {
-        this.endAt = endAt;
-    }
-
     public String getThumbnail() {
         return thumbnail;
     }

@@ -4,7 +4,7 @@
         
 <mapper namespace="com.devcamp.tripssoda.mapper.WithdrawUserMapper">
     <insert id="insertWithdrawUser" parameterType="UserDto">
-        INSERT INTO withdraw_user (name, pwd, email, tel, gender, birthday, nickname, intro, profile_img, instagram_id, point, report_cnt, user_code, reg_date)
-        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname}, #{intro}, #{profileImg}, #{instagramId}, #{point}, #{reportCnt}, #{userCode}, #{createdAt})
+        INSERT INTO withdraw_user (name, pwd, email, tel, gender, birthday, nickname, intro, profile_img, instagram_id, point, report_cnt, user_code, reg_date, created_by, updated_by)
+        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname}, #{intro}, #{profileImg}, #{instagramId}, #{point}, #{reportCnt}, #{userCode}, #{createdAt}, #{createdBy}, #{updatedBy})
     </insert>
 </mapper>

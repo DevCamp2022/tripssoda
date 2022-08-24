@@ -2,12 +2,14 @@ package com.devcamp.tripssoda.dto;
 
 import org.apache.ibatis.type.Alias;
 
+import java.sql.Date;
+
 @Alias("ProductScheduleDto")
 public class ProductScheduleDto {
     private Integer productScheduleId;
     private Integer productId;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private Integer price;
     private Integer currentMember;
     private Integer minMember;
@@ -34,19 +36,19 @@ public class ProductScheduleDto {
         this.productId = productId;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

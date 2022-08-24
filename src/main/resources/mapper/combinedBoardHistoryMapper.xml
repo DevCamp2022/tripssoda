@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.CombinedBoardHistoryMapper">
+
+    <insert id="insert" parameterType="CombinedBoardHistoryDto">
+        INSERT INTO combined_board_history
+            (menu_code, user_id, title, content, view_cnt, status, updated_by)
+        VALUES
+            (#{menuCode}, #{userId}, #{title}, #{content}, #{viewCnt}, #{status}, #{userId})
+    </insert>
+
+</mapper>

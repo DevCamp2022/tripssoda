@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.UserPointMapper">
+    <select id="selectUserPoint" parameterType="int" resultType="Integer">
+        SELECT
+            point
+        FROM
+            user_info
+        WHERE
+            id=#{userId}
+    </select>
+    <update id="updateUserPoint" parameterType="Map">
+        UPDATE
+            user_info
+        SET
+            point = #{point}
+        WHERE
+            id=#{userId};
+    </update>
+    <insert id="insertUserPointHistory" parameterType="Map">
+        INSERT INTO
+            user_point_history(user_id, amount, process_detail, process_at, status)
+        VALUES
+               (#{userId}, #{amount}, #{message}, now(), 1);
+    </insert>
+</mapper>

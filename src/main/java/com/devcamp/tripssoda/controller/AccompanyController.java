@@ -1,6 +1,7 @@
 package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
+import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -24,12 +24,13 @@ public class CombinedBoardDto {
     public CombinedBoardDto() {
     }
 
-    public CombinedBoardDto(String menuCode, int userId, String title, String content, int createdBy) {
+    public CombinedBoardDto(String menuCode, int userId, String title, String content, int createdBy, int updatedBy) {
         this.menuCode = menuCode;
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
     }
 
     public int getId() {

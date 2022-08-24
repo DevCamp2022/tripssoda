@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+        
 <mapper namespace="com.devcamp.tripssoda.mapper.QuestionMapper">
+    <select id="selectQuestion" parameterType="int" resultType="QuestionDto">
+        SELECT *
+        FROM question
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAllUserQuestion" parameterType="map" resultType="QuestionDto">
+        SELECT *
+        FROM question
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+    <select id="selectAllUserQuestionCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM question
+        WHERE user_id = #{userId}
+    </select>
+
     <sql id="selectFromQuestion">
         SELECT id, user_id, nickname, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
         FROM question

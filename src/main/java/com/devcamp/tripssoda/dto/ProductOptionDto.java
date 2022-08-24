@@ -8,33 +8,41 @@ import java.util.Date;
 
 @Alias("ProductOptionDto")
 public class ProductOptionDto {
-    private Integer productOptionId;
+    private Integer optionId;
     private Integer productId;
     private String type;
-    private boolean countable;
+    //private boolean countable;
     private String name;
     private String content;
-    private Integer price;
+    private String price;
     private Integer orderNo;
     private Date createdAt;
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
+//
+// public boolean isCountable() {
+//        return countable;
+//    }
+//
+//    public void setCountable(boolean countable) {
+//        this.countable = countable;
+//    }
 
- public boolean isCountable() {
-        return countable;
+    public Integer getOptionId() {
+        return optionId;
     }
 
-    public void setCountable(boolean countable) {
-        this.countable = countable;
+    public void setOptionId(Integer optionId) {
+        this.optionId = optionId;
     }
 
-    public Integer getProductOptionId() {
-        return productOptionId;
+    public Integer getOrderNo() {
+        return orderNo;
     }
 
-    public void setProductOptionId(Integer productOptionId) {
-        this.productOptionId = productOptionId;
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
     }
 
     public Integer getProductId() {
@@ -70,11 +78,11 @@ public class ProductOptionDto {
         this.content = content;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

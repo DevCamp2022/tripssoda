@@ -14,10 +14,44 @@
         WHERE email = #{email}
     </select>
 
+    <select id="selectAllUser" resultType="UserDto">
+        SELECT * FROM user_info
+    </select>
+
+    <select id="selectUserByNickname" parameterType="String" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE nickname = #{nickname}
+    </select>
+
+    <select id="selectUserByEmail" parameterType="String" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE email = #{email}
+    </select>
+
+    <select id="selectEmailByNameAndTel" parameterType="map" resultType="String">
+        SELECT email
+        FROM user_info
+        WHERE name = #{name} and tel = #{tel}
+    </select>
+
+    <select id="selectUserByNameAndEmail" parameterType="map" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE name = #{name} and email = #{email}
+    </select>
+
     <update id="updateUser" parameterType="UserDto">
         UPDATE user_info
         SET profile_img = #{profileImg}, nickname = #{nickname}, intro = #{intro}, instagram_id = #{instagramId},
             tel = #{tel}, pwd = #{pwd}
+        WHERE email = #{email}
+    </update>
+
+    <update id="updateUserPassword" parameterType="map">
+        UPDATE user_info
+        SET pwd = #{pwd}
         WHERE email = #{email}
     </update>
 
@@ -27,9 +61,9 @@
         WHERE id = #{userId}
     </update>
 
-    <update id="updateUpdatedBy" parameterType="map">
+    <update id="setUpdatedBy" parameterType="map">
         UPDATE user_info
-        SET updated_by = #{updatedBy}
+        SET updated_by = #{updatedBy}, updated_at = #{updatedAt}
         WHERE id = #{userId}
     </update>
 
@@ -43,4 +77,30 @@
         DELETE FROM user_info
         WHERE email = #{email}
     </delete>
+
+    <select id="searchSelectUser" parameterType="SearchCondition" resultType="UserDto">
+        SELECT *
+        FROM user_info
+        WHERE true
+        <choose>
+            <when test='option=="NA"'>
+                AND name LIKE concat('%', #{keyword}, '%')
+            </when>
+
+            <when test='option=="NI"'>
+                AND nickname LIKE concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                AND (name LIKE concat('%', #{keyword}, '%')
+                OR nickname LIKE concat('%', #{keyword}, '%'))
+            </otherwise>
+        </choose>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        FROM user_info
+    </select>
 </mapper>

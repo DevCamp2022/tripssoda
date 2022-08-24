@@ -2,8 +2,10 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.CombinedBoardDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
-import com.devcamp.tripssoda.mapper.AdminBoardMapper;
+import com.devcamp.tripssoda.mapper.CombinedBoardHistoryMapper;
+import com.devcamp.tripssoda.mapper.CombinedBoardMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,75 +14,99 @@ import java.util.Map;
 @Service
 public class AdminBoardServiceImpl implements AdminBoardService{
 
-    private final AdminBoardMapper adminBoardMapper;
+    private final CombinedBoardMapper combinedBoardMapper;
+    private final CombinedBoardHistoryMapper combinedBoardHistoryMapper;
 
-    public AdminBoardServiceImpl(AdminBoardMapper adminBoardMapper) {
-        this.adminBoardMapper = adminBoardMapper;
+    public AdminBoardServiceImpl(CombinedBoardMapper combinedBoardMapper,
+                                 CombinedBoardHistoryMapper combinedBoardHistoryMapper) {
+        this.combinedBoardMapper = combinedBoardMapper;
+        this.combinedBoardHistoryMapper = combinedBoardHistoryMapper;
     }
 
     @Override
     public int getCount() throws Exception {
-        return adminBoardMapper.count();
+        return combinedBoardMapper.count();
     }
 
     @Override
     public int remove(Integer id, Integer userId) throws Exception {
         System.out.println("서비스 딜릿 id = " + id);
         System.out.println("서비스딜리ㅣㅅ userId = " + userId);
+
+        int status = combinedBoardMapper.getStatus(id);
+
+        if(status == 0){
+            //이미 삭제된 글인 경우 4를 반환
+            return 4;
+        }
+
         Map map = new HashMap();
         map.put("id", id);
         map.put("userId", userId);
 
 //        return adminBoardMapper.delete(id, userId);
-        return adminBoardMapper.delete(map);
+        return combinedBoardMapper.delete(map);
     }
 
     @Override
     public int write(CombinedBoardDto combinedBoardDto) throws Exception {
-        return adminBoardMapper.insert(combinedBoardDto);
+        return combinedBoardMapper.insert(combinedBoardDto);
     }
 
     @Override
     public List<CombinedBoardDto> selectAllBoard() throws Exception {
-        return adminBoardMapper.selectAllBoard();
+        return combinedBoardMapper.selectAllBoard();
     }
 
     @Override
     public CombinedBoardDto read(Integer id) throws Exception {
-        CombinedBoardDto boardDto = adminBoardMapper.selectBoard(id);
-        adminBoardMapper.increaseViewCnt(id);
+        CombinedBoardDto boardDto = combinedBoardMapper.selectBoard(id);
+        combinedBoardMapper.increaseViewCnt(id);
 
         return boardDto;
     }
 
     @Override
     public List<CombinedBoardDto> getPage(Map map) throws Exception {
-        return adminBoardMapper.selectPage(map);
+        return combinedBoardMapper.selectPage(map);
     }
+
 
     @Override
-    public int modify(CombinedBoardDto boardDto) throws Exception {
-        return adminBoardMapper.update(boardDto);
+    @Transactional(rollbackFor = Exception.class)
+    public boolean modify(CombinedBoardDto combinedBoardDto) throws Exception {
+
+        //변경사항 업데이트
+        int resultCnt = combinedBoardMapper.update(combinedBoardDto);
+        System.out.println("resultCnt = " + resultCnt);
+        //이력 테이블에 저장
+        int hisResultCnt = combinedBoardHistoryMapper.insert(combinedBoardDto);
+        System.out.println("hisResultCnt = " + hisResultCnt);
+
+        try{
+            if(resultCnt!=1)
+                throw new Exception("Modify failed");
+
+            if(hisResultCnt!=1)
+                throw new Exception("Insert Modify History failed");
+
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new Exception("게시물 수정에 실패했습니다");
+        }
+        //수정,인서트 둘다 성공
+        return true;
     }
 
-//    @Override
-//    public int getSearchResultCnt(SearchCondition sc) throws Exception {
-//        return adminBoardMapper.searchResultCnt(sc);
-//    }
 
     @Override
     public int getSearchResultCnt(SearchCondition sc, String menuCode) throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("sc", sc);
         map.put("menuCode", menuCode);
-        return adminBoardMapper.searchResultCnt(map);
+        return combinedBoardMapper.searchResultCnt(map);
     }
 
-
-//    @Override
-//    public List<CombinedBoardDto> getSearchResultPage(SearchCondition sc) throws Exception {
-//        return adminBoardMapper.searchSelectPage(sc);
-//    }
 
     @Override
     public List<CombinedBoardDto> getSearchResultPage(SearchCondition sc, String menuCode) throws Exception {
@@ -90,7 +116,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 
         System.out.println("\"se\" = " + sc);
 
-//        return adminBoardMapper.searchSelectPage(sc, menuCode);
-        return adminBoardMapper.searchSelectPage(map);
+        return combinedBoardMapper.searchSelectPage(map);
     }
 }

@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface UserTourInterestService {
 
-    boolean insertUserTourInterest(Integer userId, String firstInterest, String secondInterest, String thirdInterest);
+    void insertUserTourInterest(Integer userId, String firstInterest, String secondInterest, String thirdInterest) throws Exception;
+
+    List<String> selectAllUserTourInterestKeyword(Integer userId);
 
     List<UserTourInterestDto> selectAllUserTourInterest(Integer userId);
 
-    void updateUserTourInterest(UserTourInterestDto userTourInterestDto);
+    void updateUserTourInterest(String firstInterest, String secondInterest, String thirdInterest, HttpSession session) throws Exception;
 }

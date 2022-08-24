@@ -9,6 +9,7 @@
     let msg = "${msg}";
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="MOD_SUCCESS") alert("게시물이 수정되었습니다.")
 </script>
 
 
@@ -56,6 +57,7 @@
         </c:if>
 
 
+
         <tr>
             <th class="tit" colspan="10">제목</th>
         </tr>
@@ -72,7 +74,7 @@
         <tr>
             <td class="con concon" colspan="10">
 <%--                ${dto.content}--%>
-                    <textarea name="content" rows="20" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${combinedBoardDto.content}</textarea>
+                    <textarea name="content" id="unitContent" rows="20px" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${combinedBoardDto.content}</textarea>
             </td>
         </tr>
 <%--            <tr>--%>
@@ -171,18 +173,17 @@
             if(isReadonly=='readonly') {
                 $(".writing-header").html("Board Modify");
                 $("input[name=title]").attr('readonly', false);
-                $("textarea").attr('readonly', false);
+                // $("textarea").attr('contenteditable', true);
+                CKEDITOR.instances.unitContent.setReadOnly(false);
                 $("#modifyBtn").html("<i class='fa fa-pencil'></i> 등록");
                 $("#listBtn").html("취소");
                 return;
             }
 
             // 2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/admin/boardModify${searchCondition.queryString}+&id=${param.id}'/>");
+            form.attr("action", "<c:url value='/admin/boardModify${searchCondition.queryString}+&id=${param.id}+&menuCode=${combinedBoardDto.menuCode}'/>");
             form.attr("method", "post");
-            alert("왓나 / ");
             if(formCheck()) {
-                alert("수정ㄱ");
                 form.submit();
             }
         });

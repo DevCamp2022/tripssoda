@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.UserPointHistoryMapper">
+    <select id="selectUserPointHistory" parameterType="int" resultType="UserPointHistoryDto">
+        SELECT *
+        FROM user_point_history
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAllUserPointHistory" parameterType="map" resultType="UserPointHistoryDto">
+        SELECT *
+        FROM user_point_history
+        WHERE user_id = #{userId}
+        ORDER BY id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+    <select id="selectAllUserPointHistoryCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM user_point_history
+        WHERE user_id = #{userId}
+    </select>
+</mapper>

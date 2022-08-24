@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.devcamp.tripssoda.mapper.ReservationMapper">
+    <insert id="insertReservation" parameterType="PaymentDetailDto" useGeneratedKeys="true" keyProperty="reservationId">
+        INSERT INTO reservation (payment_id, imp_uid, merchant_uid, product_id, product_schedule_id, user_id,
+                                 reserver_name, reserver_tel, title, status, qty, pickup_info, extra_info,
+                                 created_by, updated_by)
+        values (#{id},
+                #{impUid},
+                #{merchantUid},
+                #{productId},
+                #{scheduleId},
+                #{userId},
+                #{reserverName},
+                #{reserverTel},
+                #{productTitle},
+                1,
+                #{productQty},
+                #{reserverPickup},
+                null,
+                #{userId},
+                #{userId});
+    </insert>
+    <insert id="insertReservationDetail" parameterType="Map">
+        INSERT INTO reservation_detail (reservation_id, product_option_id,
+                                        content, created_by, updated_by)
+        values (#{reservationId},
+                #{productOptionId},
+                #{content},
+                #{userId},
+                #{userId});
+    </insert>
+</mapper>
+

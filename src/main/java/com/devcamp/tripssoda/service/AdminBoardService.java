@@ -20,7 +20,7 @@ public interface AdminBoardService {
 
     List<CombinedBoardDto> getPage(Map map) throws Exception;
 
-    int modify(CombinedBoardDto combinedBoardDto) throws Exception;
+    boolean modify(CombinedBoardDto combinedBoardDto) throws Exception;
 
 //    List<CombinedBoardDto> getSearchResultPage(SearchCondition sc) throws Exception;
     List<CombinedBoardDto> getSearchResultPage(SearchCondition sc, String menuCode) throws Exception;

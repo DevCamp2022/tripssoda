@@ -1,6 +1,7 @@
 package com.devcamp.tripssoda.dto;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.Objects;
@@ -10,9 +11,12 @@ public class UserDto {
     private Integer id;
     private String name;
     private String pwd;
+    // 비밀번호 확인하는 인스턴스 변수
+    private String pwdConfirm;
     private String email;
     private String tel;
     private Character gender;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
     private String nickname;
     private String intro = "";
@@ -22,6 +26,10 @@ public class UserDto {
     private Integer reportCnt;
     private Integer status;
     private String userCode;
+    // 약관동의현황을 저장
+    private Integer firstTermsStatus;
+    private Integer secondTermsStatus;
+    private Integer thirdTermsStatus;
     private Date createdAt;
     private Integer createdBy;
     private Date updatedAt;
@@ -43,6 +51,39 @@ public class UserDto {
     }
 
     // Getter & Setter
+
+    public Integer getFirstTermsStatus() {
+        return firstTermsStatus;
+    }
+
+    public void setFirstTermsStatus(Integer firstTermsStatus) {
+        this.firstTermsStatus = firstTermsStatus;
+    }
+
+    public Integer getSecondTermsStatus() {
+        return secondTermsStatus;
+    }
+
+    public void setSecondTermsStatus(Integer secondTermsStatus) {
+        this.secondTermsStatus = secondTermsStatus;
+    }
+
+    public Integer getThirdTermsStatus() {
+        return thirdTermsStatus;
+    }
+
+    public void setThirdTermsStatus(Integer thirdTermsStatus) {
+        this.thirdTermsStatus = thirdTermsStatus;
+    }
+
+    public String getPwdConfirm() {
+        return pwdConfirm;
+    }
+
+    public void setPwdConfirm(String pwdConfirm) {
+        this.pwdConfirm = pwdConfirm;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -196,12 +237,15 @@ public class UserDto {
     }
 
     // toString
+
+
     @Override
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", pwd='" + pwd + '\'' +
+                ", pwdConfirm='" + pwdConfirm + '\'' +
                 ", email='" + email + '\'' +
                 ", tel='" + tel + '\'' +
                 ", gender=" + gender +
@@ -214,6 +258,9 @@ public class UserDto {
                 ", reportCnt=" + reportCnt +
                 ", status=" + status +
                 ", userCode='" + userCode + '\'' +
+                ", firstTermsStatus=" + firstTermsStatus +
+                ", secondTermsStatus=" + secondTermsStatus +
+                ", thirdTermsStatus=" + thirdTermsStatus +
                 ", createdAt=" + createdAt +
                 ", createdBy=" + createdBy +
                 ", updatedAt=" + updatedAt +
@@ -227,13 +274,12 @@ public class UserDto {
         if (this == o) return true;
         if (!(o instanceof UserDto)) return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(getId(), userDto.getId()) && Objects.equals(getName(), userDto.getName()) && Objects.equals(getPwd(), userDto.getPwd()) && Objects.equals(getEmail(), userDto.getEmail()) && Objects.equals(getTel(), userDto.getTel()) && Objects.equals(getGender(), userDto.getGender()) && Objects.equals(getBirthday(), userDto.getBirthday()) && Objects.equals(getNickname(), userDto.getNickname()) && Objects.equals(getIntro(), userDto.getIntro()) && Objects.equals(getProfileImg(), userDto.getProfileImg()) && Objects.equals(getInstagramId(), userDto.getInstagramId()) && Objects.equals(getPoint(), userDto.getPoint()) && Objects.equals(getReportCnt(), userDto.getReportCnt()) && Objects.equals(getStatus(), userDto.getStatus()) && Objects.equals(getUserCode(), userDto.getUserCode()) && Objects.equals(getCreatedAt(), userDto.getCreatedAt()) && Objects.equals(getCreatedBy(), userDto.getCreatedBy()) && Objects.equals(getUpdatedAt(), userDto.getUpdatedAt()) && Objects.equals(getUpdatedBy(), userDto.getUpdatedBy());
+        return Objects.equals(getId(), userDto.getId()) && Objects.equals(getName(), userDto.getName()) && Objects.equals(getPwd(), userDto.getPwd()) && Objects.equals(getPwdConfirm(), userDto.getPwdConfirm()) && Objects.equals(getEmail(), userDto.getEmail()) && Objects.equals(getTel(), userDto.getTel()) && Objects.equals(getGender(), userDto.getGender()) && Objects.equals(getBirthday(), userDto.getBirthday()) && Objects.equals(getNickname(), userDto.getNickname()) && Objects.equals(getIntro(), userDto.getIntro()) && Objects.equals(getProfileImg(), userDto.getProfileImg()) && Objects.equals(getInstagramId(), userDto.getInstagramId()) && Objects.equals(getPoint(), userDto.getPoint()) && Objects.equals(getReportCnt(), userDto.getReportCnt()) && Objects.equals(getStatus(), userDto.getStatus()) && Objects.equals(getUserCode(), userDto.getUserCode()) && Objects.equals(getFirstTermsStatus(), userDto.getFirstTermsStatus()) && Objects.equals(getSecondTermsStatus(), userDto.getSecondTermsStatus()) && Objects.equals(getThirdTermsStatus(), userDto.getThirdTermsStatus());
     }
 
     // hashCode
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPwd(), getEmail(), getTel(), getGender(), getBirthday(), getNickname(), getIntro(), getProfileImg(), getInstagramId(), getPoint(), getReportCnt(), getStatus(), getUserCode(), getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy());
+        return Objects.hash(getId(), getName(), getPwd(), getPwdConfirm(), getEmail(), getTel(), getGender(), getBirthday(), getNickname(), getIntro(), getProfileImg(), getInstagramId(), getPoint(), getReportCnt(), getStatus(), getUserCode(), getFirstTermsStatus(), getSecondTermsStatus(), getThirdTermsStatus());
     }
-
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<title>tripssoda 회원가입</title>
+<title>여행관심사 선택</title>
 <link rel="stylesheet" href="<c:url value="/css/user/selectInterest.css"/>">
 
 <div class="main">
@@ -10,10 +10,13 @@
         <h2 class="title">여행 관심사를 선택해 주세요.</h2>
         <p class="sub-title">(대표 관심사를 포함한 선호 관심사 3개, 중복선택 불가)</p>
         <div class="interest-list">
-            <c:forEach var="tourInterestCodeDto" items="${tourInterestCodeDtoList}">
+            <c:forEach var="tourInterestCodeDto" items="${tourInterestCodeDtoList}" varStatus="order">
                 <div class="interest">
-                    <h3 class="keyword"># ${tourInterestCodeDto.tourIntrKeyword}</h3>
-                    <p>${tourInterestCodeDto.tourIntrDescription}</p>
+                    <img class="img" src="${pageContext.request.contextPath}/user/tourInterestImg/tourInterest${order.count}.jpg">
+                    <div class="interest-info-wrap">
+                        <h3 class="keyword"><span>#</span> ${tourInterestCodeDto.tourIntrKeyword}</h3>
+                        <p class="interest-info">${tourInterestCodeDto.tourIntrDescription}</p>
+                    </div>
                 </div>
             </c:forEach>
         </div>
@@ -38,13 +41,12 @@
             </select>
         </div>
         <div class="button-wrap">
-            <button class="register-btn">완료</button>
+            <button class="register-btn">회원가입 완료</button>
         </div>
     </form>
 </div>
 <script>
 
-<<<<<<< Updated upstream
     function formCheck() {
         let firstInterest = $("select[name=firstInterest]").val();
         let secondInterest = $("select[name=secondInterest]").val();
@@ -60,6 +62,3 @@
     }
 
 </script>
-
-=======
->>>>>>> Stashed changes

@@ -2,6 +2,7 @@ package com.devcamp.tripssoda.mapper;
 
 import com.devcamp.tripssoda.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +25,12 @@ public interface ProductMapper {
     public int setUpdateBy(Map<String, Integer> map);
     public int updateProductApproval(ApprovalDto approvalDto);
     public int insertApprovalHistory(ApprovalDto approvalDto);
+    public UpdateProductDto selectProductUpdate(Integer productId);
+    public List<UpdateProductDto> selectProductOptionUpdate(Integer productId);
+    public List<UpdateProductDto> selectProductScheduleUpdate(Integer productId);
+    public void updateProduct(UpdateProductDto dto);
+    public int updateProductOption(RegProductOptionDto PODto);
+    public void deleteProductOption(Integer productOptionId);
+    public int updateProductSchedule(RegProductScheduleDto PSDto);
+    public void deleteProductSchedule(Integer productScheduleId);
 }

@@ -3,121 +3,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동행메인페이지</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="<c:url value='/css/accompany/accompanyList.css'/>">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
-<body>
-<style>
-    * {
-        list-style: none;
-        text-decoration: none;
-        margin: 0px;
-        padding: 0px;
-        font-family: 'Noto Sans KR', sans-serif;
-        color: black;
-    }
-
-    .main1 {
-        width: 1200px;
-        margin: auto;
-    }
-    .main1 > .main-img {
-        width: 1200px;
-        height: 400px;
-        border: 1px solid black;
-        margin: auto;
-        text-align: center;
-        line-height: 100px;
-    }
-    .main1 > .region {
-        width: 1200px;
-        height: 400px;
-        border: 1px solid black;
-        text-align: center;
-    }
-    .main1 > .date-bar {
-        width: 1200px;
-        height: 50px;
-        border: 1px solid black;
-        font-size: 25px;
-        font-weight: bold;
-    }
-    .date-bar > .date-word,
-    .start-date,
-    .end-date,
-    .search-btn {
-        margin: 0px 50px 0px 50px;
-    }
-    .sort-bar {
-        display: flex;
-        width: 1200px;
-        height: 50px;
-        border: 1px solid black;
-        margin: auto;
-        font-size: 25px;
-        font-weight: bold;
-        justify-content: flex-end;
-    }
-    .sort-word,
-    .sort-btn,
-    .recruit-btn {
-        margin-right: 30px;
-    }
-    .list-wrap-flex {
-        width: 1200px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        margin: auto;
-    }
-    .list-wrap {
-        width: 250px;
-        height: 350px;
-        border: 1px solid black;
-        margin: 20px;
-    }
-    .thumbnail {
-        width: 250px;
-        height: 200px;
-        border: 1px solid black;
-        margin: auto;
-
-    }
-    .list-region {
-        width: 100px;
-        height: 50px;
-        border: 1px solid black;
-
-    }
-    .list-status-bar,
-    .list-content,
-    .profile-img-bar {
-        width: 250px;
-        height: 50px;
-        border: 1px solid black;
-        margin: auto;
-
-    }
-    .list-status-bar {
-        display: flex;
-    }
-    .profile-img-bar {
-        display: flex;
-    }
-
-    .wrt-btn {
-        width: 1200px;
-        height: 50px;
-        border: 1px solid black;
-    }
-    .paging {
-        width: 1200px;
-        height: 100px;
-        margin: auto;
-        text-align: center;
-    }
-</style>
 <body>
 <script>
     let msg = "${msg}";
@@ -128,91 +23,105 @@
     if(msg=="WRT_OK")    alert("성공적으로 등록되었습니다.");
     if(msg=="MOD_OK")    alert("성공적으로 수정되었습니다.");
 </script>
-<div class="container">
-    <div class="main1">
-        <div class="wrt-btn">
-            <button id="write-btn" class="write-btn" onclick="location.href='<c:url value="/accompany/write"/>'">동행글쓰기</button>
+<!-- <div class="wrt-btn">
+  <button id="write-btn" class="write-btn" onclick="location.href='<c:url value="/accompany/write"/>'">동행글쓰기</button>
+</div> -->
+<div class="main-img">
+
+</div>
+<div class="main-group">
+    <div class="sort-bar">
+        <div class="sort-text">
+            정렬
         </div>
-        <div class="main-img">
-            나와 맞는 여행동행과 이야기를 나누어 보아요!
-            <h1>여행 친구 찾기</h1>
+        <div class="sort-button">
+            <select class="search-option" name="option">
+                <option value="" >최신순</option>
+                <option value="" >조회순</option>
+            </select>
         </div>
-        <br><br>
-        <div class="region">
-            <h4>지역선택</h4>
+        <c:if test="${mode ne 'waiting'}">
+            <div class="only-recruit" onclick="location.href='<c:url value="/accompany/waiting"/>'">
+            모집중인 글만 보기
         </div>
-        <div class="date-bar">
-            <span class="date-word">날짜 선택</span>
-            <input type="date" class="start-date" value="${accompanyDto.startAt}">
-            -
-            <input type="date" class="end-date" value="${accompanyDto.endAt}">
-            <!-- 검색정보를 전송할 버튼 -->
-            <button type="button" class="search-btn">검색하기</button>
-        </div>
+        </c:if>
+        <c:if test="${mode eq 'waiting'}">
+            <div class="only-recruit" onclick="location.href='<c:url value="/accompany/list"/>'">
+                모든 글 보기
+            </div>
+        </c:if>
     </div>
+    <div class="list-group">
+        <c:forEach var="accompanyDto" items="${list}">
+            <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
+                <div class="list">
+                    <div class="list-thumbnail">
 
-    <div class="main2">
-        <div class="sort-bar">
-            <div class="sort-word">
-                정렬
-            </div>
-            <div class="sort-btn">
-                최신순
-            </div>
-            <div class="recruit-btn">
-                모집중인 글만 보기
-            </div>
-        </div>
-
-
-
-            <div class="list-wrap-flex">
-                <c:forEach var="accompanyDto" items="${list}">
-                <div class="list-wrap">
-                    <div class="thumbnail">
-                        <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><div class="list-region">
-                            지역${accompanyDto.regionCode}
-                        </div>썸네일</a>
                     </div>
-                    <div class="list-status-bar">
-                        <div class="list-status">
-                            모집상태${accompanyDto.status}
+                    <div class="list-title-line">
+                        <div class="recruit-on-off">
+                            모집중:${accompanyDto.status}
                         </div>
                         <div class="list-title">
-                            <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.title}"/></a>
+                            제목:${accompanyDto.title}
                         </div>
                     </div>
-                    <div class="list-content">
-                        <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>"><c:out value="${accompanyDto.content}"/></a>
+                    <div class="list-content-line">
+                        내용:${accompanyDto.content}
                     </div>
-                    <div class="profile-img-bar">
+                    <div class="list-nickname-line">
                         <div class="profile-img">
-                            프로필사진
+
                         </div>
                         <div class="nickname">
-                            닉네임${accompanyDto.nickname}
+                            닉네임:${accompanyDto.nickname}
                         </div>
-                        <div class="view-cnt">
-                            조회수${accompanyDto.viewCnt}
+                        <div class="view-cnt-line">
+                            <div class="view-cnt-icon">
+
+                            </div>
+                            <div class="view-cnt">
+                                    ${accompanyDto.viewCnt}
+                            </div>
                         </div>
+
                     </div>
                 </div>
-                </c:forEach>
-            </div>
+            </a>
+        </c:forEach>
     </div>
+    <c:if test="${mode ne 'waiting'}">
+    <div class="paging-container">
+        <div class="paging">
+            <c:if test="${ph.showPrev}">
+                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+            </c:if>
+            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+            </c:forEach>
+            <c:if test="${ph.showNext}">
+                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+            </c:if>
+        </div>
+    </div>
+    </c:if>
+    <c:if test="${mode eq 'waiting'}">
+        <div class="paging-container">
+            <div class="paging">
+                <c:if test="${ph.showPrev}">
+                    <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                </c:if>
+                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                    <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                </c:forEach>
+                <c:if test="${ph.showNext}">
+                    <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                </c:if>
+            </div>
+        </div>
+    </c:if>
 </div>
 
-<br>
-<div class="paging">
-    <c:if test="${ph.showPrev}">
-        <a href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
-    </c:if>
-    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-        <a href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-    </c:forEach>
-    <c:if test="${ph.showNext}">
-        <a href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
-    </c:if>
-</div>
+
 </body>
 </html>

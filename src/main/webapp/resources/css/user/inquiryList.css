@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 /* 초기화 */
 ol, ul, li {
     list-style: none;
@@ -8,36 +9,47 @@ ol, ul, li {
 a {
     text-decoration: none;
 }
-
+/* body */
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
 }
-
+/* main */
 .main {
     width: 840px;
-    margin: 0 auto;
+    margin: 100px auto;
+    background-color: white;
 }
 
 .contents {
     width: 100%;
-    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #e9e9e9;
+    border-radius: 4px;
 }
 
 .title {
-    text-align: left;
-    width: 90%;
-    padding-left: 10px;
-    margin: 10px auto;
-    border: 1px solid black;
+    font-size: 22px;
+    font-weight: bold;
+    width: 754px;
+    padding: 40px 0 15px 0px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
 
 .thead-wrap {
-    width: 90%;
-    margin: 0 auto;
-    border: 1px solid black;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    width: 90%;
+    height: 57px;
+    margin: 20px auto 0 auto;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #e9e9e9;
+    background-color: rgb(238, 255, 244);
+    text-align: center;
+    color: gray;
 }
 
 .thead-id {
@@ -62,10 +74,14 @@ body {
 }
 
 .td-wrap {
+    overflow: hidden;
     width: 90%;
     margin: 0 auto;
-    border: 1px solid black;
-    overflow: hidden;
+    border-bottom: 1px solid #e9e9e9;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
 }
 
 .td-id {
@@ -90,9 +106,32 @@ body {
     width: 20%;
     box-sizing: border-box;
 }
+.write-btn {
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: 500;
+    width: 120px;
+    height: 46px;
+    border: none;
+    margin: 20px 0 20px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 .paging-container {
     width: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: center;
     float: none;
+}
+
+.page {
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    color: #00ce7c;
+    font-weight: bold;
 }

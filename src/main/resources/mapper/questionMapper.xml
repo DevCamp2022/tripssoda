@@ -31,6 +31,11 @@
         SELECT count(*)
         FROM question
     </select>
+    <select id="waitingCount" resultType="int">
+        SELECT count(*)
+        FROM question
+        WHERE status = 0
+    </select>
     <insert id="insert" parameterType="QuestionDto">
         INSERT INTO question
             (title, content, user_id, hashtag, region_code)
@@ -66,6 +71,12 @@
     <delete id="deleteAll">
         DELETE FROM question
     </delete>
+    <select id="waitingSelectPage" parameterType="map" resultType="QuestionDto">
+        <include refid="selectFromQuestion"/>
+        WHERE status = 0
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
     <select id="selectPage" parameterType="map" resultType="QuestionDto">
         <include refid="selectFromQuestion"/>
         ORDER BY created_at DESC, id DESC

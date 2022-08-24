@@ -22,4 +22,8 @@ public interface AccompanyService {
 
     List<AccompanyDto> getPage(Map map) throws Exception;
 
+
+    List<AccompanyDto> waitingGetPage(Map map) throws Exception;
+
+    int waitingGetCount() throws Exception;
 }

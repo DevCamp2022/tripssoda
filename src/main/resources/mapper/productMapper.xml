@@ -141,7 +141,26 @@
     </select>
 
     <select id="selectProductDetail" parameterType="GetDetailProductDto" resultType="GetDetailProductDto">
-        SELECT *
+        SELECT
+            p.id as productId,
+            ps.id as scheduleId,
+            p.category,
+            p.rating,
+            p.req_time,
+            p.title,
+            p.keyword,
+            p.prd_intro,
+            p.course_intro,
+            p.inclusion,
+            p.exclusion,
+            p.additional_info,
+            p.meeting_point,
+            p.mandatory_guidance,
+            p.refund_policy,
+            ps.current_member,
+            ps.min_member,
+            ps.max_member,
+            ps.start_date
         FROM product AS p
         INNER JOIN product_schedule AS ps
         ON (p.id=ps.product_id)
@@ -249,4 +268,163 @@
         VALUE(#{userId}, #{reason}, now(), now(),
             #{userId}, now(), #{userId})
     </insert>
+
+    <select id="selectProductUpdate" parameterType="int" resultType="UpdateProductDto">
+        SELECT
+            p.id AS productId,
+            p.partner_id,
+            p.title,
+            p.category,
+            p.thumbnail,
+            p.rating,
+            p.req_time,
+            p.keyword,
+            p.refund_amount,
+            p.day_cnt,
+            p.min_member,
+            p.max_member,
+            p.prd_intro,
+            p.course_intro,
+            p.additional_info,
+            p.inclusion,
+            p.exclusion,
+            p.meeting_point,
+            p.pickup_type,
+            p.pickup_option,
+            p.mandatory_guidance,
+            p.refund_policy
+        FROM product AS p
+        WHERE p.id=#{productId}
+    </select>
+
+    <select id="selectProductOptionUpdate" parameterType="int" resultType="UpdateProductDto">
+        SELECT
+            po.id AS optionId,
+            po.product_id AS productId,
+            po.type,
+            po.name,
+            po.content,
+            po.price AS optionPrice,
+            po.order_no
+        FROM product_option AS po
+        WHERE po.product_id=#{productId}
+    </select>
+
+    <select id="selectProductScheduleUpdate" parameterType="int" resultType="UpdateProductDto">
+        SELECT
+            ps.id AS scheduleId,
+            ps.product_id AS productId,
+            ps.start_date,
+            ps.price,
+            ps.min_member AS scheduleMinMember,
+            ps.max_member AS scheduleMaxMember
+        FROM product_schedule AS ps
+        WHERE ps.product_id=#{productId}
+    </select>
+
+    <update id="updateProduct" parameterType="UpdateProductDto">
+        UPDATE product
+        SET
+            title = #{title},
+            category = #{category},
+            thumbnail = #{thumbnail},
+            rating = #{rating},
+            req_time = #{reqTime},
+            keyword = #{keyword},
+            refund_amount = #{refundAmount},
+            day_cnt = #{dayCnt},
+            min_member = #{minMember},
+            max_member = #{maxMember},
+            prd_intro = #{prdIntro},
+            course_intro = #{courseIntro},
+            additional_info = #{additionalInfo},
+            inclusion = #{inclusion},
+            exclusion = #{exclusion},
+            meeting_point = #{meetingPoint},
+            pickup_type = #{pickupType},
+            pickup_option = #{pickupOption},
+            mandatory_guidance = #{mandatoryGuidance},
+            refund_policy = #{refundPolicy},
+            updated_at=now(),
+            updated_by=#{userId}
+        WHERE id = #{productId}
+    </update>
+
+    <insert id="updateProductOption" parameterType="RegProductOptionDto">
+        INSERT INTO product_option
+            (
+            id,
+            product_id,
+            type,
+            name,
+            content,
+            price,
+            order_no,
+            updated_at,
+            updated_by
+            )
+        VALUES
+            (
+            #{productOptionId},
+            #{productId},
+            #{type},
+            #{name},
+            #{content},
+            #{price},
+            #{orderNo},
+            now(),
+            #{userId}
+            )
+        ON DUPLICATE KEY UPDATE
+            id = #{productOptionId},
+            product_id = #{productId},
+            type = #{type},
+            name = #{name},
+            content = #{content},
+            price = #{price},
+            order_no = #{orderNo},
+            updated_at = now(),
+            updated_by = #{userId}
+    </insert>
+
+    <delete id="deleteProductOption" parameterType="int">
+        DELETE FROM product_option WHERE id=#{productOptionId}
+    </delete>
+
+    <insert id="updateProductSchedule" parameterType="RegProductScheduleDto">
+        INSERT INTO product_schedule
+        (
+            id,
+            product_id,
+            start_date,
+            price,
+            min_member,
+            max_member,
+            updated_at,
+            updated_by
+        )
+        VALUES
+        (
+            #{productScheduleId},
+            #{productId},
+            #{scheduleStartDate},
+            #{schedulePrice},
+            #{scheduleMinMember},
+            #{scheduleMaxMember},
+            now(),
+            #{userId}
+        )
+        ON DUPLICATE KEY UPDATE
+            product_id = #{productId},
+            start_date = #{scheduleStartDate},
+            price = #{schedulePrice},
+            min_member = #{scheduleMinMember},
+            max_member = #{scheduleMaxMember},
+            updated_at = now(),
+            updated_by = #{scheduleUpdatedBy}
+    </insert>
+
+    <delete id="deleteProductSchedule" parameterType="int">
+        DELETE FROM product_schedule WHERE id=#{productScheduleId}
+    </delete>
 </mapper>

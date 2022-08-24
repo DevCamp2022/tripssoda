@@ -1,0 +1,131 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* body */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main {
+    width: 840px;
+    margin: 100px auto;
+}
+.contents {
+    width: 840px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e9e9e9;
+    padding: 40px;
+    background-color: white;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.reservation-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #e9e9e9;
+    padding: 20px;
+    border-radius: 4px;
+}
+.product-wrap {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+.img-wrap > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.tour-title-wrap {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    background-color: #00ce7c;
+    border: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
+
+.payment-wrap {
+    width: 50%;
+    padding: 10px;
+}
+.payment-wrap > li {
+    width: 100%;
+    height: 50px;
+    color: gray;
+}
+
+li > span:nth-child(2) {
+    float: right;
+    color: black;
+    font-weight: bold;
+}
+
+.total-amount-wrap {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid #c9c9c9;
+    padding-top: 20px;
+}
+.total-amount-wrap > span:nth-child(1) {
+    font-size: 22px;
+    color: black;
+}
+.total-amount-wrap > span:nth-child(2) {
+    font-size: 28px;
+    color: black;
+    font-weight: bolder;
+}
+
+.used-point-wrap {
+    background-color: #eefff4;
+    padding: 10px 30px;
+    border: 1px solid #E9E9E9;
+    border-radius: 8px;
+}
+.used-point-wrap > span:nth-child(1) {
+    color: #00ce7c;
+    font-weight: 500;
+}

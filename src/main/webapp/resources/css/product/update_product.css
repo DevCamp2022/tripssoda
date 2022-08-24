@@ -1,0 +1,93 @@
+span.man-star{
+  color: red;
+}
+
+input.hashes{
+  outline: none;
+  border: 0px solid black;
+}
+
+.div-thumbnail>img{
+  width: 500px;
+  border: 2px solid rgb(0, 206, 124);
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+.hashes{
+  background-color: #f5f5f5;
+  color: rgb(119, 119, 119);
+  margin-right: 15px;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 2px 10px;
+}
+
+.keyword-del{
+  cursor: pointer;
+  font-size: 12px;
+}
+
+input[type="text"] {
+  display: inline-block;
+  width: 80%;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--color-whiteGray);
+  border-radius: 4px;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--color-whiteGray);
+  border-radius: 4px;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+
+select {
+  display: inline-block;
+  width: 70%;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--color-whiteGray);
+  border-radius: 4px;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+table th{
+  vertical-align: top;
+}
+
+.cke_contents{ 
+  min-height:550px; 
+} 
+
+.btn-outline-danger{
+  margin-left: 4px;
+}
+
+.td-submit{
+  text-align: center;
+}
+.submitBtn{
+  width:600px;
+  display: inline-block;
+}
+
+.add-option-btn{
+  width:600px;
+}

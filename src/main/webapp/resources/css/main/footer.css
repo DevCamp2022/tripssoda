@@ -1,0 +1,64 @@
+.ga-DnNS {
+    width: 100%;
+    min-width: 1200px;
+    border-top: 1px solid rgb(233, 233, 233);
+    margin-top: -200px;
+    padding-bottom: 49px;
+    background: rgb(255, 255, 255);
+}
+
+#footer .inner {
+    padding: 50px 280px 0 0;
+    box-sizing: border-box;
+}
+
+.inner {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.ga-DnNS .grey_6A {
+    color: rgb(106, 106, 106);
+}
+.ga-DnNS .info_wrap_horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#footer .footer_info {
+    position: relative;
+    margin-top: 15px;
+}
+.ga-DnNS .grey_6A {
+    color: rgb(106, 106, 106);
+}
+.ga-DnNS .info_regular {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+}
+.ga-DnNS .small_gap {
+    margin-top: 16px;
+}
+.ga-DnNS .info_wrap_horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.ga-DnNS .vertical_line p {
+    margin-right: 14px;
+    cursor: pointer;
+}
+.ga-DnNS .info_bold {
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: bold !important;
+}
+
+.f_logo img{
+    width:180px;
+}

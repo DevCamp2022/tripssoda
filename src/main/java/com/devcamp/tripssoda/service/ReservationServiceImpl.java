@@ -1,11 +1,14 @@
 package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.PaymentDetailDto;
+import com.devcamp.tripssoda.dto.ReservationDto;
+import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.exception.InsertException;
 import com.devcamp.tripssoda.mapper.ReservationMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -41,4 +44,28 @@ public class ReservationServiceImpl implements ReservationService {
 
         return 1;
     }
+    @Override
+    public List<ReservationDto> selectAllUserReservation(Integer userId, SearchCondition sc) {
+        Map userIdAndSc = new HashMap();
+        userIdAndSc.put("userId", userId);
+        userIdAndSc.put("sc", sc);
+
+        return reservationMapper.selectAllUserReservation(userIdAndSc);
+    }
+
+    @Override
+    public int selectAllUserReservationCnt(Integer userId) {
+        return reservationMapper.selectAllUserReservationCnt(userId);
+    }
+
+//    @Override
+//    public List<Date> selectAllUserReservationStartDate(Integer userId) {
+//        return reservationMapper.selectAllUserReservationStartDate(userId);
+//    }
+//
+//    @Override
+//    public List<Integer> selectAllUserReservationTotalAmount(Integer userId) {
+//        return reservationMapper.selectAllUserReservationTotalAmount(userId);
+//    }
+
 }

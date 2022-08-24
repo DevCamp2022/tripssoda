@@ -32,4 +32,45 @@
                 #{userId},
                 #{userId});
     </insert>
+
+<!--    <select id="selectAllUserReservation" parameterType="Map" resultType="ReservationDto">-->
+<!--        SELECT *-->
+<!--        FROM reservation-->
+<!--        WHERE user_id = #{userId}-->
+<!--        ORDER BY id DESC-->
+<!--        LIMIT #{sc.offset}, #{sc.pageSize}-->
+<!--    </select>-->
+
+    <select id="selectAllUserReservationCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM reservation
+        WHERE user_id = #{userId}
+    </select>
+
+<!--    <select id="selectAllUserReservationStartDate" parameterType="int" resultType="Date">-->
+<!--        SELECT product_schedule.start_date-->
+<!--        FROM reservation-->
+<!--        RIGHT JOIN product_schedule-->
+<!--        ON reservation.product_schedule_id = product_schedule.id-->
+<!--        WHERE reservation.user_id = #{userId};-->
+<!--    </select>-->
+
+<!--    <select id="selectAllUserReservationTotalAmount" parameterType="int" resultType="Integer">-->
+<!--        SELECT payment.total_amount-->
+<!--        FROM reservation-->
+<!--        RIGHT JOIN payment-->
+<!--        ON reservation.payment_id = payment.id-->
+<!--        WHERE reservation.user_id = #{userId};-->
+<!--    </select>-->
+    <select id="selectAllUserReservation" parameterType="Map" resultType="ReservationDto">
+        SELECT r.id, r.reserv_at, r.status, r.qty, ps.start_date, p.total_amount, pr.title AS productTitle,
+               pr.thumbnail, r.product_id AS productId, ps.id AS productScheduleId, p.method, p.used_point AS usedPoint, p.product_price AS price
+        FROM tripssoda.reservation AS r
+        LEFT JOIN tripssoda.product_schedule AS ps ON ps.id = r.product_schedule_id
+        LEFT JOIN tripssoda.payment AS p ON p.id = r.payment_id
+        LEFT JOIN tripssoda.product AS pr ON pr.id = r.product_id
+        WHERE r.user_id = #{userId}
+        ORDER BY r.id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
 </mapper>

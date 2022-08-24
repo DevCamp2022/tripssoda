@@ -30,13 +30,11 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 
     @Override
     public int remove(Integer id, Integer userId) throws Exception {
-        System.out.println("서비스 딜릿 id = " + id);
-        System.out.println("서비스딜리ㅣㅅ userId = " + userId);
 
         int status = combinedBoardMapper.getStatus(id);
+        System.out.println("status = " + status);
 
-        if(status == 0){
-            //이미 삭제된 글인 경우 4를 반환
+        if(status == 0){//이미 삭제된 글인 경우 4를 반환
             return 4;
         }
 
@@ -44,7 +42,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
         map.put("id", id);
         map.put("userId", userId);
 
-//        return adminBoardMapper.delete(id, userId);
         return combinedBoardMapper.delete(map);
     }
 

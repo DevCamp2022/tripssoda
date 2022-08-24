@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.net.URLDecoder" %>
 
-<title>tripssoda 이용약관</title>
+<title>tripssoda 로그인</title>
 <link rel="stylesheet" href="<c:url value="/css/user/loginForm.css"/>">
 
 <div class="main">

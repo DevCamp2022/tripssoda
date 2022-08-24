@@ -16,5 +16,5 @@ public interface EmailVerificationService {
     void updateEmailVerificationStatus(EmailVerificationDto emailVerificationDto) throws Exception;
 
     void updateEmailVerification(EmailVerificationDto emailVerificationDto, String verfCode) throws Exception;
-    void deleteEmailVerification(String email) throws Exception;
+    void deleteEmailVerification(String email) throws IllegalAccessException;
 }

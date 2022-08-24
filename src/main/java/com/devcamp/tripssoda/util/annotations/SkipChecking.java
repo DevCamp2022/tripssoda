@@ -1,4 +1,4 @@
-package com.devcamp.tripssoda.util;
+package com.devcamp.tripssoda.util.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

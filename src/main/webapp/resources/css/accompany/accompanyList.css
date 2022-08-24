@@ -2,13 +2,15 @@
 body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     background-color: #fff;
 
 }
 .a-tag {
     text-decoration: none;
 }
+
+
 /* 여행 친구 찾기 이미지 */
 .main-img {
     width: 1200px;

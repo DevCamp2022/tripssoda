@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <title>tripssoda 이용약관</title>
+<link rel="stylesheet" href="/css/user/userTerms.css">
 
 <div class="main">
     <div class="contents">

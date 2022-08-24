@@ -62,3 +62,96 @@ VALUES
 'M004', '일대일문의', '2022-08-17 11:58:40', '41', '2022-08-17 11:58:40', '41'
 'M005', '파트너페이지', '2022-08-17 11:58:40', '41', '2022-08-17 11:58:40', '41'
 'M006', '관리자페이지', '2022-08-17 11:58:40', '41', '2022-08-17 11:58:40', '41'
+
+
+
+
+
+
+
+
+
+select * from user_permission;
+select * from menu;
+delete from menu;
+select * from menu_code;
+
+select * from user_info;
+
+select * from ip_ban_list;
+delete from ip_ban_list;
+
+INSERT into ip_ban_list
+(ip) value ('0:0:0:0:0:0:0:1');
+
+SELECT ip
+FROM ip_ban_list;
+
+-- INSERT INTO `tripssoda`.`ip_ban_list`
+-- (`ip`,
+-- `bandate`)
+-- VALUES
+-- (<{ip: }>,
+-- <{bandate: CURRENT_TIMESTAMP}>);
+
+desc combined_board;
+select * from combined_board;
+select * from combined_board_content;
+select * from combined_board_history;
+desc combined_board_history;
+select * from notice;
+select * from promotion;
+select * from faq;
+select * from inquiry;
+
+select * from partner;
+select * from product;
+select * from category_code;
+-- UPDATE `-- tripssoda`.`continent_code`
+-- SET
+-- `continent_code` = <{continent_code: }>,
+-- `continent_name` = <{continent_name: }>
+-- WHERE `continent_code` = <{expr}>;
+
+select * from accompany;
+select * from menu_code;
+SELECT * from combined_board where menu_code = 'M003';
+
+SELECT count(*)
+FROM accompany
+WHERE user_id = 57 and created_at = current_date ();
+
+-- -UPDATE combined_board
+--         SET   status = 0
+--         where  WHERE id = 30 and user_id = 3;
+
+
+
+--  create table IPBANLIST(
+--  			IP varchar(25) primary key not null,
+--  			BANDATE datetime default current_timestamp);
+
+
+SELECT CURRENT_USER();
+
+select now();
+
+select * from user_info;
+select * from user_authority;
+select * from menu_authority;
+
+select * from group_authority;
+
+INSERT INTO `tripssoda`.`group_authority`
+(`group_id`,
+ `group_name`,
+ `created_at`,
+ `created_by`,
+ `updated_at`,
+ `updated_by`)
+VALUES
+    ('U001', '일반회원', now(), 41, now(),41);
+
+select * from menu;
+
+select * from user_info;

@@ -14,7 +14,7 @@ public class RegProductOptionDto implements Serializable {
     private String type;
     private String name;
     private String content;
-    private Integer price;
+    private String price;
     private Integer orderNo;
     private String optionCreatedAt;
     private Integer optionCreatedBy;
@@ -69,11 +69,11 @@ public class RegProductOptionDto implements Serializable {
         this.content = content;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

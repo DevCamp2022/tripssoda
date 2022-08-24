@@ -321,6 +321,4 @@
 
 
 </script>
-=======
-<script type="text/javascript" src="${pageContext.request.contextPath}/script/sample/sampleJs.js"></script>
->>>>>>> 9c6831c11a0e74d9eb8bfd54237514b515a33e91
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/main/home.js"></script>

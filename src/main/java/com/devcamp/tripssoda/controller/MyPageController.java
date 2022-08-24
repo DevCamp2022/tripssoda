@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,6 +57,10 @@ public class MyPageController {
 
     @Autowired
     InquiryService inquiryService;
+
+    @Autowired
+    ReservationService reservationService;
+
 
     // 마이페이지의 default 페이지(마이페이지의 default 페이지는 계정관리 페이지임)
     @GetMapping("/mypage/info")
@@ -254,20 +259,42 @@ public class MyPageController {
 
     // 사이드 메뉴를 보여주는 메서드
     @GetMapping("/mypage/side")
-    public String side(){
+    public String side(HttpSession session, Model model){
+        String email = (String)session.getAttribute("email");
+        UserDto userDto = userService.selectUserByEmail(email);
+        model.addAttribute("userDto", userDto);
+
         return "user/myPageSide";
     }
 
     // 예약 내역 페이지로 이동
     @GetMapping("/mypage/reservationList")
-    public String reservationInfo(HttpSession session, HttpServletRequest request) {
+    public String reservationInfo(SearchCondition sc, HttpSession session, HttpServletRequest request, Model model) {
         // 세션에 이메일이 없으면 로그인 페이지로 이동
         if(session.getAttribute("email") == null) {
             return "redirect:/login?toURL="+request.getRequestURL();
         }
+        // 세션으로부터 userId를 얻는다.
+        Integer userId = (Integer)session.getAttribute("id");
+//        userId = 40;
+        // 총 게시물 수를 얻는다.
+        int totalCnt = reservationService.selectAllUserReservationCnt(userId);
+        //
+        sc.setPageSize(5);
+        PageHandler ph = new PageHandler(totalCnt, sc);
+        List<ReservationDto> reservationDtoList = reservationService.selectAllUserReservation(userId, sc);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("ph", ph);
+        model.addAttribute("reservationDtoList", reservationDtoList);
 
 
         return "user/reservationList.subTiles";
+    }
+    @GetMapping("/mypage/reservationList/reservationDetail")
+    public String reservationDetail(ReservationDto reservationDto, Model model) {
+        model.addAttribute("reservationDto", reservationDto);
+
+        return "user/reservationDetail.subTiles";
     }
 
     // 적립 내역 페이지로 이동
@@ -329,7 +356,7 @@ public class MyPageController {
 
     }
 
-    // 내 QnA 페이지로 이동 - 작성한 질문 리스트
+    // 내 Q&A 페이지로 이동 - 작성한 질문 리스트
     @GetMapping("/mypage/qnaList")
     public String qnaList(HttpSession session, HttpServletRequest request, SearchCondition sc, Model model) {
         // 세션에 이메일이 없으면 로그인 페이지로 이동
@@ -342,10 +369,14 @@ public class MyPageController {
         int totalQuestionCnt = questionService.selectAllUserQuestionCnt(userId);
         // 해당 계정으로 등록한 여행후기 답변 total글 수를 가져온다.
         int totalAnswerCnt = answerService.selectAllUserAnswerCnt(userId);
-
+        // 글 삭제 이후 Q&A 페이지에 처음 진입했을때는 page값이 없으므로 page값을 지정해준다
+        if(sc.getPage()==null) {
+            sc.setPage(1);
+        }
         // 한 번에 보여줄 후기의 갯수를 5로 지정한다
         sc.setPageSize(5);
         // 페이지 핸들러를 만든다
+
         PageHandler ph = new PageHandler(totalQuestionCnt, sc);
         // 해당 계정으로 등록된 QnA 목록을 가져온다.
         List<QuestionDto> questionDtoList = questionService.selectAllUserQuestion(userId, sc);
@@ -358,7 +389,24 @@ public class MyPageController {
         return "user/qnaList.subTiles";
     }
 
-    // 내 QnA 페이지 - 작성한 답변 리스트
+    // 내 Q&A 페이지 - 질문을 삭제하는 메서드
+    @ResponseBody
+    @PostMapping("/mypage/qnaList/delete")
+    public String deleteQuestion(Integer id, Integer page, Integer pageSize, HttpSession session, RedirectAttributes rattr) {
+        try {
+            Integer userId = (Integer) session.getAttribute("id");
+            int rowCnt = questionService.remove(id, userId);
+            if(rowCnt != 1) {
+                throw new Exception("Q&A 게시글 삭제 실패");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+        return "success";
+    }
+
+    // 내 Q&A 페이지 - 작성한 답변 리스트
     @GetMapping("/mypage/answerList")
     public String answerList(HttpSession session, HttpServletRequest request, SearchCondition sc, Model model) {
         // 세션에 이메일이 없으면 로그인 페이지로 이동
@@ -438,6 +486,90 @@ public class MyPageController {
         model.addAttribute("inquiryDtoList", inquiryDtoList);
 
         return "user/inquiryList.subTiles";
+    }
+
+    // 1:1 문의글을 읽는 메서드
+    @GetMapping("/mypage/inquiryList/read")
+    public String readInquiry(Integer id, SearchCondition sc, Model model) {
+        InquiryDto inquiryDto = inquiryService.selectUserInquiry(id);
+        model.addAttribute("inquiryDto", inquiryDto);
+        model.addAttribute("sc", sc);
+
+        return "user/inquiryForm.subTiles";
+    }
+
+    // 1:1 문의글을 수정하는 메서드
+    @PostMapping("/mypage/inquiryList/modify")
+    public String modifyInquiry(InquiryDto inquiryDto, SearchCondition sc, HttpSession session, Model model, RedirectAttributes rattr) {
+        // 세션에서 userId를 가져와서 Dto에 set함
+        Integer userId = (Integer)session.getAttribute("id");
+        inquiryDto.setUserId(userId);
+
+        try {
+            inquiryService.updateUserInquiry(inquiryDto);
+
+            rattr.addFlashAttribute("msg", "MOD_OK");
+            rattr.addAttribute("page", sc.getPage());
+            rattr.addAttribute("pageSize", sc.getPageSize());
+
+            return "redirect:/mypage/inquiryList";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("inquiryDto", inquiryDto);
+            model.addAttribute("msg", "MOD_ERR");
+            return "user/inquiryForm.subTiles";
+        }
+
+    }
+    // 1:1 문의글 삭제
+    @PostMapping("/mypage/inquiryList/remove")
+    public String removeInquiry(InquiryDto inquiryDto, SearchCondition sc, Model model, HttpSession session, RedirectAttributes rattr) {
+        // 세션에서 userId를 가져와서 Dto에 set함
+        Integer userId = (Integer)session.getAttribute("id");
+        inquiryDto.setUserId(userId);
+
+        try {
+            inquiryService.deleteUserInquiry(inquiryDto);
+
+            rattr.addFlashAttribute("msg", "DEL_OK");
+            rattr.addAttribute("page", sc.getPage());
+            rattr.addAttribute("pageSize", sc.getPageSize());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg", "DEL_ERR");
+        }
+        return "redirect:/mypage/inquiryList";
+    }
+
+    // 1:1 문의글 작성 화면으로 이동
+    @GetMapping("/mypage/inquiryList/write")
+    public String writeInquiry(Model model) {
+        model.addAttribute("mode", "new");
+        return "user/inquiryForm.subTiles";
+    }
+
+    @PostMapping("/mypage/inquiryList/write")
+    public String writeInquiry(InquiryDto inquiryDto, HttpSession session, Model model, RedirectAttributes rattr) {
+        Integer userId = (Integer)session.getAttribute("id");
+        // insert 하는 userId와 createdBy, updatedBy 값을 set한다.
+        inquiryDto.setUserId(userId);
+        inquiryDto.setCreatedBy(userId);
+        inquiryDto.setUpdatedBy(userId);
+
+        try {
+            inquiryService.insertUserInquiry(inquiryDto);
+            rattr.addFlashAttribute("msg", "WRT_OK");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("inquiryDto", inquiryDto);
+            model.addAttribute("msg", "WRT_ERR");
+            model.addAttribute("mode", "new");
+            return "user/inquiryForm.subTiles";
+        }
+
+        return "redirect:/mypage/inquiryList";
     }
 
     // 내 위시리스트 페이지로 이동

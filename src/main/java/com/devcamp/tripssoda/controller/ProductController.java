@@ -57,7 +57,7 @@ public class ProductController {
         System.out.println("dto.getScheduleId() = " + dto.getScheduleId());
 
         Integer productId = dto.getProductId();
-        List<ProductScheduleDto> list = productService.getScheduleList(productId);
+        List<ProductScheduleDto> list = productService.selectScheduleList(productId);
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 

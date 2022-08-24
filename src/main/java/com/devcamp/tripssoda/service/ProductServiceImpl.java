@@ -5,15 +5,14 @@ import com.devcamp.tripssoda.mapper.CategoryCodeMapper;
 import com.devcamp.tripssoda.mapper.ProductMapper;
 import com.devcamp.tripssoda.util.ImageResize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -138,7 +137,44 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductScheduleDto> getScheduleList(Integer productId) {
+    public List<ProductScheduleDto> selectScheduleList(Integer productId){
         return productMapper.selectScheduleList(productId);
+    }
+
+    public List<ProductOptionDto> selectOptionList(Integer productId){
+        return productMapper.selectOptionList(productId);
+    }
+
+
+    @Override
+    public GetDetailProductDto getProductDetailById(Integer productId) {
+        GetDetailProductDto data = productMapper.selectProductDetailById(productId);
+        String categoryCode = data.getCategory();
+        data.setCategory(categoryCodeMapper.selectCategoryName(categoryCode));
+        return data;
+    }
+
+    public List<ProductOptionDto> getOptionList(Integer productId){
+        return productMapper.selectOptionList(productId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public int updateProductApproval(ApprovalDto adminProductDto) throws Exception {
+        int rowCnt = productMapper.updateProductApproval(adminProductDto);
+        try {
+            if (rowCnt == 0) {
+                throw new Exception();
+            }
+            if(adminProductDto.getApproval()==0){
+                rowCnt = productMapper.insertApprovalHistory(adminProductDto);
+                if (rowCnt == 0) {
+                    throw new Exception();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+        return rowCnt;
     }
 }

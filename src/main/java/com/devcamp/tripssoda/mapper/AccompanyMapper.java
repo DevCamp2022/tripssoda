@@ -1,6 +1,7 @@
 package com.devcamp.tripssoda.mapper;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
+import com.devcamp.tripssoda.dto.QuestionDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface AccompanyMapper {
     public List<AccompanyDto> selectPage(Map map);
     public List<AccompanyDto> selectAll();
     public int selectUserAccompanyCntToday(Integer userId);
+    public List<AccompanyDto> waitingSelectPage(Map map) throws Exception;
+    public int waitingCount() throws Exception;
 }

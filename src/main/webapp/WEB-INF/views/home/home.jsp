@@ -16,6 +16,7 @@
 <%--    <img src="/image/main/trip5.jpg" alt="a lot of old houses">--%>
 </div>
 
+<<<<<<< HEAD
 
 <div class="txt"><span><strong>동행</strong>함께 떠나는 여행</span></div>
 
@@ -320,3 +321,6 @@
 
 
 </script>
+=======
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/sample/sampleJs.js"></script>
+>>>>>>> 9c6831c11a0e74d9eb8bfd54237514b515a33e91

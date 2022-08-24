@@ -18,12 +18,17 @@
     </select>
 
     <sql id="selectFromAccompany">
-        SELECT id, user_id, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
+        SELECT id, user_id, nickname, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
         FROM accompany
     </sql>
     <select id="count" resultType="int">
         SELECT count(*)
         FROM accompany
+    </select>
+    <select id="waitingCount" resultType="int">
+        SELECT count(*)
+        FROM accompany
+        WHERE status = 0
     </select>
     <insert id="insert" parameterType="AccompanyDto">
 	    INSERT INTO accompany (user_id, region_code, start_at, end_at, thumbnail, title, content,
@@ -57,6 +62,12 @@
     <select id="selectAll" resultType="AccompanyDto">
         <include refid="selectFromAccompany"/>
         ORDER BY created_at DESC, id DESC
+    </select>
+    <select id="waitingSelectPage" parameterType="map" resultType="AccompanyDto">
+        <include refid="selectFromAccompany"/>
+        WHERE status = 0
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{offset}, #{pageSize}
     </select>
     <select id="selectPage" parameterType="map" resultType="AccompanyDto">
         <include refid="selectFromAccompany"/>

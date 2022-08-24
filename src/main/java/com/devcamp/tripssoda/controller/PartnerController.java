@@ -3,6 +3,7 @@ package com.devcamp.tripssoda.controller;
 import com.devcamp.tripssoda.dto.PartnerDto;
 import com.devcamp.tripssoda.service.PartnerService;
 import com.devcamp.tripssoda.util.annotations.SkipChecking;
+import com.devcamp.tripssoda.util.SkipChecking;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

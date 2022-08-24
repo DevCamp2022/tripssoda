@@ -3,6 +3,7 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,4 +15,8 @@ public interface ProductService {
     public void getMainList(Model model);
     public GetDetailProductDto getProductDetail(GetDetailProductDto dto);
     public List<ProductScheduleDto> getScheduleList(Integer productId);
+    public UpdateProductDto getUpdateProduct(Integer productId);
+    public List<UpdateProductDto> getUpdateProductOption(Integer productId);
+    public List<UpdateProductDto> getUpdateProductSchedule(Integer productId);
+    public void updateProduct(UpdateProductDto dto, @RequestParam MultipartFile uploadThumb, HttpServletRequest request, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto);
 }

@@ -1,0 +1,148 @@
+/* 공통 요소 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* 썸네일업로드부터 버튼까지 그룹화한 영역 */
+.main-group {
+    width: 1200px;
+    margin: auto;
+}
+.question-container {
+    width: 1200px;
+    min-height: 300px;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 4px;
+    margin-top: 50px;
+}
+.title-box {
+    display: flex;
+    width: 1200px;
+    height: 54px;
+    border-radius: 4px;
+    outline: 0;
+    border: 0;
+}
+.question-icon-box {
+    padding: 20px;
+
+
+}
+.question-icon {
+    width: 20px;
+    height: 16px;
+    background-image: url("/image/question/question-input-icon.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* 제목 - input 태그 */
+.title-input-box {
+    width: 1140px;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    box-sizing: border-box;
+    background-color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 55px;
+
+}
+/* 제목, 내용 사이의 실선 */
+.only-line {
+    width: 1166px;
+    height: 1px;
+    border-top: 1px solid rgb(233, 233, 233);
+
+    margin: auto;
+}
+/* 내용 - textarea 태그 */
+.content-input-box {
+    margin-top: 30px;
+    width: 1200px;
+    min-height: 100px;
+    outline: 0;
+    border: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 20px;
+}
+.profile-img-line {
+    display: flex;
+    width: 1134px;
+    height: 33px;
+    padding: 30px;
+}
+.profile-img {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-image: url("/image/question/profile-img.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.reg-date {
+    line-height: 33px;
+    margin-left: 5px;
+    color: #9a9a9a;
+    font-size: 12px;
+}
+/* .content-box {
+
+} */
+.content-text {
+    margin-top: 20px;
+    width: 1197px;
+    min-height: 772px;
+    border: 1px solid rgb(233, 233, 233);
+    font-size: 14px;
+    line-height: 160%;
+    box-sizing: border-box;
+    padding: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+
+
+/* 취소, 완료 버튼을 그룹화 */
+.button-line {
+    display: flex;
+    width: 1200px;
+    height: 190px;
+    margin-top: 70px;
+}
+/* 취소버튼 */
+.cancel-btn {
+    width: 592px;
+    height: 54px;
+    border-radius: 4px;
+    /* line-height: 54px; */
+    background-color: rgb(219,219,219);
+    padding: 17px 5px;
+    color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+    outline: 0;
+    border: 0;
+}
+/* 완료버튼 */
+.ok-btn {
+    margin-left: 16px;
+    width: 592px;
+    height: 54px;
+    border-radius: 4px;
+    /* line-height: 100px; */
+    text-align: center;
+    background-color: rgb(0,206,124);
+    color: #fff;
+    padding: 17px 5px;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+}

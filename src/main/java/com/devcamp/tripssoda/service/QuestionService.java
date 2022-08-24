@@ -25,4 +25,8 @@ public interface QuestionService {
 
     int modifyAnswerCnt(Integer questionId, Integer cnt) throws Exception;
 
+
+    List<QuestionDto> waitingGetPage(Map map) throws Exception;
+
+    public int waitingGetCount() throws Exception;
 }

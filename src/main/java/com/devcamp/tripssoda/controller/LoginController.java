@@ -110,9 +110,8 @@ public class LoginController {
 
         // 계정이 휴면 상태이면 휴면 해제 화면으로 이동
 //        if(userDto.getStatus() == 0) {
-//            /* 이동 코드(미구현) */
+//            /* 이동 코드 */
 //        }
-        System.out.println("login success");
 
         // 홈으로 이동
         toURL = toURL == null || toURL.equals("")? "/" : toURL;

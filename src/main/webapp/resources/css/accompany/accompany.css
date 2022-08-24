@@ -1,0 +1,215 @@
+/* 공통 요소 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #fff;
+}
+a {
+    text-decoration: none;
+}
+/* 썸네일 등록 사진을 감싸는 영역 */
+.main-img-area {
+    width: 1200px;
+    height: 480px;
+    margin: auto;
+}
+/* 썸네일 사진 올라가는 영역 */
+.main-img {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    margin: 40px 0;
+    background-color: #e9e9e9;
+}
+/* 썸네일 밑에 전체 영역을 그룹화 */
+.content-profile-group {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 1200px;
+    margin: 40px auto 0 auto;
+    /* margin: 40px 0 0 0; */
+}
+/* 썸네일 밑의 영역 중 왼쪽 영역 */
+.content-group {
+    flex: 2.75;
+    width: 800px;
+    height: 444px;
+    /* margin: auto; */
+}
+/* 제목 나오는 영역 */
+.title-line {
+    width: 800px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.5em;
+}
+/* 지역,모집인원,모집날짜 나오는 박스 영역 */
+/* 추가 해야 함 */
+.region-box {
+    width: 800px;
+    height: 89px;
+    margin: 40px 0 0;
+    padding: 20px 30px;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+
+}
+/* 내용(줄바꿈할 때 <p>태그가 붙게 해야 한다) */
+.content-box {
+    font-size: 15px;
+    line-height: 1.5em;
+    margin: 40px 0 0 0;
+}
+/* 해시태그 나오는 영역 */
+.hashtag-line {
+    margin: 100px 0 0 0;
+    padding: 6px;
+}
+.hashtag-text {
+    color: #6A6A6A;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #e9e9e9;
+}
+/* 등록일, 조회수, 신고하기 나오는 라인 */
+/* 신고하기는 아직 안만듬 */
+.view-cnt-line {
+    display: flex;
+    justify-content: flex-start;
+    width: 800px;
+    height: 15px;
+    margin-top: 10px;
+    color: #9a9a9a;
+}
+/* .reg-date {
+
+} */
+/* .view-cnt {
+
+}  */
+
+/* 썸네일 밑의 영역 중 오른쪽 영역 */
+.profile-group {
+    flex: 1;
+    width: 320px;
+    height: 252px;
+    border: 1px solid #e9e9e9;
+    padding: 20px 19px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* margin: auto; */
+}
+/* 프로필이미지, 닉네임, 태그가 있는 실선 위의 영역 */
+.profile-top {
+    width: 280px;
+    height: 58px;
+    display: flex;
+}
+/* 프로필 이미지 영역 */
+.profile-img {
+    width: 58px;
+    height: 58px;
+    background-image: url("/image/accompany/profile-img.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+    cursor: pointer;
+
+}
+/* 프로필사진 오른쪽의 닉네임, 태그가 있는 2줄을 묶은 영역 */
+.profile-right {
+    padding: 10px;
+}
+/* 닉네임 있는 위에 줄 */
+.nickname-line {
+    display: flex;
+}
+/* 닉네임 */
+.nickname {
+    font-size: 16px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 30px;
+}
+/* #붙은 태그 */
+.profile-tag {
+    width: 88px;
+    height: 25px;
+    margin-bottom: 3px;
+    border: 1px solid #e9e9e9;
+    border-radius: 2px;
+    line-height: 25px;
+    color: #00c678;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* #안붙은 태그가 나오는 아래줄 */
+.tag2-line {
+    /* margin-top: 10px; */
+    color: #6a6a6a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+/* 프로필영역의 실선 아래쪽 그룹 */
+.profile-bottom {
+    margin: 26px auto 0 auto;
+    padding-top: 40px;
+    width: 280px;
+    height: 126px;
+    border-top: 1px solid #e9e9e9;
+}
+/* 느낌표 아이콘 있는 줄 그룹 */
+.profile-icon-line {
+    display: flex;
+    padding-left: 10px;
+}
+/* 느낌표 아이콘 */
+.profile-icon {
+    width: 18px;
+    height: 18px;
+    background-image: url("/image/accompany/profile-icon.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+/* 프로필 사진을 클릭해보세요 */
+.profile-text {
+    color: #252525;
+    font-weight: bold;
+    line-height: 18px;
+}
+/* 동행 신청하기 버튼 */
+.apply-btn {
+    width: 280px;
+    height: 50px;
+    margin: 17px 20px 0 0;
+    /*margin-top: 17px;*/
+    /*box-sizing: border-box;*/
+    color: #fff;
+    background-color: #00ce7c;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.apply-text {
+    color: #fff;
+}
+
+

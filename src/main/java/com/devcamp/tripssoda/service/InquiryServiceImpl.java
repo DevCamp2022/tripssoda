@@ -36,4 +36,28 @@ public class InquiryServiceImpl implements InquiryService {
 
         return inquiryMapper.selectAllUserInquiry(userIdAndSc);
     }
+
+    @Override
+    public void updateUserInquiry(InquiryDto inquiryDto) throws Exception {
+        int rowCnt = inquiryMapper.updateUserInquiry(inquiryDto);
+        if(rowCnt != 1) {
+            throw new Exception("1:1 문의글 수정 오류");
+        }
+    }
+
+    @Override
+    public void deleteUserInquiry(InquiryDto inquiryDto) throws Exception {
+        int rowCnt = inquiryMapper.deleteUserInquiry(inquiryDto);
+        if(rowCnt != 1) {
+            throw new Exception("1:1 문의글 삭제 오류");
+        }
+    }
+
+    @Override
+    public void insertUserInquiry(InquiryDto inquiryDto) throws Exception {
+        int rowCnt = inquiryMapper.insertUserInquiry(inquiryDto);
+        if(rowCnt != 1) {
+            throw new Exception("1:1 문의글 등록 오류");
+        }
+    }
 }

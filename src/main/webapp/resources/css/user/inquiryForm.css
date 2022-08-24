@@ -1,0 +1,65 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+/* 초기화 */
+ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* body */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main {
+    width: 840px;
+    margin: 100px auto;
+}
+.contents {
+    width: 840px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e9e9e9;
+    padding: 40px;
+    background-color: white;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.frm {
+    width: 100%;
+    margin: 20px auto 50px auto;
+}
+.frm > span {
+    margin: 0 10px;
+}
+.inquiry-title {
+    padding: 5px 10px;
+    width: 60%;
+    margin: 20px 20px 20px 0;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #00ce7c;
+    color: white;
+    font-weight: 500;
+}
+.reply-textarea {
+    width: 100%;
+    margin: 20px auto;
+}

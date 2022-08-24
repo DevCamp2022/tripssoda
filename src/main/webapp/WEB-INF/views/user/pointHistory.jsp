@@ -12,7 +12,7 @@
         <h2 class="title">적립 내역</h2>
         <div class="point-status-wrap">
             <div class="point">현재 보유 적립금 : <fmt:formatNumber value="${point}"/>원</div>
-            <button class="reg-coupon-btn">쿠폰 등록</button>
+<%--            <button class="reg-coupon-btn">쿠폰 등록</button>--%>
         </div>
         <div class="thead-wrap">
             <div class="thead-id">번호</div>

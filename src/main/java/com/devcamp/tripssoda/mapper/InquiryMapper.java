@@ -15,4 +15,10 @@ public interface InquiryMapper {
 
     public List<InquiryDto> selectAllUserInquiry(Map map);
 
+    public int updateUserInquiry(InquiryDto inquiryDto);
+
+    public int deleteUserInquiry(InquiryDto inquiryDto);
+
+    public int insertUserInquiry(InquiryDto inquiryDto);
+
 }

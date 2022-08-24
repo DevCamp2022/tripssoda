@@ -44,11 +44,12 @@ body {
     overflow: hidden;
     width: 90%;
     height: 57px;
-    margin: 10px auto 0 auto;
+    margin: 20px auto 0 auto;
     border-top: 1px solid black;
     border-bottom: 1px solid #e9e9e9;
-    background-color: rgba(220, 220, 220, 0.31);
+    background-color: rgb(238, 255, 244);
     text-align: center;
+    color: gray;
 }
 
 .thead-id {
@@ -80,6 +81,7 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
+    padding: 20px 0;
 }
 
 .td-id {
@@ -104,9 +106,23 @@ body {
     width: 20%;
     box-sizing: border-box;
 }
+.write-btn {
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: 500;
+    width: 120px;
+    height: 46px;
+    border: none;
+    margin: 20px 0 20px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 .paging-container {
     width: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: center;
     float: none;
 }

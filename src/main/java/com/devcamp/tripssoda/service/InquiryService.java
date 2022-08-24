@@ -11,4 +11,10 @@ public interface InquiryService {
     int selectUserInquiryCnt(Integer userId);
 
     List<InquiryDto> selectAllUserInquiry(Integer userId, SearchCondition sc);
+
+    void updateUserInquiry(InquiryDto inquiryDto) throws Exception;
+
+    void deleteUserInquiry(InquiryDto inquiryDto) throws Exception;
+
+    void insertUserInquiry(InquiryDto inquiryDto) throws Exception;
 }

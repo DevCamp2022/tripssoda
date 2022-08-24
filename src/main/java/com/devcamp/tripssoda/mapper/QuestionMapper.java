@@ -26,4 +26,6 @@ public interface QuestionMapper {
     public List<QuestionDto> waitingSelectPage(Map map) throws Exception;
     public int waitingCount() throws Exception;
 
+    public int updateStatus(QuestionDto questionDto) throws Exception;
+
 }

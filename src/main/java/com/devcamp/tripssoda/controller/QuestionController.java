@@ -1,10 +1,9 @@
 package com.devcamp.tripssoda.controller;
 
-import com.devcamp.tripssoda.dto.AnswerDto;
-import com.devcamp.tripssoda.dto.PageHandlerOld;
-import com.devcamp.tripssoda.dto.QuestionDto;
+import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.service.AnswerService;
 import com.devcamp.tripssoda.service.QuestionService;
+import com.devcamp.tripssoda.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,10 +24,13 @@ public class QuestionController {
 
     QuestionService questionService;
     AnswerService answerService;
+    UserService userService;
+
     //생성자로 주입
-    QuestionController(QuestionService questionService, AnswerService answerService) {
+    QuestionController(QuestionService questionService, AnswerService answerService, UserService userService) {
         this.questionService = questionService;
         this.answerService = answerService;
+        this.userService = userService;
     }
 
 //    @PostMapping("/answer/modify")
@@ -134,10 +136,11 @@ public class QuestionController {
     public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         //userId는 인조식별자
-//        Integer writer = (int) session.getAttribute("userId");
-        int writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        int writer = 43;
         System.out.println("questionDto = " + questionDto);
         questionDto.setUserId(writer);
+
 
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(questionDto.getHashtag()==null || questionDto.getHashtag().trim().equals(""))
@@ -168,13 +171,14 @@ public class QuestionController {
             e.printStackTrace();
             m.addAttribute(questionDto);
             m.addAttribute("msg", "MOD_ERR");
-
             return "question/questionWrite.mainTiles";
         }
     }
 
     @GetMapping("/modify")
-    public String modify(Integer id, Integer page, Integer pageSize, Model m) {
+    public String modify(Integer id, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+        if(!loginCheck(request))
+            return "redirect:/login?toURL="+request.getRequestURL();
         QuestionDto questionDto = null;
         try {
             questionDto = questionService.read(id);
@@ -191,9 +195,20 @@ public class QuestionController {
 
     @PostMapping("/write")
     public String write(QuestionDto questionDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
-//        Integer writer = (int) session.getAttribute("userId");
-        int writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        int writer = 43;
+        String email = (String) session.getAttribute("email");
+        UserDto userDto = userService.selectUserByEmail(email);
+        String nickname = userDto.getNickname();
+        questionDto.setNickname(nickname);
+
+        String profileImg = userDto.getProfileImg();
+        System.out.println("nickname = " + nickname);
+        System.out.println("profileImg = " + profileImg);
+        questionDto.setProfileImg(profileImg);
+
         questionDto.setUserId(writer);
+
         System.out.println("result = " + result);
 
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
@@ -229,17 +244,17 @@ public class QuestionController {
     }
 
     @GetMapping("/write")
-    public String write(Model m) {
+    public String write(HttpServletRequest request, Model m) {
+        if(!loginCheck(request))
+            return "redirect:/login?toURL="+request.getRequestURL();
         m.addAttribute("mode", "new");
-
         return "question/questionWrite.mainTiles";
-
     }
 
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
-//        Integer writer = (int) session.getAttribute("userId");
-        int writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        int writer = 43;
         try {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
@@ -255,10 +270,43 @@ public class QuestionController {
         return "redirect:/question/list";
     }
 
+    @PostMapping("/answer/select")
+    public String select(QuestionDto questionDto,
+//                         Integer id,
+                         Model m, HttpSession session, Integer page, Integer pageSize, RedirectAttributes rattr) {
+        Integer writer = (int) session.getAttribute("id");
+        questionDto.setUserId(writer);
+
+        questionDto.setStatus(1);
+
+        try {
+            int rowCnt = questionService.updateStatus(questionDto);
+//            questionDto = questionService.read(id);
+
+
+            if(rowCnt!=1)
+                throw new Exception("Select Failed");
+            rattr.addAttribute("id", questionDto.getId());
+            rattr.addAttribute("page", page);
+            rattr.addAttribute("pageSize", pageSize);
+            System.out.println("questionDto = " + questionDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(questionDto);
+            System.out.println("questionDto = " + questionDto);
+
+//            System.out.println("id = " + id);
+        }
+        return "redirect:/question/read";
+//        return "question/question.mainTiles";
+    }
+
     @GetMapping("/read")
     public String read(Integer id, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         QuestionDto questionDto = null;
         try {
+
             questionDto = questionService.read(id);
             m.addAttribute(questionDto);
             m.addAttribute("page", page);
@@ -266,7 +314,6 @@ public class QuestionController {
 
             if(questionDto.equals(null))
                 throw new Exception("Read Failed");
-
             return "question/question.mainTiles";
         } catch (Exception e) {
             e.printStackTrace();
@@ -303,12 +350,11 @@ public class QuestionController {
             m.addAttribute("msg", "LIST_ERR");
             m.addAttribute("totalCnt", 0);
         }
-
         return "question/questionList.mainTiles";
     }
 
     private boolean loginCheck(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return session != null && session.getAttribute("userId") != null;
+        return session != null && session.getAttribute("id") != null;
     }
 }

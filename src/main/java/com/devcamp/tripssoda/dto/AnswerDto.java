@@ -17,6 +17,8 @@ public class AnswerDto {
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
+    private String nickname;
+    private String profileImg;
 
     public AnswerDto() {}
 
@@ -24,6 +26,22 @@ public class AnswerDto {
         this.questionId = questionId;
         this.userId = userId;
         this.content = content;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Integer getId() {
@@ -132,6 +150,8 @@ public class AnswerDto {
                 ", createdBy=" + createdBy +
                 ", updatedAt=" + updatedAt +
                 ", updatedBy=" + updatedBy +
+                ", nickname='" + nickname + '\'' +
+                ", profileImg='" + profileImg + '\'' +
                 '}';
     }
 }

@@ -27,12 +27,7 @@
         </ul>
     </div>
 
-    <div class="side-container-etc">
-        <ul>
-            <label for="menu">메뉴관리</label>
-            <li id="menu"><a href="/admin/PartnerList">메뉴<span>></span></a></li>
-        </ul>
-    </div>
+
 
 </div>
 

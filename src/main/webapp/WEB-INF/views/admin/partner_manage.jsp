@@ -12,22 +12,20 @@
 
     <div class="list-container">
 
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">파트너목록</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd">상품목록</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc">통계</a>
-            </li>
-        </ul>
+<%--        <ul class="nav nav-tabs">--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link active" data-toggle="tab" href="#qwe">파트너목록</a>--%>
+<%--            </li>--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" data-toggle="tab" href="#asd">상품목록</a>--%>
+<%--            </li>--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" data-toggle="tab" href="#zxc">통계</a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+
         <div class="tab-content">
             <div class="tab-pane fade show active" id="qwe">
-
-
-
                 <div class="search-container">
                     <form action="<c:url value="/admin/partnerList"/>" class="search-form" method="get">
                         <select class="search-option" name="option">
@@ -109,6 +107,7 @@
                     </form>
 
                     <br>
+                    <%--  --%>
                     <div class="paging-container">
                         <div class="paging">
                             <c:if test="${totalCnt==null || totalCnt==0}">
@@ -135,7 +134,7 @@
 
 
             <div class="tab-pane fade" id="asd">
-                <p>Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
+                <p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque commodo consectetur faucibus. Aenean eget ultricies justo.</p>
             </div>
             <div class="tab-pane fade" id="zxc">
                 <p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque commodo consectetur faucibus. Aenean eget ultricies justo.</p>

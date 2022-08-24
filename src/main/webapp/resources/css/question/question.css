@@ -1,0 +1,357 @@
+/* 공통 요소 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #fff;
+}
+a {
+    text-decoration: none;
+    color: #9a9a9a;
+}
+.total-group {
+    width: 1200px;
+    margin: auto;
+}
+/* 썸네일 밑에 전체 영역을 그룹화 */
+.content-profile-group {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 1200px;
+    margin: 40px auto 0 auto;
+    /* margin: 40px 0 0 0; */
+}
+/* 썸네일 밑의 영역 중 왼쪽 영역 */
+.content-group {
+    flex: 2.75;
+    width: 800px;
+    min-height: 700px;
+    /* margin: auto; */
+}
+/* 제목 나오는 영역 */
+.title-line {
+    display: flex;
+    width: 800px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.5em;
+    margin-bottom: 40px;
+}
+.question-icon {
+    width: 36px;
+    height: 36px;
+    background-image: url("/image/question/question-icon.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-color: #f8f8f8;
+    border-radius: 18px;
+    margin-right: 10px;
+}
+/* .title-text {
+
+} */
+.region-box {
+    width: 800px;
+    height: 61px;
+    padding: 20px 30px;
+    border: 1px solid rgba(176, 176, 176, 0.844);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+.region-line {
+    display: flex;
+    font-size: 16px;
+}
+.status-text {
+    color: #6a6a6a;
+    margin-right: 10px;
+}
+.answer-on-off {
+    color: #00ce7c;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.region-text {
+    color: #6a6a6a;
+    margin-right: 10px;
+}
+/* .region-selected {
+
+} */
+.content-box {
+    width: 800px;
+    min-height: 100px;
+    margin: 40px 0;
+    font-size: 15px;
+    line-height: 1.5em;
+}
+/* 해시태그 나오는 영역 */
+.hashtag-line {
+    margin: 100px 0 0 0;
+    padding: 6px;
+}
+.hashtag-text {
+    color: #6A6A6A;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #e9e9e9;
+}
+
+/* 등록일, 조회수, 신고하기 나오는 라인 */
+/* 신고하기는 아직 안만듬 */
+.view-cnt-line {
+    display: flex;
+    width: 800px;
+    height: 15px;
+    margin: 10px 0 0 0;
+    color: #9a9a9a;
+}
+/*.reg-date {*/
+
+/*} */
+/*.view-cnt {*/
+/*    */
+/*}*/
+
+.answer-cnt {
+    margin-right: 4px;
+}
+
+.modify-btn {
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    color: #9a9a9a;
+    background: none;
+    margin-top: -2px;
+    margin-right: -7px;
+}
+.remove-btn {
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    color: #9a9a9a;
+    background: none;
+    margin-top: -2px;
+}
+
+/* 썸네일 밑의 영역 중 오른쪽 영역 */
+.profile-group {
+    flex: 1;
+    width: 320px;
+    height: 252px;
+    border: 1px solid rgba(176, 176, 176, 0.844);
+    padding: 20px 19px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* margin: auto; */
+}
+/* 프로필이미지, 닉네임, 태그가 있는 실선 위의 영역 */
+.profile-top {
+    width: 280px;
+    height: 58px;
+    display: flex;
+}
+/* 프로필 이미지 영역 */
+.profile-img {
+    width: 58px;
+    height: 58px;
+    background-image: url("/image/question/profile-img.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+
+}
+/* 프로필사진 오른쪽의 닉네임, 태그가 있는 2줄을 묶은 영역 */
+.profile-right {
+    padding: 10px;
+}
+/* 닉네임 있는 위에 줄 */
+.nickname-line {
+    display: flex;
+}
+/* 닉네임 */
+.nickname {
+    font-size: 16px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 60px;
+}
+/* #붙은 태그 */
+.profile-tag {
+    width: 88px;
+    height: 25px;
+    border: 1px solid rgba(176, 176, 176, 0.844);
+    border-radius: 2px;
+    line-height: 25px;
+    color: #00c678;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* #안붙은 태그가 나오는 아래줄 */
+.tag2-line {
+     margin-top: 10px;
+    color: #6a6a6a;
+
+}
+/* 프로필영역의 실선 아래쪽 그룹 */
+.profile-bottom {
+    margin: auto;
+    margin-top: 26px;
+    padding-top: 40px;
+    width: 280px;
+    height: 126px;
+    border-top: 1px solid rgba(176, 176, 176, 0.844);
+}
+/* 느낌표 아이콘 있는 줄 그룹 */
+.profile-icon-line {
+    display: flex;
+}
+/* 느낌표 아이콘 */
+.profile-icon {
+    width: 18px;
+    height: 18px;
+    background-image: url("/image/question/profile-icon.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+/* 프로필 사진을 클릭해보세요 */
+.profile-text {
+    color: #252525;
+    font-weight: bold;
+    line-height: 18px;
+}
+/* 답변하기 버튼 */
+.apply-btn {
+    width: 280px;
+    height: 50px;
+    margin-top: 17px;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #00ce7c;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* 썸네일 밑의 영역 중 오른쪽 영역 */
+.profile-group {
+    flex: 1;
+    width: 320px;
+    height: 252px;
+    border: 1px solid rgba(176, 176, 176, 0.844);
+    padding: 20px 19px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* margin: auto; */
+}
+
+/* 답변 카운트 2 */
+.answer-cnt2 {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.answer-cnt2-number {
+    color: #00ce7c;
+    font-weight: 500;
+}
+
+/* 답변 css 시작 */
+
+.answer-top-box {
+    width: 800px;
+    min-height: 156px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.answer-profile-img-line {
+    display: flex;
+    width: 800px;
+    height: 34px;
+
+}
+.answer-profile-img {
+    width: 33px;
+    height: 33px;
+    background-image: url("/image/question/profile-img2.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 6px;
+}
+.answer-nickname-reg-date-box {
+    width: 150px;
+    height: 33px;
+    margin-top: 3px;
+}
+.answer-nickname-line {
+    color: #252525;
+    font-size: 12px;
+}
+.answer-reg-date-line {
+    color: #9a9a9a;
+    font-size: 12px;
+    margin-top: 3px;
+
+}
+.answer-content-box {
+    width: 746px;
+    min-height: 63px;
+    padding: 20px 0 0 50px;
+    line-height: 1.5em;
+}
+
+
+
+/*.only-line {*/
+/*    width: 800px;*/
+/*    height: 1px;*/
+/*    border-top: 1px solid rgb(233, 233, 233);*/
+/*    !*margin-bottom: 30px;*!*/
+/*    !* margin-top: 30px; *!*/
+/*}*/
+.repeat-answer-container {
+    min-height: 100px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #9a9a9a;
+}
+.repeat-answer {
+    display: flex;
+}
+.commenter {
+    font-size: 13px;
+}
+.comment-date {
+    padding-top: 5px;
+    color: #9a9a9a;
+    font-size: 13px;
+}
+.comment {
+    padding-top: 15px;
+    padding-left: 50px;
+}
+.modBtn,
+.delBtn {
+    border: 0;
+    outline: 0;
+    background: none;
+    font-size: 14px;
+    color: #9a9a9a;
+    margin-top: 10px;
+}

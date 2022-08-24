@@ -5,7 +5,7 @@ public class PageHandlerOld {
     private Integer totalCnt;
     private Integer pageSize;
     private Integer totalPage;
-    private Integer naviSize = 2;
+    private Integer naviSize = 9;
     private Integer page;
     private Integer beginPage;
     private Integer endPage;

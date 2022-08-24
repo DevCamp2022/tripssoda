@@ -6,318 +6,136 @@
 <html>
 <head>
     <title>Q&A상세페이지</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="<c:url value='/css/question/question.css'/>">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"></head>
 </head>
 <body>
-<style>
-    * {
-        list-style: none;
-        text-decoration: none;
-        margin: 0px;
-        padding: 0px;
-        border-collapse: collapse;
-        font-family: 'Noto Sans KR', sans-serif;
-    }
-
-    .container {
-        display: flex;
-        width: 1200px;
-        height: 10000px;
-        border: 1px solid black;
-        margin: auto;
-    }
-    .wrap1 {
-        flex: 2;
-        width: 800px;
-        height: 10000px;
-        text-align: center;
-        border: 1px solid black;
-    }
-    .wrap1 > .title {
-        width: 800px;
-        height: 100px;
-        text-align: center;
-        line-height: 100px;
-        border: 1px solid black;
-    }
-
-
-    .wrap2 {
-        flex: 1;
-        width: 230px;
-        height: 400px;
-        text-align: center;
-        border: 1px solid black;
-    }
-    .status-bar {
-        display: flex;
-        width: 800px;
-        height: 50px;
-        border: 1px solid black;
-    }
-    .status,
-    .region {
-        width: 100px;
-        height: 30px;
-        border: 1px solid black;
-        margin: auto 0 auto 0;
-    }
-    .content {
-        width: 800px;
-        height: 300px;
-        border: 1px solid black;
-        line-height: 300px;
-    }
-    .hashtag {
-        width: 800px;
-        height: 50px;
-        border: 1px solid black;
-        line-height: 50px;
-    }
-    .reg-date-bar {
-        display: flex;
-        width: 800px;
-        height: 50px;
-        border: 1px solid black;
-        line-height: 50px;
-    }
-    .reg-date {
-        width: 200px;
-        height: 30px;
-        line-height: 30px;
-        margin: auto 0 auto 0;
-        border: 1px solid black;
-    }
-    .view-cnt,
-    .report,
-    .answer-cnt {
-        width: 100px;
-        height: 30px;
-        line-height: 30px;
-        margin: auto 0 auto 0;
-        border: 1px solid black;
-    }
-    .modify-btn,
-    .remove-btn {
-        width: 50px;
-        height: 30px;
-        border: 1px solid black;
-        line-height: 30px;
-        margin: auto 0 auto 0;
-        cursor: pointer;
-    }
-    .answer-cnt2 {
-        width: 100px;
-        height: 30px;
-        line-height: 30px;
-        margin: auto 0 auto 0;
-        border: 1px solid black;
-    }
-    .wrap3 {
-        width: 300px;
-        height: 62px;
-        border: 1px solid black;
-        margin: 20px auto 0px auto;
-        line-height: 62px;
-        text-align: center;
-    }
-    .profile-img-bar {
-        display: flex;
-        width: 300px;
-        height: 30px;
-        border: 1px solid black;
-        line-height: 30px;
-        margin: auto;
-    }
-    .profile-img,
-    .nickname,
-    .tag {
-        width: 100px;
-        height: 30px;
-        border: 1px solid black;
-        line-height: 30px;
-    }
-    .age-bar {
-        display: flex;
-        width: 300px;
-        height: 30px;
-        border: 1px solid black;
-        line-height: 30px;
-        margin: auto;
-    }
-    .age,
-    .gender,
-    .country {
-        width: 100px;
-        height: 30px;
-        border: 1px solid black;
-        line-height: 30px;
-    }
-    .notice-area {
-        width: 380px;
-        height: 300px;
-        border: 1px solid black;
-        line-height: 30px;
-        margin: 50px auto 50px auto;
-    }
-    .notice {
-        margin: 50px auto 30px auto;
-    }
-    .answer-btn {
-        width: 300px;
-        height: 80px;
-        border: 1px solid black;
-        line-height: 80px;
-        font-size: 30px;
-        margin: auto;
-        cursor: pointer;
-    }
-
-
-
-    /* start answer-css */
-    .comment_area {
-        width: 850px;
-        height: 500px;
-        margin: auto 0 auto 0;
-        /*background-color: green;*/
-    }
-    .comment_area > input {
-        background-color: #f8f8f8;
-        outline-color: #e6e6e6;
-    }
-    #modBtn, #sendBtn {
-        background-color: rgb(236, 236, 236); /* Blue background */
-        border: none; /* Remove borders */
-        color: black; /* White text */
-        padding: 6px 12px; /* Some padding */
-        font-size: 16px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
-        border-radius: 5px;
-    }
-    #commentList {
-        margin: auto;
-        width: 100%;
-        height: 500px;
-    }
-    .commenter {
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .comment {
-        background-color: #f8f8f8;
-        outline-color: #e6e6e6;
-        height: 40px;
-        line-height: 40px;
-        border: 1px solid #e9e8e8;
-    }
-    .delBtn, .modBtn, .replyBtn, #wrtRepBtn {
-        margin-right: 10px;
-        font-size:10pt;
-        color : black;
-        background-color: #eff0f2;
-        text-decoration: none;
-        padding : 5px 10px 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .delBtn {
-        margin-left: 10px;
-    }
-</style>
-
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${questionDto.id}">
-<div class="container">
-    <div class="wrap1">
-        <div class="title">
-            <h1>제목 : <c:out value='${questionDto.title}'/></h1>
-        </div>
-        <div class="status-bar">
-            <div class="status">
-                답변상태 : ${questionDto.status}
-            </div>
-            <div class="region">
-                지역코드 : ${questionDto.regionCode}
-            </div>
-        </div>
-        <div class="content">
-            <h1>내용 : ${questionDto.content}</h1>
-        </div>
-        <div class="hashtag">
-            해시태그 : ${questionDto.hashtag}
-        </div>
-        <div class="reg-date-bar">
-            <div class="reg-date">
-                등록일 : <fmt:formatDate value="${questionDto.createdAt}" pattern="yyyy.MM.dd hh:mm" />
-            </div>
-            <div class="view-cnt">
-                조회수 : ${questionDto.viewCnt}
-            </div>
-            <div class="answer-cnt">
-                답변수 : ${questionDto.ansCnt}
-            </div>
-            <div class="report">
-                신고하기
-            </div>
-            <button type="button" class="modify-btn">
-                <a href="<c:url value='/question/modify'/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}">수정</a>
-            </button>
-            <button type="button" id="remove-btn" class="remove-btn">
-                삭제
-            </button>
-        </div>
-        <div class="answer-cnt2">
-            답변수 : ${questionDto.ansCnt}
-        </div>
-        <br><br>
+    <input type="hidden" name="answerId" value="">
+    <div class="total-group">
+        <div class="content-profile-group">
+            <div class="content-group">
+                <div class="title-line">
+                    <div class="question-icon">
 
-        <%--댓글 html--%>
-        <div class="comment_area">
-            답변쓰기 : <input type="text" name="content" placeholder="답변을 남겨보세요"><br>
-            <button id="sendBtn" type="button">답변등록</button>
-            <button id="modBtn" type="button">답변수정</button>
-            <div id="commentList"></div>
-        </div>
+                    </div>
+                    <div class="title-text">
+                        ${questionDto.title}
+                    </div>
+                </div>
+                <div class="region-box">
+                    <div class="region-line">
+                        <div class="status-text">
+                            상태
+                        </div>
+                        <div class="answer-on-off">
+                            ${questionDto.status}
+                        </div>
+                        <div class="region-text">
+                            지역
+                        </div>
+                        <div class="region-selected">
+                            ${questionDto.regionCode}
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    ${questionDto.content}
+                </div>
+                <div class="hashtag-line">
+                    <span class="hashtag-text">${questionDto.hashtag}</span>
+                </div>
+                <div class="view-cnt-line">
+                    <div class="reg-date">
+                        <fmt:formatDate value="${questionDto.createdAt}" pattern="yyyy.MM.dd HH:mm" />
+                    </div>
+                    <div class="view-cnt">
+                        &nbsp· 조회수 ${questionDto.viewCnt}
+                    </div>
+                    <div class="answer-cnt">
+                        &nbsp· 답변수 ${questionDto.ansCnt}
+                    </div>
+                    <button type="button" class="modify-btn">
+                        <a href="<c:url value='/question/modify'/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}">수정</a>
+                    </button>
+                    <button type="button" id="remove-btn" class="remove-btn">
+                        · 삭제
+                    </button>
+                </div>
+                <div class="answer-cnt2">
+                    <span class="answer-cnt2-number">${questionDto.ansCnt}</span>개의 답변
+                </div>
 
-    </div>
-    <div class="wrap2">
-        <div class="notice-area">
-            <div class="wrap3">
-                <div class="profile-img-bar">
+                <div id="commentList"></div>
+
+                <%--            <div class="answer-top-box">--%>
+                <%--                <div class="answer-profile-img-line">--%>
+                <%--                    <div class="answer-profile-img">--%>
+
+                <%--                    </div>--%>
+                <%--                    <div class="answer-nickname-reg-date-box">--%>
+                <%--                        <!-- userId를 닉네임으로 변경해야함 -->--%>
+                <%--                        <div class="answer-nickname-line">--%>
+                <%--                            ${answerDto.userId}--%>
+                <%--                        </div>--%>
+                <%--                        <div class="answer-reg-date-line">--%>
+                <%--                            <fmt:formatDate value="${answerDto.createdAt}" pattern="yyyy.MM.dd hh:mm" />--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+                <%--                <div class="answer-content-box">--%>
+                <%--                    ${answerDto.content}--%>
+                <%--                </div>--%>
+                <%--                <div class="only-line">--%>
+                <%--                </div>--%>
+                <%--            </div>--%>
+            </div>
+
+            <!-- 우측 프로필 영역 -->
+            <div class="profile-group">
+                <div class="profile-top">
                     <div class="profile-img">
-                        프로필이미지
+
                     </div>
-                    <div class="nickname">
-                        닉네임 : ${questionDto.nickname}
-                    </div>
-                    <div class="tag">
-                        등급태그
+                    <div class="profile-right">
+                        <div class="nickname-line">
+                            <div class="nickname">
+                                ${questionDto.nickname}
+                            </div>
+                            <!-- 프로필에서 태그를 얻어오는듯1 -->
+                            <div class="profile-tag">
+                                ${questionDto.hashtag}
+                            </div>
+                        </div>
+
+                        <!-- 프로필에서 태그를 얻어오는듯2 -->
+                        <div class="tag2-line">
+                            20대·남성·대한민국·경험추구형
+                        </div>
                     </div>
                 </div>
-                <div class="age-bar">
-                    <div class="age">
-                        나이태그
+                <div class="profile-bottom">
+                    <div class="profile-icon-line">
+                        <div class="profile-icon">
+
+                        </div>
+                        <div class="profile-text">
+                            프로필 사진을 클릭해보세요!
+                        </div>
                     </div>
-                    <div class="gender">
-                        성별태그
+                    <div class="apply-btn" onclick="location.href='<c:url value="/question/answer/write"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}'">
+                        답변하기
                     </div>
-                    <div class="country">
-                        국적태그
-                    </div>
+
                 </div>
-            </div>
-            <div class="notice">
-                프로필 사진을 클릭해보세요!
-            </div>
-            <div class="answer-btn">
-                답변하기
             </div>
         </div>
     </div>
-</div>
 </form>
+<input type="hidden" name="page" value="${page}">
+<input type="hidden" name="pageSize" value="${pageSize}">
 <script>
     $(document).ready(function() {
         $("#remove-btn").on("click", function() {
@@ -395,13 +213,23 @@
         });
 
         $("#commentList").on("click", ".modBtn", function() {
+            <%--let id = $(this).parent().attr("data-id");--%>
+            <%--// console.log("id",id);--%>
+            <%--// console.log("questionId",questionId);--%>
+            <%--$.ajax({--%>
+            <%--    type:'GET',       // 요청 메서드--%>
+            <%--    url: '/question/answer/modify?id='+questionId+"&answerId="+id,  // 요청 URI--%>
+            <%--    success : function(result){--%>
+            <%--        // $("#commentList").html(toHtml(result));    // 서버로부터 응답이 도착하면 호출될 함수--%>
+            <%--        location.href="<c:url value="/question/answer/modify"/>?page=${page}&pageSize=${pageSize}";--%>
+            <%--        &lt;%&ndash;location.href="<c:url value="/question/answer/modify"/>";&ndash;%&gt;--%>
+            <%--    },--%>
+            <%--    error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수--%>
+            <%--}); // $.ajax()--%>
             let id = $(this).parent().attr("data-id");
-            let content = $("div.comment", $(this).parent()).text();
-
-            //1. comment의 내용을 input에 뿌려주기
-            $("input[name=content]").val(content);
-            //2. cno 전달하기
-            $("#modBtn").attr("data-id", id);
+            let page = $("input[name=page]").val();
+            let pageSize = $("input[name=pageSize]").val();
+            location.href="/question/answer/modify?id="+questionId+"&answerId="+id+"&page="+page+"&pageSize="+pageSize;
         });
 
         // $(".delBtn").click(function(){
@@ -436,26 +264,31 @@
 
             let HH = addZero(date.getHours());
             let MM = addZero(date.getMinutes());
-            let ss = addZero(date.getSeconds());
 
-            return yyyy+"."+mm+"."+dd+ " " + HH + ":" + MM + ":" + ss;
+            return yyyy+"."+mm+"."+dd+ " " + HH + ":" + MM;
         }
 
 
         let tmp = "<div>";
 
         comments.forEach(function(comment){
-            tmp += '<div data-id='+comment.id
+            tmp += '<div class="repeat-answer-container" data-id='+comment.id
             tmp += ' data-questionId='+comment.questionId + '>'
-            tmp += ' <span class="commenter">' + comment.userId + '</span>'
+            tmp += ' <div class="repeat-answer"><div class="answer-profile-img"></div>'
+            tmp += ' <div><span class="commenter">' + comment.userId + '</span>'
+            tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div></div>'
             tmp += ' <div class="comment">' + comment.content + '</div>'
-            tmp += dateToString(comment.createdAt)
-            tmp += '<button class="delBtn" type="button">삭제</button>'
             tmp += '<button class="modBtn" type="button">수정</button>'
+                <%--<a href="<c:url value='/question/answer/modify'/>?page=${page}&pageSize=${pageSize}">수정</a></button>--%>
+            tmp += '<button class="delBtn" type="button">삭제</button>'
+            tmp += '<div class="only-line"></div>'
             tmp += '</div>'
+
         })
 
         return tmp + "</div>";
+
+
     } //댓글 script2 끝
 </script>
 </body>

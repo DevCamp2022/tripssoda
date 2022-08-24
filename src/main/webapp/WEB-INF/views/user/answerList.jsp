@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<title>내 QnA</title>
+<title>내 Q&A</title>
 <link rel="stylesheet" href="<c:url value="/css/user/answerList.css"/>">
 <script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 
@@ -21,6 +21,7 @@
                     <div class="nickname">${nickname}</div>
                     <div class="reg-date"><fmt:formatDate value="${answerDto.createdAt}" pattern="yyyy-MM-dd HH:ss"/></div>
                     <div class="answer-text">${answerDto.content}</div>
+                    <input type="hidden" id="hidden-id" value="${answerDto.questionId}">
                 </div>
             </c:forEach>
 
@@ -53,5 +54,10 @@
     $(".show-question").on("click", function() {
         location.href="/mypage/qnaList";
     });
+
+    $(".answer").on("click", function () {
+        let id = $(this).children("input[id=hidden-id]").val();
+        location.href="/question/read?id=" + id;
+    })
 </script>
 

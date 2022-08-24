@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page import="java.net.URLDecoder" %>
 
 <link rel="stylesheet" href="/css/user/registerForm.css">
 <title>tripssoda 회원가입</title>
@@ -132,6 +133,7 @@
 
     // 인증번호 전송 버튼을 클릭했을 때
     $('.send-email-verf-btn').on("click", function() {
+        alert("인증번호를 전송중입니다. 잠시만 기다려주세요!");
         let email = $(".input-email").val();
         $.ajax({
             type:"POST",
@@ -139,10 +141,17 @@
             data: {email:email},
             cache : false,
             success :function(result){
-                alert(result);
+                if(result == "Email has been sent") {
+                    alert("인증번호가 전송되었습니다.");
+                } else if (result == "Email already exists") {
+                    alert("이미 가입된 이메일입니다.");
+                } else {
+                    alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
+                }
+
             },
             error: function() {
-                alert("인증번호 발송에 실패했습니다");
+                alert("오류가 발생하여 인증번호 전송에 실패했습니다.");
             }
         });
     });

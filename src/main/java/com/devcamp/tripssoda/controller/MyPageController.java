@@ -549,6 +549,7 @@ public class MyPageController {
         return "user/inquiryForm.subTiles";
     }
 
+    // 1:1 문의글 form 전송
     @PostMapping("/mypage/inquiryList/write")
     public String writeInquiry(InquiryDto inquiryDto, HttpSession session, Model model, RedirectAttributes rattr) {
         Integer userId = (Integer)session.getAttribute("id");
@@ -556,6 +557,7 @@ public class MyPageController {
         inquiryDto.setUserId(userId);
         inquiryDto.setCreatedBy(userId);
         inquiryDto.setUpdatedBy(userId);
+        inquiryDto.setMenuCode("M004");
 
         try {
             inquiryService.insertUserInquiry(inquiryDto);

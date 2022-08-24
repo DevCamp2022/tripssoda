@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
 });
 
-let optCnt = 0;
+let optCnt = $("#get-optionSize").val();
 
 //thumbnail upload
 $("#uploadThumb").change(function(){
@@ -330,6 +330,288 @@ function valid() {
     return true;
 }
 
+//카테고리 셀렉트박스에 바인딩
+$(document).ready(function() {
+    let ctg = $("#category").val();
+    for(let i=1; i<6; i++) {
+        if(ctg == ("C00"+i)) {
+            $(".C00"+i).attr("selected","selected");
+        }
+    }
+});
+
+//키워드 span태그에 넣어주기
+$(document).ready(function() {
+    let kwd = $("#get-keyword").val();
+    if(kwd != '' && kwd != null) {
+        let kwdArr = kwd.split(',');
+        for(let i=0; i<kwdArr.length; i++) {
+            let s = "";
+            s += "<span class='hashes'>" + kwdArr[i];
+            s += "<input type='hidden' class='hashes' name='keyword' value='" + kwdArr[i] + "'>";
+            s += "<span class='delBtn'>&nbsp;<span class='material-icons' style='font-size:12px;cursor:pointer;'>clear</span></span></span>";
+            $(".word-list").append(s);
+        }
+    }
+})
+
+//필수안내, 환불정책, 포함사항, 미포함사항, 추가사항 값 바인딩
+$(document).ready(function(){
+    let mdt = $("#get-manguid").val();
+    if(mdt != '' && mdt != null) {
+        let mdtArr = mdt.split(',');
+        $("#mandatoryGuidance").attr('value',mdtArr[0]);
+        for(let i=1; i<mdtArr.length; i++) {
+            let s = '<div class="manGuide">';
+            s += '<input type="text" name="mandatoryGuidance" value="' + mdtArr[i] + '">';
+            s += '<button type="button" class="btn btn-outline-danger manGuide-delBtn">삭제</button><br></div>';
+            $(".td-manGuide").append(s);
+        }
+    }
+
+    let rf = $("#get-rfp").val();
+    if(rf != '' && rf != null) {
+        let rfArr = rf.split(',');
+        $("#refundPolicy").attr('value',rfArr[0]);
+        for(let i=1; i<rfArr.length; i++) {
+            let s = '<div class="refundPolicy">';
+            s += '<input type="text" name="refundPolicy" value="' + rfArr[i] + '">';
+            s += '<button type="button" class="btn btn-outline-danger refundPolicy-delBtn">삭제</button><br></div>';
+            $(".td-refund").append(s);
+        }
+    }
+
+    let addin = $("#get-addin").val();
+    if(addin != '' && addin != null) {
+        let addinArr = addin.split(',');
+        $("#additionalInfo").attr('value',addinArr[0]);
+        for(let i=1; i<addinArr.length; i++) {
+            let s = '<div class="manGuide">';
+            s += '<input type="text" name="additionalInfo" value="' + addinArr[i] + '">';
+            s += '<button type="button" class="btn btn-outline-danger additionalInfo-delBtn">삭제</button><br></div>';
+            $(".td-additionalInfo").append(s);
+        }
+    }
+
+    let exc = $("#get-exc").val();
+    if(exc != '' && exc != null) {
+        let excArr = exc.split(',');
+        $("#exclusion").attr('value',excArr[0]);
+        for(let i=1; i<excArr.length; i++) {
+            let s = '<div class="exclusion">';
+            s += '<input type="text" name="exclusion" value="' + excArr[i] + '">';
+            s += '<button type="button" class="btn btn-outline-danger exclusion-delBtn">삭제</button><br></div>';
+            $(".td-exclusion").append(s);
+        }
+    }
+
+    let inc = $("#get-inc").val();
+    if(inc != '' && inc != null) {
+        let incArr = mdt.split(',');
+        $("#inclusion").attr('value',incArr[0]);
+        for(let i=1; i<incArr.length; i++) {
+            let s = '<div class="inclusion">';
+            s += '<input type="text" name="inclusion" value="' + incArr[i] + '">';
+            s += '<button type="button" class="btn btn-outline-danger inclusion-delBtn">삭제</button><br></div>';
+            $(".td-inclusion").append(s);
+        }
+    }
+})
+
+//상품일정 가져오기
+$(document).ready(function() {
+    let fd = $("#get-firstDate").val();
+    let ld = $("#get-lastDate").val();
+    console.log('fd',fd);
+    console.log('ld',ld);
+    $("#startDate").attr('value',fd);
+    if(ld == null || ld == ''){
+        $("#endDate").attr('value',fd);
+    }
+    $("#endDate").attr('value',ld);
+
+    const start = $("#startDate").val();
+    const end = $("#endDate").val();
+
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    const durMilis = endDate.getTime() - startDate.getTime();
+    const durDays = durMilis/(1000*60*60*24);
+
+    $('input[name=dayCnt]').attr('value',`${durDays+1}`);
+});
+
+//픽업타입, (선택형)픽업옵션 가져오기
+$(document).ready(function() {
+    let pt = $("#get-pickupType").val();
+    console.log('pt',pt);
+    for(let i=0; i<3; i++) {
+        if($(".pt-"+i).val() == pt) {
+            $(".pt-"+i).attr('checked','checked');
+        }
+    }
+
+    if(pt == 'S') {
+        let po = $("#get-pickupOption").val();
+        let poArr = po.split(',');
+        $("#firstpo").attr('value',poArr[0]);
+        for(let i=1; i<poArr.length; i++) {
+            let s = "";
+                s += "<tr class='tr-pickupOption'>"
+                s += "<td class='td-additional-option' colspan='3'>";
+                s += "<input type='text' name='pickupOption' value='"+poArr[i]+"'>";
+                s += "<button type='button' class='btn btn-outline-danger pickupOption-delBtn'>삭제</button>";
+                s += "</td>";
+                s += "</tr>";
+                $(".table-pickupInfo").append(s);
+        }
+    }
+
+    if(pt == "S") {
+        $(".tr-pickupOption").show();
+        $("input[name=pickupOption]").attr("disabled", false);
+    }
+    else if(pt == "A") {
+        $(".tr-pickupOption").hide();
+        $("input[name=pickupOption]").attr("disabled", true);
+    }
+    else if(pt == "F") {
+        $(".tr-pickupOption").hide();
+        $("input[name=pickupOption]").attr("disabled", true);
+    };
+})
+
+
+//DB에서 상품옵션 가져오기
+$(document).ready(function() {
+    for(let z=0; z<optCnt; z++) {
+        let optionType = $(".get-optionType-"+z).val();
+        let optionName = $(".input-option-s-name_" + z).val();
+        let optionContent = $(".get-option-content-" + z).val();
+        let optionContentArr = optionContent.split(',');
+        let optionPrice = $(".get-option-price-" + z).val();
+        let optionPriceArr = optionPrice.split(',');
+        let optionOrderNo = $(".get-option-orderNo-" + z).val();
+
+        let str = ""
+            str += '<table class="table table-option">';
+            str += '<tr>';
+            str += '<th>옵션#'+(parseInt(z)+1)+'</th>'
+            str += '<th>';
+            str += '<div class="btn-group" role="group" aria-label="Basic radio toggle button group">';
+            str += '<input type="radio" id="option-type-s-'+z+'" class="btn-check option-type-s-'+z+'" name="regProductOptionListDto['+z+'].type" value="S" autocomplete="off">'
+            str += '<label class="btn btn-outline-warning" for="option-type-s-'+z+'">선택형</label>';
+            str += '<input type="radio" id="option-type-a-'+z+'" class="btn-check option-type-a-'+z+'" name="regProductOptionListDto['+z+'].type" value="A" autocomplete="off">';
+            str += '<label class="btn btn-outline-warning" for="option-type-a-'+z+'">단답형</label>';
+            str += '</div>';
+            str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-danger option-delBtn" type="button">상품옵션 제거</button>';
+            str += '</th>';
+            str += '</tr>';
+            str += '<tr>';
+            str += '<td colspan="2">';
+            str += '<table class="table table-type-s-'+z+'">';
+            str += '<tr>';
+            str += '<th>옵션명</th>';
+            str += '<th>옵션</th>';
+            str += '<th>옵션가격</th>';
+            str += '<th>비고</th>';
+            str += '</tr>';
+
+
+            str += '<tr class="tr-option">';
+            str += '<td width="40%">';
+            str += '<input class="input-option-s-name_'+z+'" type="text" name="regProductOptionListDto['+z+'].name" value="'+optionName+'">';
+            str += '</td>';
+            str += '<td width="30%"class="td-option-content-'+z+'">';
+            str += '<input class="input-option-s-content_'+z+'" type="text" name="regProductOptionListDto['+z+'].content" value="'+optionContentArr[0]+'">';
+            str += '</td>';
+            str += '<td width="20%"class="td-option-price-'+z+'">';
+            str += '<input class="input-option-s-price_'+z+'" type="text" name="regProductOptionListDto['+z+'].price" value="'+optionPriceArr[0]+'">';
+            str += '</td>';
+            str += '<td>';
+            str += '<button class="btn btn-outline-info add-tr-option" type="button" class="add-option">옵션추가</button>';
+            str += '<input type="hidden" name="regProductOptionListDto[' + z + '].orderNo" value="'+optionOrderNo+'">';
+            str += '</td>';
+            str += '</tr>';
+            for(let j=1; j<optionContentArr.length; j++) {
+                str += '<tr class="tr-option">';
+                str += '<td width="40%">';
+                str += '</td>';
+                str += '<td width="30%"class="td-option-content-'+z+'">';
+                str += '<input class="input-option-s-content_'+z+'" type="text" name="regProductOptionListDto['+z+'].content" value="'+optionContentArr[j]+'">';
+                str += '</td>';
+                str += '<td width="20%"class="td-option-price-'+z+'">';
+                str += '<input class="input-option-s-price_'+z+'" type="text" name="regProductOptionListDto['+z+'].price" value="'+optionPriceArr[j]+'">';
+                str += '</td>';
+                str += '<td>';
+                str += '<button class="btn btn-outline-danger del-tr-option" type="button">옵션삭제</button>';
+                str += '</td>';
+                str += '</tr>';
+            }
+            str += '</table>';
+            str += '<table class="table table-type-a-'+z+'">';
+            str += '<tr>';
+            str += '<th>옵션명</th>';
+            str += '</tr>';
+            str += '<tr>';
+            str += '<td>';
+            str += '<input class="input-option-a-name_'+z+'" type="text" name="regProductOptionListDto['+z+'].name" value="'+optionName+'">';
+            str += '</td>';
+            str += '</tr>';
+            str += '</table>';
+            str += '</td>';
+            str += '</tr>';
+            str += '</table>';
+    
+        $(".product-option").append(str);
+        
+        
+        //타입확인 함수 넣기
+        if(optionType == 'S') {
+            $(".table-type-s-" + z).show();
+            $(".table-type-a-" + z).hide();
+            $(".input-option-a-name_"+z).attr("disabled",true);
+            $(".input-option-s-name_"+z).attr("disabled",false);
+            $(".input-option-s-content_"+z).attr("disabled",false);
+            $(".input-option-s-price_"+z).attr("disabled",false);
+            $(".option-type-s-"+z).attr('checked','checked');
+        } else if(optionType == 'A') {
+            $(".table-type-s-" + z).hide();
+            $(".table-type-a-" + z).show();
+            $(".input-option-a-name_"+z).attr("disabled",false);
+            $(".input-option-s-name_"+z).attr("disabled",true);
+            $(".input-option-s-content_"+z).attr("disabled",true);
+            $(".input-option-s-price_"+z).attr("disabled",true);
+            $(".option-type-a-"+z).attr('checked','checked');
+        }
+
+        $(document).ready(function(){
+            for(let i=0; i<z; i++) {
+                $("input[name='regProductOptionListDto["+i+"].type']").change(function(){
+                    if($("input[name='regProductOptionListDto["+i+"].type']:checked").val() == "S"){
+                        $(".table-type-s-" + i).show();
+                        $(".table-type-a-" + i).hide();
+                        $(".input-option-a-name_"+i).attr("disabled",true);
+                        $(".input-option-s-name_"+i).attr("disabled",false);
+                        $(".input-option-s-content_"+i).attr("disabled",false);
+                        $(".input-option-s-price_"+i).attr("disabled",false);
+                        
+                    } 
+                    else if($("input[name='regProductOptionListDto["+i+"].type']:checked").val() == "A"){
+                        $(".table-type-s-" + i).hide();
+                        $(".table-type-a-" + i).show();
+                        $(".input-option-a-name_"+i).attr("disabled",false);
+                        $(".input-option-s-name_"+i).attr("disabled",true);
+                        $(".input-option-s-content_"+i).attr("disabled",true);
+                        $(".input-option-s-price_"+i).attr("disabled",true);
+                        
+                    }
+                })
+            }
+        });
+    }
+})
 
 //상품옵션 추가하기
 $(document).on("click",".add-tr-option",function(){

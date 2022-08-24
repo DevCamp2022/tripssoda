@@ -5,12 +5,12 @@
 <div class="content">
   <!--카테고리 버튼-->
   <div class="div-category-button-wrap">
-      <div class="div-category-button">
+      <div class="div-category-button" id="category-editor">
         <img src="https://tripsoda.com/images/common/icon/menu/store/editor.svg"><br>
         <p>에디터 픽</p>
       </div>
       
-      <div class="div-category-button">
+      <div class="div-category-button" id="category-private">
         <img src="https://tripsoda.com/images/common/icon/menu/store/private.svg">
         <p>프라이빗투어</p>
       </div>
@@ -40,6 +40,7 @@
   <div class="div-list-wrap">
     <!--이곳에 a태그 추가하여 상세로 넘어가도록 바인딩 할 것.-->
     <!-- <div class="prevBtn">PREV</div> -->
+    <span style="float:left;margin-left: 90px;">에디터픽</span><br>
     <c:forEach var="list" items="${list0}" varStatus="statusNm">
         <div class="div-editor div-editor-${statusNm.count}">
           <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
@@ -69,12 +70,13 @@
         </div>
     </c:forEach>
     <!-- <div class="nextBtn">NEXT</div> -->
-  </div>
+  </div><br><br><br>
 
   <!--프라이빗 list-->
   <div class="div-list-wrap">
     <!--이곳에 a태그 추가하여 상세로 넘어가도록 바인딩 할 것.-->
     <!-- <div class="prevBtn">PREV</div> -->
+    <span style="float:left;margin-left: 90px;">프라이빗</span><br>
     <c:forEach var="list" items="${list1}" varStatus="statusNm">
         <div class="div-editor div-editor-${statusNm.count}">
           <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">

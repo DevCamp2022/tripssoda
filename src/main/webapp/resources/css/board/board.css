@@ -1,0 +1,55 @@
+div.content{
+    margin-top: 50px;
+}
+
+h1.board-title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+hr.separator {
+    margin-bottom: 80px;
+}
+div.search-wrap{
+    margin: 20px 10px 20px 0;
+}
+
+table.board-table {
+width: 100%;
+}
+table.board-table th{
+    border: 1px none black;
+    border-bottom: 1px solid #D5D5D5FF;
+    border-top-style: solid;
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+table.board-table tr td {
+    border-bottom: 1px solid #D5D5D5FF;
+    padding: 15px;
+    text-align: center;
+}
+
+table.board-table th.number{
+
+}
+table.board-table th.title{
+    width: 700px;
+}
+table.board-table th.date{
+
+}
+table.board-table th.count{
+
+}
+
+div.paging{
+    text-align: center;
+    margin-top: 50px;
+}
+
+div.paging a{
+    padding: 10px;
+}

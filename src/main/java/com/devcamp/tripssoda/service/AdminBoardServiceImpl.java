@@ -115,4 +115,23 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 
         return combinedBoardMapper.searchSelectPage(map);
     }
+
+    @Override
+    public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception {
+        Map map = new HashMap();
+        map.put("sc",sc);
+        map.put("menuCode", menuCode);
+
+        System.out.println("\"se\" = " + sc);
+
+        return combinedBoardMapper.searchSelectPageForUser(map);
+    }
+
+    @Override
+    public int getSearchResultCntForUser(SearchCondition sc, String menuCode) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("sc", sc);
+        map.put("menuCode", menuCode);
+        return combinedBoardMapper.searchResultCntForUser(map);
+    }
 }

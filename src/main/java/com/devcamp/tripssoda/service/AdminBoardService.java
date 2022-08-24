@@ -3,6 +3,7 @@ package com.devcamp.tripssoda.service;
 import com.devcamp.tripssoda.dto.CombinedBoardDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +29,7 @@ public interface AdminBoardService {
 //    int getSearchResultCnt(SearchCondition sc) throws Exception;
     int getSearchResultCnt(SearchCondition sc, String menuCode) throws Exception;
 
+    public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception;
+
+    public int getSearchResultCntForUser(SearchCondition sc, String menuCode) throws Exception;
 }

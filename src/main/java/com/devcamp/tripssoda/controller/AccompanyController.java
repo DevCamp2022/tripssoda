@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +43,7 @@ public class AccompanyController {
 
     @GetMapping("/waiting")
     public String waitingList(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
-//        if(!loginCheck(request))
-//            return "redirect:/login/login+toURL"+request.getRequestURL();
+//
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
 
@@ -73,8 +74,8 @@ public class AccompanyController {
     public String modify(AccompanyDto accompanyDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         //userId는 인조식별자
-//        Integer writer = (int) session.getAttribute("userId");
-        Integer writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        Integer writer = 43;
         System.out.println("accompanyDto = " + accompanyDto);
         accompanyDto.setUserId(writer);
 
@@ -114,7 +115,9 @@ public class AccompanyController {
     }
 
     @GetMapping("/modify")
-    public String modify(Integer id, Integer page, Integer pageSize, Model m) {
+    public String modify(Integer id, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+        if(!loginCheck(request))
+            return "redirect:/login?toURL="+request.getRequestURL();
         AccompanyDto accompanyDto = null;
         try {
             accompanyDto = accompanyService.read(id);
@@ -128,9 +131,20 @@ public class AccompanyController {
     }
 
     @PostMapping("/write")
-    public String write(AccompanyDto accompanyDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
-//        Integer writer = (int) session.getAttribute("userId");
-        Integer writer = 43;
+    public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
+                        @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
+        Integer writer = (int) session.getAttribute("id");
+//        Integer writer = 43;
+        String email = (String) session.getAttribute("email");
+        UserDto userDto = userService.selectUserByEmail(email);
+        String nickname = userDto.getNickname();
+        accompanyDto.setNickname(nickname);
+
+        String profileImg = userDto.getProfileImg();
+        System.out.println("profileImg = " + profileImg);
+        accompanyDto.setProfileImg(profileImg);
+
+//        Integer writer = 43;
         accompanyDto.setUserId(writer);
 
         //유효성 검사를 추가 해야 한다.
@@ -152,8 +166,9 @@ public class AccompanyController {
         accompanyDto.setHashtag(hashtag2);
         System.out.println("accompanyDto.getStartAt() = " + accompanyDto.getStartAt());
         System.out.println("result = " + result);
+        System.out.println("uploadThumb = " + uploadThumb);
         try {
-            int rowCnt = accompanyService.write(accompanyDto);
+            int rowCnt = accompanyService.write(accompanyDto, request, uploadThumb);
             System.out.println("accompanyDto.getMemberCnt() = " + accompanyDto.getMemberCnt());
             if(rowCnt!=1)
                 throw new Exception("Write Failed");
@@ -169,7 +184,9 @@ public class AccompanyController {
     }
 
     @GetMapping("/write")
-    public String write(Model m) {
+    public String write(HttpServletRequest request, Model m) {
+        if(!loginCheck(request))
+            return "redirect:/login?toURL="+request.getRequestURL();
         m.addAttribute("mode", "new");
         return "accompany/accompanyWrite.mainTiles";
     }
@@ -177,8 +194,9 @@ public class AccompanyController {
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         //writer
-//        Integer writer = (int) session.getAttribute("userId");
-        Integer writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        Integer writer = 43;
+
         try {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
@@ -196,9 +214,7 @@ public class AccompanyController {
     @GetMapping("/read")
     public String read(Integer id, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         AccompanyDto accompanyDto = null;
-        //닉네임, 프로필사진 등을 유저에서 얻기 위해서 위에서 DI로 주입받고, 호출해야함.
-//        UserDto userDto = null;
-//        System.out.println("accompanyDto.getHashtag() = " + accompanyDto.getHashtag());
+
         try {
             accompanyDto = accompanyService.read(id);
 
@@ -263,6 +279,6 @@ public class AccompanyController {
 
     private boolean loginCheck(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return session != null && session.getAttribute("userId") != null;
+        return session != null && session.getAttribute("id") != null;
     }
 }

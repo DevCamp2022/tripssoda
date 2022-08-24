@@ -6,7 +6,7 @@ body {
     background-color: #fff;
 
 }
-a {
+.a-tag {
     text-decoration: none;
 }
 /* 여행 친구 찾기 이미지 */
@@ -85,7 +85,7 @@ a {
     margin-top: 24px;
 }
 /* 리스트 하나씩 묶음 */
-.list {
+.list-one {
     width: 282px;
     height: 377px;
     cursor: pointer;
@@ -143,15 +143,15 @@ a {
     margin: 9px 0 0 0;
 }
 /* 프로필사진 */
-.profile-img {
+.profile-img2 {
     width: 24px;
     height: 24px;
     margin-right: 6px;
     border-radius: 50%;
-    background-image: url("/image/accompany/profile-img.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /*background-image: url("/image/accompany/profile-img.svg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
 }
 /* 닉네임 */
 .nickname {

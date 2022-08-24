@@ -2,6 +2,7 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
+import com.devcamp.tripssoda.dto.QuestionDto;
 import com.devcamp.tripssoda.mapper.AccompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,16 @@ public class AccompanyServiceImpl implements AccompanyService {
     @Override
     public List<AccompanyDto> getPage(Map map) throws Exception {
         return accompanyMapper.selectPage(map);
+    }
+
+    @Override
+    public List<AccompanyDto> waitingGetPage(Map map) throws Exception {
+        return accompanyMapper.waitingSelectPage(map);
+    }
+
+    @Override
+    public int waitingGetCount() throws Exception {
+        return accompanyMapper.waitingCount();
     }
 
 }

@@ -5,7 +5,7 @@ $("#payBtn").click(function () {
     if (checkEmptyForm()) {
 // IMP.request_pay(param, callback) 결제창 호출
         const payMethod = $("input[name='payMethod']").val();
-        if (payMethod===undefined){
+        if (payMethod===''){
             alert("결제 수단을 선택해주시기 바랍니다.")
             return;
         }

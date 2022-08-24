@@ -10,10 +10,13 @@ $.ajax({
     method: "GET",
     data: {productId: URLSearch.get("productId"), scheduleId: URLSearch.get("scheduleId")},
     success: function (result) {
-        updatePaymentInfo(result)
+        console.log(result)
+        updatePaymentInfo(result.productInfo)
     },
-    error: function () {
-        alert("실패");
+    error: function (result) {
+        alert(result.responseJSON.message);
+        location.href='/product/list';
+        // location.href=`/product/detail?productId=${URLSearch.get("productId")}&scheduleId=${URLSearch.get("scheduleId")}`;
     }
 });
 

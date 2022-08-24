@@ -53,7 +53,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="tit"><input type="checkbox" id="all_check"></th>
+                            <th class="titb"><input type="checkbox" id="all_check"></th>
                             <th class="tit">번호</th>
                             <th class="tit">이름</th>
                             <th class="tit">닉네임</th>
@@ -76,7 +76,18 @@
                                 <td class="con" name="tel">${userDto.tel}</td>
                                 <td class="con">${userDto.gender}</td>
                                 <td class="con"><fmt:formatDate value="${userDto.birthday}" pattern="yy-MM-dd" type="date"/></td>
-                                <td class="con">${userDto.userCode}</td>
+                                <td class="con">
+                                    <c:if test="${userDto.userCode eq 'U001'}">
+                                          일반
+                                    </c:if>
+                                    <c:if test="${userDto.userCode eq 'U002'}">
+                                        파트너
+                                    </c:if>
+                                    <c:if test="${userDto.userCode eq 'U003'}">
+                                        관리자
+                                    </c:if>
+<%--                                        ${userDto.userCode}--%>
+                                </td>
                                 <td class="con"><fmt:formatDate value="${userDto.createdAt}" pattern="yy-MM-dd" type="date"/></td>
                                 <td class="con"> ${userDto.status==1? '회원' : '탈퇴'} </td>
 

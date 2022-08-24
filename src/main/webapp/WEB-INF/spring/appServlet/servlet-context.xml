@@ -2,11 +2,12 @@
 <!--	스프링 스케쥴러 관련 추가
 		2022-08-07 권능			-->
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:task="http://www.springframework.org/schema/task"
+			 xmlns:mvc="http://www.springframework.org/schema/mvc"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
@@ -56,5 +57,20 @@
 		</beans:property>
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/accompany/write"/>
+			<beans:bean class="com.devcamp.tripssoda.util.IPCheckInterceptor"/>
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/accompany/write"/>
+			<beans:bean class="com.devcamp.tripssoda.util.CntInterceptor"/>
+		</mvc:interceptor>
+
+	</mvc:interceptors>
+
+
 
 </beans:beans>

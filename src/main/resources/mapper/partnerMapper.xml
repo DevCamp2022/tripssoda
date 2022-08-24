@@ -6,39 +6,91 @@
     <insert id="insertPartner" parameterType="PartnerDto">
 		INSERT INTO partner
         (
-            user_id,
-            reg_number,
-            company_name,
-            intro,
-            intro_attachment,
-            service_region,
-            product_type,
-            manager_name,
-            manager_tel,
-            terms_agreement,
-            created_at,
-            created_by,
-            updated_at,
-            updated_by
+        id
+        user_id,
+        reg_number,
+        company_name,
+        intro,
+        intro_attachment,
+        service_region,
+        product_type,
+        manager_name,
+        manager_tel,
+        terms_agreement,
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
         )
         VALUES
         (
-            #{userId},
-            #{regNumber},
-            #{companyName},
-            #{intro},
-            #{introAttachment},
-            #{serviceRegion},
-            #{productType},
-            #{managerName},
-            #{managerTel},
-            #{termsAgreement},
-            now(),
-            #{userId},
-            now(),
-            #{userId}
+        #{id}
+        #{userId},
+        #{regNumber},
+        #{companyName},
+        #{intro},
+        #{introAttachment},
+        #{serviceRegion},
+        #{productType},
+        #{managerName},
+        #{managerTel},
+        #{termsAgreement},
+        now(),
+        #{userId},
+        now(),
+        #{userId}
         )
     </insert>
 
+<!--    <select id="searchSelectPartner" resultType="PartnerDto"   >-->
+<!--        select * from partner-->
+<!--    </select>-->
+
+
+<!--    <select id="selectOnPartner" resultType="PartnerDto">-->
+<!--        select * from partner-->
+<!--        where on_partnership = 1-->
+<!--    </select>-->
+
+    <select id="selectOnApplicant" resultType="PartnerDto">
+        select * from partner
+        where on_partnership = 0
+    </select>
+
+    <update id="updateToPartner" parameterType="PartnerDto">
+        UPDATE partner
+        SET 'on_partnership' = 1
+    </update>
+
+    <select id="selectPartnerInfo" parameterType="int" resultType="PartnerDto">
+        select * from partner
+        where id = #{id}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from partner;
+    </select>
+
+
+    <select id="selectOnPartner" parameterType="SearchCondition" resultType="partnerDto">
+        SELECT *
+        FROM partner
+        WHERE true
+        <choose>
+            <when test='option=="NA"'>
+                AND company_name LIKE concat('%', #{keyword}, '%')
+            </when>
+
+            <when test='option=="NI"'>
+                AND manager_name LIKE concat('%', #{keyword}, '%')
+            </when>
+
+        </choose>
+
+        and on_partnership = 1
+
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
 
 </mapper>

@@ -11,10 +11,10 @@ import java.util.Map;
 public interface UserMapper {
 
     public int insertUser(UserDto userDto) throws Exception;
+
     public UserDto selectUser(String email);
 
     public List<UserDto> selectAllUser();
-    public List<UserDto> searchSelectUser(SearchCondition sc);
 
     public UserDto selectUserByNickname(String nickname);
 
@@ -37,4 +37,6 @@ public interface UserMapper {
     public int updateUserCode(Map updateInfo);
 
     public int count();
+
+    List<UserDto> searchSelectUser(SearchCondition sc);
 }

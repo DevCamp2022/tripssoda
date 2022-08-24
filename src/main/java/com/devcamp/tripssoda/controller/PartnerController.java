@@ -2,6 +2,7 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.PartnerDto;
 import com.devcamp.tripssoda.service.PartnerService;
+import com.devcamp.tripssoda.util.SkipChecking;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,14 @@ public class PartnerController {
         this.partnerService = partnerService;
     }
 
+    @SkipChecking
     @GetMapping("/reg")
     public String regPartner(HttpSession session) {
         session.setAttribute("userId","1");
         return "partner/reg_partner.mainTiles";
     }
 
+    @SkipChecking
     @PostMapping("/reg")
     public String regPartner(PartnerDto dto) {
         System.out.println("dto = " + dto);

@@ -6,37 +6,37 @@
     <insert id="insertPartner" parameterType="PartnerDto">
 		INSERT INTO partner
         (
-        user_id,
-        reg_number,
-        company_name,
-        intro,
-        intro_attachment,
-        service_region,
-        product_type,
-        manager_name,
-        manager_tel,
-        terms_agreement,
-        created_at,
-        created_by,
-        updated_at,
-        updated_by
+            user_id,
+            reg_number,
+            company_name,
+            intro,
+            intro_attachment,
+            service_region,
+            product_type,
+            manager_name,
+            manager_tel,
+            terms_agreement,
+            created_at,
+            created_by,
+            updated_at,
+            updated_by
         )
         VALUES
         (
-        #{userId},
-        #{regNumber},
-        #{companyName},
-        #{intro},
-        #{introAttachment},
-        #{serviceRegion},
-        #{productType},
-        #{managerName},
-        #{managerTel},
-        #{termsAgreement},
-        now(),
-        #{userId},
-        now(),
-        #{userId}
+            #{userId},
+            #{regNumber},
+            #{companyName},
+            #{intro},
+            #{introAttachment},
+            #{serviceRegion},
+            #{productType},
+            #{managerName},
+            #{managerTel},
+            #{termsAgreement},
+            now(),
+            #{userId},
+            now(),
+            #{userId}
         )
     </insert>
 

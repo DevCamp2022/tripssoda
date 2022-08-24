@@ -3,13 +3,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link href="/css/product/detail_product.css" rel='stylesheet' />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="content">
-  <div class="product-banner-wrap">11</div>
+  <!-- <div class="product-banner-wrap">11</div> -->
   <!-- <div class="detail-wrap"> -->
     <div class="right-area">
       <!-- banner생각해볼것 -->
       <p class="showCategory">${details.category}</p>
-      <span class="showRating">평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp; (시계)${details.reqTime}시간 소요</span><br>
+      <span class="showRating">평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp;<span class="material-icons">alarm_on</span>${details.reqTime}시간 소요</span><br>
       <b class="detail-title">${details.title}</b>
       <input type="hidden" value="${details.keyword}" id="keywords">
       <div class="keywords-wrap"></div>
@@ -22,20 +23,21 @@
         <br><br>
         <input id="list-length" type="hidden" value="${fn:length(list)}" >
         <c:forEach var="list" items="${list}" varStatus="statusNm">
-          <a href="/product/detail?productId=${list.productId}&scheduleId=${list.productScheduleId}" style="cursor:pointer;">
+          <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}&startDate=${list.startDate}" style="cursor:pointer;">
             <div class="date-wrapper date-wrapper-${statusNm.count}">
-              <input id="list-currentMember" type="hidden" value="${list.currentMember}" >
-              <input id="list-minMember" type="hidden" value="${list.minMember}" >
-              <input id="list-maxMember" type="hidden" value="${list.maxMember}" >
-              <input id="list-min-current" type="hidden" value="${list.minMember - list.currentMember}" >
-              <span class="show-list-startDate"><fmt:formatDate value="${list.startDate}" pattern="yyyy년 MM월 dd일 출발" /></span>
+              <input class="list-currentMember-${statusNm.index}" type="hidden" value="${list.currentMember}" >
+              <input class="list-minMember-${statusNm.index}" type="hidden" value="${list.scheduleMinMember}" >
+              <input class="list-maxMember-${statusNm.index}" type="hidden" value="${list.scheduleMaxMember}" >
+              <input class="list-min-current-${statusNm.index}" type="hidden" value="${list.scheduleMinMember - list.currentMember}" >
+              <span><fmt:formatDate value="${list.startDate}" pattern="yyyy년 MM월 dd일 출발" /></span>
+              <span class="show-list-startDate-${statusNm.index}"></span>
               <br><br>
-              <span class="show-list-currentMember" style="color:rgb(0, 206, 124);">${details.currentMember}</span>
-              <span style="color:rgb(119, 119, 119);">/ ${details.maxMember}명</span>
-              <progress class="currentMember" value="${list.currentMember}" min="${list.minMember}" max="${list.maxMember}"></progress>
+              <span class="show-list-currentMember" style="color:rgb(0, 206, 124);">${list.currentMember}</span>
+              <span style="color:rgb(119, 119, 119);">/ ${list.scheduleMaxMember}명</span>
+              <progress class="currentMember" value="${list.currentMember}" min="${list.scheduleMinMember}" max="${list.scheduleMaxMember}"></progress>
               <br><br>
-              <span class="show-list-min-current"></span>
-              <span style="color:rgb(0, 206, 124);">&nbsp;투어확정</span><br>
+              <span class="show-list-min-current-${statusNm.index}"></span>
+              <span class="show-list-result-${statusNm.index}" style="color:rgb(0, 206, 124);">&nbsp;투어확정</span><br>
             </div>
           </a>
         </c:forEach>

@@ -5,7 +5,8 @@
 <link href="/css/product/update_product.css" rel='stylesheet' />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="content">
-  <h4><strong>상품수정</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
+  <br>
+  <h4><strong>상품등록</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
   <hr>
   <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
   <input type="hidden" name="userId" value="${sessionScope.userId}">
@@ -22,13 +23,19 @@
       <th><span class="man-star">*</span>상품 카테고리 선택</th>
       <td>
         <select name="category" id="sel-category">
-          <option>카테고리를 선택해주세요</option>
+          <option selected disabled hidden>카테고리를 선택해주세요</option>
           <option class="C001" value="C001">에디터 픽</option>
           <option class="C002" value="C002">프라이빗 투어</option>
           <option class="C003" value="C003">소규모 데이투어</option>
           <option class="C004" value="C004">버스데이투어</option>
           <option class="C005" value="C005">이색투어</option>
         </select>
+      </td>
+    </tr>
+    <tr>
+      <th width="150px"><span class="man-star">*</span>여행소요시간</th>
+      <td>
+        <input type="number" name="reqTime" id="reqTime"/>
       </td>
     </tr>
     <tr>
@@ -47,12 +54,12 @@
         onkeypress="if(event.keyCode=='13'){event.preventDefault(); handleKeyword();}"><br>
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <th><span class="man-star">*</span>환급금</th>
       <td>
         <input type="text" name="refundAmount" id="refundAmount" />
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <th><span class="man-star">*</span>모집 최소인원(명)</th>
       <td>

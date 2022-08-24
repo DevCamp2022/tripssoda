@@ -20,6 +20,7 @@ public interface ProductMapper {
     public List<ProductOptionDto> selectOptionList(Integer productId);
     public GetDetailProductDto selectProductDetailById(Integer productId);
     public List<ProductScheduleDto> getScheduleList(Integer productId);
+    public List<ProductScheduleDto> selectProductScheduleList(GetDetailProductDto dto);
     public int selectProductAvailability(Map<String, Integer> scheduleInfo);
     public int increaseCurrentMember(Map<String, Integer> scheduleInfo);
     public int setUpdateBy(Map<String, Integer> map);

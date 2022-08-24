@@ -6,6 +6,7 @@
 
 <title>계정 정보 수정</title>
 <link rel="stylesheet" href="<c:url value="/css/user/updateUserForm.css"/>">
+<script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 
 <script>
     let msg = "";
@@ -35,30 +36,30 @@
             <div class="msg"><form:errors path="nickname"/></div>
             <div class="nickname-wrap wraps">
                 <p class="user-nickname">닉네임</p>
-                <input type="text" name="nickname" class="input-nickname" value="${userDto.nickname}" placeholder="닉네임 입력(4자~12자, 영대소문자와 숫자 조합)">
+                <input type="text" name="nickname" class="input-nickname inputs" value="${userDto.nickname}" placeholder="닉네임 입력(4자~12자, 영대소문자와 숫자 조합)">
                 <p class="nickname-check check-text"></p>
             </div>
             <div class="intro-wrap wraps">
                 <p class="user-intro">소개글</p>
-                <input type="text" name="intro" class="input-intro" value="${userDto.intro}" maxlength="2000" placeholder="소개글을 입력해주세요(2000자 이내)">
+                <input type="text" name="intro" class="input-intro inputs" value="${userDto.intro}" maxlength="2000" placeholder="소개글을 입력해주세요(2000자 이내)">
             </div>
             <div class="instagram-wrap wraps">
-                <p class="user-instagram">인스타그램</p>
-                <input type="text" name="instagramId" class="input-instagram" value="${userDto.instagramId}" placeholder="@를 제외한 user ID만 입력" maxlength="30">
+                <p class="user-instagram"><i class="fa-brands fa-instagram"></i>인스타그램</p>
+                <input type="text" name="instagramId" class="input-instagram inputs" value="${userDto.instagramId}" placeholder="@를 제외한 user ID만 입력" maxlength="30">
             </div>
             <div class="tel-wrap wraps">
                 <p class="user-tel">휴대폰 번호</p>
-                <input type="text" name="tel" class="input-tel" value="${userDto.tel}" placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
+                <input type="text" name="tel" class="input-tel inputs" value="${userDto.tel}" placeholder="휴대폰 번호 입력(- 없이 입력)" maxlength="11">
                 <p class="tel-check check-text"></p>
             </div>
             <div class="pwd-wrap wraps">
                 <p class="user-pwd">비밀번호</p>
-                <input type="password" name="pwd" class="input-pwd" placeholder="비밀번호 입력(8자~12자, 영문 문자+숫자+특수문자 사용)" maxlength="14">
+                <input type="password" name="pwd" class="input-pwd inputs" placeholder="비밀번호 입력(8자~12자, 영문 문자+숫자+특수문자 사용)" maxlength="14">
                 <p class="pwd-check check-text"></p>
             </div>
             <div class="pwd-confirm-wrap wraps">
                 <p class="user-pwd-confirm">비밀번호 확인</p>
-                <input type="password" name="pwdConfirm" class="input-pwd" placeholder="비밀번호 확인" maxlength="14">
+                <input type="password" name="pwdConfirm" class="input-pwd inputs" placeholder="비밀번호 확인" maxlength="14">
                 <p class="pwd-confirm-check check-text"></p>
             </div>
             <input type="hidden" name="email" value="${userDto.email}">
@@ -162,6 +163,9 @@
                 let newImg = document.createElement('img');
                 newImg.setAttribute("src", e.target.result);
                 $(".img-wrap").html(newImg);
+                $(".img-wrap").children().css("width", "100%");
+                $(".img-wrap").children().css("height", "100%");
+                $(".img-wrap").children().css("border-radius", "200px");
             }
             reader.readAsDataURL($(this)[0].files[0]);
         });
@@ -186,7 +190,7 @@
         let nickVerfResult = false;
 
         // 닉네임 유효성 검사
-        $("input[name=nickname]").blur(function() {
+        $("input[name=nickname]").keyup(function() {
             // 닉네임을 변수에 저장
             let nickname = $("input[name=nickname]").val();
             // 닉네임 유효성 검사결과를 변수에 저장
@@ -221,7 +225,7 @@
         });
 
         // 비밀번호 유효성 검사
-        $("input[name=pwd]").blur(function() {
+        $("input[name=pwd]").keyup(function() {
             // 비밀번호 유효성 검사결과를 변수에 저장
             pwdResult = pwdJ.test($('input[name=pwd]').val());
 
@@ -235,7 +239,7 @@
         });
 
         // 비밀번호확인 유효성 검사
-        $("input[name=pwdConfirm]").blur(function() {
+        $("input[name=pwdConfirm]").keyup(function() {
             // 비밀번호확인 유효성 검사결과를 변수에 저장
             pwdConfirmResult = pwdJ.test($('input[name=pwdConfirm]').val());
             let pwd = $('input[name=pwd]').val();
@@ -254,7 +258,7 @@
         });
 
         // 휴대폰번호 유효성 검사
-        $("input[name=tel]").blur(function() {
+        $("input[name=tel]").keyup(function() {
             // 비밀번호 유효성 검사결과를 변수에 저장
             telResult = telJ.test($('input[name=tel]').val());
 

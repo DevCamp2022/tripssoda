@@ -85,8 +85,10 @@ public class LoginController {
         //  세션 객체에 id와 email을 저장
         UserDto userDto = userService.selectUser(email);
         Integer userId = userDto.getId();
+        String userCode = userDto.getUserCode();
         session.setAttribute("id", userId);
         session.setAttribute("email", email);
+        session.setAttribute("userCode", userCode);
 
         // 로그인 기록을 저장
         UserHistoryDto userHistoryDto = new UserHistoryDto(userId, "로그인", userId);
@@ -108,9 +110,8 @@ public class LoginController {
 
         // 계정이 휴면 상태이면 휴면 해제 화면으로 이동
 //        if(userDto.getStatus() == 0) {
-//            /* 이동 코드(미구현) */
+//            /* 이동 코드 */
 //        }
-        System.out.println("login success");
 
         // 홈으로 이동
         toURL = toURL == null || toURL.equals("")? "/" : toURL;

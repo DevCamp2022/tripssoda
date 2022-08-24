@@ -135,7 +135,7 @@ public class QuestionController {
         System.out.println("result = " + result);
         //userId는 인조식별자
 //        Integer writer = (int) session.getAttribute("userId");
-        int writer = 43;
+        int writer = (Integer)session.getAttribute("id");
         System.out.println("questionDto = " + questionDto);
         questionDto.setUserId(writer);
 

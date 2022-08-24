@@ -73,8 +73,8 @@ public class AccompanyController {
     public String modify(AccompanyDto accompanyDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         //userId는 인조식별자
-//        Integer writer = (int) session.getAttribute("userId");
-        Integer writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        Integer writer = 43;
         System.out.println("accompanyDto = " + accompanyDto);
         accompanyDto.setUserId(writer);
 
@@ -175,10 +175,10 @@ public class AccompanyController {
     }
 
     @PostMapping("/remove")
-    public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
+    public String remove(Integer id, Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         //writer
-//        Integer writer = (int) session.getAttribute("userId");
-        Integer writer = 43;
+        Integer writer = (int) session.getAttribute("id");
+//        Integer writer = 43;
         try {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
@@ -189,6 +189,9 @@ public class AccompanyController {
         } catch (Exception e) {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "DEL_ERR");
+        }
+        if(toURL != null) {
+            return "redirect:" + toURL;
         }
         return "redirect:/accompany/list";
     }

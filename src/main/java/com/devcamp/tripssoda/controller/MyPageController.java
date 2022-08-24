@@ -88,7 +88,7 @@ public class MyPageController {
             return "redirect:/login";
         }
         // 계정관리 페이지로 이동
-        return "user/accountManage.subTiles";
+        return "user/accountManage.mypageTiles";
     }
     // 회원 정보 update form을 보여줌
     @GetMapping("/mypage/info/update")
@@ -115,7 +115,7 @@ public class MyPageController {
             rattr.addFlashAttribute("msg", "READ_INFO_ERR");
             return "redirect:/login";
         }
-        return "user/updateUserForm.subTiles";
+        return "user/updateUserForm.mypageTiles";
     }
 
     // 회원 정보를 업데이트
@@ -127,7 +127,7 @@ public class MyPageController {
         // 에러가 있으면 계정정보 페이지로 redirect
         if(bindingResult.hasErrors()) {
             System.out.println("bindingResult = " + bindingResult);
-            return "user/updateUserForm.subTiles";
+            return "user/updateUserForm.mypageTiles";
         }
 
         try {
@@ -288,13 +288,13 @@ public class MyPageController {
         model.addAttribute("reservationDtoList", reservationDtoList);
 
 
-        return "user/reservationList.subTiles";
+        return "user/reservationList.mypageTiles";
     }
     @GetMapping("/mypage/reservationList/reservationDetail")
     public String reservationDetail(ReservationDto reservationDto, Model model) {
         model.addAttribute("reservationDto", reservationDto);
 
-        return "user/reservationDetail.subTiles";
+        return "user/reservationDetail.mypageTiles";
     }
 
     // 적립 내역 페이지로 이동
@@ -326,7 +326,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("userPointHistoryDtoList", userPointHistoryDtoList);
 
-        return "user/pointHistory.subTiles";
+        return "user/pointHistory.mypageTiles";
     }
 
     // 여행후기 페이지로 이동
@@ -352,7 +352,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("productReviewDtoList", productReviewDtoList);
 
-        return "user/tourReviewList.subTiles";
+        return "user/tourReviewList.mypageTiles";
 
     }
 
@@ -386,7 +386,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("questionDtoList", questionDtoList);
 
-        return "user/qnaList.subTiles";
+        return "user/qnaList.mypageTiles";
     }
 
     // 내 Q&A 페이지 - 질문을 삭제하는 메서드
@@ -434,7 +434,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("answerDtoList", answerDtoList);
 
-        return "user/answerList.subTiles";
+        return "user/answerList.mypageTiles";
     }
 
     // 내 동행게시글 페이지로 이동
@@ -460,7 +460,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("accompanyDtoList", accompanyDtoList);
 
-        return "user/accompanyList.subTiles";
+        return "user/accompanyList.mypageTiles";
     }
 
     // 내 1:1 문의 페이지로 이동
@@ -485,7 +485,7 @@ public class MyPageController {
         model.addAttribute("ph", ph);
         model.addAttribute("inquiryDtoList", inquiryDtoList);
 
-        return "user/inquiryList.subTiles";
+        return "user/inquiryList.mypageTiles";
     }
 
     // 1:1 문의글을 읽는 메서드
@@ -495,7 +495,7 @@ public class MyPageController {
         model.addAttribute("inquiryDto", inquiryDto);
         model.addAttribute("sc", sc);
 
-        return "user/inquiryForm.subTiles";
+        return "user/inquiryForm.mypageTiles";
     }
 
     // 1:1 문의글을 수정하는 메서드
@@ -506,7 +506,7 @@ public class MyPageController {
         inquiryDto.setUserId(userId);
 
         try {
-            inquiryService.updateUserInquiry(inquiryDto);
+            inquiryService.updateUserInquiry(inquiryDto, userId);
 
             rattr.addFlashAttribute("msg", "MOD_OK");
             rattr.addAttribute("page", sc.getPage());
@@ -517,7 +517,7 @@ public class MyPageController {
             e.printStackTrace();
             model.addAttribute("inquiryDto", inquiryDto);
             model.addAttribute("msg", "MOD_ERR");
-            return "user/inquiryForm.subTiles";
+            return "user/inquiryForm.mypageTiles";
         }
 
     }
@@ -546,7 +546,7 @@ public class MyPageController {
     @GetMapping("/mypage/inquiryList/write")
     public String writeInquiry(Model model) {
         model.addAttribute("mode", "new");
-        return "user/inquiryForm.subTiles";
+        return "user/inquiryForm.mypageTiles";
     }
 
     // 1:1 문의글 form 전송
@@ -568,7 +568,7 @@ public class MyPageController {
             model.addAttribute("inquiryDto", inquiryDto);
             model.addAttribute("msg", "WRT_ERR");
             model.addAttribute("mode", "new");
-            return "user/inquiryForm.subTiles";
+            return "user/inquiryForm.mypageTiles";
         }
 
         return "redirect:/mypage/inquiryList";

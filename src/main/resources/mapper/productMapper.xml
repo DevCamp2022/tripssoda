@@ -173,6 +173,101 @@
         WHERE product_id=#{productId}
         and date(start_date)>date(now()+INTERVAL 1 DAY);
     </select>
+    <select id="selectOptionList" parameterType="int" resultType="ProductOptionDto">
+        SELECT
+            *
+        FROM
+            product_option
+        WHERE
+              product_id=#{productId};
+    </select>
+    <select id="selectProductByApprovalStatus" parameterType="String" resultType="ApprovalProductDto">
+        SELECT
+            pt.user_id as partner_id,
+            pt.company_name as company_name,
+            pd.id AS product_id,
+            pd.title AS title,
+            pd.req_time AS req_time,
+            pd.day_cnt AS day_cnt,
+            pd.limit_qty AS limit_qty,
+            pd.min_member AS min_member,
+            pd.max_member AS max_member,
+            pd.approval_status as approval_status,
+            pds.price as product_price
+        FROM
+            product AS pd
+        LEFT JOIN
+            partner AS pt
+        ON
+            pt.user_id = pd.partner_id
+        LEFT JOIN
+            product_schedule AS pds
+        ON
+            pd.id = pds.product_id
+        WHERE
+            pd.approval_status = #{approvalStatus}
+        GROUP BY
+            pd.id
+        ORDER BY
+            pd.created_at;
+
+    </select>
+    <select id="count" resultType="int">
+        select count(*) from product;
+    </select>
+
+    <select id="selectProductDetailById" parameterType="int" resultType="GetDetailProductDto">
+        SELECT *
+        FROM product AS p
+                 INNER JOIN product_schedule AS ps
+                            ON (p.id=ps.product_id)
+        WHERE p.id=#{productId}
+        group by p.id;
+    </select>
+
+    <select id="selectProductAvailability" parameterType="Map" resultType="int">
+        SELECT
+            CASE WHEN(current_member>=max_member) THEN 0 ELSE 1 END
+                AS available FROM product_schedule
+        WHERE product_id = #{productId} AND id =#{scheduleId}
+    </select>
+
+    <update id="increaseCurrentMember" parameterType="Map">
+        UPDATE
+            product_schedule
+        SET current_member = CASE
+            WHEN (current_member <![CDATA[<]]> max_member)
+            THEN current_member+1 ELSE current_member END,
+        member_status = CASE
+            WHEN (current_member=max_member)
+            THEN 1 ELSE 0 END
+        WHERE product_id=#{productId} AND id = #{scheduleId};
+    </update>
+    <update id="setUpdateBy" parameterType="Map">
+        UPDATE
+            product_schedule
+        SET
+            updated_by = #{userId},
+            updated_at = now()
+        WHERE
+              product_id = #{productId} AND id=#{scheduleId};
+    </update>
+    <update id="updateProductApproval" parameterType="ApprovalDto">
+        UPDATE
+            product
+        SET approval_status = #{approval},
+            updated_at = now(),
+            updated_by = #{userId}
+        WHERE id = #{productId}
+    </update>
+    <insert id="insertApprovalHistory" parameterType="ApprovalDto">
+        INSERT INTO
+            partner_approval_history
+            (partner_id, canceled_reason, canceled_at,
+             created_at, created_by, updated_at, updated_by)
+        VALUE(#{userId}, #{reason}, now(), now(),
+            #{userId}, now(), #{userId})
+    </insert>
 
     <select id="selectProductUpdate" parameterType="int" resultType="UpdateProductDto">
         SELECT

@@ -2,14 +2,14 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.mapper.IpBanListMapper;
-import com.devcamp.tripssoda.service.AdminBoardService;
-import com.devcamp.tripssoda.service.AdminUserService;
-import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.service.*;
 import com.devcamp.tripssoda.util.annotations.SkipChecking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,17 +26,22 @@ public class AdminController {
     private final AdminBoardService adminBoardService;
     private final AdminUserService adminUserService;
     private final UserService userService;
-
+    private final AdminProductService adminProductService;
+    private final ProductService productService;
     @Autowired
     private final IpBanListMapper ipBanListMapper = null;
 
     public AdminController(AdminBoardService adminBoardService,
                            AdminUserService adminUserService,
-                           UserService userService)
+                           UserService userService,
+                           AdminProductService adminProductService,
+                           ProductService productService )
     {
         this.adminBoardService = adminBoardService;
         this.adminUserService = adminUserService;
         this.userService = userService;
+        this.adminProductService = adminProductService;
+        this.productService = productService;
     }
 
 //    @AuthChecking
@@ -317,6 +322,38 @@ public class AdminController {
         return "admin/partner_manage.subTiles";
     }
 
+    @GetMapping("/productList")
+    public String productList(Model m, SearchCondition sc) throws Exception{
+
+
+        try{
+            int totalCnt = adminProductService.getAllProductCnt();
+            System.out.println("partner - totalCnt = " + totalCnt);
+            m.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+//                List<PartnerDto> list = adminUserService.searchSelectPartner(sc);
+//            List<PartnerDto> partnerList = adminUserService.selectOnPartner(sc);
+//            List<PartnerDto> applicantList = adminUserService.selectOnApplicant(sc);
+            List<AdminProductDto> approvedList = adminProductService.selectProductByApprovalStatus("1");
+            List<AdminProductDto> unapprovedList = adminProductService.selectProductByApprovalStatus("0");
+
+//                m.addAttribute("list", list);
+            m.addAttribute("approvedList", approvedList);
+            m.addAttribute("unapprovedList", unapprovedList);
+
+            m.addAttribute("ph", pageHandler);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            m.addAttribute("msg", "LIST_ERR");
+            m.addAttribute("totalCnt", 0);
+        }
+
+        return "admin/product_manage.subTiles";
+    }
+
     //파트너 심사 승인
     @PostMapping("/partner/approve")
     public String approval(PartnerDto partnerDto, Model m, SearchCondition sc, Integer id) throws Exception {
@@ -331,10 +368,39 @@ public class AdminController {
     @GetMapping("/partner/info")
     public String partnerInfo(Integer id, Model m){
         PartnerDto partnerDto = adminUserService.selectPartnerInfo(id);
+        System.out.println("partnerDto = " + partnerDto);
         m.addAttribute("partnerDto", partnerDto);
-        return "admin/partnerInfo.subTiles";
+        return "admin/partner_detail.subTiles";
     }
 
+    @GetMapping("/productList/info")
+    public String getProductDetail(Integer productId, Model model) {
+        System.out.println(productId);
+        GetDetailProductDto details = productService.getProductDetailById(productId);
+        System.out.println("details = " + details);
+        List<ProductScheduleDto> list = productService.selectScheduleList(productId);
+        System.out.println("list = " + list);
+        List<ProductOptionDto> option = productService.selectOptionList(productId);
+        System.out.println("option = " + option);
 
+        model.addAttribute("details", details);
+        model.addAttribute("list", list);
+        model.addAttribute("option", option);
 
+        return "admin/product_detail.subTiles";
+    }
+
+    @GetMapping("/product/approval")
+    public ResponseEntity<String> approveProduct(HttpSession session, ApprovalDto approvalDto){
+        Integer userId = (Integer) session.getAttribute("id");
+        approvalDto.setUserId(userId);
+        System.out.println("productApprovalDto = " + approvalDto);
+        try {
+            productService.updateProductApproval(approvalDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
 }

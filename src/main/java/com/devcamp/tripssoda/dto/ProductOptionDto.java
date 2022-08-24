@@ -127,4 +127,20 @@ public class ProductOptionDto {
         this.updatedAt = updatedAt;
     }
 
+    @Override
+    public String toString() {
+        return "ProductOptionDto{" +
+                "optionId=" + optionId +
+                ", productId=" + productId +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", price='" + price + '\'' +
+                ", orderNo=" + orderNo +
+                ", createdAt=" + createdAt +
+                ", createdBy=" + createdBy +
+                ", updatedAt=" + updatedAt +
+                ", updatedBy=" + updatedBy +
+                '}';
+    }
 }

@@ -48,10 +48,21 @@ public class QuestionServiceImpl implements QuestionService {
         return questionMapper.selectPage(map);
     }
 
+    @Override
     public int modifyAnswerCnt(Integer questionId, Integer cnt) throws Exception {
         Map map = new HashMap();
-        map.put("questionId", questionId);
+        map.put("id", questionId);
         map.put("cnt", cnt);
         return questionMapper.updateAnswerCnt(map);
+    }
+
+    @Override
+    public List<QuestionDto> waitingGetPage(Map map) throws Exception {
+        return questionMapper.waitingSelectPage(map);
+    }
+
+    @Override
+    public int waitingGetCount() throws Exception {
+        return questionMapper.waitingCount();
     }
 }

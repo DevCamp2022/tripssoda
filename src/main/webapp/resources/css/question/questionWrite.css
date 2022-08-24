@@ -1,0 +1,128 @@
+/* 공통 요소 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* '여행친구찾기' 사진 영역 */
+.main-img {
+    width: 1200px;
+    min-height: 341px;
+    margin: 0 auto;
+    color: rgb(255,255,255);
+    background-image: url("/image/question/main-img.PNG");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* 지역선택, '모집인원', '날짜 선택'을 묶은 영역 */
+.select-region-box {
+    margin: 20px auto 0 auto;
+    width: 1200px;
+    height: 525px;
+    border: 1px solid rgb(233,233,233);
+    background-color: #fff;
+}
+/* 썸네일업로드부터 버튼까지 그룹화한 영역 */
+.main-group {
+    width: 1200px;
+    margin: auto;
+}
+.title-box {
+    display: flex;
+    margin-top: 30px;
+    width: 1200px;
+    height: 54px;
+    border-radius: 4px;
+    border: 1px solid rgb(233, 233, 233);
+}
+.question-icon-box {
+    padding: 20px;
+
+
+}
+.question-icon {
+    width: 20px;
+    height: 16px;
+    background-image: url("/image/question/question-input-icon.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* 제목 - input 태그 */
+.title-input-box {
+    width: 1140px;
+    border: none;
+    box-sizing: border-box;
+    background-color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+/* 제목, 내용 사이의 실선 */
+.only-line {
+    width: 1200px;
+    height: 1px;
+    border-top: 1px solid rgb(233, 233, 233);
+    margin-top: 30px;
+}
+/* 내용 - textarea 태그 */
+.content-input-box {
+    margin-top: 30px;
+    width: 1200px;
+    min-height: 772px;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.hashtag-input-box {
+    margin-top: 30px;
+    width: 1200px;
+    height: 54px;
+    border-radius: 4px;
+    border: 1px solid rgb(233, 233, 233);
+    box-sizing: border-box;
+    background-color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+/* 취소, 완료 버튼을 그룹화 */
+.button-line {
+    display: flex;
+    width: 1200px;
+    height: 190px;
+    margin-top: 70px;
+}
+/* 취소버튼 */
+.cancel-btn {
+
+    width: 592px;
+    height: 54px;
+    border-radius: 4px;
+    /* line-height: 54px; */
+    background-color: rgb(219,219,219);
+    padding: 17px 5px;
+    color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+    outline: 0;
+    border: 0;
+}
+/* 완료버튼 */
+.ok-btn {
+    margin-left: 16px;
+    width: 592px;
+    height: 54px;
+    border-radius: 4px;
+    /* line-height: 100px; */
+    text-align: center;
+    background-color: rgb(0,206,124);
+    color: #fff;
+    padding: 17px 5px;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+}

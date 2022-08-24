@@ -54,7 +54,7 @@ public class ProductController {
         GetDetailProductDto details = productService.getProductDetail(dto);
 
         Integer productId = dto.getProductId();
-        List<ProductScheduleDto> list = productService.getScheduleList(productId);
+        List<ProductScheduleDto> list = productService.selectScheduleList(productId);
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 

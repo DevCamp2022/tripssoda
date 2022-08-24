@@ -10,12 +10,12 @@
 <div class="main">
     <div class="contents">
         <h2 class="title">여행 후기</h2>
-        <div class="search-wrap">
-            <h3 class="search-condition">조회 기간</h3>
-            <input type="date" class="search-date" value="2019-09-22" min="1992-04-08" max="2022-08-18"> -
-            <input type="date" class="search-date" value="2019-09-22" min="1992-04-08" max="2022-08-18">
-            <button class="search-btn" type="button">조회</button>
-        </div>
+<%--        <div class="search-wrap">--%>
+<%--            <h3 class="search-condition">조회 기간</h3>--%>
+<%--            <input type="date" class="search-date" value="2019-09-22" min="1992-04-08" max="2022-08-18"> ---%>
+<%--            <input type="date" class="search-date" value="2019-09-22" min="1992-04-08" max="2022-08-18">--%>
+<%--            <button class="search-btn" type="button">조회</button>--%>
+<%--        </div>--%>
         <div class="review-wrap">
             <p class="review-count">후기 ${totalCnt}건</p>
             <div class="th-wrap">

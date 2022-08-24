@@ -180,7 +180,7 @@ public class RegisterController {
                 e.printStackTrace();
                 return "Insert emailVerification failed";
             }
-            return "Email has sent";
+            return "Email has been sent";
         }
     }
 
@@ -262,6 +262,10 @@ public class RegisterController {
 //        return "user/emailCheck.subTiles";
 //    }
 
+//    @GetMapping("/test")
+//    public String asd() {
+//        return "user/registerSuccess.mainTiles";
+//    }
 
 }
 

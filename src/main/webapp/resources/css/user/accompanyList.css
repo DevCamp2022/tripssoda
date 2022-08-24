@@ -33,7 +33,7 @@ body {
     width: 754px;
     padding: 40px 0 15px 0px;
     box-sizing: border-box;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
@@ -43,6 +43,7 @@ body {
     margin: 10px auto;
     border: 1px solid #e9e9e9;
     overflow: hidden;
+    border-radius: 4px;
 }
 
 .thumbnail-wrap {
@@ -79,6 +80,7 @@ body {
 
 .region {
     padding-left: 5px;
+    padding-right: 10px;
 }
 
 .start-date {
@@ -119,7 +121,7 @@ body {
 
 .paging-container {
     width: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: center;
     float: none;
 }

@@ -20,7 +20,7 @@
 		<div class="inner">
 			<h1 class="site-logo"><a href="/"><img src="/image/main/ssoda_logo.png" alt="logo"></a></h1>
 			<nav class="primary-nav" role="navigation">
-				<ul class="list">
+				<ul class="menu-list">
 					<li><a href="/#sub_menu01" class="mainBtn">커뮤니티</a></li>
 					<li><a href="/product/list#sub_menu02" class="mainBtn">여행상점</a></li>
 				</ul>

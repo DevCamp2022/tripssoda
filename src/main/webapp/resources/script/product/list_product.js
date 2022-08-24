@@ -1,3 +1,4 @@
+//next, prev버튼이벤트(현재 사용안하고있음)
 $(document).ready(function(){
   for(let i=0; i<10; i++) {
     if(i>4){
@@ -35,3 +36,15 @@ $(".prevBtn").click(function(){
   starter = 1;
   handleList();
 })
+
+//카테고리 버튼 클릭 이벤트(스크롤이동)
+//에디터 388, 프라이빗 748
+$(document).on('click', '#category-editor', function(){
+  window.scrollTo(0, 388);
+
+});
+
+$(document).on('click', '#category-private', function(){
+  window.scrollTo(0, 748);
+
+});

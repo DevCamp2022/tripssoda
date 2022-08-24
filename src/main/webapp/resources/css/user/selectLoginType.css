@@ -13,8 +13,6 @@ body {
 
 .contents {
     width: 723px;
-    border: 3px solid #00ce7c;
-    border-radius: 5px;
     margin: 20px auto;
     padding: 20px;
     display: flex;
@@ -81,4 +79,8 @@ body {
     width: 80px;
     cursor: pointer;
     border: none;
+    background-color: #00ce7c;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
 }

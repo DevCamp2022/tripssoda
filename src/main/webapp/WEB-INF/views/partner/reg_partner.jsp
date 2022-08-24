@@ -20,7 +20,7 @@
       </td>
     </tr>
     <tr>
-      <th>상폼소개</th>
+      <th>상품소개</th>
       <td>
         <input type="text" name="intro" id="intro"/>
       </td>

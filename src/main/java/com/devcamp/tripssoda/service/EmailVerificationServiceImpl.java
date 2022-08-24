@@ -92,10 +92,10 @@ public class EmailVerificationServiceImpl implements EmailVerificationService {
     }
 
     @Override
-    public void deleteEmailVerification(String email) throws Exception {
+    public void deleteEmailVerification(String email) throws IllegalAccessException {
         int rowCnt = emailVerificationMapper.deleteEmailVerification(email);
         if(rowCnt != 1) {
-            throw new Exception("이메일 인증정보 삭제 실패");
+            throw new IllegalAccessException("이메일 인증정보 삭제 실패");
         }
     }
 }

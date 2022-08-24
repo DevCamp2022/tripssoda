@@ -4,6 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("PartnerDto")
 public class PartnerDto {
+    private Integer id;
     private Integer userId;
     private Integer regNumber;
     private String companyName;
@@ -21,6 +22,14 @@ public class PartnerDto {
     private Integer createBy;
     private String updatedAt;
     private Integer updatedBy;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -161,6 +170,7 @@ public class PartnerDto {
     @Override
     public String toString() {
         return "PartnerDto{" +
+                "id=" + id +
                 "userId=" + userId +
                 ", regNumber=" + regNumber +
                 ", companyName='" + companyName + '\'' +

@@ -19,9 +19,6 @@ import static org.junit.Assert.*;
 public class UserServiceImplTest {
 
     @Autowired
-    private UserMapper userMapper;
-    
-    @Autowired
     private UserService userService;
 
     @Test
@@ -29,6 +26,9 @@ public class UserServiceImplTest {
         UserDto userDto = new UserDto("김윤기", "1234", "abcde8@abc.com", "aaaaaaaa", "01046664272", 'M', new Date(), "U001");
 
         userService.insertUser(userDto, "I001", "I002", "I003");
+
+        assertTrue(1==1);
+        assertTrue(2==2);
 
     }
 

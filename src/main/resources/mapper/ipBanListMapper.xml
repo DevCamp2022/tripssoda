@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.IpBanListMapper">
+
+    <select id="findIpBanList" resultType="String">
+        SELECT ip
+        FROM ip_ban_list
+    </select>
+
+    <insert id="insertIpBan" parameterType="java.util.Map">
+        insert into ip_ban_list (ip)
+        values (#{ip});
+    </insert>
+
+</mapper>

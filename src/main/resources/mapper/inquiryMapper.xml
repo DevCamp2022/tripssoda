@@ -22,4 +22,21 @@
         LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 
+    <update id="updateUserInquiry" parameterType="InquiryDto">
+        UPDATE inquiry
+        SET title = #{title}, content = #{content}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <delete id="deleteUserInquiry" parameterType="InquiryDto">
+        DELETE FROM inquiry
+        WHERE id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <insert id="insertUserInquiry" parameterType="InquiryDto">
+        INSERT INTO inquiry
+        (user_id, title, content, menu_code, created_by, updated_by)
+        VALUES (#{userId}, #{title}, #{content}, #{menuCode}, #{createdBy}, #{updatedBy})
+    </insert>
+
 </mapper>

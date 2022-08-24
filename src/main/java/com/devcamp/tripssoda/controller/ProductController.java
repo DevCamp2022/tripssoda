@@ -39,7 +39,6 @@ public class ProductController {
             @ModelAttribute(value = "RegProductOptionListDto[]") RegProductOptionListDto regProductOptionListDto,
             @ModelAttribute(value = "RegProductScheduleListDto[]") RegProductScheduleListDto regProductScheduleListDto) {
 
-        System.out.println("[Controller]regProductScheduleListDto = " + regProductScheduleListDto);
         productService.regProduct(dto, regProductOptionListDto, regProductScheduleListDto, request, uploadThumb);
         return "redirect:/product/register"; //나중에 마이페이지 파트너 상품등록 확인뷰로 바꿀것
     }
@@ -53,15 +52,36 @@ public class ProductController {
     @GetMapping("/detail")
     public String getProductDetail(GetDetailProductDto dto, Model model) {
         GetDetailProductDto details = productService.getProductDetail(dto);
-        System.out.println("dto.getProductId() = " + dto.getProductId());
-        System.out.println("dto.getScheduleId() = " + dto.getScheduleId());
 
         Integer productId = dto.getProductId();
-        List<ProductScheduleDto> list = productService.getScheduleList(productId);
+        List<ProductScheduleDto> list = productService.selectScheduleList(productId);
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 
-        System.out.println("details = " + details);
         return "product/detail_product.mainTiles";
+    }
+
+    @GetMapping("/update")
+    public String updateProduct(Integer productId, Model model) {
+        UpdateProductDto dto = productService.getUpdateProduct(productId);
+        List<UpdateProductDto> poList = productService.getUpdateProductOption(productId);
+        List<UpdateProductDto> psList = productService.getUpdateProductSchedule(productId);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("poList", poList);
+        model.addAttribute("psList", psList);
+
+        return "product/update_product.mainTiles";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(UpdateProductDto dto,
+                                @RequestParam MultipartFile uploadThumb,
+                                HttpServletRequest request,
+                                RegProductOptionListDto regProductOptionListDto,
+                                RegProductScheduleListDto regProductScheduleListDto) {
+        System.out.println("dto.getProductId() = "+dto.getProductId());
+        productService.updateProduct(dto, uploadThumb, request, regProductOptionListDto, regProductScheduleListDto);
+        return "redirect:/product/update?productId="+dto.getProductId();
     }
 }

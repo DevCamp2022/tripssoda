@@ -2,10 +2,12 @@ package com.devcamp.tripssoda.service;
 
 
 import com.devcamp.tripssoda.dto.*;
+import com.devcamp.tripssoda.exception.ExceedMaxMemberException;
 import com.devcamp.tripssoda.exception.NotEnoughPointException;
 import com.devcamp.tripssoda.exception.NotValidAmountException;
 import com.devcamp.tripssoda.exception.InsertException;
 import com.devcamp.tripssoda.mapper.PaymentMapper;
+import com.devcamp.tripssoda.mapper.ProductMapper;
 import com.devcamp.tripssoda.mapper.ReservationMapper;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
@@ -28,14 +30,17 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentMapper paymentMapper;
     private final UserPointService userPointService;
     private final IamportClient iamportClient;
-    public final ReservationService reservationService;
+    private final ReservationService reservationService;
+    private final ProductMapper productMapper;
 
     public PaymentServiceImpl(PaymentMapper paymentMapper, UserPointService userPointService,
-                              IamportClient iamportClient, ReservationService reservationService) {
+                              IamportClient iamportClient, ReservationService reservationService,
+                              ProductMapper productMapper) {
         this.paymentMapper = paymentMapper;
         this.userPointService = userPointService;
         this.iamportClient = iamportClient;
         this.reservationService=reservationService;
+        this.productMapper = productMapper;
     }
 
     @Override
@@ -60,7 +65,24 @@ public class PaymentServiceImpl implements PaymentService {
         //    paymentDetailDto.setUsedPoint(0);
         //}
 
+
+
         try {
+            Map<String, Integer> scheduleInfo = new HashMap<>();
+            scheduleInfo.put("userId", paymentDetailDto.getUserId());
+            scheduleInfo.put("productId", paymentDetailDto.getProductId());
+            scheduleInfo.put("scheduleId", paymentDetailDto.getScheduleId());
+
+
+            int rowCnt = 0;
+            rowCnt = productMapper.increaseCurrentMember(scheduleInfo);
+            if(rowCnt != 1){
+                throw new InsertException("Error occurred while increasing current member count");
+            }
+            rowCnt = productMapper.setUpdateBy(scheduleInfo);
+            if(rowCnt != 1){
+                throw new InsertException("Error occurred while updating system column");
+            }
             //요청된 가격과 실제 서버에서의 가격이 동일한지 체크
             boolean validPrice = isValidPrice(paymentDetailDto);
 
@@ -71,7 +93,6 @@ public class PaymentServiceImpl implements PaymentService {
             Integer usedPoint = paymentDetailDto.getUsedPoint();
             Integer userId = paymentDetailDto.getUserId();
 
-            int rowCnt =0;
             //포인트가 사용됐을때만, 사용한 포인트 만큼 실제로 보유중인지 확인
             if(paymentDetailDto.getUsedPoint()>0) {
                 int availablePoint = userPointService.isAvailablePoint(usedPoint, userId);
@@ -103,21 +124,30 @@ public class PaymentServiceImpl implements PaymentService {
 
         } catch (NotValidAmountException payAmount) {
             payAmount.printStackTrace();
-            iamportClient.cancelPaymentByImpUid(createCancelData(paymentDetailDto.getImpUid(), "요청결제가격과 실제가격 불일치"));
+            iamportCancelPayment(paymentDetailDto.getImpUid(), "요청결제가격과 실제가격 불일치");
             throw new Exception("code: P100");
         } catch (NotEnoughPointException userPoint) {
             userPoint.printStackTrace();
-            iamportClient.cancelPaymentByImpUid(createCancelData(paymentDetailDto.getImpUid(), "유저 포인트 부족"));
+            iamportCancelPayment(paymentDetailDto.getImpUid(), "유저 포인트 부족");
             throw new Exception("code: P200");
         } catch (InsertException insert) {
             insert.printStackTrace();
-            iamportClient.cancelPaymentByImpUid(createCancelData(paymentDetailDto.getImpUid(), "서버 에러 발생으로 인한 취소"));
+            iamportCancelPayment(paymentDetailDto.getImpUid(), "서버 에러 발생으로 인한 취소");
             throw new Exception("code: P300");
         } catch (Exception e){
             e.printStackTrace();
-            iamportClient.cancelPaymentByImpUid(createCancelData(paymentDetailDto.getImpUid(), "알 수 없는 원인으로 인한 취소"));
+            iamportCancelPayment(paymentDetailDto.getImpUid(), "알 수 없는 원인으로 인한 취소");
             throw new Exception();
         }
+    }
+
+    public void iamportCancelPayment(String impUid, String reason) throws IamportResponseException, IOException {
+        iamportClient.cancelPaymentByImpUid(createCancelData(impUid, reason));
+    }
+
+    //return값이 0이면 available false, 1이면 available true
+    public int isMemberAvailable(Map<String, Integer> scheduleInfo) {
+        return productMapper.selectProductAvailability(scheduleInfo);
     }
 
     private CancelData createCancelData(String imp_uid, String reason) throws IamportResponseException, IOException {
@@ -221,5 +251,10 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentSuccessDto selectPaymentSuccessDetail(Map<String,  Integer> paymentInfo){
         return paymentMapper.selectPaymentSuccessDetail(paymentInfo);
     }
+
+    public boolean increaseCurrentMember(Map<String, Integer> scheduleInfo){
+        return true;
+    }
+
 }
 

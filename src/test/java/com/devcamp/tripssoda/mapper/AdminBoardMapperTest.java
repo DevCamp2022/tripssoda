@@ -17,6 +17,7 @@ public class AdminBoardMapperTest {
 
     public AdminBoardMapperTest(){}
 
+
     @Test
     public void insertTestData() throws Exception{
 //        adminBoardMapper.deleteAll();

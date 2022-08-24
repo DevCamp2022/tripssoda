@@ -5,15 +5,24 @@
 ol, ul, li {
     list-style: none;
 }
+/* body */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
 .main {
     width: 1200px;
     margin: 0 auto;
 }
+.contents {
+    width: 952px;
+    margin: 100px auto;
+}
 
 .title {
     font-size: 22px;
     text-align: center;
+    font-weight: bold;
 }
 
 .sub-title {
@@ -23,26 +32,50 @@ ol, ul, li {
 
 .interest-list {
     overflow: hidden;
-    width: 1000px;
+    width: 100%;
     margin: 20px auto;
 }
 
 .interest {
     float: left;
-    width: 460px;
+    display: flex;
+    align-items: center;
+    width: 450px;
     box-sizing: border-box;
-    border: 1px solid black;
+    border: 1px solid #e9e9e9;
+    border-radius: 4px;
     margin: 10px;
     padding: 10px;
+    overflow: hidden;
 }
-
+.interest .img {
+    display: inline;
+    width: 140px;
+    height: 140px;
+}
+.interest-info-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.keyword > span {
+    color: #00ce7c;
+ }
 .interest .keyword {
     font-size: 18px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    width: 100%;
+    padding-left: 10px;
+}
+.interest-info {
+    width: 100%;
+    font-size: 15px;
+    padding-left: 10px;
 }
 
 .select-box {
-    width: 1000px;
+    width: 100%;
     margin: 20px auto;
     display: flex;
     justify-content: center;
@@ -58,7 +91,18 @@ ol, ul, li {
 }
 
 .button-wrap > button {
-    margin: 10px;
+    display: block;
+    background: #00ce7c;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+    height: 54px;
+    border: none;
+    margin: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 4px;
 }
 
 

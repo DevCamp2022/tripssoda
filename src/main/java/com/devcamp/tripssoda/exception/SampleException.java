@@ -1,4 +1,6 @@
 package com.devcamp.tripssoda.exception;
 
-public class SampleException {
+public class SampleException extends Exception{
+
+
 }

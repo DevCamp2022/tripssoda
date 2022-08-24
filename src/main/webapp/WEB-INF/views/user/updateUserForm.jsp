@@ -163,6 +163,9 @@
                 let newImg = document.createElement('img');
                 newImg.setAttribute("src", e.target.result);
                 $(".img-wrap").html(newImg);
+                $(".img-wrap").children().css("width", "100%");
+                $(".img-wrap").children().css("height", "100%");
+                $(".img-wrap").children().css("border-radius", "200px");
             }
             reader.readAsDataURL($(this)[0].files[0]);
         });

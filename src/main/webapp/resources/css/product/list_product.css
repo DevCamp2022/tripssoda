@@ -1,6 +1,12 @@
+body{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  background-color: #fff;
+}
 .div-category-button-wrap {
-  margin-top: 150px;
-  margin-bottom: 150px;
+  margin-top: 130px;
+  margin-bottom: 130px;
   text-align: center;
   /* margin: 0 auto; */
 }
@@ -36,17 +42,27 @@
 .div-list-wrap{
   text-align: center;
   width: 100%;
+  overflow: hidden;
+  border-radius: 15px;
 }
 
 .img-thumbnail{
-  width: 250px;
-  height: 190px;
+
+  width: 100%;
+  height: 100%;
   border-radius: 15px;
+  transition: all 0.4s;
+}
+
+.img-thumbnail:hover{
+  transform: scale(1.1);
 }
 
 .thumbnail-wrapper{
   width: 250px;
   height: 190px;
+  overflow: hidden;
+  border-radius: 15px;
 }
 
 .main-tourTitle>h4{
@@ -116,4 +132,8 @@
 .nextBtn{
   display: inline-block;
   cursor: pointer;
+}
+
+.content{
+  padding-bottom: 100px;
 }

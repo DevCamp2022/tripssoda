@@ -1,7 +1,10 @@
 package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
+import com.devcamp.tripssoda.dto.PageHandlerOld;
+import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
+import com.devcamp.tripssoda.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +30,42 @@ public class AccompanyController {
 //    }
 
     AccompanyService accompanyService;
+    UserService userService;
 
     //생성자로 주입
-    AccompanyController(AccompanyService accompanyService) {
+    AccompanyController(AccompanyService accompanyService, UserService userService) {
         this.accompanyService = accompanyService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/waiting")
+    public String waitingList(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+//        if(!loginCheck(request))
+//            return "redirect:/login/login+toURL"+request.getRequestURL();
+        if(page==null) page=1;
+        if(pageSize==null) pageSize=12;
+
+        int totalCnt = 0;
+        try {
+            totalCnt = accompanyService.waitingGetCount();
+
+            PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
+
+            Map map = new HashMap();
+            map.put("offset", (page-1)*pageSize);
+            map.put("pageSize", pageSize);
+
+            List<AccompanyDto> list = accompanyService.waitingGetPage(map);
+            m.addAttribute("mode", "waiting");
+            m.addAttribute("ph", ph);
+            m.addAttribute("list", list);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("msg", "LIST_ERR");
+        }
+        return "accompany/accompanyList.mainTiles";
     }
 
     @PostMapping("/modify")
@@ -41,6 +76,25 @@ public class AccompanyController {
         Integer writer = 43;
         System.out.println("accompanyDto = " + accompanyDto);
         accompanyDto.setUserId(writer);
+
+        //유효성 검사를 추가 해야 한다.
+        //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
+        if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
+            accompanyDto.setHashtag("아무나다좋아");
+        String[] hashList = accompanyDto.getHashtag().split(" ");
+        //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
+        String hashtag2 = "";
+        for(String hashtag : hashList) {
+            if(hashtag.charAt(0)!='#')
+                hashtag2 += "# "+hashtag+" ";
+            else {
+                hashtag2 += hashtag+" ";
+            }
+        }
+        System.out.println("hashtag2 = " + hashtag2);
+        //3. 변환한 hashcode를 setter로 dto에 저장한다.
+        accompanyDto.setHashtag(hashtag2);
+
         try {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
@@ -86,7 +140,11 @@ public class AccompanyController {
         //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
         String hashtag2 = "";
         for(String hashtag : hashList) {
-            hashtag2 += "#"+hashtag+" ";
+            if(hashtag.charAt(0)!='#')
+                hashtag2 += "#"+hashtag+" ";
+            else {
+                hashtag2 += hashtag+" ";
+            }
         }
         System.out.println("hashtag2 = " + hashtag2);
         //3. 변환한 hashcode를 setter로 dto에 저장한다.
@@ -137,19 +195,22 @@ public class AccompanyController {
     @GetMapping("/read")
     public String read(Integer id, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         AccompanyDto accompanyDto = null;
+        //닉네임, 프로필사진 등을 유저에서 얻기 위해서 위에서 DI로 주입받고, 호출해야함.
+//        UserDto userDto = null;
 //        System.out.println("accompanyDto.getHashtag() = " + accompanyDto.getHashtag());
         try {
             accompanyDto = accompanyService.read(id);
+
             //1. endAt을 불러온다.
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             //2. 오늘 날짜를 구한다.
 //            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            Date now = new Date();
-//            String nowTime = df.format(now);
-//            System.out.println("nowTime = " + nowTime);
-            long milliSeconds = now.getTime();
-            String strLong = Long.toString(milliSeconds);
-            System.out.println("milliSeconds = " + milliSeconds);
+//            Date now = new Date();
+////            String nowTime = df.format(now);
+////            System.out.println("nowTime = " + nowTime);
+//            long milliSeconds = now.getTime();
+//            String strLong = Long.toString(milliSeconds);
+//            System.out.println("milliSeconds = " + milliSeconds);
 
             //3. 둘 다 milliseconds로 변환 후 오늘 날짜 - endAt<=0이면
 

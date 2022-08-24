@@ -63,7 +63,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 
     @Override
     public int getInquiryCnt() {
-        return 0; 1
+        return 0;
     }
 
     @Override

@@ -177,7 +177,7 @@ public class AdminController {
 
 
     @PostMapping("/remove")
-    public String remove(Integer id,String menuCode, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
+    public String remove(Integer id, String menuCode, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
         Integer userId = (Integer) session.getAttribute("id");
 
         try {

@@ -24,7 +24,8 @@
 <form id="form" action="" method="">
     <div class="main-group">
         <div class="upload-img">
-
+            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf">
+            <div class="div-thumbnail"></div>
         </div>
         <div class="select-region-box">
 
@@ -77,6 +78,7 @@
             let form = $("#form");
             form.attr("action", "<c:url value='/accompany/write'/>");
             form.attr("method", "post");
+            form.attr("enctype", "multipart/form-data")
             if(formCheck()) {
                 form.submit();
             }
@@ -99,6 +101,25 @@
             form.attr("action", "<c:url value='/accompany/remove'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
             form.submit();
+        });
+        //thumbnail upload
+        $("#uploadThumb").change(function(){
+            //정규표현식
+            // var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+            var f = $(this)[0].files[0]; //현재 선택한 파일
+            // if(!f.type.match(reg)){
+            //     alert("유효한 확장자가 아닙니다.");
+            //     return;
+            // }
+
+            var reader = new FileReader();
+            reader.onload = function(e){
+                let newImg = document.createElement('img');
+                newImg.setAttribute("src", e.target.result);
+                newImg.setAttribute("width",500);
+                $(".div-thumbnail").html(newImg);
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
         });
     });
     // CKEDITOR.replace('content',

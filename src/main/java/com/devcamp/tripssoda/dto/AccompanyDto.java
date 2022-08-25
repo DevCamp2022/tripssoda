@@ -28,6 +28,7 @@ public class AccompanyDto {
     private int createdBy;
     private Date updatedAt;
     private int updatedBy;
+    private String profileImg;
 
     public AccompanyDto() {}
 
@@ -40,6 +41,14 @@ public class AccompanyDto {
         this.content = content;
         this.memberCnt = memberCnt;
         this.hashtag = hashtag;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public void setId(Integer id) {
@@ -250,6 +259,7 @@ public class AccompanyDto {
                 ", createdBy=" + createdBy +
                 ", updatedAt=" + updatedAt +
                 ", updatedBy=" + updatedBy +
+                ", profileImg='" + profileImg + '\'' +
                 '}';
     }
 }

@@ -22,6 +22,15 @@ public class QuestionDto {
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
+    private String profileImg;
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
+    }
 
     public QuestionDto() {}
 
@@ -179,6 +188,7 @@ public class QuestionDto {
                 ", createdBy=" + createdBy +
                 ", updatedAt=" + updatedAt +
                 ", updatedBy=" + updatedBy +
+                ", profileImg='" + profileImg + '\'' +
                 '}';
     }
 }

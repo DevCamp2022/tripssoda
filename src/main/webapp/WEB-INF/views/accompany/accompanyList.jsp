@@ -30,7 +30,12 @@
 
 </div>
 <div class="main-group">
-    <div class="sort-bar">
+    <div class="sort-bar2">
+        <a href="<c:url value='/accompany/write'/>">
+        <div class="new-write-btn">
+            동행 글쓰기
+        </div>
+        </a>
         <div class="sort-text">
             정렬
         </div>
@@ -53,28 +58,33 @@
     </div>
     <div class="list-group">
         <c:forEach var="accompanyDto" items="${list}">
-            <a href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
-                <div class="list">
-                    <div class="list-thumbnail">
-
+            <a class="a-tag" href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
+                <div class="list-one">
+                    <div class="list-thumbnail2">
+                        <img class="list-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">
                     </div>
                     <div class="list-title-line">
                         <div class="recruit-on-off">
-                            모집중:${accompanyDto.status}
+                            <c:if test="${accompanyDto.status eq 0}">
+                                모집중
+                            </c:if>
+                            <c:if test="${accompanyDto.status eq 1}">
+                                지난여행
+                            </c:if>
                         </div>
                         <div class="list-title">
-                            제목:${accompanyDto.title}
+                            ${accompanyDto.title}
                         </div>
                     </div>
                     <div class="list-content-line">
-                        내용:${accompanyDto.content}
+                        ${accompanyDto.content}
                     </div>
                     <div class="list-nickname-line">
                         <div class="profile-img">
-
+                            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">
                         </div>
                         <div class="nickname">
-                            닉네임:${accompanyDto.nickname}
+                            ${accompanyDto.nickname}
                         </div>
                         <div class="view-cnt-line">
                             <div class="view-cnt-icon">

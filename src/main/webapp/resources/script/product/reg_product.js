@@ -43,11 +43,11 @@ CKEDITOR.replace('meetingPoint',
 //검색키워드 key이벤트
 function handleKeyword() {
 	if (window.event.keyCode == 13) {
+        if($(".gen-key").val() == ' '){alert("빈 문자열은 입력할 수 없습니다."); return;}
     	// 엔터키가 눌렸을 때
         let s = "";
         s += "<span class='hashes'>" + $(".gen-key").val()
         s += "<input type='hidden' class='hashes' name='keyword' value='" + $(".gen-key").val() + "'>";
-        // 나중에 'X'키 이쁘게 바꿀것!!
         s += "<span class='delBtn'>&nbsp;<span class='material-icons' style='font-size:12px;cursor:pointer;'>clear</span></span></span>";        
         $(".word-list").append(s);
         $(".gen-key").val("").focus();

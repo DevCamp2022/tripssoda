@@ -2,21 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<link href="/css/product/update_product.css" rel='stylesheet' />
+<link href="/css/product/reg_product.css" rel='stylesheet' />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="content">
   <br>
   <h4><strong>상품등록</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
-  <hr>
+
   <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
-  <input type="hidden" name="userId" value="${sessionScope.userId}">
+  <input type="hidden" name="userId" value="${sessionScope.userId}" >
   <input type="hidden" name="partnerId" value="${sessionScope.partnerId}">
   <table class="table reg-product">
     <!-- 상품 -->
     <tr>
       <th width="150px"><span class="man-star">*</span>상품제목</th>
       <td>
-        <input type="text" name="title" id="title"/>
+        <input type="text" name="title" id="title" style="border:1px solid gray;"/>
       </td>
     </tr>
     <tr>

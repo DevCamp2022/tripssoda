@@ -33,6 +33,21 @@
     justify-content: flex-end;
     margin: 50px 0 0 0;
 }
+
+.new-write-btn {
+    width: 167px;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(37,37,37);
+    padding: 10px 19px;
+    color: rgb(37,37,37);
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* 정렬 텍스트 */
 .sort-text {
     width: 26px;

@@ -185,6 +185,7 @@ public class AccompanyController {
 
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
+
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURL();
         m.addAttribute("mode", "new");

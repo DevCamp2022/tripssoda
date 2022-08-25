@@ -28,8 +28,23 @@ body {
     /*min-height: 2000px;*/
     margin: 0 auto;
 }
+
+.new-write-btn {
+    width: 167px;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(37,37,37);
+    padding: 10px 19px;
+    color: rgb(37,37,37);
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* 정렬 버튼 행전체 */
-.sort-bar {
+.sort-bar2 {
     width: 1200px;
     height: 41px;
     display: flex;
@@ -39,7 +54,7 @@ body {
 }
 /* 정렬 텍스트 */
 .sort-text {
-    width: 26px;
+    width: 30px;
     height: 17px;
     color: #6a6a6a;
     margin: 2px 10px 0 0;

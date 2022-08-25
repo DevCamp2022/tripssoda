@@ -10,9 +10,9 @@
     </select>
     <insert id="insert" parameterType="AnswerDto">
         INSERT INTO answer
-            (question_id, content, user_id, created_at, updated_at)
+            (question_id, content, user_id, nickname, profile_img, created_at, updated_at)
         VALUES
-            (#{questionId}, #{content}, #{userId}, now(), now())
+            (#{questionId}, #{content}, #{userId}, #{nickname}, #{profileImg}, now(), now())
     </insert>
     <select id="select" parameterType="int" resultType="AnswerDto">
         SELECT *
@@ -45,7 +45,7 @@
         WHERE id = #{id} AND user_id = #{userId}
     </delete>
     <select id="selectAll" parameterType="int" resultType="AnswerDto">
-        SELECT id, question_id, content, user_id, created_at, updated_at
+        SELECT id, question_id, nickname, profile_img, content, user_id, created_at, updated_at
         FROM answer
         WHERE question_id = #{questionId}
         ORDER BY id ASC

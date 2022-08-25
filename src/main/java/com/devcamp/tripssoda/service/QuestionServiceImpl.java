@@ -11,10 +11,10 @@ import java.util.Map;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
+    QuestionMapper questionMapper;
 
-    private QuestionMapper questionMapper;
-
-    public QuestionServiceImpl(QuestionMapper questionMapper) {
+    //생성자 주입
+    QuestionServiceImpl(QuestionMapper questionMapper) {
         this.questionMapper = questionMapper;
     }
 
@@ -32,6 +32,7 @@ public class QuestionServiceImpl implements QuestionService {
     public int selectAllUserQuestionCnt(Integer userId){
         return questionMapper.selectAllUserQuestionCnt(userId);
     }
+
     @Override
     public int getCount() throws Exception {
         return questionMapper.count();
@@ -79,5 +80,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int waitingGetCount() throws Exception {
         return questionMapper.waitingCount();
+    }
+
+    @Override
+    public int updateStatus(QuestionDto questionDto) throws Exception {
+        return questionMapper.updateStatus(questionDto);
     }
 }

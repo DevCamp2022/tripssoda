@@ -4,6 +4,7 @@ import com.devcamp.tripssoda.dto.CombinedBoardDto;
 import com.devcamp.tripssoda.dto.InquiryDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +32,7 @@ public interface AdminBoardService {
     int selectAllInquiryCnt();
 
     List<InquiryDto> selectAllInquiry(SearchCondition sc);
+    public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception;
+
+    public int getSearchResultCntForUser(SearchCondition sc, String menuCode) throws Exception;
 }

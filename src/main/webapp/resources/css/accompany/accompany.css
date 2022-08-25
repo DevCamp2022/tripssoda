@@ -93,6 +93,24 @@ a {
 
 }  */
 
+.modify-btn {
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    color: #9a9a9a;
+    background: none;
+    margin-top: -4px;
+    margin-right: -7px;
+}
+.remove-btn {
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    color: #9a9a9a;
+    background: none;
+    margin-top: -4px;
+}
+
 /* 썸네일 밑의 영역 중 오른쪽 영역 */
 .profile-group {
     flex: 1;
@@ -111,15 +129,15 @@ a {
     display: flex;
 }
 /* 프로필 이미지 영역 */
-.profile-img {
+.profile-img2 {
     width: 58px;
     height: 58px;
-    background-image: url("/image/accompany/profile-img.svg");
-    background-position: center;
-    background-repeat: no-repeat;
+    /*background-image: url("/image/accompany/profile-img.svg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
     /*background-size: cover;*/
-    cursor: pointer;
-
+    /*cursor: pointer;*/
+    border-radius: 50%;
 }
 /* 프로필사진 오른쪽의 닉네임, 태그가 있는 2줄을 묶은 영역 */
 .profile-right {

@@ -1,5 +1,5 @@
 /* 공통 요소 */
-body {
+.main-group {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
     font-size: 15px;
@@ -25,7 +25,7 @@ body {
     margin: 0 auto;
 }
 /* 정렬 버튼 행전체 */
-.sort-bar {
+.sort-bar-line {
     width: 1200px;
     height: 41px;
     display: flex;
@@ -33,6 +33,21 @@ body {
     justify-content: flex-end;
     margin: 50px 0 0 0;
 }
+
+.new-write-btn {
+    width: 167px;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(37,37,37);
+    padding: 10px 19px;
+    color: rgb(37,37,37);
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* 정렬 텍스트 */
 .sort-text {
     width: 26px;
@@ -84,7 +99,7 @@ body {
 }
 
 /* 리스트 하나씩 묶음 */
-.list {
+.list-one {
     width: 546px;
     height: 208px;
     cursor: pointer;
@@ -96,7 +111,7 @@ body {
     /* background-color: royalblue; */
     box-sizing: border-box;
 }
-.list:after {
+.list-one:after {
     content: "";
     display: block;
     border-bottom: 1px solid #e9e9e9;
@@ -141,6 +156,9 @@ body {
     color: rgb(0,206,124);
     margin-right: 50px;
 }
+.answer-off {
+    color: #666666;
+}
 /* 제목 */
 .list-title-line {
     width: 531px;
@@ -177,15 +195,15 @@ body {
     margin: 9px 0 0 0;
 }
 /* 프로필사진 */
-.profile-img {
+.profile-img2 {
     width: 24px;
     height: 24px;
     margin-right: 6px;
     border-radius: 50%;
-    background-image: url("/image/question/profile-img.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /*background-image: url("/image/question/profile-img.svg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
 }
 /* 닉네임 */
 .nickname {

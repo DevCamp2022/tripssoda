@@ -2,9 +2,9 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.QuestionDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
+
 import java.util.List;
 import java.util.Map;
-import java.util.List;
 
 public interface QuestionService {
     List<QuestionDto> selectAllUserQuestion(Integer userId, SearchCondition sc);
@@ -25,8 +25,9 @@ public interface QuestionService {
 
     int modifyAnswerCnt(Integer questionId, Integer cnt) throws Exception;
 
-
     List<QuestionDto> waitingGetPage(Map map) throws Exception;
 
     public int waitingGetCount() throws Exception;
+
+    int updateStatus(QuestionDto questionDto) throws Exception;
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-        
+
 <mapper namespace="com.devcamp.tripssoda.mapper.QuestionMapper">
     <select id="selectQuestion" parameterType="int" resultType="QuestionDto">
         SELECT *
@@ -14,7 +14,7 @@
         FROM question
         WHERE user_id = #{userId}
         ORDER BY id DESC
-        LIMIT #{sc.offset}, #{sc.pageSize}
+            LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 
     <select id="selectAllUserQuestionCnt" parameterType="int" resultType="int">
@@ -24,7 +24,7 @@
     </select>
 
     <sql id="selectFromQuestion">
-        SELECT id, user_id, nickname, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
+        SELECT id, user_id, nickname, profile_img, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
         FROM question
     </sql>
     <select id="count" resultType="int">
@@ -38,9 +38,9 @@
     </select>
     <insert id="insert" parameterType="QuestionDto">
         INSERT INTO question
-            (title, content, user_id, hashtag, region_code)
+            (title, content, user_id, nickname, profile_img, hashtag, region_code)
         VALUES
-            (#{title}, #{content}, #{userId}, #{hashtag}, #{regionCode})
+            (#{title}, #{content}, #{userId}, #{nickname}, #{profileImg}, #{hashtag}, #{regionCode})
     </insert>
     <select id="select" parameterType="int" resultType="QuestionDto">
         <include refid="selectFromQuestion"/>
@@ -53,6 +53,11 @@
             hashtag = #{hashtag},
             region_code = #{regionCode},
             updated_at = now()
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+    <update id="updateStatus" parameterType="QuestionDto">
+        UPDATE question
+        SET status = #{status}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
     <delete id="delete" parameterType="map">

@@ -23,7 +23,12 @@
 
 </div>
 <div class="main-group">
-    <div class="sort-bar">
+    <div class="sort-bar-line">
+        <a href="<c:url value='/question/write'/>">
+            <div class="new-write-btn">
+                질문 글쓰기
+            </div>
+        </a>
         <div class="sort-text">
             정렬
         </div>
@@ -47,7 +52,7 @@
     <div class="list-group">
         <c:forEach var="questionDto" items="${list}">
             <a class="a-tag" href="<c:url value='/question/read?id=${questionDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
-                <div class="list">
+                <div class="list-one">
                     <div class="list-region-line">
                         <div class="list-region-box">
                             <div class="region-icon">
@@ -58,7 +63,12 @@
                             </div>
                         </div>
                         <div class="answer-on-off">
-                            답변대기:${questionDto.status}
+                            <c:if test="${questionDto.status eq 0}">
+                                답변대기
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <span class="answer-off">채택완료</span>
+                            </c:if>
                         </div>
                     </div>
                     <div class="list-title-line">
@@ -72,23 +82,20 @@
                     </div>
                     <div class="list-nickname-line">
                         <div class="profile-img">
-
+                            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${questionDto.profileImg}">
                         </div>
                         <div class="nickname">
                                 ${questionDto.nickname}
                         </div>
                         <div class="dash-img">
-
                         </div>
                         <div class="view-cnt-box">
                             <div class="view-cnt-icon">
-
                             </div>
                             <div class="view-cnt">
                                     ${questionDto.viewCnt}
                             </div>
                             <div class="answer-cnt-icon">
-
                             </div>
                             <div class="answer-cnt">
                                     ${questionDto.ansCnt}

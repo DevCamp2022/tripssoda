@@ -36,10 +36,18 @@ body {
     width: 1200px;
     height: 400px;
     /* background-color: #f4f4f4; */
-    background-image: url("/image/accompany/thumbnail-last-img.PNG");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    /*background-image: url("/image/accompany/thumbnail-last-img.PNG");*/
+    /*background-position: center;*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+}
+.sdfadsf {
+    width: 300px;
+    height: 300px;
+}
+.div-thumbnail {
+    width: 300px;
+    height: 300px;
 }
 /* .upload-img-icon1 {
   margin: 0 auto 50px auto;

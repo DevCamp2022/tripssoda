@@ -17,6 +17,7 @@
             <input type="email" class="input-email" name="email" placeholder="이메일 주소 입력">
             <button class="send-email-verf-btn" type="button">인증번호 전송</button>
             <input type="text" class="verf-num" name="inputCode" placeholder="인증번호 입력">
+            <button class="confirm-verf-num" type="button">인증번호 확인</button>
         </div>
         <button class="find-btn">찾기</button>
     </form>
@@ -24,24 +25,30 @@
 <script>
     let msg = "${msg}";
     if(msg == "UPDATE_PWD_ERR") alert("비밀번호 변경에 실패했습니다. 다시 시도해주세요");
+
+    // 이메일 인증여부를 저장할 변수 선언
+    let emailVerfResult = false;
+    // 이메일 인증을 성공했을 때 해당 이메일을 저장할 변수 선언
+    let verifiedEmail = "";
+
+    // // 이름 정규식
+    // let nameJ = /^[가-힣]{2,6}$/;
+    // let emailJ = /^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$/;
+
     // form 전송여부를 정하는 onsubmit 함수
-    let nameResult = false;
-    let emailResult = false;
-
-    // 이름 정규식
-    let nameJ = /^[가-힣]{2,6}$/;
-    let emailJ = /^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$/;
-
     function formCheck() {
-        nameResult = nameJ.test($('input[name=name]').val());
-        emailResult = emailJ.test($('input[name=email]').val());
-        if(!nameResult) {
-            alert("정확한 이름을 입력해주세요");
-            return false;
-        } else if(!emailResult) {
-            alert("올바른 이메일을 입력해주세요");
+        let email = $('.input-email').val();
+        // 이메일 인증이 되지 않았을 때
+        if(!emailVerfResult) {
+            alert("이메일 인증을 먼저 진행해주세요.");
             return false;
         }
+        // 인증된 이메일이 아닌 다른 이메일로 찾기를 시도할 때
+        if(email != verifiedEmail) {
+            alert("인증된 이메일이 아닙니다. 인증을 다시 진행해주세요.");
+            return false;
+        }
+
         return true;
     }
 
@@ -49,6 +56,10 @@
     $(".send-email-verf-btn").on("click", function () {
         let email = $('.input-email').val();
         let name = $('.input-name').val();
+        if(email=="" || email==null) {
+            alert("이메일을 입력해주세요");
+            return;
+        }
 
         $.ajax({
             type:"POST",
@@ -58,6 +69,7 @@
             success :function(result){
                 if(result == "Email has been sent") {
                     alert("인증번호를 전송하였습니다.");
+                    emailVerfResult = true;
                 } else if(result == "Invalid email") {
                     alert("해당하는 정보에 대한 계정을 찾을 수 없습니다. 올바른 정보를 입력해주세요.")
                 } else {
@@ -70,6 +82,43 @@
 
         });
     });
+
+    // 인증번호 확인 버튼을 클릭했을 때
+    $('.confirm-verf-num').on("click", function() {
+        let inputCode = ($('.verf-num').val()).trim();
+        let email = $(".input-email").val();
+
+        if(!emailVerfResult) {
+            alert("먼저 인증번호 전송을 요청하세요");
+            return;
+        }
+        if(inputCode=="" || inputCode==null) {
+            alert("인증번호를 입력해주세요");
+            return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url:"/register/confirmVerfCode",
+            data: {inputCode:inputCode, email:email},
+            cache : false,
+            success :function(result){
+                if(result == "success") {
+                    emailVerfResult = true;
+                    verifiedEmail = email;
+                    alert("인증에 성공하였습니다.");
+                } else if(result == "fail") {
+                    alert("유효시간이 지나 인증에 실패했습니다. 인증을 다시 진행해주세요.")
+                } else {
+                    alert("인증번호가 올바르지 않습니다. 다시 시도해주세요.");
+                }
+            },
+            error: function() {
+                alert("인증 중 오류가 발생했습니다. 다시 시도해주세요");
+            }
+
+        });
+    })
 </script>
 
 

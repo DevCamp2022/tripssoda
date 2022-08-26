@@ -82,6 +82,7 @@ input::placeholder {
     color: white;
     border-radius: 0 4px 4px 0;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .input-password {
@@ -115,7 +116,7 @@ input::placeholder {
     width: 450px;
     height: 56px;
     box-sizing: border-box;
-
+    margin-bottom: 10px;
     padding-left: 16px;
     border: 1px solid #e9e9e9;
     border-radius: 4px;

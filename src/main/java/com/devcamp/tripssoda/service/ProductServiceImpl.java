@@ -162,15 +162,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int updateProductApproval(ApprovalDto adminProductDto) throws Exception {
-        int rowCnt = productMapper.updateProductApproval(adminProductDto);
+    public int updateProductApproval(ApprovalDto productApprovalDto) throws Exception {
+        int rowCnt = productMapper.updateProductApproval(productApprovalDto);
         try {
-            if (rowCnt == 0) {
+            if (rowCnt != 1) {
                 throw new Exception();
             }
-            if (adminProductDto.getApproval() == 0) {
-                rowCnt = productMapper.insertApprovalHistory(adminProductDto);
-                if (rowCnt == 0) {
+            if (productApprovalDto.getApproval().equals(0)) {
+                System.out.println("productApprovalDto.getApproval() = " + productApprovalDto.getApproval());
+
+                rowCnt = productMapper.insertProductApprovalHistory(productApprovalDto);
+                if (rowCnt != 1) {
                     throw new Exception();
                 }
             }

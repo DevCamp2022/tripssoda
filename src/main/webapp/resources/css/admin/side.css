@@ -1,17 +1,8 @@
-
-
-
-.side-container-board{
-    text-align: center;
-    padding: 30px 22px 22px 22px;
-    margin: 100px 46px 20px 0;
-    width: 314px;
-    border: 1px solid #e9e9e9;
-    border-radius: 8px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
+.side-wrap{
+    margin-top: 50px;
 }
+
+
 .menu-header {
     width: 270px;
     box-sizing: border-box;
@@ -35,67 +26,51 @@
     padding-left: 12px;
 }
 
-.side-container-board li{
-    background: #fafafa;
-    margin-bottom: 14px;
-    width: 270px;
-    height: 52px;
-    border-radius: 8px;
-    border: 1px solid #e9e9e9;
-    padding: 0 20px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-}
-
-.side-container-board a {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    text-decoration: none ;
-    color: black;
-    font-size: 14px;
-}
-
-.side-container-board span {
-    float: right;
-    color: grey;
-}
-
-
-.side-container-stats {
+.side-container{
     text-align: center;
-    padding: 30px 22px 22px 22px;
-    margin: 60px 46px 20px 0;
-    width: 314px;
+    width: 100%;
     border: 1px solid #e9e9e9;
     border-radius: 8px;
     background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding: 8px;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
 }
-.side-container-stats li{
-    background: whitesmoke;
-    margin-bottom: 7px;
-    width: 270px;
+.side-container li{
+    /*background: #fafafa;*/
+    width: 200px;
     height: 52px;
     border-radius: 8px;
-    border: 1px solid #e9e9e9;
-    padding: 0 20px;
+    /*border: 1px solid #e9e9e9;*/
     box-sizing: border-box;
     display: flex;
     align-items: center;
 }
-.side-container-stats a {
+
+.side-container li a {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
-    text-decoration: none ;
+    text-decoration: none;
     color: black;
     font-size: 14px;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
-.side-container-stats span {
+
+.side-container span {
     float: right;
     color: grey;
 }
 
+.side-wrap>label{
+    display:block;
+    margin-bottom: 12px;
+}

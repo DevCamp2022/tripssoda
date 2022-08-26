@@ -32,10 +32,10 @@
     </div>
     <div class="content-container">
         <div class="content-wrap">
-            <div class="left-wrap">
+            <div class="top-wrap">
                 <tiles:insertAttribute name="menu"/>
             </div>
-            <div class='right-wrap'>
+            <div class='bottom-wrap'>
                 <tiles:insertAttribute name="content"/>
             </div>
         </div>

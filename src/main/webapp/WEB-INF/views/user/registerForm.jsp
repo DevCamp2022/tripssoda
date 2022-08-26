@@ -155,6 +155,70 @@
         }
     }
 
+    function birthCheck() {
+
+        let today = new Date();
+        let year = today.getFullYear(); // 년도
+        let month = today.getMonth() + 1;  // 월
+        let date = today.getDate();  // 날짜
+        let day = today.getDay();  // 요일
+
+        let birthYear = $("input[name=year]").val();
+        let birthMonth = $("select[name=month]").val();
+        let birthDay = $("input[name=day]").val();
+
+        if(birthYear < 1900 || birthYear > year || '') {
+            $('.birthday-check').text('올바른 생년을 입력해주세요.');
+            $('.birthday-check').css('color', 'red');
+        } else if(birthMonth == '') {
+            $('.birthday-check').text('태어난 월을 선택해주세요');
+            $('.birthday-check').css('color', 'red');
+        } else if(birthDay == '') {
+            $('.birthday-check').text('태어난 날짜를 입력해주세요');
+            $('.birthday-check').css('color', 'red');
+        } else if(birthDay != '') {
+            if(birthMonth == 1 || birthMonth == 3 || birthMonth == 5 || birthMonth == 7 || birthMonth == 8 || birthMonth == 10 || birthMonth == 12) {
+                if(birthDay < 1 || birthDay > 31) {
+                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
+                    $('.birthday-check').css('color', 'red');
+                } else {
+                    $('.birthday-check').text('OK');
+                    $('.birthday-check').css('color', 'blue');
+                    birthResult = true;
+                }
+            } else if (birthMonth == 4 || birthMonth == 6 || birthMonth == 9 || birthMonth == 11) {
+                if(birthDay < 1 || birthDay > 30) {
+                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
+                    $('.birthday-check').css('color', 'red');
+                } else {
+                    $('.birthday-check').text('OK');
+                    $('.birthday-check').css('color', 'blue');
+                    birthResult = true;
+                }
+            } else if (birthMonth == 2) {
+                if((parseInt(birthYear%4) != 0) && (birthDay < 1 || birthDay > 28)) {
+                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
+                    $('.birthday-check').css('color', 'red');
+                } else if((parseInt(birthYear%4) == 0) && (birthDay < 1 || birthDay > 29)) {
+                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
+                    $('.birthday-check').css('color', 'red');
+                } else {
+                    $('.birthday-check').text('OK');
+                    $('.birthday-check').css('color', 'blue');
+                    birthResult = true;
+                }
+            } else {
+                $('.birthday-check').text('OK');
+                $('.birthday-check').css('color', 'blue');
+                birthResult = true;
+            }
+        } else {
+            $('.birthday-check').text('');
+            $('.birthday-check').css('color', 'blue');
+            birthResult = true;
+        }
+    }
+
     // 인증번호 전송 버튼을 클릭했을 때
     $('.send-email-verf-btn').on("click", function() {
 
@@ -168,14 +232,14 @@
             return;
         }
 
-        $.ajax({
+       $.ajax({
             type:"POST",
             url:"/register/emailCheck",
             data: {email:email},
             cache : false,
             success :function(result){
                 if(result == "Email has been sent") {
-                    alert("인증번호가 전송되었습니다.");
+                    alert("인증번호 전송이 완료되었습니다.");
                     emailSendCheck = true;
                 } else if (result == "Email already exists") {
                     alert("이미 가입된 이메일입니다.");
@@ -188,6 +252,7 @@
                 alert("오류가 발생하여 인증번호 전송에 실패했습니다.");
             }
         });
+        alert("인증번호 전송을 시작합니다.");
     });
     // 인증번호 확인 버튼을 클릭했을 때
     $('.confirm-verf-num').on("click", function() {
@@ -301,69 +366,9 @@
     });
 
     // 생일 유효성 검사
-    $("input[name=day]").keyup(function() {
-        let today = new Date();
-        let year = today.getFullYear(); // 년도
-        let month = today.getMonth() + 1;  // 월
-        let date = today.getDate();  // 날짜
-        let day = today.getDay();  // 요일
-
-        let birthYear = $("input[name=year]").val();
-        let birthMonth = $("select[name=month]").val();
-        let birthDay = $("input[name=day]").val();
-
-        if(birthYear < 1900 || birthYear > year || '') {
-            $('.birthday-check').text('올바른 생년을 입력해주세요.');
-            $('.birthday-check').css('color', 'red');
-        } else if(birthMonth == '') {
-            $('.birthday-check').text('태어난 월을 선택해주세요');
-            $('.birthday-check').css('color', 'red');
-        } else if(birthDay == '') {
-            $('.birthday-check').text('태어난 날짜를 입력해주세요');
-            $('.birthday-check').css('color', 'red');
-        } else if(birthDay != '') {
-            if(birthMonth == 1 || birthMonth == 3 || birthMonth == 5 || birthMonth == 7 || birthMonth == 8 || birthMonth == 10 || birthMonth == 12) {
-                if(birthDay < 1 || birthDay > 31) {
-                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
-                    $('.birthday-check').css('color', 'red');
-                } else {
-                    $('.birthday-check').text('OK');
-                    $('.birthday-check').css('color', 'blue');
-                    birthResult = true;
-                }
-            } else if (birthMonth == 4 || birthMonth == 6 || birthMonth == 9 || birthMonth == 11) {
-                if(birthDay < 1 || birthDay > 30) {
-                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
-                    $('.birthday-check').css('color', 'red');
-                } else {
-                    $('.birthday-check').text('OK');
-                    $('.birthday-check').css('color', 'blue');
-                    birthResult = true;
-                }
-            } else if (birthMonth == 2) {
-                if((parseInt(birthYear%4) != 0) && (birthDay < 1 || birthDay > 28)) {
-                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
-                    $('.birthday-check').css('color', 'red');
-                } else if((parseInt(birthYear%4) == 0) && (birthDay < 1 || birthDay > 29)) {
-                    $('.birthday-check').text('올바른 생년월일을 입력해주세요');
-                    $('.birthday-check').css('color', 'red');
-                } else {
-                    $('.birthday-check').text('OK');
-                    $('.birthday-check').css('color', 'blue');
-                    birthResult = true;
-                }
-            } else {
-                $('.birthday-check').text('OK');
-                $('.birthday-check').css('color', 'blue');
-                birthResult = true;
-            }
-        } else {
-            $('.birthday-check').text('');
-            $('.birthday-check').css('color', 'blue');
-            birthResult = true;
-        }
-
-    });
+    $("input[name=day]").keyup(birthCheck);
+    $("input[name=year]").keyup(birthCheck);
+    $("select[name=month]").change(birthCheck);
 
 
     // 회원가입 버튼 눌렀을 때 생일을 종합하여 input 태그에 저장

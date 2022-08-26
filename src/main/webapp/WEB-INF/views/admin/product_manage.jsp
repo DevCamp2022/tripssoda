@@ -25,21 +25,20 @@
         </div>
 
         <div class="product-container">
-            <h1>승인 대기 중 상품</h1>
-
-
+            <h1 class="product-container-title">승인 대기 중 상품</h1>
             <form name="boardListForm">
                 <table class="combined-list-tb">
                     <th class="titb"><input type="checkbox" id="all_check"></th>
                     <th class="tit">유저ID</th>
                     <th class="tit">회사명</th>
                     <th class="tit">제목</th>
-<%--                    <th class="tit">소요시간</th>--%>
-<%--                    <th class="tit">일정 수</th>--%>
-<%--                    <th class="tit">최소 인원</th>--%>
-<%--                    <th class="tit">최대 인원</th>--%>
+                    <th class="tit">소요시간</th>
+                    <th class="tit">일정 수</th>
+                    <th class="tit">최소 인원</th>
+                    <th class="tit">최대 인원</th>
                     <th class="tit">가격</th>
                     <th class="tit">상태</th>
+<%--                    <th class="tit">취소사유</th>--%>
                     </tr>
 
                     <c:forEach var="unapproved" items="${unapprovedList}">
@@ -52,18 +51,19 @@
                             <td class="con" name="title"><a
                                     href="/admin/productList/info${searchCondition.queryString}&productId=${unapproved.productId}">${unapproved.title}</a>
                             </td>
-<%--                            <td class="con" name="reqTime">${unapproved.reqTime}</td>--%>
-<%--                            <td class="con" name="dayCnt">${unapproved.dayCnt}</td>--%>
-<%--                            <td class="con" name="minMember">${unapproved.minMember}</td>--%>
-<%--                            <td class="con" name="maxMember">${unapproved.maxMember}</td>--%>
+                            <td class="con" name="reqTime">${unapproved.reqTime}</td>
+                            <td class="con" name="dayCnt">${unapproved.dayCnt}</td>
+                            <td class="con" name="minMember">${unapproved.minMember}</td>
+                            <td class="con" name="maxMember">${unapproved.maxMember}</td>
                             <td class="con" name="productPrice">${unapproved.productPrice}</td>
-                            <td class="con" name="approvalStatus">${unapproved.approvalStatus==0?"대기":"완료"}</td>
+                            <td class="con" name="approvalStatus">${unapproved.approvalStatus==0?"대기":nnapproved.approvalStatus==1?"완료":"취소"}</td>
+<%--                            <td class="con" name="canceledReason">${unapproved.approvalStatus==0?"대기":napproved.approvalStatus==1?"완료":"취소"}</td>--%>
                         </tr>
                     </c:forEach>
                 </table>
             </form>
 
-            <h1>승인 완료된 상품</h1>
+            <h1 class="product-container-title">승인 완료된 상품</h1>
             <form name="boardListForm">
                 <table class="combined-list-tb">
                     <th class="titb"><input type="checkbox" id="all_check"></th>
@@ -93,7 +93,7 @@
                             <td class="con" name="minMember">${approved.minMember}</td>
                             <td class="con" name="maxMember">${approved.maxMember}</td>
                             <td class="con" name="productPrice">${approved.productPrice}</td>
-                            <td class="con" name="approvalStatus">${approved.approvalStatus==0?"대기":"완료"}</td>
+                            <td class="con" name="approvalStatus">${approved.approvalStatus==0?"대기":approved.approvalStatus==1?"완료":"취소"}</td>
                         </tr>
                     </c:forEach>
                 </table>

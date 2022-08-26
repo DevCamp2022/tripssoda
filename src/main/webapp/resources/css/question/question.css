@@ -2,12 +2,12 @@
 body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     background-color: #fff;
 }
 a {
     text-decoration: none;
-    color: #9a9a9a;
+    /*color: #9a9a9a;*/
 }
 .total-group {
     width: 1200px;
@@ -74,6 +74,9 @@ a {
     color: #00ce7c;
     margin-right: 10px;
     font-weight: bold;
+}
+.answer-off {
+    color: #666666;
 }
 .region-text {
     color: #6a6a6a;
@@ -157,14 +160,15 @@ a {
     display: flex;
 }
 /* 프로필 이미지 영역 */
-.profile-img {
+.profile-img2 {
     width: 58px;
     height: 58px;
-    background-image: url("/image/question/profile-img.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
+    border-radius: 50%;
+    /*background-image: url("/image/question/profile-img.svg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*cursor: pointer;*/
 
 }
 /* 프로필사진 오른쪽의 닉네임, 태그가 있는 2줄을 묶은 영역 */
@@ -249,6 +253,18 @@ a {
     font-weight: 500;
     cursor: pointer;
 }
+.apply-btn2 {
+    width: 280px;
+    height: 50px;
+    margin-top: 17px;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #e9e9e9;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: 500;
+}
 
 /* 썸네일 밑의 영역 중 오른쪽 영역 */
 .profile-group {
@@ -286,13 +302,14 @@ a {
     height: 34px;
 
 }
-.answer-profile-img {
+.profile-img2 {
     width: 33px;
     height: 33px;
-    background-image: url("/image/question/profile-img2.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    border-radius: 50%;
+    /*background-image: url("/image/question/profile-img2.svg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
     margin-right: 6px;
 }
 .answer-nickname-reg-date-box {
@@ -347,7 +364,8 @@ a {
     padding-left: 50px;
 }
 .modBtn,
-.delBtn {
+.delBtn,
+.select-answer-btn{
     border: 0;
     outline: 0;
     background: none;

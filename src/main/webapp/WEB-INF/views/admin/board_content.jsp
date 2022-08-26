@@ -17,6 +17,7 @@
 <div class="combined-wrap">
     <div class="combined-wrap-tit"><h1 class="writing-header">${mode=="new" ? "Board Register" : "Contents"}</h1></div>
     <form id="form" class="frm" action="" method="post">
+        <input type="hidden" name="id" value="${param.id}">
 
         <table class="combined-list-tb">
 

@@ -64,7 +64,7 @@ $(document).on("click",".hashes .delBtn",function(){
 $("#add-manGuide").click(function(){
     let s = '<div class="manGuide">';
     s += '<input type="text" name="mandatoryGuidance"/>';
-    s += '<button type="button" class="manGuide-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-info manGuide-delBtn">삭제</button><br></div>';
     $(".td-manGuide").append(s);
 });
 
@@ -266,8 +266,8 @@ function valid() {
         return false;
     }
 
-    if($("#thumbnail").val() == "") {
-        alert("썸네일 이미지를 첨부해 주세요.");
+    if($("#sel-category").val() == "" || $("#sel-category").val() == undefined || $("#sel-category").val() == null) {
+        alert("카테고리를 선택해 주세요.");
         return false;
     }
 
@@ -276,12 +276,17 @@ function valid() {
         return false;
     }
 
-    if($("#serviceRegion").val() == "") {
-        alert("서비스 지역 입력해 주세요.");
+    if($("#uploadThumb").val() == "") {
+        alert("썸네일 이미지를 첨부해 주세요.");
         return false;
     }
 
-    if($("#keyword").val() == "") {
+    // if($("#serviceRegion").val() == "") {
+    //     alert("서비스 지역 입력해 주세요.");
+    //     return false;
+    // }
+
+    if($("input[name=keyword]").val() == "" || $("input[name=keyword]").val() == undefined) {
         alert("검색키워드를 입력해 주세요.");
         return false;
     }

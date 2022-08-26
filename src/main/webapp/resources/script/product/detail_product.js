@@ -92,58 +92,15 @@ $(document).ready(function(){
   }
 });
 
-$(document).ready(function(){
-  if($("#currentMember").val() == '' || $("#currentMember").val() == null) {
-    $(".show-currentMember").html('0');
-  }
-
-  if($("#min-current").val() > 0 && $("#minMember").val() != 1) {
-    let str = $("#min-current").val() + "명 더 구매시";
-    $(".show-min-current").html(str);
-  }
-
-  if($("#min-current").val() > 0 && $("#minMember").val() == 1) {
-    let str = "지금 구매 시";
-    $(".show-min-current").html(str);
-  }
-
-  if($("#min-current").val() <= 0 && $("#currentMember").val() < $("maxMember").val()) {
-    let str = "지금 구매 시";
-    $(".show-min-current").html(str);
-  }
-
-
-
-  if($("#list-currentMember").val() == '' || $("#list-currentMember").val() == null) {
-    $(".show-list-currentMember").html('0');
-  }
-
-  if($("#list-min-current").val() > 0 && $("#list-minMember").val() != 1) {
-    let str = $("#list-min-current").val() + "명 더 구매시";
-    $(".show-list-min-current").html(str);
-  }
-
-  if($("#list-min-current").val() > 0 && $("#list-minMember").val() == 1) {
-    let str = "지금 구매 시";
-    $(".show-list-min-current").html(str);
-  }
-
-  if($("#list-min-current").val() <= 0 && $("#list-currentMember").val() < $("#list-maxMember").val()) {
-    let str = "지금 구매 시";
-    $(".show-list-min-current").html(str);
-  }
-
-});
-
 //사이드 리모콘 애니메이션
 $(document).ready(function(){
   var currentPosition = parseInt($("#chase").css("top"));
   $(window).scroll(function() {
   // var currentPosition = 677;
   var scroll_top = $(document).scrollTop();
-  if(scroll_top>677) {
+  if(scroll_top>0) {
       var position = $(window).scrollTop(); 
-      $("#chase").stop().animate({"top":position+currentPosition+(-630)+"px"},500);
+      $("#chase").stop().animate({"top":position+currentPosition+(-100)+"px"},500);
     }
   });
 });
@@ -185,4 +142,32 @@ $(".prevBtn").click(function(){
   cnt--;
   starter = 1;
   handleList();
+})
+
+//출발일이 다른 동일투어 상태표시
+$(document).ready(function(){
+  $(".show-list-startDate-0").append("<span style='color:rgb(0, 206, 124);'>(현재)</span>");
+  let len = $("#list-length").val(); //list길이
+
+  for(let i=0; i<len; i++) {
+    let curr = $(".list-currentMember-"+i).val();
+    let min = $(".list-minMember-"+i).val();
+    let max = $(".list-maxMember-"+i).val();
+    let gap = $(".list-min-current-"+i).val();
+
+    console.log('curr',curr);
+    if(gap <= 0 && curr < max) {
+      $(".show-list-min-current-"+i).text("지금 구매시");
+    } else if(gap > 0 && gap == 1) {
+      $(".show-list-min-current-"+i).text("지금 구매시");
+    } else if(gap > 0 && gap != 1) {
+      $(".show-list-min-current-"+i).text(gap+"명 더 모이면");
+    } else if(gap <= 0 && curr == max) {
+      $(".show-list-min-current-"+i).text("마감되었습니다.");
+      $(".show-list-min-current-"+i).css('color','gray');
+      $(".show-list-result-"+i).remove();
+    }
+  }
+
+
 })

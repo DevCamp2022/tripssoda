@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
         //product_option 등록
         List<RegProductOptionDto> list = regProductOptionListDto.getRegProductOptionListDto();
 
-        if(list.size()>0) {
+        if(list != null) {
             for (int i = 0; i < list.size(); i++) {
                 if(list.get(i).getType()==null){
                     continue;
@@ -135,8 +135,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductScheduleDto> selectScheduleList(Integer productId){
+    public List<ProductScheduleDto> selectScheduleList(Integer productId) {
         return productMapper.selectScheduleList(productId);
+    }
+
+    @Override
+    public List<ProductScheduleDto> getProductScheduleList(GetDetailProductDto dto) {
+        return productMapper.selectProductScheduleList(dto);
     }
 
     public List<ProductOptionDto> selectOptionList(Integer productId){

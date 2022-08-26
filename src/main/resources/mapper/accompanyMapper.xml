@@ -18,7 +18,7 @@
     </select>
 
     <sql id="selectFromAccompany">
-        SELECT id, user_id, nickname, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
+        SELECT id, user_id, nickname, profile_img, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
         FROM accompany
     </sql>
     <select id="count" resultType="int">
@@ -31,9 +31,9 @@
         WHERE status = 0
     </select>
     <insert id="insert" parameterType="AccompanyDto">
-	    INSERT INTO accompany (user_id, region_code, start_at, end_at, thumbnail, title, content,
+	    INSERT INTO accompany (user_id, nickname, profile_img, region_code, start_at, end_at, thumbnail, title, content,
                                member_cnt, hashtag, chat_url, created_at, created_by)
-	    VALUES(#{userId}, #{regionCode}, #{startAt}, #{endAt}, #{thumbnail}, #{title}, #{content},
+	    VALUES(#{userId}, #{nickname}, #{profileImg}, #{regionCode}, #{startAt}, #{endAt}, #{thumbnail}, #{title}, #{content},
                #{memberCnt}, #{hashtag}, #{chatUrl}, now(), #{createdBy})
     </insert>
     <select id="select" parameterType="int" resultType="AccompanyDto">
@@ -44,7 +44,7 @@
     <!--    title = #{title}, content = #{content}, member_cnt = #{memberCnt}, hashtag = #{hashtag}, updated_by = #{userId}, updated_at = now()-->
     <update id="update" parameterType="AccompanyDto">
         UPDATE accompany
-        SET title = #{title}, content = #{content}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}
+        SET title = #{title}, content = #{content}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}, thumbnail = #{thumbnail}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
     <delete id="delete" parameterType="map">

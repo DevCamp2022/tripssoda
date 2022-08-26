@@ -2,7 +2,9 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.InquiryDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface InquiryService {
@@ -12,7 +14,8 @@ public interface InquiryService {
 
     List<InquiryDto> selectAllUserInquiry(Integer userId, SearchCondition sc);
 
-    void updateUserInquiry(InquiryDto inquiryDto) throws Exception;
+    @Transactional(rollbackFor = Exception.class)
+    void updateUserInquiry(InquiryDto inquiryDto, Integer userId) throws Exception;
 
     void deleteUserInquiry(InquiryDto inquiryDto) throws Exception;
 

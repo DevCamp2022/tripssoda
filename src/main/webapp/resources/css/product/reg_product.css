@@ -2,8 +2,54 @@ span.man-star{
   color: red;
 }
 
+span.hashes{
+  border-radius: 3px;
+  background-color: gray;
+  color:white;
+  margin-right: 10px;
+  padding: 5px;
+}
+
 input.hashes{
   outline: none;
   border: 0px solid black;
 }
 
+input[type="text"], input[type="number"], input[type="file"] {
+  display: inline-block;
+  width: 80%;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid gray;
+  border-radius: 4px;
+  box-sizing: border-box;
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+
+table{
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 10px;
+}
+
+tr{
+  /* border: 1px solid gray; */
+  height: 50px;
+  padding: 10px;
+}
+td{
+  /* border: 1px solid gray; */
+  padding: 10px;
+}
+
+th{
+  padding: 10px;
+  vertical-align:middle;
+}
+
+select{
+  padding: 10px;
+}

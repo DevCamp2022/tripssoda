@@ -37,4 +37,6 @@ public interface CombinedBoardMapper {
     List<CombinedBoardDto> searchSelectPage(Map map) throws Exception;
 
     public int getStatus(Integer id);
+    int searchResultCntForUser(Map<String, Object> map) throws Exception;
+    public List<CombinedBoardDto> searchSelectPageForUser(Map map) throws Exception;
 }

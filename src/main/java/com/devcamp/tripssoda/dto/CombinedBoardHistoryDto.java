@@ -3,17 +3,19 @@ package com.devcamp.tripssoda.dto;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
+import java.util.Objects;
+
 @Alias("CombinedBoardHistoryDto")
 public class CombinedBoardHistoryDto {
     private int id;
-    private String menu_code;
-    private int user_id;
+    private String menuCode;
+    private int userId;
     private String title;
     private String content;
-    private int view_cnt;
+    private int viewCnt;
     private int status;
-    private Date updated_at;
-    private int updated_by;
+    private Date updatedAt;
+    private int updatedBy;
 
     public CombinedBoardHistoryDto() {
     }
@@ -26,20 +28,20 @@ public class CombinedBoardHistoryDto {
         this.id = id;
     }
 
-    public String getMenu_code() {
-        return menu_code;
+    public String getMenuCode() {
+        return menuCode;
     }
 
-    public void setMenu_code(String menu_code) {
-        this.menu_code = menu_code;
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -58,12 +60,12 @@ public class CombinedBoardHistoryDto {
         this.content = content;
     }
 
-    public int getView_cnt() {
-        return view_cnt;
+    public int getViewCnt() {
+        return viewCnt;
     }
 
-    public void setView_cnt(int view_cnt) {
-        this.view_cnt = view_cnt;
+    public void setViewCnt(int viewCnt) {
+        this.viewCnt = viewCnt;
     }
 
     public int getStatus() {
@@ -74,34 +76,47 @@ public class CombinedBoardHistoryDto {
         this.status = status;
     }
 
-    public Date getUpdated_at() {
-        return updated_at;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public int getUpdated_by() {
-        return updated_by;
+    public int getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setUpdated_by(int updated_by) {
-        this.updated_by = updated_by;
+    public void setUpdatedBy(int updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CombinedBoardHistoryDto)) return false;
+        CombinedBoardHistoryDto that = (CombinedBoardHistoryDto) o;
+        return getId() == that.getId() && getUserId() == that.getUserId() && getViewCnt() == that.getViewCnt() && getStatus() == that.getStatus() && Objects.equals(getMenuCode(), that.getMenuCode()) && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getContent(), that.getContent());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getMenuCode(), getUserId(), getTitle(), getContent(), getViewCnt(), getStatus());
     }
 
     @Override
     public String toString() {
         return "CombinedBoardHistoryDto{" +
                 "id=" + id +
-                ", menu_code='" + menu_code + '\'' +
-                ", user_id=" + user_id +
+                ", menuCode='" + menuCode + '\'' +
+                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", view_cnt=" + view_cnt +
+                ", viewCnt=" + viewCnt +
                 ", status=" + status +
-                ", updated_at=" + updated_at +
-                ", updated_by=" + updated_by +
+                ", updatedAt=" + updatedAt +
+                ", updatedBy=" + updatedBy +
                 '}';
     }
 }

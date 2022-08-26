@@ -2,14 +2,19 @@ package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
-import com.devcamp.tripssoda.dto.QuestionDto;
 import com.devcamp.tripssoda.mapper.AccompanyMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.devcamp.tripssoda.util.ImageResize;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class AccompanyServiceImpl implements AccompanyService {
@@ -38,19 +43,87 @@ public class AccompanyServiceImpl implements AccompanyService {
         return accompanyMapper.count();
     }
     @Override
-    public int write(AccompanyDto dto) throws Exception {
+    public int write(AccompanyDto dto, HttpServletRequest request, MultipartFile uploadThumb) throws Exception {
+        //thumbnail dto바인딩, 파일저장, 리사이징 처리
+        String realPath = request.getServletContext().getRealPath("/resources/image/thumbnail");
+        UUID uuid = UUID.randomUUID();
+        String uploadName = uuid + uploadThumb.getOriginalFilename();
+
+        File folder = new File(realPath);
+        System.out.println("realPath = " + realPath);
+        if(uploadThumb.isEmpty())
+            dto.setThumbnail("Empty");
+        else {
+//            dto.setThumbnail(uploadName);
+            if (!folder.exists()) {
+                try {
+                    folder.mkdirs(); // 폴더 생성
+                } catch (Exception e) {
+                    e.getStackTrace();
+                }
+            }
+            //실제 업로드
+            try {
+                File file = new File(realPath + File.separator + uploadName);
+                uploadThumb.transferTo(file);
+                String fileName = ImageResize.thumbnailResize(realPath, uploadName);
+                dto.setThumbnail(fileName);
+
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         return accompanyMapper.insert(dto);
     }
+
     @Override
     public AccompanyDto read(Integer id) throws Exception {
         AccompanyDto dto = accompanyMapper.select(id);
         accompanyMapper.increaseViewCnt(id);
         return dto;
     }
+
     @Override
     public int modify(AccompanyDto dto) throws Exception {
+        return accompanyMapper.update(dto);    
+    }
+
+    @Override
+    public int modify(AccompanyDto dto, @RequestParam MultipartFile uploadThumb, HttpServletRequest request) throws Exception {
+        String oldFileName = accompanyMapper.select(dto.getId()).getThumbnail();
+
+        if(uploadThumb.isEmpty()) {
+            dto.setThumbnail(oldFileName);
+        } else {
+            String realPath = request.getServletContext().getRealPath("/resources/image/thumbnail");
+            UUID uuid = UUID.randomUUID();
+            String newFileName = uuid + uploadThumb.getOriginalFilename();
+            dto.setThumbnail(newFileName);
+            File folder = new File(realPath);
+            if(!folder.exists()){
+                try{
+                    folder.mkdirs();
+                }catch(Exception e){
+                    e.getStackTrace();
+                }
+            }
+            try {
+                File file = new File(realPath + File.separator + newFileName);
+                if(file.exists()) {
+                    file.delete();
+                }
+                uploadThumb.transferTo(file);
+                String fileName = ImageResize.thumbnailResize(realPath, newFileName);
+                dto.setThumbnail(fileName);
+
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+        }
         return accompanyMapper.update(dto);
     }
+
     @Override
     public int remove(Integer id, Integer userId) throws Exception {
         Map map = new HashMap();

@@ -16,7 +16,7 @@
 <%--    <img src="/image/main/trip5.jpg" alt="a lot of old houses">--%>
 </div>
 
-<<<<<<< HEAD
+
 
 <div class="txt"><span><strong>동행</strong>함께 떠나는 여행</span></div>
 

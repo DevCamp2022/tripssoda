@@ -11,9 +11,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"></head>
 </head>
 <body>
+<script>
+    let msg = "${msg}";
+    if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
+</script>
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${questionDto.id}">
-    <input type="hidden" name="answerId" value="">
+    <input type="hidden" name="page" value="${page}">
+    <input type="hidden" name="pageSize" value="${pageSize}">
+    <input type="hidden" name="sessionId" value="${sessionScope.id}">
+    <input type="hidden" name="memberId" value="${questionDto.userId}">
+
+<%--    <input type="hidden" name="title" value="${questionDto.title}">--%>
+<%--    <input type="hidden" name="regionCode" value="${questionDto.regionCode}">--%>
+<%--    <input type="hidden" name="content" value="${questionDto.content}">--%>
+<%--    <input type="hidden" name="hashtag" value="${questionDto.hashtag}">--%>
+<%--    <input type="hidden" name="createdAt" value="${questionDto.createdAt}">--%>
+<%--    <input type="hidden" name="viewCnt" value="${questionDto.viewCnt}">--%>
+<%--    <input type="hidden" name="ansCnt" value="${questionDto.ansCnt}">--%>
+<%--    <input type="hidden" name="profileImg" value="${questionDto.profileImg}">--%>
+<%--    <input type="hidden" name="nickname" value="${questionDto.nickname}">--%>
+
     <div class="total-group">
         <div class="content-profile-group">
             <div class="content-group">
@@ -31,7 +50,12 @@
                             상태
                         </div>
                         <div class="answer-on-off">
-                            ${questionDto.status}
+                            <c:if test="${questionDto.status eq 0}">
+                                답변대기
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <span class="answer-off">채택완료</span>
+                            </c:if>
                         </div>
                         <div class="region-text">
                             지역
@@ -57,12 +81,14 @@
                     <div class="answer-cnt">
                         &nbsp· 답변수 ${questionDto.ansCnt}
                     </div>
+                    <c:if test="${sessionScope.id eq questionDto.userId}">
                     <button type="button" class="modify-btn">
                         <a href="<c:url value='/question/modify'/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}">수정</a>
                     </button>
                     <button type="button" id="remove-btn" class="remove-btn">
                         · 삭제
                     </button>
+                    </c:if>
                 </div>
                 <div class="answer-cnt2">
                     <span class="answer-cnt2-number">${questionDto.ansCnt}</span>개의 답변
@@ -97,7 +123,7 @@
             <div class="profile-group">
                 <div class="profile-top">
                     <div class="profile-img">
-
+                        <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${questionDto.profileImg}">
                     </div>
                     <div class="profile-right">
                         <div class="nickname-line">
@@ -105,14 +131,14 @@
                                 ${questionDto.nickname}
                             </div>
                             <!-- 프로필에서 태그를 얻어오는듯1 -->
-                            <div class="profile-tag">
-                                ${questionDto.hashtag}
-                            </div>
+<%--                            <div class="profile-tag">--%>
+<%--                                ${questionDto.hashtag}--%>
+<%--                            </div>--%>
                         </div>
 
                         <!-- 프로필에서 태그를 얻어오는듯2 -->
                         <div class="tag2-line">
-                            20대·남성·대한민국·경험추구형
+<%--                            20대·남성·대한민국·경험추구형--%>
                         </div>
                     </div>
                 </div>
@@ -122,13 +148,29 @@
 
                         </div>
                         <div class="profile-text">
-                            프로필 사진을 클릭해보세요!
+                            답변을 작성해주세요!
+<%--                            프로필 사진을 클릭해보세요!--%>
                         </div>
                     </div>
-                    <div class="apply-btn" onclick="location.href='<c:url value="/question/answer/write"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}'">
-                        답변하기
-                    </div>
-
+                    <c:if test="${sessionScope.id ne questionDto.userId}">
+                        <c:if test="${questionDto.status eq 0}">
+                            <c:if test="${sessionScope.id ne null}">
+                                <div class="apply-btn" onclick="location.href='<c:url value="/question/answer/write"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}'">
+                                    답변하기
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.id eq null}">
+                                <div class="apply-btn" onclick="location.href='<c:url value="/login"/>'">
+                                    답변하기
+                                </div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${questionDto.status eq 1}">
+                        <div class="apply-btn2">
+                            답변 채택이 완료되었습니다.
+                        </div>
+                        </c:if>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -249,6 +291,13 @@
         });//end 댓글script
     });
 
+    $("#commentList").on("click", ".select-answer-btn", function(){
+        let form = $("#form");
+        form.attr("action", "<c:url value='/question/answer/select'/>");
+        form.attr("method", "post");
+        form.submit();
+    });
+
     //댓글 script2 시작
     let toHtml = function(comments) {
         let addZero = function(value=1){
@@ -272,15 +321,26 @@
         let tmp = "<div>";
 
         comments.forEach(function(comment){
+
+            let sessionId = $("input[name=sessionId]").val();
+            let memberId = $("input[name=memberId]").val();
+
             tmp += '<div class="repeat-answer-container" data-id='+comment.id
             tmp += ' data-questionId='+comment.questionId + '>'
-            tmp += ' <div class="repeat-answer"><div class="answer-profile-img"></div>'
-            tmp += ' <div><span class="commenter">' + comment.userId + '</span>'
+            tmp += ' <div class="repeat-answer"><div class="answer-profile-img"><img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/'+ comment.profileImg +'"></div>'
+            tmp += ' <div><span class="commenter">' + comment.nickname + '</span>'
             tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div></div>'
             tmp += ' <div class="comment">' + comment.content + '</div>'
+<%--            <c:if test="${sessionScope.id eq answerDto.userId}">--%>
+            if(sessionId==comment.userId) {
             tmp += '<button class="modBtn" type="button">수정</button>'
                 <%--<a href="<c:url value='/question/answer/modify'/>?page=${page}&pageSize=${pageSize}">수정</a></button>--%>
             tmp += '<button class="delBtn" type="button">삭제</button>'
+            }
+<%--            </c:if>--%>
+            if(sessionId==memberId) {
+            tmp += '<button class="select-answer-btn" type="button">채택하기</button>'
+            }
             tmp += '<div class="only-line"></div>'
             tmp += '</div>'
 

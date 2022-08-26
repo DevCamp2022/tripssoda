@@ -18,9 +18,11 @@
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
 </script>
+<form id="form" action="" method="">
+    <input type="hidden" name="id" value="${accompanyDto.id}">
     <div class="main-img-area">
-        <div class="main-img">
-
+        <div class="main-img2">
+            <img class="main-img" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">
         </div>
     </div>
     <div class="content-profile-group">
@@ -49,44 +51,66 @@
                 <div class="view-cnt">
                     &nbsp· 조회수 ${accompanyDto.viewCnt}
                 </div>
+                <c:if test="${sessionScope.id eq accompanyDto.userId}">
+                <button type="button" class="modify-btn">
+                    <a href="<c:url value='/accompany/modify'/>?id=${accompanyDto.id}&page=${page}&pageSize=${pageSize}">수정</a>
+                </button>
+                <button type="button" id="remove-btn" class="remove-btn">
+                    · 삭제
+                </button>
+                </c:if>
             </div>
         </div>
 
 <div class="profile-group">
     <div class="profile-top">
         <div class="profile-img">
-
+            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">
         </div>
         <div class="profile-right">
             <div class="nickname-line">
                 <div class="nickname">
                     ${accompanyDto.nickname}
                 </div>
-                <div class="profile-tag">
-                    # 맛집탐방러
-                </div>
+<%--                <div class="profile-tag">--%>
+<%--                    # 맛집탐방러--%>
+<%--                </div>--%>
             </div>
             <div class="tag2-line">
-                40대 · 남성 · 대한민국 · 경험추구형
+<%--                40대 · 남성 · 대한민국 · 경험추구형--%>
             </div>
         </div>
     </div>
     <div class="profile-bottom">
         <div class="profile-icon-line">
             <div class="profile-icon">
-
             </div>
             <div class="profile-text">
-                프로필 사진을 클릭해보세요!
+<%--                프로필 사진을 클릭해보세요!--%>
+                동행에 참여 해보세요!
             </div>
         </div>
-
-        <div class="apply-btn">
-            <a class="apply-text" href="https://${accompanyDto.chatUrl}">오픈채팅방입장</a>
-        </div>
+        <c:if test="${sessionScope.id ne accompanyDto.userId}">
+            <c:if test="${sessionScope.id ne null}">
+                <a class="apply-text" href="https://${accompanyDto.chatUrl}">
+                <div class="apply-btn">
+                    오픈채팅방입장
+                </div>
+                </a>
+            </c:if>
+            <c:if test="${sessionScope.id eq null}">
+                <a class="apply-text" href="<c:url value='/login'/>">
+                    <div class="apply-btn">
+                        오픈채팅방입장
+                    </div>
+                </a>
+            </c:if>
+        </c:if>
     </div>
 </div>
 </div>
+</form>
+
 <script>
     $(document).ready(function() {
         $("#remove-btn").on("click", function() {
@@ -96,7 +120,27 @@
             form.attr("method", "post");
             form.submit();
         });
+        //thumbnail upload
+        $("#uploadThumb").change(function(){
+            //정규표현식
+            // var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+            var f = $(this)[0].files[0]; //현재 선택한 파일
+            // if(!f.type.match(reg)){
+            //     alert("유효한 확장자가 아닙니다.");
+            //     return;
+            // }
+
+            var reader = new FileReader();
+            reader.onload = function(e){
+                let newImg = document.createElement('img');
+                newImg.setAttribute("src", e.target.result);
+                newImg.setAttribute("width",500);
+                $(".div-thumbnail").html(newImg);
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        });
     });
+
 </script>
 </body>
 </html>

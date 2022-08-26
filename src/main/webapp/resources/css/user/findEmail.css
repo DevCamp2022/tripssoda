@@ -10,10 +10,17 @@ a {
     text-decoration: none;
 }
 
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* main */
 .main {
     width: 1200px;
+    min-height: 800px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 
 .contents {
@@ -43,6 +50,7 @@ a {
     font-size: 13px;
     margin: 10px 0;
     padding: 0 10px;
+    border-radius: 4px;
 }
 
 .find-btn {
@@ -56,8 +64,12 @@ a {
     margin: 10px 0;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
+.check-text {
+    margin: 5px;
+}
 
 
 

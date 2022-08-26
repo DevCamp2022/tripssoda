@@ -1,18 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Renee
-  Date: 2022-08-19
-  Time: 오후 2:54
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
+<link rel="stylesheet" href="/css/admin/side.css" />
+<style>
+    body{
+
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        background-color: #fff;
+    }
+    a:hover{   text-decoration: none;}
+</style>
 <body>
-<h1>관리자 메인 홈</h1>
-
-
-</body>
-</html>
+<h1><br><br><Br>관리자 메인 홈</h1>

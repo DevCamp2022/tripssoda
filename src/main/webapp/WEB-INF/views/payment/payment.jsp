@@ -4,6 +4,8 @@
 
 <link rel="stylesheet" type="text/css" href="/css/payment/payment.css">
 
+
+
 <div class="content">
     <div class="reservation-wrap">
         <form id="frm">
@@ -58,7 +60,7 @@
                             <em class="detail-info-tit">수량</em>
                             <div class="qty-wrap">
                                 <button type="button" class="btn-amount-minus" data-btn='product'>-</button>
-                                <input type="number" name="productQty" value="1">
+                                <input type="number" name="productQty" value="1" readonly>
                                 <button type="button" class="btn-amount-plus" data-btn='product'>+</button>
                             </div>
                         </li>

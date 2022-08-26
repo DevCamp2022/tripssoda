@@ -54,10 +54,11 @@ body {
 }
 /* 정렬 텍스트 */
 .sort-text {
-    width: 30px;
+    display: block;
+    width: 40px;
     height: 17px;
     color: #6a6a6a;
-    margin: 2px 10px 0 0;
+    margin: -1px 10px 0 20px;
 }
 /* 정렬 선택 버튼 */
 .sort-button {
@@ -70,7 +71,8 @@ body {
 }
 /* 정렬 선택 버튼-옵션 */
 .search-option {
-    padding: 8px 33px 8px 10px;
+    display: block;
+    padding: 5px 3px 9px 10px;
     border: unset;
     background-color: #fff;
     font-family: 'Noto Sans KR', sans-serif;

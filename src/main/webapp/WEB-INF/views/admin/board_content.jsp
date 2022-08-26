@@ -16,8 +16,9 @@
 
 <div class="combined-wrap">
     <div class="combined-wrap-tit"><h1 class="writing-header">${mode=="new" ? "Board Register" : "Contents"}</h1></div>
-    <form id="form" class="frm" action="" method="post">
-        <input type="hidden" name="id" value="${param.id}">
+    
+    <form id="form" class="frm" action="" method="">
+<%--        <input type="hidden" name="id" value="${param.id}">--%>
 
         <table class="combined-list-tb">
 
@@ -117,12 +118,15 @@
 </div>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/board.js"></script>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/board.js"></script>--%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
 <script>
+    CKEDITOR.replace('unitContent',
+        {filebrowserUploadUrl:'/ckeditor/fileUploader'});
+
     $(document).ready(function(){
 
         let formCheck = function() {
@@ -157,7 +161,7 @@
         $("#writeBtn").on("click", function() {
             let form = $("#form");
 
-            if (formCheck())
+            if (formCheck()) {
                 if (!confirm("등록하시겠습니까?"))
                     return;
                 else {
@@ -165,6 +169,8 @@
                     form.attr("method", "post");
                     form.submit();
                 }
+            }
+
         });
 
         $("#modifyBtn").on("click", function(){
@@ -195,7 +201,7 @@
             if(!confirm("정말로 삭제하시겠습니까?")) return;
 
             let form = $("#form");
-            form.attr("action", "<c:url value='/admin/remove${searchCondition.queryString}'/>");
+            form.attr("action", "<c:url value='/admin/remove${searchCondition.queryString}+&id=${param.id}'/>");
             form.attr("method", "post");
             form.submit();
         });

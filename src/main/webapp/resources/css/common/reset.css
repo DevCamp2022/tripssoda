@@ -62,4 +62,3 @@ input, select
 }
 
 input:focus, select:focus {outline: 2px solid #00ce7c;} /* outline 테두리 속성 수정 */
-

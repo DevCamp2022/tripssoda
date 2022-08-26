@@ -30,7 +30,12 @@
 
 </div>
 <div class="main-group">
-    <div class="sort-bar">
+    <div class="sort-bar2">
+        <a href="<c:url value='/accompany/write'/>">
+        <div class="new-write-btn">
+            동행 글쓰기
+        </div>
+        </a>
         <div class="sort-text">
             정렬
         </div>

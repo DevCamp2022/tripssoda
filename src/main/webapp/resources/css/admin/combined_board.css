@@ -1,4 +1,9 @@
-
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    background-color: #fff;
+}
 
 .combined-wrap{
     min-height: 1000px;
@@ -42,6 +47,7 @@
     text-align: center;
     /*background: lightgreen;*/
     /*background-color: rgb(22, 22, 22);*/
+    /*background-color: #f5f5f5;*/
     background-color: #f5f5f5;
     /*opacity: 0.6;*/
     color:black;

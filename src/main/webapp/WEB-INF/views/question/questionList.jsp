@@ -24,6 +24,11 @@
 </div>
 <div class="main-group">
     <div class="sort-bar-line">
+        <a href="<c:url value='/question/write'/>">
+            <div class="new-write-btn">
+                질문 글쓰기
+            </div>
+        </a>
         <div class="sort-text">
             정렬
         </div>

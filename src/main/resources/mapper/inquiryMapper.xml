@@ -39,4 +39,18 @@
         VALUES (#{userId}, #{title}, #{content}, #{menuCode}, #{createdBy}, #{updatedBy})
     </insert>
 
+
+
+    <select id="selectAllInquiryCnt" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM inquiry
+    </select>
+
+    <select id="selectAllInquiry" parameterType="SearchCondition" resultType="InquiryDto">
+        SELECT *
+        FROM inquiry
+        ORDER BY id DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+
 </mapper>

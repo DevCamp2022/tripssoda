@@ -5,6 +5,7 @@
 <link href="/css/product/update_product.css" rel='stylesheet' />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="content">
+  <br>
   <h4><strong>상품수정</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
   <hr>
   <form action="<c:url value='/product/update'/>" method="POST" enctype="multipart/form-data">
@@ -52,12 +53,12 @@
         onkeypress="if(event.keyCode=='13'){event.preventDefault(); handleKeyword();}"><br>
       </td>
     </tr>
-    <tr>
+    <!-- <tr>
       <th><span class="man-star">*</span>환급금</th>
       <td>
         <input type="text" name="refundAmount" id="refundAmount" value="${dto.refundAmount}"/>
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <th><span class="man-star">*</span>모집 최소인원(명)</th>
       <td>

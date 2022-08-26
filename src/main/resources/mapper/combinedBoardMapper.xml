@@ -12,11 +12,11 @@
         DELETE FROM combined_board
     </delete>
 
-    <delete id="delete" parameterType="map">
+    <update id="delete" parameterType="map">
         UPDATE combined_board
         SET   status = 0
         WHERE id = #{id} and user_id = #{userId}
-    </delete>
+    </update>
 
     <insert id="insert" parameterType="CombinedBoardDto">
         INSERT INTO combined_board
@@ -121,5 +121,37 @@
         SELECT status
         FROM combined_board
         WHERE id = #{id}
+    </select>
+
+    <select id="searchSelectPageForUser" parameterType="java.util.Map" resultType="CombinedBoardDto">
+        SELECT id, menu_code, title, content, view_cnt, status, created_at, created_by, updated_at, updated_by
+        FROM  combined_board
+        WHERE true
+        <include refid="searchCondition"/>
+
+        <if test='menuCode != "0"'>
+            and
+            menu_code = #{menuCode}
+        </if>
+            and
+            status = 1
+
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{sc.offset}, #{sc.pageSize}
+    </select>
+
+
+    <select id="searchResultCntForUser" parameterType="java.util.Map" resultType="int">
+        SELECT count(*)
+        FROM  combined_board
+        WHERE true
+        <include refid="searchCondition"/>
+
+        <if test='menuCode != "0"'>
+            and
+            menu_code = #{menuCode}
+        </if>
+            and
+            status = 1;
     </select>
 </mapper>

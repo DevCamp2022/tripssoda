@@ -177,7 +177,7 @@ public class AdminController {
 
 
     @PostMapping("/remove")
-    public String remove(Integer id,String menuCode, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
+    public String remove(Integer id, String menuCode, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
         Integer userId = (Integer) session.getAttribute("id");
 
         try {
@@ -244,29 +244,6 @@ public class AdminController {
         return "success";
     }
 
-    //1:1
-    @GetMapping
-    public String inquiryList(Model m, SearchCondition sc) throws Exception{
-        try{
-            int totalCnt = adminUserService.getInquiryCnt();
-            System.out.println("totalCnt = " + totalCnt);
-            m.addAttribute("totalCnt", totalCnt);
-
-            PageHandler pageHandler = new PageHandler(totalCnt, sc);
-
-            List<UserDto> list = adminUserService.selectInquiryList(sc);
-
-            m.addAttribute("list", list);
-            m.addAttribute("ph", pageHandler);
-
-        }catch(Exception e){
-            e.printStackTrace();
-            m.addAttribute("msg", "LIST_ERR");
-            m.addAttribute("totalCnt", 0);
-        }
-
-        return "inquiry";
-    }
 
     //회원관리
     @GetMapping("/userList")
@@ -402,5 +379,35 @@ public class AdminController {
             return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/inquiry")
+    public String inquiry(Model m, SearchCondition sc) throws Exception{
+
+        try{
+            int totalCnt = adminBoardService.selectAllInquiryCnt();
+            System.out.println("totalCnt = " + totalCnt);
+            m.addAttribute("totalCnt", totalCnt);
+
+            PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+            List<InquiryDto> list = adminBoardService.selectAllInquiry(sc);
+            System.out.println("list.toString() = " + list.toString());
+            m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            m.addAttribute("msg", "LIST_ERR");
+            m.addAttribute("totalCnt", 0);
+        }
+        return "admin/inquiry_board.subTiles";
+    }
+
+    @GetMapping("/inquiry/read")
+    public String inquiryRead(Model m ){
+
+        return "admin/inquiry_content.subTiles";
     }
 }

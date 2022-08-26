@@ -126,8 +126,8 @@ body {
 
 .img-wrap {
     float: left;
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 200px;
+    height: 200px;
 }
 .img-wrap > img {
     width: 100%;
@@ -136,12 +136,16 @@ body {
 .info-wrap {
     float: left;
     padding: 5px;
-    width: 64%;
+    width: 47%;
     margin-left: 10px;
 }
 .product-title {
     font-size: 18px;
     font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 .start-date {
     display: flex;

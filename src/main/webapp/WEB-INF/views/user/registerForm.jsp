@@ -28,6 +28,7 @@
             <div class="email-wrap">
                 <input type="email" class="input-email" name="email" placeholder="이메일 주소 입력">
                 <button class="send-email-verf-btn" type="button">인증번호 전송</button>
+                <p class="email-check check-text"></p>
                 <input type="text" class="verf-num" placeholder="인증번호 입력">
                 <button class="confirm-verf-num" type="button">인증번호 확인</button>
             </div>
@@ -40,7 +41,7 @@
             </div>
             <p class="row-title">이름</p>
             <div class="name-wrap">
-                <input type="text" class="input-name" name="name" placeholder="이름(2~6자)">
+                <input type="text" class="input-name" name="name" placeholder="이름(2~6자)" maxlength="6">
                 <p class="name-check check-text"></p>
             </div>
             <p class="row-title">휴대폰 번호</p>
@@ -90,6 +91,29 @@
 </div>
 
 <script>
+    //모든 공백 체크 정규식
+    let empJ = /\s/g;
+    // 비밀번호 양식 검증 (8~12자리 문자,숫자,특수문자 혼합)
+    let pwdJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,12}$/;
+    // 이름 정규식
+    let nameJ = /^[가-힣]{2,6}$/;
+    // 휴대폰 번호 정규식
+    let telJ = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+    // 이메일 정규식
+    let emailJ = /^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$/;
+
+    // 유효성 검사 결과를 저장할 변수 선언
+    let pwdResult = false;
+    let nameResult = false;
+    let telResult = false;
+    let birthResult = false;
+    let emailResult = false;
+    let pwdConfirmResult = false;
+    // 이메일 인증번호 전송 버튼을 눌렀는지 안 눌렀는지 체크하는 변수 선언
+    let emailSendCheck = false;
+    // 이메일 인증 여부를 저장할 변수 선언
+    let emailVerfResult = false;
+
     // form 전송여부를 정하는 onsubmit 함수
     function formCheck() {
         let firstTermsStatus = $('input[name=firstTermsStatus]').is(':checked');
@@ -101,6 +125,9 @@
 
         if(telResult && pwdResult && nameResult && birthResult && emailVerfResult && pwdConfirmResult) {
             return true;
+        } else if(!emailVerfResult) {
+            alert("이메일 인증을 완료해야 합니다");
+            return false;
         } else if(!pwdResult) {
             $('input[name=pwd]').focus();
             $('.pwd-check').text('올바른 비밀번호를 입력해주세요');
@@ -125,16 +152,22 @@
             $('.birthday-check').text('올바른 생년월일을 입력해주세요');
             $('.birthday-check').css('color', 'red');
             return false;
-        } else if(!emailVerfResult) {
-            alert("이메일 인증을 완료해야 합니다");
-            return false;
         }
     }
 
     // 인증번호 전송 버튼을 클릭했을 때
     $('.send-email-verf-btn').on("click", function() {
-        alert("인증번호를 전송중입니다. 잠시만 기다려주세요!");
+
         let email = $(".input-email").val();
+        if(email=="" || email==null) {
+            alert("이메일을 입력해주세요");
+            return;
+        }
+        if(!emailResult) {
+            alert("올바른 이메일을 입력해주세요")
+            return;
+        }
+
         $.ajax({
             type:"POST",
             url:"/register/emailCheck",
@@ -143,10 +176,11 @@
             success :function(result){
                 if(result == "Email has been sent") {
                     alert("인증번호가 전송되었습니다.");
+                    emailSendCheck = true;
                 } else if (result == "Email already exists") {
                     alert("이미 가입된 이메일입니다.");
                 } else {
-                    alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
+                    alert("이메일 전송에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.")
                 }
 
             },
@@ -157,8 +191,17 @@
     });
     // 인증번호 확인 버튼을 클릭했을 때
     $('.confirm-verf-num').on("click", function() {
-        let inputCode = $('.verf-num').val();
+        let inputCode = ($('.verf-num').val()).trim();
         let email = $(".input-email").val();
+
+        if(!emailSendCheck) {
+            alert("먼저 인증번호 전송을 요청하세요");
+            return;
+        }
+        if(inputCode=="" || inputCode==null) {
+            alert("인증번호를 입력해주세요");
+            return;
+        }
 
         $.ajax({
             type:"POST",
@@ -182,22 +225,18 @@
         });
     })
 
-    //모든 공백 체크 정규식
-    let empJ = /\s/g;
-    // 비밀번호 양식 검증 (8~12자리 문자,숫자,특수문자 혼합)
-    let pwdJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,12}$/;
-    // 이름 정규식
-    let nameJ = /^[가-힣]{2,6}$/;
-    // 휴대폰 번호 정규식
-    let telJ = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+    // 이메일 유효성 검사
+    $("input[name=email]").keyup(function () {
+        emailResult = emailJ.test($('input[name=email]').val());
 
-    // 유효성 검사 결과를 저장할 전역 변수 선언
-    let pwdResult = false;
-    let nameResult = false;
-    let telResult = false;
-    let birthResult = false;
-    let pwdConfirmResult = false;
-    let emailVerfResult = false;
+        // 이메일 형식에 맞지 않으면 메세지 표시
+        if(!emailResult) {
+            $('.email-check').text('올바른 이메일을 입력해주세요.');
+            $('.email-check').css('color', 'red');
+        } else {
+            $('.email-check').text('');
+        }
+    });
 
     // 비밀번호 유효성 검사
     $("input[name=pwd]").keyup(function() {
@@ -221,7 +260,7 @@
         let pwdConfirm = $('input[name=pwdConfirm]').val();
 
         if (pwdConfirmResult && (pwd === pwdConfirm)) {
-            $('.pwd-confirm-check').text('비밀번호가 일치합니다.');
+            $('.pwd-confirm-check').text('OK');
             $('.pwd-confirm-check').css('color', 'blue');
         } else if (!pwdConfirmResult) {
             $('.pwd-confirm-check').text('8~12자리의 영대소문자와 숫자, 특수기호 조합을 입력하세요.');

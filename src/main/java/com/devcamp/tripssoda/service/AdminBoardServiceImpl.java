@@ -1,9 +1,12 @@
 package com.devcamp.tripssoda.service;
 
 import com.devcamp.tripssoda.dto.CombinedBoardDto;
+import com.devcamp.tripssoda.dto.InquiryDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
+import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.mapper.CombinedBoardHistoryMapper;
 import com.devcamp.tripssoda.mapper.CombinedBoardMapper;
+import com.devcamp.tripssoda.mapper.InquiryMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +19,14 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 
     private final CombinedBoardMapper combinedBoardMapper;
     private final CombinedBoardHistoryMapper combinedBoardHistoryMapper;
+    private final InquiryMapper inquiryMapper;
 
     public AdminBoardServiceImpl(CombinedBoardMapper combinedBoardMapper,
-                                 CombinedBoardHistoryMapper combinedBoardHistoryMapper) {
+                                 CombinedBoardHistoryMapper combinedBoardHistoryMapper,
+                                 InquiryMapper inquiryMapper) {
         this.combinedBoardMapper = combinedBoardMapper;
         this.combinedBoardHistoryMapper = combinedBoardHistoryMapper;
+        this.inquiryMapper = inquiryMapper;
     }
 
     @Override
@@ -59,7 +65,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
     public CombinedBoardDto read(Integer id) throws Exception {
         CombinedBoardDto boardDto = combinedBoardMapper.selectBoard(id);
         combinedBoardMapper.increaseViewCnt(id);
-
         return boardDto;
     }
 
@@ -95,7 +100,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
         return true;
     }
 
-
     @Override
     public int getSearchResultCnt(SearchCondition sc, String menuCode) throws Exception {
         Map<String, Object> map = new HashMap<>();
@@ -110,9 +114,37 @@ public class AdminBoardServiceImpl implements AdminBoardService{
         Map map = new HashMap();
         map.put("sc",sc);
         map.put("menuCode", menuCode);
-
         System.out.println("\"se\" = " + sc);
 
         return combinedBoardMapper.searchSelectPage(map);
+    }
+
+    @Override
+    public int selectAllInquiryCnt() {
+        return inquiryMapper.selectAllInquiryCnt();
+    }
+
+    @Override
+    public List<InquiryDto> selectAllInquiry(SearchCondition sc) {
+        return inquiryMapper.selectAllInquiry(sc);
+    }
+
+
+    public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception {
+        Map map = new HashMap();
+        map.put("sc",sc);
+        map.put("menuCode", menuCode);
+
+        System.out.println("\"se\" = " + sc);
+
+        return combinedBoardMapper.searchSelectPageForUser(map);
+    }
+
+    @Override
+    public int getSearchResultCntForUser(SearchCondition sc, String menuCode) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("sc", sc);
+        map.put("menuCode", menuCode);
+        return combinedBoardMapper.searchResultCntForUser(map);
     }
 }

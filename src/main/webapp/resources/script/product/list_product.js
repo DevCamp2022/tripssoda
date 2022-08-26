@@ -40,11 +40,11 @@ $(".prevBtn").click(function(){
 //카테고리 버튼 클릭 이벤트(스크롤이동)
 //에디터 388, 프라이빗 748
 $(document).on('click', '#category-editor', function(){
-  window.scrollTo(0, 388);
+  window.scrollTo(0, 350);
 
 });
 
 $(document).on('click', '#category-private', function(){
-  window.scrollTo(0, 748);
+  window.scrollTo(0, 730);
 
 });

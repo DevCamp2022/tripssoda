@@ -5,6 +5,7 @@ import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.mapper.AccompanyMapper;
 import com.devcamp.tripssoda.util.ImageResize;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +50,7 @@ public class AccompanyServiceImpl implements AccompanyService {
         String uploadName = uuid + uploadThumb.getOriginalFilename();
 
         File folder = new File(realPath);
+        System.out.println("realPath = " + realPath);
         if(uploadThumb.isEmpty())
             dto.setThumbnail("Empty");
         else {
@@ -81,10 +83,47 @@ public class AccompanyServiceImpl implements AccompanyService {
         accompanyMapper.increaseViewCnt(id);
         return dto;
     }
+
     @Override
     public int modify(AccompanyDto dto) throws Exception {
+        return accompanyMapper.update(dto);    
+    }
+
+    @Override
+    public int modify(AccompanyDto dto, @RequestParam MultipartFile uploadThumb, HttpServletRequest request) throws Exception {
+        String oldFileName = accompanyMapper.select(dto.getId()).getThumbnail();
+
+        if(uploadThumb.isEmpty()) {
+            dto.setThumbnail(oldFileName);
+        } else {
+            String realPath = request.getServletContext().getRealPath("/resources/image/thumbnail");
+            UUID uuid = UUID.randomUUID();
+            String newFileName = uuid + uploadThumb.getOriginalFilename();
+            dto.setThumbnail(newFileName);
+            File folder = new File(realPath);
+            if(!folder.exists()){
+                try{
+                    folder.mkdirs();
+                }catch(Exception e){
+                    e.getStackTrace();
+                }
+            }
+            try {
+                File file = new File(realPath + File.separator + newFileName);
+                if(file.exists()) {
+                    file.delete();
+                }
+                uploadThumb.transferTo(file);
+                String fileName = ImageResize.thumbnailResize(realPath, newFileName);
+                dto.setThumbnail(fileName);
+
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+        }
         return accompanyMapper.update(dto);
     }
+
     @Override
     public int remove(Integer id, Integer userId) throws Exception {
         Map map = new HashMap();

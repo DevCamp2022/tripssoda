@@ -23,6 +23,8 @@ public interface AccompanyService {
 
     int modify(AccompanyDto dto) throws Exception;
 
+    int modify(AccompanyDto dto, MultipartFile uploadThumb, HttpServletRequest request) throws Exception;
+
     int remove(Integer id, Integer userId) throws Exception;
 
     List<AccompanyDto> getPage(Map map) throws Exception;

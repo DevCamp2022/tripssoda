@@ -21,7 +21,7 @@
     </update>
     <insert id="insertUserPointHistory" parameterType="Map">
         INSERT INTO
-            user_point_history(user_id, amount, process_detail, process_at, status)
+            user_point_history (user_id, amount, process_detail, process_at, status)
         VALUES
                (#{userId}, #{amount}, #{message}, now(), 1);
     </insert>

@@ -4,8 +4,8 @@
         
 <mapper namespace="com.devcamp.tripssoda.mapper.UserMapper">
     <insert id="insertUser" parameterType="UserDto" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user_info (name, pwd, email, tel, gender, birthday, nickname)
-        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname})
+        INSERT INTO user_info (name, pwd, email, tel, gender, birthday, nickname, point)
+        VALUES (#{name}, #{pwd}, #{email}, #{tel}, #{gender}, #{birthday}, #{nickname}, #{point})
     </insert>
 
     <select id="selectUser" parameterType="String" resultType="UserDto">

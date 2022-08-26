@@ -19,6 +19,7 @@ public interface ProductService {
     public List<ProductOptionDto> selectOptionList(Integer productId);
     public int updateProductApproval(ApprovalDto approvalDto) throws Exception;
     public List<ProductScheduleDto> getScheduleList(Integer productId);
+    public List<ProductScheduleDto> getProductScheduleList(GetDetailProductDto dto);
     public UpdateProductDto getUpdateProduct(Integer productId);
     public List<UpdateProductDto> getUpdateProductOption(Integer productId);
     public List<UpdateProductDto> getUpdateProductSchedule(Integer productId);

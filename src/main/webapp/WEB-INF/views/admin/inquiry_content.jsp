@@ -17,31 +17,16 @@
 <div class="combined-wrap">
     <div class="combined-wrap-tit"><h1 class="writing-header">${mode=="new" ? "Board Register" : "Contents"}</h1></div>
     <form id="form" class="frm" action="" method="post">
-        <input type="hidden" name="id" value="${param.id}">
 
         <table class="combined-list-tb">
 
-        <c:if test='${mode eq "new"}'>
-            <tr>
-                <td colspan="9">
-
-                    <select name="boardOption">
-                        <option selected>--게시판선택--</option>
-                        <option value="M001">공지사항</option>
-                        <option value="M002">프로모션</option>
-                        <option value="M003">자주묻는질문</option>
-                    </select>
-                </td>
-
-            </tr>
-        </c:if>
 
 <%--  여기 조건문 손봐야함  --%>
         <c:if test="${mode ne 'new'}">
             <tr>
                 <td colspan="10" class="bc-button-wrap">
-                    <button class="bc-btn" type="button" id="modifyBtn">수정</button>
-                    <button class="bc-btn" id="conDelBtn" type="button">삭제</button>
+<%--                    <button class="bc-btn" type="button" id="modifyBtn">답변</button>--%>
+<%--                    <button class="bc-btn" id="conDelBtn" type="button">삭제</button>--%>
                     <button class="bc-btn" type="button" id="listBtn"> 목록</button>
                 </td>
             </tr>
@@ -86,9 +71,9 @@
 <%--                    </c:if>--%>
 <%--                </td>--%>
 <%--            </tr>--%>
-        <tr>
-            <td><span class="img-length"></span>글자수</td>
-        </tr>
+<%--        <tr>--%>
+<%--            <td><span class="img-length"></span>글자수</td>--%>
+<%--        </tr>--%>
 
     </table>
 <%--            <c:if test="${mode eq 'new'}">--%>
@@ -99,7 +84,7 @@
 
     </form>
     <c:if test="${mode eq 'new'}">
-        <button type="button" id="writeBtn">등록</button>
+        <button type="button" id="answerBtn">답변</button>
         <button type="button" id="resetBtn"> 취소</button>
 
     </c:if>

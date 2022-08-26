@@ -35,4 +35,11 @@ public class PartnerController {
         //성공화면 or 마이페이지 등록리스트 나중에 만들어서 리턴값 변경하기
         return "redirect:/partner/reg";
     }
+
+    @SkipChecking
+    @GetMapping("/mypage")
+    public String PartnerMypage() {
+        System.out.println("파트너마이페이지 접속중");
+        return "partner/mypage.partTiles";
+    }
 }

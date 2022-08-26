@@ -12,11 +12,11 @@
         DELETE FROM combined_board
     </delete>
 
-    <delete id="delete" parameterType="map">
+    <update id="delete" parameterType="map">
         UPDATE combined_board
         SET   status = 0
         WHERE id = #{id} and user_id = #{userId}
-    </delete>
+    </update>
 
     <insert id="insert" parameterType="CombinedBoardDto">
         INSERT INTO combined_board

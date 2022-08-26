@@ -43,11 +43,11 @@ CKEDITOR.replace('meetingPoint',
 //검색키워드 key이벤트
 function handleKeyword() {
 	if (window.event.keyCode == 13) {
+        if($(".gen-key").val() == ' '){alert("빈 문자열은 입력할 수 없습니다."); return;}
     	// 엔터키가 눌렸을 때
         let s = "";
         s += "<span class='hashes'>" + $(".gen-key").val()
         s += "<input type='hidden' class='hashes' name='keyword' value='" + $(".gen-key").val() + "'>";
-        // 나중에 'X'키 이쁘게 바꿀것!!
         s += "<span class='delBtn'>&nbsp;<span class='material-icons' style='font-size:12px;cursor:pointer;'>clear</span></span></span>";        
         $(".word-list").append(s);
         $(".gen-key").val("").focus();
@@ -64,35 +64,35 @@ $(document).on("click",".hashes .delBtn",function(){
 $("#add-manGuide").click(function(){
     let s = '<div class="manGuide">';
     s += '<input type="text" name="mandatoryGuidance"/>';
-    s += '<button type="button" class="manGuide-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-danger manGuide-delBtn">삭제</button><br></div>';
     $(".td-manGuide").append(s);
 });
 
 $("#add-refund").click(function(){
     let s = '<div class="refundPolicy">';
     s += '<input type="text" name="refundPolicy" id="refundPolicy"/>';
-    s += '<button type="button" class="refundPolicy-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-danger refundPolicy-delBtn">삭제</button><br></div>';
     $(".td-refund").append(s);
 });
 
 $("#add-inclusion").click(function(){
     let s = '<div class="inclusion">';
     s += '<input type="text" name="inclusion" id="inclusion"/>';
-    s += '<button type="button" class="inclusion-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-danger inclusion-delBtn">삭제</button><br></div>';
     $(".td-inclusion").append(s);
 });
 
 $("#add-exclusion").click(function(){
     let s = '<div class="exclusion">';
     s += '<input type="text" name="exclusion" id="exclusion"/>';
-    s += '<button type="button" class="exclusion-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-danger exclusion-delBtn">삭제</button><br></div>';
     $(".td-exclusion").append(s);
 });
 
 $("#add-additionalInfo").click(function(){
     let s = '<div class="additionalInfo">';
     s += '<input type="text" name="additionalInfo" id="additionalInfo"/>';
-    s += '<button type="button" class="additionalInfo-delBtn">삭제</button><br></div>';
+    s += '<button type="button" class="btn btn-outline-danger additionalInfo-delBtn">삭제</button><br></div>';
     $(".td-additionalInfo").append(s);
 });
 
@@ -266,8 +266,8 @@ function valid() {
         return false;
     }
 
-    if($("#thumbnail").val() == "") {
-        alert("썸네일 이미지를 첨부해 주세요.");
+    if($("#sel-category").val() == "" || $("#sel-category").val() == undefined || $("#sel-category").val() == null) {
+        alert("카테고리를 선택해 주세요.");
         return false;
     }
 
@@ -276,12 +276,17 @@ function valid() {
         return false;
     }
 
-    if($("#serviceRegion").val() == "") {
-        alert("서비스 지역 입력해 주세요.");
+    if($("#uploadThumb").val() == "") {
+        alert("썸네일 이미지를 첨부해 주세요.");
         return false;
     }
 
-    if($("#keyword").val() == "") {
+    // if($("#serviceRegion").val() == "") {
+    //     alert("서비스 지역 입력해 주세요.");
+    //     return false;
+    // }
+
+    if($("input[name=keyword]").val() == "" || $("input[name=keyword]").val() == undefined) {
         alert("검색키워드를 입력해 주세요.");
         return false;
     }

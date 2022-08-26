@@ -11,6 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"></head>
 </head>
 <body>
+<script>
+    let msg = "${msg}";
+    if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
+</script>
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${questionDto.id}">
     <input type="hidden" name="page" value="${page}">
@@ -149,9 +154,16 @@
                     </div>
                     <c:if test="${sessionScope.id ne questionDto.userId}">
                         <c:if test="${questionDto.status eq 0}">
-                        <div class="apply-btn" onclick="location.href='<c:url value="/question/answer/write"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}'">
-                            답변하기
-                        </div>
+                            <c:if test="${sessionScope.id ne null}">
+                                <div class="apply-btn" onclick="location.href='<c:url value="/question/answer/write"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}'">
+                                    답변하기
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.id eq null}">
+                                <div class="apply-btn" onclick="location.href='<c:url value="/login"/>'">
+                                    답변하기
+                                </div>
+                            </c:if>
                         </c:if>
                         <c:if test="${questionDto.status eq 1}">
                         <div class="apply-btn2">

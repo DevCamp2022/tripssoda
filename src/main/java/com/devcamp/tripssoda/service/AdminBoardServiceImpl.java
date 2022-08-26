@@ -120,7 +120,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
     }
 
     @Override
-<<<<<<< HEAD
     public int selectAllInquiryCnt() {
         return inquiryMapper.selectAllInquiryCnt();
     }
@@ -131,7 +130,6 @@ public class AdminBoardServiceImpl implements AdminBoardService{
     }
 
 
-=======
     public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception {
         Map map = new HashMap();
         map.put("sc",sc);
@@ -149,5 +147,4 @@ public class AdminBoardServiceImpl implements AdminBoardService{
         map.put("menuCode", menuCode);
         return combinedBoardMapper.searchResultCntForUser(map);
     }
->>>>>>> 68f0dbd2f8ee7a0664722964322300ebdc0d25bf
 }

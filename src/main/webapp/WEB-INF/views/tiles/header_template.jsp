@@ -20,9 +20,12 @@
 		<div class="inner">
 			<h1 class="site-logo"><a href="/"><img src="/image/main/ssoda_logo.png" alt="logo"></a></h1>
 			<nav class="primary-nav" role="navigation">
-				<ul class="menu-list">
-					<li><a href="/#sub_menu01" class="mainBtn">커뮤니티</a></li>
-					<li><a href="/product/list#sub_menu02" class="mainBtn">여행상점</a></li>
+
+				<ul class="list">
+					<li><a href="#sub_menu01" class="mainBtn">커뮤니티</a></li>
+					<li><a href="#sub_menu02" class="mainBtn">여행상점</a></li>
+					<li><a href="#sub_menu03" class="mainBtn">공지사항</a></li>
+
 				</ul>
 
 				<ul class="list_login">
@@ -68,6 +71,16 @@
 						<li><a href="#">체코</a></li>
 						<li><a href="#">오스트리아</a></li>
 						<li><a href="#">터키</a></li>
+					</ul>
+				</nav>
+			</section>
+
+			<section class="sub-nav-tap" id="sub_menu03">
+				<nav class="sub-nav-tap-menu" role="navigation">
+					<ul>
+						<li><a href="/board/list?menuCode=M001">공지사항</a></li>
+						<li><a href="/board/list?menuCode=M002">프로모션</a></li>
+						<li><a href="/board/list?menuCode=M003">FAQ</a></li>
 					</ul>
 				</nav>
 			</section>

@@ -43,7 +43,7 @@
     <span style="float:left;margin-left: 90px;">에디터픽</span><br>
     <c:forEach var="list" items="${list0}" varStatus="statusNm">
         <div class="div-editor div-editor-${statusNm.count}">
-          <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+          <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}&startDate=${list.startDate}">
             <!--썸네일-->
             <div class="thumbnail-wrapper">
               <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->

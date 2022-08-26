@@ -14,7 +14,6 @@ public interface ProductMapper {
     public void insertProductSchedule(RegProductScheduleDto PSDto);
     public List<GetMainListProductDto> selectMainList(String category);
     public GetDetailProductDto selectProductDetail(GetDetailProductDto dto);
-    public List<ProductScheduleDto> selectScheduleList(Integer productId);
     public List<AdminProductDto> selectProductByApprovalStatus(String approvalStatus);
     public int count();
     public List<ProductOptionDto> selectOptionList(Integer productId);
@@ -25,6 +24,8 @@ public interface ProductMapper {
     public int setUpdateBy(Map<String, Integer> map);
     public int updateProductApproval(ApprovalDto approvalDto);
     public int insertApprovalHistory(ApprovalDto approvalDto);
+    public List<ProductScheduleDto> selectProductScheduleList(GetDetailProductDto dto);
+    public List<ProductScheduleDto> selectScheduleList(Integer productId);
     public UpdateProductDto selectProductUpdate(Integer productId);
     public List<UpdateProductDto> selectProductOptionUpdate(Integer productId);
     public List<UpdateProductDto> selectProductScheduleUpdate(Integer productId);

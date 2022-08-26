@@ -41,7 +41,7 @@
             </select>
         </div>
         <div class="button-wrap">
-            <button class="register-btn">회원가입 완료</button>
+            <button class="register-btn">${pageContext.request.session.getAttribute('id') == null ? "회원가입 완료" : "여행관심사 수정"}</button>
         </div>
     </form>
 </div>

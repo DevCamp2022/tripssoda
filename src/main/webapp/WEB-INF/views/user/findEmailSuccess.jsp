@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<title>tripssoda 회원가입</title>
+<link rel="stylesheet" href="<c:url value="/css/user/findEmailSuccess.css"/>">
+<title>이메일 찾기</title>
 
 <div class="main">
     <div class="contents">

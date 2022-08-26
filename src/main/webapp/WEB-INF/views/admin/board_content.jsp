@@ -87,7 +87,7 @@
 <%--                </td>--%>
 <%--            </tr>--%>
         <tr>
-            <td><span class="img-length"></span>글자수</td>
+<%--            <td><span class="img-length"></span>글자수</td>--%>
         </tr>
 
     </table>
@@ -103,17 +103,17 @@
         <button type="button" id="resetBtn"> 취소</button>
 
     </c:if>
-    <table>
-        <c:if test="${mode ne 'new'}">
-            <tr>
-                <td><button>다음글</button></td>
-            </tr>
-            <tr>
-                <td><button>이전글</button></td>
-            </tr>
-        </c:if>
+<%--    <table>--%>
+<%--        <c:if test="${mode ne 'new'}">--%>
+<%--            <tr>--%>
+<%--                <td><button>다음글</button></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td><button>이전글</button></td>--%>
+<%--            </tr>--%>
+<%--        </c:if>--%>
 
-    </table>
+<%--    </table>--%>
 </div>
 
 

@@ -8,7 +8,7 @@ h1.board-title{
 }
 
 hr.separator {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 div.search-wrap{
     margin: 20px 10px 20px 0;
@@ -52,4 +52,72 @@ div.paging{
 
 div.paging a{
     padding: 10px;
+}
+
+.search-container {
+    /*background-color: rgb(253, 253, 250);*/
+    width: 100%;
+    height: 110px;
+    /*border: 1px solid #ddd;*/
+    margin-top : 10px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-form {
+    height: 37px;
+    display: flex;
+}
+
+.search-option {
+    width: 100px;
+    height: 100%;
+    outline: none;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    color: gray;
+}
+
+.search-option > option {
+    text-align: center;
+}
+
+.search-input {
+    color: gray;
+    background-color: white;
+    border: none;
+    height: 100%;
+    width: 300px;
+    font-size: 15px;
+    border: none;
+    /*padding: 5px 7px;*/
+}
+.search-input::placeholder {
+    color: gray;
+}
+
+.search-button {
+    /* 메뉴바의 검색 버튼 아이콘  */
+    width: 20%;
+    height: 100%;
+    background-color: #00ce7c;
+    color: rgb(209, 209, 209);
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    border: none;
+    margin-left: 15px;
+
+}
+
+.search-button:hover {
+    color: rgb(165, 165, 165);
+}
+
+input[name='keyword']:focus{
+outline: none;
 }

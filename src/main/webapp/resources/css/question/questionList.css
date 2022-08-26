@@ -1,3 +1,9 @@
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    background-color: #fff;
+}
 /* 공통 요소 */
 .main-group {
     font-family: 'Noto Sans KR', sans-serif;

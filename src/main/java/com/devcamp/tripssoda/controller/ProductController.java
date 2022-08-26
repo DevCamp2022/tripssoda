@@ -52,9 +52,7 @@ public class ProductController {
     @GetMapping("/detail")
     public String getProductDetail(GetDetailProductDto dto, Model model) {
         GetDetailProductDto details = productService.getProductDetail(dto);
-
-        Integer productId = dto.getProductId();
-        List<ProductScheduleDto> list = productService.selectScheduleList(productId);
+        List<ProductScheduleDto> list = productService.getProductScheduleList(dto);
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 

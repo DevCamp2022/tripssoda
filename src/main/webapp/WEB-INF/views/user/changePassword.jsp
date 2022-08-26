@@ -37,7 +37,7 @@
     let pwdResult = false;
     let pwdConfirmResult = false;
     // 비밀번호 유효성 검사
-    $("input[name=pwd]").blur(function() {
+    $("input[name=pwd]").keyup(function() {
         // 비밀번호 유효성 검사결과를 변수에 저장
         pwdResult = pwdJ.test($('input[name=pwd]').val());
 
@@ -51,7 +51,7 @@
     });
 
     // 비밀번호확인 유효성 검사
-    $("input[name=pwdConfirm]").blur(function() {
+    $("input[name=pwdConfirm]").keyup(function() {
         // 비밀번호확인 유효성 검사결과를 변수에 저장
         pwdConfirmResult = pwdJ.test($('input[name=pwdConfirm]').val());
         let pwd = $('input[name=pwd]').val();

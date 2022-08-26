@@ -2,7 +2,6 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
-import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
@@ -71,14 +70,12 @@ public class AccompanyController {
     }
 
     @PostMapping("/modify")
-    public String modify(AccompanyDto accompanyDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
+    public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
+                           Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
-        //userId는 인조식별자
         Integer writer = (int) session.getAttribute("id");
-//        Integer writer = 43;
-        System.out.println("accompanyDto = " + accompanyDto);
-        accompanyDto.setUserId(writer);
 
+        accompanyDto.setUserId(writer);
         //유효성 검사를 추가 해야 한다.
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
@@ -101,7 +98,7 @@ public class AccompanyController {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
 
-            int rowCnt = accompanyService.modify(accompanyDto);
+            int rowCnt = accompanyService.modify(accompanyDto, uploadThumb, request);
             if(rowCnt!=1)
                 throw new Exception("Modify Failed");
             rattr.addFlashAttribute("msg", "MOD_OK");
@@ -121,6 +118,7 @@ public class AccompanyController {
         AccompanyDto accompanyDto = null;
         try {
             accompanyDto = accompanyService.read(id);
+            System.out.println("accompanyDto = " + accompanyDto);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
             m.addAttribute(accompanyDto);
@@ -185,12 +183,15 @@ public class AccompanyController {
 
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
-
+        System.out.println("\"kkkkkkkk\" = " + "kkkkkkkk");
         if(!loginCheck(request))
-            return "redirect:/login?toURL="+request.getRequestURL();
+        {
+            System.out.println("loginCheck(request) = " + loginCheck(request));
+            return "redirect:/login?toURL="+request.getRequestURL();}
         m.addAttribute("mode", "new");
         return "accompany/accompanyWrite.mainTiles";
     }
+
 
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {

@@ -1,0 +1,46 @@
+div.combined-wrap{
+    width: 1100px;
+    margin: 50px auto;
+}
+
+.combined-wrap-tit{
+    border-left: black solid 3px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+table.combined-list-tb{
+    margin-bottom: 50px;
+}
+.writing-header{
+    font-size : 24px;
+    margin-left: 10px;
+}
+
+th {
+    padding: 20px 40px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid #D5D5D5FF;
+
+}
+
+th.title {
+    width: 800px;
+    text-align: center;
+}
+
+td.content {
+    padding: 40px;
+    border-bottom: 1px solid #D5D5D5FF;
+}
+
+th.date{
+    color: #6a6a6a;
+}
+
+a.to-list{
+    width: -webkit-fill-available;
+    text-align: center;
+    color: #00ce7c;
+    font-weight: 600;
+}

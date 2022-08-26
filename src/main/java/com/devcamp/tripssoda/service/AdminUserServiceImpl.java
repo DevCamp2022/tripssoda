@@ -1,8 +1,10 @@
 package com.devcamp.tripssoda.service;
 
+import com.devcamp.tripssoda.dto.InquiryDto;
 import com.devcamp.tripssoda.dto.PartnerDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.dto.UserDto;
+import com.devcamp.tripssoda.mapper.InquiryMapper;
 import com.devcamp.tripssoda.mapper.PartnerMapper;
 import com.devcamp.tripssoda.mapper.ProductMapper;
 import com.devcamp.tripssoda.mapper.UserMapper;
@@ -15,7 +17,8 @@ public class AdminUserServiceImpl implements AdminUserService{
     private final ProductMapper productMapper;
     private final PartnerMapper partnerMapper;
 
-    public AdminUserServiceImpl(UserMapper userMapper, ProductMapper productMapper, PartnerMapper partnerMapper){
+    public AdminUserServiceImpl(UserMapper userMapper, ProductMapper productMapper,
+                                PartnerMapper partnerMapper){
         this.userMapper = userMapper;
         this.productMapper = productMapper;
         this.partnerMapper = partnerMapper;
@@ -61,15 +64,6 @@ public class AdminUserServiceImpl implements AdminUserService{
         return partnerMapper.count();
     }
 
-    @Override
-    public int getInquiryCnt() {
-        return 0;
-    }
-
-    @Override
-    public List<UserDto> selectInquiryList(SearchCondition sc) {
-        return null;
-    }
 
 
 }

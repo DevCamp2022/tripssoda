@@ -23,7 +23,4 @@ public interface AdminUserService {
 
     int getAllPartnerCnt();
 
-    public int getInquiryCnt();
-
-    public List<UserDto> selectInquiryList(SearchCondition sc);
 }

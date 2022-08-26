@@ -21,6 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/payment")
+
 public class PaymentController {
     private final PaymentService paymentService;
 
@@ -46,6 +47,10 @@ public class PaymentController {
         Map<String, Object> result = new HashMap<>();
 
         Integer userId = (Integer) session.getAttribute("id");
+
+        if(userId==null){
+
+        }
 
         Map<String, Integer> scheduleInfo = new HashMap<>();
         scheduleInfo.put("userId", userId);

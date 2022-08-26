@@ -18,7 +18,6 @@
     --%>
     <link href="/css/common/reset.css" rel='stylesheet'/>
     <link href="/css/common/tiles_main_layout.css" rel='stylesheet'/>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">--%>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>

@@ -23,9 +23,13 @@
 </div>
 <form id="form" action="" method="">
     <div class="main-group">
-        <div class="upload-img">
-            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf">
-            <div class="div-thumbnail"></div>
+        <div class="thumbnail-hap">
+            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf" value="${accompanyDto.thumbnail}">
+            <div class="div-thumbnail">
+                <c:if test="${mode ne 'new'}">
+                <img src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}">
+                </c:if>
+            </div>
         </div>
         <div class="select-region-box">
 
@@ -33,6 +37,7 @@
         <div class="title-box">
             <c:if test="${mode ne 'new'}">
                 <div>
+                    <input name="aa" type="hidden" value="${accompanyDto.thumbnail}">
                     <input name="id" type="hidden" value="${accompanyDto.id}">
                 </div>
             </c:if>
@@ -79,9 +84,7 @@
             form.attr("action", "<c:url value='/accompany/write'/>");
             form.attr("method", "post");
             form.attr("enctype", "multipart/form-data")
-            if(formCheck()) {
-                form.submit();
-            }
+            form.submit();
         });
         $("#modify-btn").on("click", function() {
             let form = $("#form");
@@ -93,6 +96,7 @@
             // }
             form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
+            form.attr("enctype", "multipart/form-data")
             form.submit();
         });
         $("#remove-btn").on("click", function() {
@@ -116,7 +120,8 @@
             reader.onload = function(e){
                 let newImg = document.createElement('img');
                 newImg.setAttribute("src", e.target.result);
-                newImg.setAttribute("width",500);
+                newImg.setAttribute("width",1200);
+                newImg.setAttribute("height", 400);
                 $(".div-thumbnail").html(newImg);
             }
             reader.readAsDataURL($(this)[0].files[0]);

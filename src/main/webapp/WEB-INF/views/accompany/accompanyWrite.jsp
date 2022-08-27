@@ -24,9 +24,20 @@
 <form id="form" action="" method="">
     <div class="main-group">
         <div class="upload-img">
-            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf">
-            <div class="div-thumbnail"></div>
-        </div>
+
+            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf" >
+<%--            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf" value="${accompanyDto.thumbnail}">--%>
+
+            <div class="div-thumbnail">
+                <c:if test="${mode ne 'new'}">
+                    <img width="1200px" height="400px" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}">
+                </c:if>
+            </div>
+<%--            <c:if test="${accompanyDto.thumbnail eq null}">--%>
+<%--                <img width="1200px" height="400px" src="${pageContext.request.contextPath}/image/thumbnail/default.webp">--%>
+<%--            </c:if>--%>
+
+</div>
         <div class="select-region-box">
 
         </div>
@@ -111,7 +122,8 @@
             //     return;
             // }
             let toURL = $("input[name=toURL]").val();
-            form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}&toURL="+ toURL);
+            <%--form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}&toURL="+ toURL);--%>
+            form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
             form.attr("enctype", "multipart/form-data")
             if(formCheck()) {

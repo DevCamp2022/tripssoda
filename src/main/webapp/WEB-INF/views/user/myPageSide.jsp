@@ -25,10 +25,10 @@
 <%--            <li class="wishlist-manage"><a href="<c:url value="/mypage/wishList"/>">내 위시리스트</a></li>--%>
         </ul>
     </div>
-    <div class="side-container-stats">
-        <ul>
-            <li class="product-manage"><a href="">여행 상품 관리<span><i class="fa-solid fa-angle-right"></i></span></a></li>
-        </ul>
-    </div>
+<%--    <div class="side-container-stats">--%>
+<%--        <ul>--%>
+<%--            <li class="product-manage"><a href="">여행 상품 관리<span><i class="fa-solid fa-angle-right"></i></span></a></li>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
 </div>
 

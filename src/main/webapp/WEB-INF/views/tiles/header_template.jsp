@@ -133,9 +133,9 @@
 							<li class="sub-li"><a href="/#sub_menu01">홈</a></li>
 							<li class="sub-li"><a href="/accompany/list">동행</a></li>
 							<li class="sub-li"><a href="/question/list">Q&A</a></li>
-							<li class="sub-li"><a href="/board/list${searchCondition.queryString}&menuCode=M001">공지사항</a></li>
-							<li class="sub-li"><a href="/board/list${searchCondition.queryString}&menuCode=M002">프로모션</a></li>
-							<li class="sub-li"><a href="/board/list${searchCondition.queryString}&menuCode=M003">FAQ</a></li>
+							<li class="sub-li"><a href="/board/list?menuCode=M001">공지사항</a></li>
+							<li class="sub-li"><a href="/board/list?menuCode=M002">프로모션</a></li>
+							<li class="sub-li"><a href="/board/list?menuCode=M003">FAQ</a></li>
 						</ul>
 					</li>
 

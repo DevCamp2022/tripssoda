@@ -21,8 +21,80 @@
 </div>
 <div class="main-group">
         <div class="select-region-box">
-
-        </div>
+                <div class="region-area">
+                    <div class="continent-area">
+                        <div class="continent-component">
+                            <div value="00">동아시아</div>
+                            <div>동남아시아</div>
+                            <div>서남아시아</div>
+                            <div>유럽</div>
+                            <div>아메리카</div>
+                            <div>오세아니아</div>
+                            <div>아프리카</div>
+                        </div>
+                    </div>
+                    <div class="country-area">
+                        <div class="country-component">
+                            <div value="00">한국</div>
+                            <div>일본</div>
+                            <div>홍콩</div>
+                            <div>마카오</div>
+                            <div>대만</div>
+                            <div>중국</div>
+                            <div>몽골</div>
+                        </div>
+                    </div>
+                    <div class="city-area">
+                        <div class="city-component">
+                            <div value="000">서울</div>
+                            <div>강원도</div>
+                            <div>제주도</div>
+                            <div>부산</div>
+                            <div>경기도</div>
+                            <div>인천</div>
+                            <div>충청도</div>
+                            <div>경상도</div>
+                            <div>전라도</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">도쿄</div>
+                            <div>오사카</div>
+                            <div>후쿠오카</div>
+                            <div>오키나와</div>
+                            <div>나고야</div>
+                            <div>교토</div>
+                            <div>훗카이도</div>
+                            <div>히로시마</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">홍콩</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">마카오</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">타이페이</div>
+                            <div value="000">타이중</div>
+                            <div value="000">가오슝</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">상하이</div>
+                            <div>베이징</div>
+                            <div>칭다오</div>
+                            <div>청두</div>
+                            <div>광저우</div>
+                            <div>하이난</div>
+                            <div>항저우</div>
+                            <div>장가계</div>
+                            <div>충칭</div>
+                            <div>서안</div>
+                        </div>
+                        <div class="city-component">
+                            <div value="000">울란바토르</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <c:if test="${mode ne 'new'}">
             <div>
                 <input name="id" type="hidden" value="${questionDto.id}">
@@ -69,6 +141,21 @@
                 form.content.focus();
                 return false;
             }
+            if(form.title.value.length>100) {
+                alert("제목은 100자 이하로 입력해주세요.");
+                form.title.focus();
+                return false;
+            }
+            if(form.content.value.length>1000) {
+                alert("내용은 1000자 이하로 입력해주세요.");
+                form.title.focus();
+                return false;
+            }
+            if(form.hashtag.value.length>100) {
+                alert("해시태그는 100자 이하로 입력해주세요.");
+                form.title.focus();
+                return false;
+            }
             return true;
         }
         $("#write-btn").on("click", function() {
@@ -89,7 +176,8 @@
             // }
             form.attr("action", "<c:url value='/question/modify'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
-            form.submit();
+            if(formCheck())
+                form.submit();
         });
         $("#remove-btn").on("click", function() {
             if(!confirm("정말로 삭제하시겠습니까?")) return;

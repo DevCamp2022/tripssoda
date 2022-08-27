@@ -25,6 +25,32 @@ body {
     border: 1px solid rgb(233,233,233);
     background-color: #fff;
 }
+.region-area {
+    width: 1200px;
+    display: flex;
+    margin: auto;
+}
+.continent-area {
+    width: 220px;
+}
+.country-area {
+    width: 144px;
+}
+.city-area {
+    width: 795px;
+}
+.city-component {
+    display: flex;
+}
+.continent-component > div {
+    padding: 10px;
+}
+.country-component > div {
+    padding: 10px;
+}
+.city-component > div {
+    padding: 10px;
+}
 /* 썸네일업로드부터 버튼까지 그룹화한 영역 */
 .main-group {
     width: 1200px;

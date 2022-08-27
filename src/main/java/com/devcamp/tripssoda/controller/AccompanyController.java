@@ -270,7 +270,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
@@ -285,6 +285,7 @@ public class AccompanyController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.getPage(map);
             m.addAttribute("ph", ph);

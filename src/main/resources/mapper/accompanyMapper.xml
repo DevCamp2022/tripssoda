@@ -21,6 +21,21 @@
         SELECT id, user_id, nickname, profile_img, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
         FROM accompany
     </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="time"'>
+                ORDER BY created_at DESC, id DESC
+            </when>
+            <when test='option=="view"'>
+                ORDER BY view_cnt DESC, id DESC
+            </when>
+            <otherwise>
+                ORDER BY created_at DESC, id DESC
+            </otherwise>
+        </choose>
+    </sql>
+
     <select id="count" resultType="int">
         SELECT count(*)
         FROM accompany
@@ -71,7 +86,8 @@
     </select>
     <select id="selectPage" parameterType="map" resultType="AccompanyDto">
         <include refid="selectFromAccompany"/>
-        ORDER BY created_at DESC, id DESC
+        WHERE true
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
 

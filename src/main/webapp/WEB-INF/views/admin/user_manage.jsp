@@ -11,21 +11,21 @@
 
     <div class="list-container">
 
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#qwe">회원목록</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#asd">통계</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="qwe">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#qwe">회원목록</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#asd">통계</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
+            </li>
+        </ul>
 
+        <div class="tab-content">
 
+            <div class="tab-pane fade show active" id="qwe">
 
             <div class="search-container">
                 <form action="<c:url value="/admin/userList"/>" class="search-form" method="get">
@@ -97,7 +97,7 @@
                     </table>
                 </form>
 
-                <br>
+
                 <div class="paging-container">
                     <div class="paging">
                         <c:if test="${totalCnt==null || totalCnt==0}">
@@ -117,8 +117,8 @@
                     </div>
                 </div>
 
-            </div>
 
+            </div>
 
         </div>
 

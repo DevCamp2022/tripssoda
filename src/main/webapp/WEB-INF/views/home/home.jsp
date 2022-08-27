@@ -45,8 +45,44 @@
 
 <div class="content">
 
-    <div class="slide-wrap">
 
+
+<%--동행게시글--%>
+    <div class="slide-wrap">
+        <div class="div-list-wrap">
+            <h1>취향저격 동행찾기</h1>
+            <div class="btn-lank">
+                <a href="/product/list"><span>더보기</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+
+            <c:forEach var="list" items="${list0}" varStatus="statusNm">
+                <div class="div-editor">
+                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+                        <!--썸네일-->
+                        <div class="thumbnail-wrapper">
+                            <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
+                            <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${list.thumbnail}" alt="thumbnail picture">
+                        </div>
+                        <!--상품정보(제목, 평점, 출발일, 가격)-->
+                        <div class="itemInfo-wrapper">
+                            <div class="main-tourTitle">
+                                <h4>${list.title}</h4>
+                            </div>
+                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>
+                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>
+                            <div class="main-tourDate">2022년 08월 19일 출발 </div>
+                            <div class="main-tourPrice">
+                                <b>160,000원</b>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </c:forEach>
+        </div>
+    </div>
+<%--    에디터픽--%>
+    <div class="slide-wrap">
         <div class="div-list-wrap">
             <h1>에디터 픽</h1>
             <div class="btn-lank">
@@ -81,6 +117,7 @@
     </div>
 
 
+<%--    프라이빗투어--%>
     <div class="slide-wrap">
 
         <div class="div-list-wrap">
@@ -269,42 +306,6 @@
 
         </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a></div></div></div>
     </div>
-
-
-
-
-<%--    <div class="board_list_wrap">--%>
-<%--        <div class="tab_menu_wrap">--%>
-<%--            <ul class="tabmenu">--%>
-<%--                <li class="tabmenu_item active">--%>
-<%--                    <button type="button" data-value="notice">공지사항</button></li>--%>
-<%--                <li class="tabmenu_item">--%>
-<%--                    <button type="button" data-value="faq">자주묻는 질문</button></li>--%>
-<%--                <li class="tabmenu_item">--%>
-<%--                    <button type="button" data-value="promotion">프로모션</button></li>--%>
-<%--            </ul>--%>
-<%--            <button class="more-list">더보기</button>--%>
-<%--        </div>--%>
-
-<%--&lt;%&ndash;        for문&ndash;%&gt;--%>
-<%--        <ul class="content-list">--%>
-<%--            <li>--%>
-<%--                <a href="/board/detail">--%>
-<%--                    <span>트립소다 앱 런칭 알림</span>--%>
-<%--                    <span>2022.01.30.</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
-
-<%--            <li>--%>
-<%--                <a href="/board/detail">--%>
-<%--                    <span>트립소다 앱 런칭 알림</span>--%>
-<%--                    <span>2022.01.30.</span>--%>
-<%--                </a>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
-
-
 
 
 

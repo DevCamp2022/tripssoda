@@ -43,7 +43,8 @@ public class PartnerController {
         return "redirect:/partner/register";
     }
 
-    @SkipChecking
+
+//    @SkipChecking //스킵 안돼요오......^^
     @GetMapping("/mypage")
     public String PartnerMypage() {
         System.out.println("파트너마이페이지 접속중");

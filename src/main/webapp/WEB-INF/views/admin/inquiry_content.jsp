@@ -15,14 +15,11 @@
 
 
 <div class="combined-wrap">
-    <div class="combined-wrap-tit"><h1 class="writing-header">${mode=="new" ? "Board Register" : "Contents"}</h1></div>
+    <div class="combined-wrap-tit"><h1 class="writing-header">Inquiry Board</h1></div>
     <form id="form" class="frm" action="" method="post">
 
         <table class="combined-list-tb">
 
-
-<%--  여기 조건문 손봐야함  --%>
-        <c:if test="${mode ne 'new'}">
             <tr>
                 <td colspan="10" class="bc-button-wrap">
 <%--                    <button class="bc-btn" type="button" id="modifyBtn">답변</button>--%>
@@ -30,38 +27,28 @@
                     <button class="bc-btn" type="button" id="listBtn"> 목록</button>
                 </td>
             </tr>
-<%--            <c:if test="${dto.id eq id}">--%>
-<%--                <tr>--%>
-<%--                    <td colspan="10">--%>
-<%--                        <button type="button" id="modifyBtn">수정</button>--%>
-<%--                        <button type="button" id="removeBtn">삭제</button>--%>
-<%--                        <button type="button" id="listBtn"> 목록</button>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--            </c:if>--%>
-        </c:if>
 
 
 
-        <tr>
-            <th class="tit" colspan="10">제목</th>
-        </tr>
-        <tr>
-            <td class="con contit" colspan="10">
-<%--                ${dto.title}--%>
-                    <input name="title" type="text" value="${combinedBoardDto.title}" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>
-            </td>
-        </tr>
+            <tr>
+                <th class="tit" colspan="10">제목</th>
+            </tr>
+            <tr>
+                <td class="con contit" colspan="10">
+    <%--                ${dto.title}--%>
+                        <input name="title" type="text" value="${combinedBoardDto.title}" placeholder="  제목을 입력해 주세요." readonly>${combinedBoardDto.title}
+                </td>
+            </tr>
 
-        <tr>
-            <th class="tit" colspan="10">내용</th>
-        </tr>
-        <tr>
-            <td class="con concon" colspan="10">
-<%--                ${dto.content}--%>
-                    <textarea name="content" id="unitContent" rows="20px" placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${combinedBoardDto.content}</textarea>
-            </td>
-        </tr>
+            <tr>
+                <th class="tit" colspan="10">내용</th>
+            </tr>
+            <tr>
+                <td class="con concon" colspan="10">
+    <%--                ${dto.content}--%>
+                        <textarea name="content" id="unitContent" rows="20px" placeholder=" 내용을 입력해 주세요." >${combinedBoardDto.content}</textarea>
+                </td>
+            </tr>
 <%--            <tr>--%>
 <%--                <td>--%>
 <%--                    <c:if test="${mode eq 'new'}">--%>
@@ -83,22 +70,22 @@
 <%--            </c:if>--%>
 
     </form>
-    <c:if test="${mode eq 'new'}">
+<%--    <c:if test="${mode eq 'new'}">--%>
         <button type="button" id="answerBtn">답변</button>
         <button type="button" id="resetBtn"> 취소</button>
 
-    </c:if>
-    <table>
-        <c:if test="${mode ne 'new'}">
-            <tr>
-                <td><button>다음글</button></td>
-            </tr>
-            <tr>
-                <td><button>이전글</button></td>
-            </tr>
-        </c:if>
+<%--    </c:if>--%>
+<%--    <table>--%>
+<%--        <c:if test="${mode ne 'new'}">--%>
+<%--            <tr>--%>
+<%--                <td><button>다음글</button></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td><button>이전글</button></td>--%>
+<%--            </tr>--%>
+<%--        </c:if>--%>
 
-    </table>
+<%--    </table>--%>
 </div>
 
 

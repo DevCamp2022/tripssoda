@@ -5,6 +5,7 @@ import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.util.annotations.AuthChecking;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -128,6 +129,7 @@ public class AccompanyController {
         return "accompany/accompanyWrite.mainTiles";
     }
 
+
     @PostMapping("/write")
     public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
@@ -181,6 +183,7 @@ public class AccompanyController {
         }
     }
 
+    @AuthChecking
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
         System.out.println("\"kkkkkkkk\" = " + "kkkkkkkk");

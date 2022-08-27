@@ -42,7 +42,7 @@ public class AuthorizationAspect {
 
     @Around("execution(* com.devcamp.tripssoda.controller.PartnerController.*(..)) " +
             "&& !@annotation(com.devcamp.tripssoda.util.annotations.SkipChecking)"
-            + "|| @annotation(com.devcamp.tripssoda.util.annotations.AuthChecking)")
+            )
     public Object partnerCheck(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("### {}: before", joinPoint.getSignature().getName());
         System.out.println("\"AOP - Partner Login Check Started\" = " + "AOP - Partner Login Check Started");
@@ -53,6 +53,26 @@ public class AuthorizationAspect {
         if(userCode==null || !userCode.equals("U002") || !userCode.equals("U003")){
             logger.info("partnerCode is not present. Go to login page");
             System.out.println("partnerCode Code is not present. Go to login page");
+            return "redirect:/";
+        }
+        logger.info("### {}: after\n", joinPoint.getSignature().getName());
+        Object result = joinPoint.proceed();
+        return result;
+    }
+
+
+    @Around("execution(* com.devcamp.tripssoda.controller.AccompanyController.*(..))" +
+            "&& @annotation(com.devcamp.tripssoda.util.annotations.AuthChecking)")
+    public Object authCheck(ProceedingJoinPoint joinPoint) throws Throwable {
+        logger.info("### {}: before", joinPoint.getSignature().getName());
+        System.out.println("\"AOP - Auth Login Check Started\" = " + "AOP - Auth Login Check Started");
+
+        HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.currentRequestAttributes())).getRequest().getSession();
+        String userCode = SessionUtil.getLoginUserId(session);
+
+        if(userCode==null){
+            logger.info("Auth is not present. Go to login page");
+            System.out.println("authCheck Code is not present. Go to login page");
             return "redirect:/";
         }
         logger.info("### {}: after\n", joinPoint.getSignature().getName());

@@ -226,7 +226,7 @@ body{
     border-bottom: 1px solid whitesmoke;
 }
 
-#writeBtn, #bDelBtn, #modifyBtn, #conDelBtn, #listBtn, #resetBtn{
+#writeBtn, #bDelBtn, #modifyBtn, #conDelBtn, #listBtn, #resetBtn, #answerBtn{
     /* 메뉴바의 검색 버튼 아이콘  */
     width: 100px;
     height: 100%;

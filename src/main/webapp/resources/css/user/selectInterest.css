@@ -57,6 +57,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 8px;
 }
 .keyword > span {
     color: #00ce7c;
@@ -72,6 +73,9 @@ body {
     width: 100%;
     font-size: 15px;
     padding-left: 10px;
+}
+.interest-code {
+    display: none;
 }
 
 .select-box {
@@ -104,5 +108,3 @@ body {
     box-sizing: border-box;
     border-radius: 4px;
 }
-
-

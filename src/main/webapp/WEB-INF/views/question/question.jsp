@@ -244,13 +244,13 @@
             $.ajax({
                 type:'POST',       // 요청 메서드
                 url: '/answers?questionId='+questionId,  // 요청 URI // /ch4/comments?bno=1085 POST
-                headers : { "content-type": "application/json"}, // 요청 헤더
+                headers : { "content-type": "application/json; charset:UTF-8" }, // 요청 헤더
                 data : JSON.stringify({questionId:questionId, content:comment}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success : function(result){
                     alert(result);
                     showList(questionId);
                 },
-                error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
+                error   : function(){ alert("작성 실패") } // 에러가 발생했을 때, 호출될 함수
             }); // $.ajax()
         });
 
@@ -278,13 +278,16 @@
         $("#commentList").on("click", ".delBtn", function(){
             let id = $(this).parent().attr("data-id");
             let questionId = $(this).parent().attr("data-questionId");
+            if(!confirm('정말로 삭제하시겠습니까?')) return;
 
             $.ajax({
                 type:'DELETE',
                 url: '/answers/'+id+'?questionId='+questionId,  // 요청 URI
                 success : function(result){
-                    alert(result)
+                    // alert(result)
+                    alert('성공적으로 삭제되었습니다.');
                     showList(questionId);
+                    location.reload();
                 },
                 error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
             }); // $.ajax()

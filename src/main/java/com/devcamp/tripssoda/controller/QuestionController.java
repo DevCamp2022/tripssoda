@@ -133,7 +133,7 @@ public class QuestionController {
     }
 
     @PostMapping("/modify")
-    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
+    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         //userId는 인조식별자
         Integer writer = (int) session.getAttribute("id");
@@ -166,9 +166,6 @@ public class QuestionController {
             if(rowCnt!=1)
                 throw new Exception("Modify Failed");
             rattr.addFlashAttribute("msg", "MOD_OK");
-            if(toURL != null) {
-                return "redirect:" + toURL;
-            }
             return "redirect:/question/list";
         } catch (Exception e) {
             e.printStackTrace();

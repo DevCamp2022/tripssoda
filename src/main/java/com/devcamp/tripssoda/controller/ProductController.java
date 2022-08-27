@@ -56,7 +56,7 @@ public class ProductController {
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 
-        return "product/detail_product.partnerTiles";
+        return "product/detail_product.mainTiles";
     }
 
     @GetMapping("/update")

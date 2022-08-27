@@ -20,6 +20,8 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    letter-spacing: 0.5px;
+    line-height: 1.5rem;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -61,34 +63,3 @@ input, select
 
 input:focus, select:focus {outline: 2px solid #00ce7c;} /* outline 테두리 속성 수정 */
 
-input[type="radio"]{
-    position: relative;
-    top: 50%;
-    opacity: 1;
-    appearance: none;
-    outline: 0px;
-    box-shadow: none;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 1px 5px;
-    border: 1px solid rgb(139, 139, 139);
-    border-radius: 100%;
-    cursor: pointer;
-}
-
-input[type="radio"]:checked::after {
-    position: absolute;
-    background-color: #00ce7c;
-    border: 1px solid #00ce7c;
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin: 1px;
-    border-radius: 100%;
-    cursor: pointer;
-}
-
-input[type="radio"]::after {
-    content: "";
-}

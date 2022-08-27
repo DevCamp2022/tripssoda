@@ -72,6 +72,24 @@
                 form.content.focus();
                 return false;
             }
+            if(form.title.value.length>100) {
+                alert("제목은 100자 이하로 입력해주세요");
+                form.title.focus();
+                return false;
+            }
+            if(form.content.value.length>1000) {
+                alert("내용은 1000자 이하로 입력해주세요");
+                form.content.focus();
+                // setTimeout(function(){form.hashtag.focus();}, 1);
+                return false;
+            }
+            if(form.hashtag.value.length>100) {
+                alert("해시태그는 100자 이하로 입력해주세요");
+                form.hashtag.focus();
+                // setTimeout(function(){form.hashtag.focus();}, 2);
+                return false;
+            }
+
             return true;
         }
         $("#write-btn").on("click", function() {
@@ -93,7 +111,9 @@
             // }
             form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
-            form.submit();
+            if(formCheck()) {
+                form.submit();
+            }
         });
         $("#remove-btn").on("click", function() {
             if(!confirm("정말로 삭제하시겠습니까?")) return;

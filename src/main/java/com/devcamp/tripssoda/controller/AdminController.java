@@ -28,6 +28,7 @@ public class AdminController {
     private final UserService userService;
     private final AdminProductService adminProductService;
     private final ProductService productService;
+
     @Autowired
     private final IpBanListMapper ipBanListMapper = null;
 
@@ -35,7 +36,8 @@ public class AdminController {
                            AdminUserService adminUserService,
                            UserService userService,
                            AdminProductService adminProductService,
-                           ProductService productService )
+                           ProductService productService,
+                           InquiryService inquiryService)
     {
         this.adminBoardService = adminBoardService;
         this.adminUserService = adminUserService;
@@ -111,8 +113,8 @@ public class AdminController {
     // 게시글 수정
     @PostMapping("/boardModify")
     public String modify(CombinedBoardDto combinedBoardDto, SearchCondition sc, RedirectAttributes rattr, Model m, HttpSession session) {
-        System.out.println("combinedBoardDto.getMenuCode() = " + combinedBoardDto.getMenuCode());
-        System.out.println("combinedBoardDto.getId() = " + combinedBoardDto.getId());
+//        System.out.println("combinedBoardDto.getMenuCode() = " + combinedBoardDto.getMenuCode());
+//        System.out.println("combinedBoardDto.getId() = " + combinedBoardDto.getId());
 
         try{
             if(session.getAttribute("id")==null){
@@ -409,7 +411,10 @@ public class AdminController {
     }
 
     @GetMapping("/inquiry/read")
-    public String inquiryRead(Model m ){
+    public String inquiryRead(Model m) throws Exception{
+//        Integer id =
+//        InquiryDto inquiryDto = adminBoardService.read(id);
+
 
         return "admin/inquiry_content.subTiles";
     }

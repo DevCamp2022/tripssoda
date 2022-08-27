@@ -61,7 +61,7 @@ public class QuestionController {
 //    }
 
     @GetMapping("/waiting")
-    public String waitingList(Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
+    public String waitingList(String option, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         //로그인 구현되면 주석 풀고 수정.
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
@@ -77,6 +77,7 @@ public class QuestionController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<QuestionDto> list = questionService.waitingGetPage(map);
             m.addAttribute("mode", "waiting");
@@ -323,7 +324,7 @@ public class QuestionController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
         //로그인 구현되면 주석 풀고 수정.
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
@@ -339,6 +340,7 @@ public class QuestionController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<QuestionDto> list = questionService.getPage(map);
             m.addAttribute("ph", ph);

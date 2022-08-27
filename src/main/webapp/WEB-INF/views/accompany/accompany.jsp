@@ -20,6 +20,7 @@
 </script>
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${accompanyDto.id}">
+    <input type="hidden" name="msg" value="${msg}">
     <div class="main-img-area">
         <div class="main-img2">
             <img class="main-img" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">

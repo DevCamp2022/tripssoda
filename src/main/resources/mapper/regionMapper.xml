@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.devcamp.tripssoda.mapper.RegionMapper">
+    <insert id="insertContinent" parameterType="regionDto">
+        INSERT INTO continent_code
+        (continent_code, continent_name)
+        VALUES( #{continentCode}, #{continentName})
+    </insert>
+    <insert id="insertCountry" parameterType="regionDto">
+        INSERT INTO country_code
+            (country_code, country_name, continent_code)
+        VALUES( #{countryCode}, #{countryName}, #{continentCode})
+    </insert>
+    <insert id="insertCity" parameterType="regionDto">
+        INSERT INTO city_code
+            (city_code, city_name, country_code)
+        VALUES( #{cityCode}, #{cityName}, #{countryCode})
+    </insert>
+
+    <update id="updateCity" parameterType="Map">
+        UPDATE city_code
+        SET city_code = #{cityCode2}
+        WHERE city_code = #{cityCode1}
+    </update>
+</mapper>

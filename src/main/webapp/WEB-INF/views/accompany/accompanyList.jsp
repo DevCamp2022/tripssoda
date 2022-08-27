@@ -14,18 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 <body>
-<script>
-    let msg = "${msg}";
-    if(msg=="LIST_ERR")  alert("게시물 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
-    if(msg=="READ_ERR")  alert("삭제되었거나 없는 게시물입니다.");
-    if(msg=="DEL_ERR")   alert("삭제되었거나 없는 게시물입니다.");
-    if(msg=="DEL_OK")    alert("성공적으로 삭제되었습니다.");
-    if(msg=="WRT_OK")    alert("성공적으로 등록되었습니다.");
-    if(msg=="MOD_OK")    alert("성공적으로 수정되었습니다.");
-</script>
-<!-- <div class="wrt-btn">
-  <button id="write-btn" class="write-btn" onclick="location.href='<c:url value="/accompany/write"/>'">동행글쓰기</button>
-</div> -->
+<input type="hidden" name="msg" value="${msg}">
 <div class="main-img">
 
 </div>
@@ -131,7 +120,6 @@
         </div>
     </c:if>
 </div>
-
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/accompany/accompany_list.js"></script>
 </body>
 </html>

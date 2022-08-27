@@ -41,7 +41,7 @@ public class HomeController {
 
 		try {
 			//menuCode 게시판아이디를 같이 보내준다
-			int totalCnt = adminBoardService.getSearchResultCnt(sc, menuCode);
+			int totalCnt = adminBoardService.getSearchResultCntForUser(sc, menuCode);
 			m.addAttribute("totalCnt", totalCnt);
 
 			PageHandler pageHandler = new PageHandler(totalCnt, sc);
@@ -50,7 +50,7 @@ public class HomeController {
 			List<CombinedBoardDto> promotionList = adminBoardService.getSearchResultPageForUser(sc, "M002");
 			List<CombinedBoardDto> faqList = adminBoardService.getSearchResultPageForUser(sc, "M003");
 			m.addAttribute("noticeList", noticeList);
-			m.addAttribute("poromotionList", promotionList);
+			m.addAttribute("promotionList", promotionList);
 			m.addAttribute("faqList", faqList);
 			m.addAttribute("ph", pageHandler);
 

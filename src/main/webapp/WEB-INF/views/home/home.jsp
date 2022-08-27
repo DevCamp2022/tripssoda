@@ -180,9 +180,9 @@
             <div class="tabBox on">
                 <div class="notice">
                     <ul>
-                        <c:forEach var="noticeList" begin="1" end="5" step="1" items="${noticeList}">
+                        <c:forEach var="noticeList" begin="0" end="4" step="1" items="${noticeList}">
                             <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
+                                <a href="/board/detail${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
                                     <p>${noticeList.title}</p>
                                     <p><fmt:formatDate value="${noticeList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
                                 </a>
@@ -194,9 +194,9 @@
             <div class="tabBox">
                 <div class="promotion">
                     <ul>
-                        <c:forEach var="promoList" begin="1" end="5" step="1" items="${promotionList}">
+                        <c:forEach var="promoList" begin="0" end="4" step="1" items="${promotionList}">
                             <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
+                                <a href="/board/detail${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
                                     <p>${promoList.title}</p>
                                     <p><fmt:formatDate value="${promoList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
                                 </a>
@@ -208,9 +208,9 @@
             <div class="tabBox">
                 <div class="faq">
                     <ul>
-                        <c:forEach var="faqList" begin="1" end="5" step="1" items="${faqList}">
+                        <c:forEach var="faqList" begin="0" end="4" step="1" items="${faqList}">
                             <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
+                                <a href="/board/detail${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
                                     <p>${faqList.title}</p>
                                     <p><fmt:formatDate value="${faqList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
                                 </a>

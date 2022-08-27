@@ -79,6 +79,8 @@
     <select id="selectUserAccompanyCntToday" parameterType="int" resultType="int">
         SELECT count(*)
         FROM accompany
-        WHERE user_id = #{userId} and created_at = current_date ()
+        WHERE user_id = #{userId} and date(created_at) = date(now());
     </select>
+
+
 </mapper>

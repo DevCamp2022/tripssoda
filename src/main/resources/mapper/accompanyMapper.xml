@@ -81,7 +81,7 @@
     <select id="waitingSelectPage" parameterType="map" resultType="AccompanyDto">
         <include refid="selectFromAccompany"/>
         WHERE status = 0
-        ORDER BY created_at DESC, id DESC
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
     <select id="selectPage" parameterType="map" resultType="AccompanyDto">

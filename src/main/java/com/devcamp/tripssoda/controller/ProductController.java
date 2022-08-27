@@ -23,11 +23,15 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/list")
+    public String getCategoryList(Model model) {
+        productService.getMainList(model);
+        return "product/list_product.mainTiles";
+    }
+
     @GetMapping("/register")
     public String registerProduct(HttpSession session) {
-        session.setAttribute("userId", "2");
-        session.setAttribute("partnerId", "2");
-        return "product/reg_product.mainTiles";
+        return "product/reg_product.partnerTiles";
     }
 
 
@@ -43,11 +47,7 @@ public class ProductController {
         return "redirect:/product/register"; //나중에 마이페이지 파트너 상품등록 확인뷰로 바꿀것
     }
 
-    @GetMapping("/list")
-    public String getCategoryList(Model model) {
-        productService.getMainList(model);
-        return "product/list_product.mainTiles";
-    }
+
 
     @GetMapping("/detail")
     public String getProductDetail(GetDetailProductDto dto, Model model) {
@@ -56,7 +56,7 @@ public class ProductController {
         model.addAttribute("details", details);
         model.addAttribute("list", list);
 
-        return "product/detail_product.mainTiles";
+        return "product/detail_product.partnerTiles";
     }
 
     @GetMapping("/update")
@@ -69,7 +69,7 @@ public class ProductController {
         model.addAttribute("poList", poList);
         model.addAttribute("psList", psList);
 
-        return "product/update_product.mainTiles";
+        return "product/update_product.partnerTiles";
     }
 
     @PostMapping("/update")

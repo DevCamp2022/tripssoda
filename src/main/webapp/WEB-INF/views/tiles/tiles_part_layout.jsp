@@ -33,7 +33,7 @@
     <div class="content-container">
         <div class="content-wrap">
             <div class="left-wrap">
-                <tiles:insertAttribute name="part"/>
+                <tiles:insertAttribute name="partner"/>
             </div>
             <div class='right-wrap'>
                 <tiles:insertAttribute name="content"/>

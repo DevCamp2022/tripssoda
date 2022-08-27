@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -20,26 +23,30 @@ public class PartnerController {
     }
 
     @SkipChecking
-    @GetMapping("/reg")
-    public String regPartner(HttpSession session) {
-        session.setAttribute("userId","1");
-        return "partner/reg_partner.mainTiles";
+    @GetMapping("/register")
+    public String regPartner() {
+        return "partner/reg_partner.partnerTiles";
     }
 
     @SkipChecking
-    @PostMapping("/reg")
-    public String regPartner(PartnerDto dto) {
+    @PostMapping("/register")
+    public String regPartner(PartnerDto dto,
+                             HttpServletRequest request,
+                             @RequestParam MultipartFile uploadLogo,
+                             @RequestParam MultipartFile uploadAttach) {
         System.out.println("dto = " + dto);
-        partnerService.regPartner(dto);
+        System.out.println("uploadLogo = " + uploadLogo);
+        System.out.println("uploadAttach = " + uploadAttach);
+//        partnerService.regPartner(dto, request, uploadLogo, uploadAttach);
 
         //성공화면 or 마이페이지 등록리스트 나중에 만들어서 리턴값 변경하기
-        return "redirect:/partner/reg";
+        return "redirect:/partner/register";
     }
 
     @SkipChecking
     @GetMapping("/mypage")
     public String PartnerMypage() {
         System.out.println("파트너마이페이지 접속중");
-        return "partner/mypage.partTiles";
+        return "partner/mypage.partnerTiles";
     }
 }

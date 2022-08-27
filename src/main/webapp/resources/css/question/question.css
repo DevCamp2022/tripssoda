@@ -49,9 +49,10 @@ a {
     border-radius: 18px;
     margin-right: 10px;
 }
-/* .title-text {
-
-} */
+.title-text {
+    word-break:break-all;
+    width: 800px;
+}
 .region-box {
     width: 800px;
     height: 61px;
@@ -91,6 +92,7 @@ a {
     margin: 40px 0;
     font-size: 15px;
     line-height: 1.5em;
+    word-break:break-all;
 }
 /* 해시태그 나오는 영역 */
 .hashtag-line {

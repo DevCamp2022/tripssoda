@@ -53,3 +53,29 @@ function valid() {
     console.log("모든 유효성을 통과함");
     return true;
 }
+
+//회사로고 파일명 바인딩
+$("#uploadLogo").on('change',function(){
+    let fileName = $("#uploadLogo").val();
+    $(".uploadLogo").attr('value',fileName);
+});
+
+//회사소개 파일명 바인딩
+$("#uploadAttach").on('change',function(){
+    let fileName = $("#uploadAttach").val();
+    $(".uploadAttach").attr('value',fileName);
+});
+
+CKEDITOR.replace('intro',
+    {filebrowserUploadUrl:'/ckeditor/fileUploader'
+});
+
+// $(".submitBtn").click(function(){
+//     let formData = new FormData();
+
+// // ... formData.append("키이름", "값"); 생략
+
+// for (let key of formData.keys()) {
+// 	console.log(key, ":", formData.get(key));
+// }
+// })

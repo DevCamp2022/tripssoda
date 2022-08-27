@@ -5,6 +5,7 @@ import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.util.annotations.AuthChecking;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,6 +95,15 @@ public class AccompanyController {
         //3. 변환한 hashcode를 setter로 dto에 저장한다.
         accompanyDto.setHashtag(hashtag2);
 
+        //chatUrl
+        if(accompanyDto.getChatUrl().length()>=8) {
+            String urlSub = accompanyDto.getChatUrl().trim().substring(0, 8);
+            System.out.println("urlSub = " + urlSub);
+            //2. https://면 https://를 제거하고, 아니면 그대로 둔다.
+            if(urlSub.equals("https://"))
+                accompanyDto.setChatUrl(accompanyDto.getChatUrl().trim().substring(8));
+        }
+
         try {
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
@@ -131,6 +141,7 @@ public class AccompanyController {
         return "accompany/accompanyWrite.mainTiles";
     }
 
+
     @PostMapping("/write")
     public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
@@ -165,6 +176,16 @@ public class AccompanyController {
         System.out.println("hashtag2 = " + hashtag2);
         //3. 변환한 hashcode를 setter로 dto에 저장한다.
         accompanyDto.setHashtag(hashtag2);
+
+        //chatUrl
+        //1. chatUrl의 앞에서8글자를 urlSub에 저장.
+        if(accompanyDto.getChatUrl().length()>=8) {
+            String urlSub = accompanyDto.getChatUrl().trim().substring(0, 8);
+            System.out.println("urlSub = " + urlSub);
+            //2. https://면 https://를 제거하고, 아니면 그대로 두고 setter로 dto에 저장.
+            if(urlSub.equals("https://"))
+                accompanyDto.setChatUrl(accompanyDto.getChatUrl().trim().substring(8));
+        }
         System.out.println("accompanyDto.getStartAt() = " + accompanyDto.getStartAt());
         System.out.println("result = " + result);
         System.out.println("uploadThumb = " + uploadThumb);
@@ -184,6 +205,7 @@ public class AccompanyController {
         }
     }
 
+    @AuthChecking
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
         System.out.println("\"kkkkkkkk\" = " + "kkkkkkkk");

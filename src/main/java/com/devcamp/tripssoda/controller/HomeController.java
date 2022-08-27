@@ -54,7 +54,7 @@ public class HomeController {
 			m.addAttribute("faqList", faqList);
 			m.addAttribute("ph", pageHandler);
 
-			System.out.println("noticeList.toString() = " + noticeList.toString());
+//			System.out.println("noticeList.toString() = " + noticeList.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();

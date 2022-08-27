@@ -42,12 +42,15 @@ CKEDITOR.replace('meetingPoint',
 
 //검색키워드 key이벤트
 function handleKeyword() {
-	if (window.event.keyCode == 13) {
-        if($(".gen-key").val() == ' '){alert("빈 문자열은 입력할 수 없습니다."); return;}
-    	// 엔터키가 눌렸을 때
+	if (window.event.keyCode == 13) { // 엔터키가 눌렸을 때
+        let keyword = $(".gen-key").val().replace(/(\s*)/g, "");
+        if(keyword == '') {
+            $(".gen-key").val("").focus();
+            return;
+        }
         let s = "";
-        s += "<span class='hashes'>" + $(".gen-key").val()
-        s += "<input type='hidden' class='hashes' name='keyword' value='" + $(".gen-key").val() + "'>";
+        s += "<span class='hashes'>" + keyword;
+        s += "<input type='hidden' class='hashes' name='keyword' value='" + keyword + "'>";
         s += "<span class='delBtn'>&nbsp;<span class='material-icons' style='font-size:12px;cursor:pointer;'>clear</span></span></span>";        
         $(".word-list").append(s);
         $(".gen-key").val("").focus();
@@ -64,35 +67,35 @@ $(document).on("click",".hashes .delBtn",function(){
 $("#add-manGuide").click(function(){
     let s = '<div class="manGuide">';
     s += '<input type="text" name="mandatoryGuidance"/>';
-    s += '<button type="button" class="btn btn-outline-danger manGuide-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel manGuide-delBtn">삭제</button><br></div>';
     $(".td-manGuide").append(s);
 });
 
 $("#add-refund").click(function(){
     let s = '<div class="refundPolicy">';
     s += '<input type="text" name="refundPolicy" id="refundPolicy"/>';
-    s += '<button type="button" class="btn btn-outline-danger refundPolicy-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel refundPolicy-delBtn">삭제</button><br></div>';
     $(".td-refund").append(s);
 });
 
 $("#add-inclusion").click(function(){
     let s = '<div class="inclusion">';
     s += '<input type="text" name="inclusion" id="inclusion"/>';
-    s += '<button type="button" class="btn btn-outline-danger inclusion-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel inclusion-delBtn">삭제</button><br></div>';
     $(".td-inclusion").append(s);
 });
 
 $("#add-exclusion").click(function(){
     let s = '<div class="exclusion">';
     s += '<input type="text" name="exclusion" id="exclusion"/>';
-    s += '<button type="button" class="btn btn-outline-danger exclusion-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel exclusion-delBtn">삭제</button><br></div>';
     $(".td-exclusion").append(s);
 });
 
 $("#add-additionalInfo").click(function(){
     let s = '<div class="additionalInfo">';
     s += '<input type="text" name="additionalInfo" id="additionalInfo"/>';
-    s += '<button type="button" class="btn btn-outline-danger additionalInfo-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel additionalInfo-delBtn">삭제</button><br></div>';
     $(".td-additionalInfo").append(s);
 });
 
@@ -142,10 +145,10 @@ $("input[name='pickupType']").change(function(){
 })
 $(".pickOption-addBtn").click(function(){
     let s = "";
-    s += "<tr class='tr-pickupOption'>"
+    s += "<tr class='tr-pickupOption'>";
     s += "<td class='td-additional-option' colspan='3'>";
-    s += "<input type='text' name='pickupOption'>";
-    s += "<button type='button' class='btn btn-outline-danger pickupOption-delBtn'>삭제</button>";
+    s += "<input type='text' name='pickupOption'>&nbsp;";
+    s += "<button type='button' class='btnDel pickupOption-delBtn'>삭제</button>";
     s += "</td>";
     s += "</tr>";
     $(".table-pickupInfo").append(s);
@@ -194,9 +197,6 @@ function getScheduleList() {
 
     $('input[name=dayCnt]').attr('value',`${durDays+1}`);
 
-    // const req = $("#reqTime").val();
-    // const reqMilis = new Date(req).getTime();
-
     let scheduleCnt = 0;
     while(startDate <= endDate) {
 
@@ -210,15 +210,15 @@ function getScheduleList() {
         s += "<input type='hidden' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleStartDate' value='" + realStart + "'>";
         s += "</td>";
         s += "<td>";
-        s += "<input type='text' class='schedulePrice_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].schedulePrice'>";
+        s += "<input type='text' class='schedulePrice_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].schedulePrice' required='required'>";
         s += "</td>";
         s += "<td>";
-        s += "<input type='text' class='scheduleMinMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMinMember'>";
+        s += "<input type='text' class='scheduleMinMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMinMember' required='required'>";
         s += "</td>";
         s += "<td>";
-        s += "<input type='text' class='scheduleMaxMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMaxMember'>";
+        s += "<input type='text' class='scheduleMaxMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMaxMember' required='required'>";
         s += "</td>";
-        s += "<td><button class='btn btn-outline-danger schedule-delBtn'>삭제</button></td>";
+        s += "<td><button class='btnDel schedule-delBtn'>삭제</button></td>";
         s += "</tr>";
         $(".table-schedule").append(s);
 		startDate.setDate(startDate.getDate() + 1);
@@ -261,43 +261,18 @@ $(document).on("keyup",".scheduleMaxMember_0",function(){
 
 
 function valid() {
-    if($("#title").val() == "") {
-        alert("상품제목을 입력해 주세요");
-        return false;
-    }
-
     if($("#sel-category").val() == "" || $("#sel-category").val() == undefined || $("#sel-category").val() == null) {
         alert("카테고리를 선택해 주세요.");
         return false;
     }
-
-    if($("#reqTime").val() == "") {
-        alert("여행소요시간을 입력해 주세요.");
-        return false;
-    }
-
-    if($("#uploadThumb").val() == "") {
-        alert("썸네일 이미지를 첨부해 주세요.");
-        return false;
-    }
-
-    // if($("#serviceRegion").val() == "") {
-    //     alert("서비스 지역 입력해 주세요.");
-    //     return false;
-    // }
 
     if($("input[name=keyword]").val() == "" || $("input[name=keyword]").val() == undefined) {
         alert("검색키워드를 입력해 주세요.");
         return false;
     }
 
-    if($("#minMember").val() == "") {
-        alert("모집 최소인원을 입력해 주세요.");
-        return false;
-    }
-
-    if($("#maxMember").val() == "") {
-        alert("모집 최대인원을 입력해 주세요.");
+    if($("#minMember").val() - $("#maxMember").val() < 0) {
+        alert("총 기간이 최소 1일 이상이어야 합니다.");
         return false;
     }
 
@@ -316,18 +291,8 @@ function valid() {
         return false;
     }
 
-    if($("#mandatoryGuidance").val() == "") {
-        alert("필수안내를 입력해 주세요.");
-        return false;
-    }
-
-    if($("#refundPolicy").val() == "") {
-        alert("환불정책을 입력해 주세요.");
-        return false;
-    }
-
-    if($("#dayCnt").val() == "") {
-        alert("총 기간을 설정해 주세요.");
+    if($("#dayCnt").val() <= 0) {
+        alert("여행 시작일이 여행 종료일보다 뒤에 놓일 수 없습니다.");
         return false;
     }
 
@@ -351,7 +316,7 @@ $(document).on("click",".add-tr-option",function(){
         str += '<input class="input-option-s-price_'+numOfParent+'" type="text" name="regProductOptionListDto['+numOfParent+'].price">';
         str += '</td>';
         str += '<td>';
-        str += '<button class="btn btn-outline-danger del-tr-option" type="button">옵션삭제</button>';
+        str += '<button class="btnDel del-tr-option" type="button">옵션삭제</button>';
         str += '</td>';
         str += '</tr>';
     $(".table-type-s-" + numOfParent).append(str);
@@ -402,13 +367,14 @@ $(".add-option-btn").click(function(){
         str += '<tr>';
         str += '<th>옵션#'+(parseInt(optCnt)+1)+'</th>'
         str += '<th>';
-        str += '<div class="btn-group" role="group" aria-label="Basic radio toggle button group">';
-        str += '<input type="radio" id="option-type-s-'+optCnt+'" class="btn-check option-type-s-'+optCnt+'" name="regProductOptionListDto['+optCnt+'].type" value="S" autocomplete="off" checked>'
+        str += '<div class="btn-group">';
+        str += '<input type="radio" id="option-type-s-'+optCnt+'" class="btn-check option-type-s-'+optCnt+'" name="regProductOptionListDto['+optCnt+'].type" value="S" checked>'
         str += '<label class="btn btn-outline-warning" for="option-type-s-'+optCnt+'">선택형</label>';
-        str += '<input type="radio" id="option-type-a-'+optCnt+'" class="btn-check option-type-a-'+optCnt+'" name="regProductOptionListDto['+optCnt+'].type" value="A" autocomplete="off">';
+        str += '<input type="radio" id="option-type-a-'+optCnt+'" class="btn-check option-type-a-'+optCnt+'" name="regProductOptionListDto['+optCnt+'].type" value="A">';
         str += '<label class="btn btn-outline-warning" for="option-type-a-'+optCnt+'">단답형</label>';
+        // str += '</div>';
+        str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btnDel option-delBtn" type="button">상품옵션 제거</button>';
         str += '</div>';
-        str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-danger option-delBtn" type="button">상품옵션 제거</button>';
         str += '</th>';
         str += '</tr>';
         str += '<tr>';
@@ -433,7 +399,7 @@ $(".add-option-btn").click(function(){
         str += '<td>';
 
 
-        str += '<button class="btn btn-outline-info add-tr-option" type="button" class="add-option">옵션추가</button>';
+        str += '<button class="btnAdd add-tr-option" type="button" class="add-option">옵션추가</button>';
         str += '<input type="hidden" name="regProductOptionListDto[' + optCnt + '].orderNo" value="'+optCnt+'">';
         str += '</td>';
         str += '</tr>';
@@ -485,3 +451,8 @@ $(".add-option-btn").click(function(){
     optCnt++;
 })
 
+//썸네일 파일명 바인딩
+$("#uploadThumb").on('change',function(){
+    let fileName = $("#uploadThumb").val();
+    $(".uploadThumb").attr('value',fileName);
+});

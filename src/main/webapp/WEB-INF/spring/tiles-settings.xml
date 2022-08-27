@@ -28,27 +28,29 @@
     <definition name="*.subTiles" extends="subLayout">
         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
     </definition>
+    <definition name="*/*.subTiles" extends="subLayout">
+            <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+
+
     <definition name="*/*.mypageTiles" template="/WEB-INF/views/tiles/tiles_sub_layout.jsp">
         <put-attribute name="header" value="/WEB-INF/views/tiles/header_template.jsp" />
         <put-attribute name="menu" value="/WEB-INF/views/tiles/mypage_menu_template.jsp" />
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/views/tiles/footer_template.jsp" />
     </definition>
-    <definition name="*/*.subTiles" extends="subLayout">
-            <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
-    </definition>
 
     <!-- 파트너 마이페이지 -->
     <definition name="partLayout" template="/WEB-INF/views/tiles/tiles_part_layout.jsp">
         <put-attribute name="header" value="/WEB-INF/views/tiles/header_template.jsp" />
-        <put-attribute name="part" value="/WEB-INF/views/tiles/part_template.jsp" />
+        <put-attribute name="partner" value="/WEB-INF/views/partner/side.jsp" />
         <put-attribute name="content" value="" />
         <put-attribute name="footer" value="/WEB-INF/views/tiles/footer_template.jsp" />
     </definition>
-    <definition name="*.partTiles" extends="partLayout">
+    <definition name="*.partnerTiles" extends="partLayout">
         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
     </definition>
-    <definition name="*/*.partTiles" extends="partLayout">
+    <definition name="*/*.partnerTiles" extends="partLayout">
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
 

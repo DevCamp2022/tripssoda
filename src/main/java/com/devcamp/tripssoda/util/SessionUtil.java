@@ -9,7 +9,7 @@ public class SessionUtil {
     private SessionUtil() {}
 
     public static String getLoginUserId(HttpSession session) {
-        System.out.println("String.valueOf(session.getAttribute(\"id\")) = " + String.valueOf(session.getAttribute("id")));
+        System.out.println("String.valueOf(session.getAttribute(\"id\")) = " + session.getAttribute("id"));
 
         return String.valueOf(session.getAttribute("id"));
     }

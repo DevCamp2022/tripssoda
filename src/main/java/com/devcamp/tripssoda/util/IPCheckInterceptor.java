@@ -28,8 +28,9 @@ public class IPCheckInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object arg2) throws Exception{
+
         logger.info("client ip " + req.getRemoteAddr());//접속한 사용자의 IP
-        System.out.println("client ip " + req.getRemoteAddr());
+        System.out.println("check인터셉터 client ip " + req.getRemoteAddr());
         List<String> list = ipBanListMapper.findIpBanList(); //오늘ip밴 당한사람 ip 가져온다.
         for(String li : list)
         {

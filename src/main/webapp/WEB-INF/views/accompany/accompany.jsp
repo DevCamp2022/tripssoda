@@ -92,9 +92,20 @@
             </div>
         </div>
         <c:if test="${sessionScope.id ne accompanyDto.userId}">
-        <div class="apply-btn">
-            <a class="apply-text" href="https://${accompanyDto.chatUrl}">오픈채팅방입장</a>
-        </div>
+            <c:if test="${sessionScope.id ne null}">
+                <a class="apply-text" href="https://${accompanyDto.chatUrl}">
+                <div class="apply-btn">
+                    오픈채팅방입장
+                </div>
+                </a>
+            </c:if>
+            <c:if test="${sessionScope.id eq null}">
+                <a class="apply-text" href="<c:url value='/login'/>">
+                    <div class="apply-btn">
+                        오픈채팅방입장
+                    </div>
+                </a>
+            </c:if>
         </c:if>
     </div>
 </div>

@@ -31,24 +31,32 @@ body {
     margin: auto;
 }
 /* 썸네일 업로드 */
-.upload-img {
-    margin-top: 70px;
+.div-thumbnail {
+    margin: 30px auto 10px auto;
     width: 1200px;
     height: 400px;
+    text-align: center;
     /* background-color: #f4f4f4; */
     /*background-image: url("/image/accompany/thumbnail-last-img.PNG");*/
     /*background-position: center;*/
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
 }
+.thumbnail-hap {
+    border: 1px solid rgb(233,233,233);
+}
 .sdfadsf {
+    display: block;
     width: 300px;
-    height: 300px;
+    height: 100px;
+    margin: 15px auto 15px auto;
+    text-align: center;
+    border: 1px solid #9a9a9a;
 }
-.div-thumbnail {
-    width: 300px;
-    height: 300px;
-}
+/*.div-thumbnail {*/
+/*    width: 300px;*/
+/*    height: 300px;*/
+/*}*/
 /* .upload-img-icon1 {
   margin: 0 auto 50px auto;
 

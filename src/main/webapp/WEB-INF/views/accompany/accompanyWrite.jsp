@@ -111,6 +111,7 @@
             // }
             form.attr("action", "<c:url value='/accompany/modify'/>?page=${page}&pageSize=${pageSize}");
             form.attr("method", "post");
+            form.attr("enctype", "multipart/form-data")
             if(formCheck()) {
                 form.submit();
             }
@@ -136,7 +137,8 @@
             reader.onload = function(e){
                 let newImg = document.createElement('img');
                 newImg.setAttribute("src", e.target.result);
-                newImg.setAttribute("width",500);
+                newImg.setAttribute("width",1200);
+                newImg.setAttribute("height", 400);
                 $(".div-thumbnail").html(newImg);
             }
             reader.readAsDataURL($(this)[0].files[0]);

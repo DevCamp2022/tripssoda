@@ -8,6 +8,7 @@ public class PartnerDto {
     private Integer userId;
     private Integer regNumber;
     private String companyName;
+    private String partnerLogo;
     private String intro;
     private String introAttachment;
     private String serviceRegion;
@@ -53,6 +54,14 @@ public class PartnerDto {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getPartnerLogo() {
+        return partnerLogo;
+    }
+
+    public void setPartnerLogo(String partnerLogo) {
+        this.partnerLogo = partnerLogo;
     }
 
     public String getIntro() {
@@ -171,9 +180,10 @@ public class PartnerDto {
     public String toString() {
         return "PartnerDto{" +
                 "id=" + id +
-                "userId=" + userId +
+                ", userId=" + userId +
                 ", regNumber=" + regNumber +
                 ", companyName='" + companyName + '\'' +
+                ", partnerLogo='" + partnerLogo + '\'' +
                 ", intro='" + intro + '\'' +
                 ", introAttachment='" + introAttachment + '\'' +
                 ", serviceRegion='" + serviceRegion + '\'' +

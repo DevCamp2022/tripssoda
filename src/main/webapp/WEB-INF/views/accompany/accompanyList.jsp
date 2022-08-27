@@ -50,7 +50,7 @@
             <a class="a-tag" href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
                 <div class="list-one">
                     <div class="list-thumbnail2">
-                        <img class="list-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">
+                        <img class="list-thumbnail" src="/image/thumbnail/${accompanyDto.thumbnail}" alt="">
                     </div>
                     <div class="list-title-line">
                         <div class="recruit-on-off">

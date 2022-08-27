@@ -10,15 +10,21 @@
     <img src="/image/main/trip3.jpg" alt="a house on the mountain">
     <img src="/image/main/trip7.jpg" alt="a big building">
     <img src="/image/main/trip1.webp" alt="another house">
-
-<%--    <img src="/image/main/trip2.jpg" alt="a small road between two houses">--%>
-<%--    <img src="/image/main/trip4.jpg" alt="a modern city">--%>
-<%--    <img src="/image/main/trip5.jpg" alt="a lot of old houses">--%>
 </div>
 
 
 
-<div class="txt"><span><strong>동행</strong>함께 떠나는 여행</span></div>
+
+
+    <div class="searchMain">
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">
+        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+
+<div class="txt">
+    <span><strong>동행</strong>함께 떠나는 여행</span>
+    <a href="/accompany/list"><button id="goBtn" type="button">함께하기</button></a>
+</div>
 
     <section class="container">
         <h1 class="title">
@@ -33,8 +39,6 @@
             <span>together</span>
         </h2>
     </section>
-
-
 </div>
 
 
@@ -43,34 +47,42 @@
 
 
 
-<%--    <div class="slide-wrap">--%>
-
-<%--        <h1> 여행정보 공유해요! </h1>--%>
-
-<%--        <div class="slider">--%>
-<%--            <div class="slide" id="slide-1"><img src="/image/main/trip2.jpg"></div>--%>
-<%--            <div class="slide" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--            <div class="slide" id="slide-3"><img src="/image/main/trip4.jpg"></div>--%>
-<%--            <div class="slide" id="slide-4"><img src="/image/main/trip5.jpg"></div>--%>
-<%--            <div class="slide" id="slide-5"><img src="/image/main/trip6.jpg"></div>--%>
-<%--            <div class="slide" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--            <div class="slide" id="slide-3"><img src="/image/main/trip4.jpg"></div>--%>
-<%--            <div class="slide" id="slide-1"><img src="/image/main/trip2.jpg"></div>--%>
-<%--            <div class="slide" id="slide-5"><img src="/image/main/trip6.jpg"></div>--%>
-<%--            <div class="slide last" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--        </div>--%>
-
-<%--&lt;%&ndash;        <a href="#slide-1">1</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-2">2</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-3">3</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-4">4</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-5">5</a>&ndash;%&gt;--%>
-<%--    </div>--%>
-
-
-
+<%--동행게시글--%>
     <div class="slide-wrap">
+        <div class="div-list-wrap">
+            <h1>취향저격 동행찾기</h1>
+            <div class="btn-lank">
+                <a href="/product/list"><span>더보기</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
 
+            <c:forEach var="list" items="${list0}" varStatus="statusNm">
+                <div class="div-editor">
+                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+                        <!--썸네일-->
+                        <div class="thumbnail-wrapper">
+                            <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
+                            <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${list.thumbnail}" alt="thumbnail picture">
+                        </div>
+                        <!--상품정보(제목, 평점, 출발일, 가격)-->
+                        <div class="itemInfo-wrapper">
+                            <div class="main-tourTitle">
+                                <h4>${list.title}</h4>
+                            </div>
+                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>
+                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>
+                            <div class="main-tourDate">2022년 08월 19일 출발 </div>
+                            <div class="main-tourPrice">
+                                <b>160,000원</b>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </c:forEach>
+        </div>
+    </div>
+<%--    에디터픽--%>
+    <div class="slide-wrap">
         <div class="div-list-wrap">
             <h1>에디터 픽</h1>
             <div class="btn-lank">
@@ -105,6 +117,7 @@
     </div>
 
 
+<%--    프라이빗투어--%>
     <div class="slide-wrap">
 
         <div class="div-list-wrap">
@@ -144,27 +157,71 @@
 
 
 
-<%--&lt;%&ndash;    슬라이드리뷰&ndash;%&gt;--%>
-<%--    <div id="slideShow">--%>
-<%--        <ul class="slides">--%>
-<%--            <li><img src="/image/main/trip2.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip3.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip4.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip5.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip6.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip7.jpg"></li>--%>
-<%--        </ul>--%>
-<%--        <p class="controller">--%>
+<%--    게시판--%>
+    <div id="wrap">
+        <section class="tabArea">
+            <ul class="tab">
+                <li class="on">
+                    <a href="#!"><span>공지사항</span></a>
+                </li>
+                <li>
+                    <a href="#!"><span>프로모션</span></a>
+                </li>
+                <li>
+                    <a href="#!"><span>FAQ</span></a>
+                </li>
+<%--                <li>--%>
+<%--                    <a href="#!"><span></span></a>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a href="#!"><span></span></a>--%>
+<%--                </li>--%>
+            </ul>
+            <div class="tabBox on">
+                <div class="notice">
+                    <ul>
+                        <c:forEach var="noticeList" begin="1" end="5" step="1" items="${noticeList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
+                                    <p>${noticeList.title}</p>
+                                    <p><fmt:formatDate value="${noticeList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <div class="tabBox">
+                <div class="promotion">
+                    <ul>
+                        <c:forEach var="promoList" begin="1" end="5" step="1" items="${promotionList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
+                                    <p>${promoList.title}</p>
+                                    <p><fmt:formatDate value="${promoList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <div class="tabBox">
+                <div class="faq">
+                    <ul>
+                        <c:forEach var="faqList" begin="1" end="5" step="1" items="${faqList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
+                                    <p>${faqList.title}</p>
+                                    <p><fmt:formatDate value="${faqList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
 
-<%--            <!-- &lang: 왼쪽 방향 화살표--%>
-<%--            &rang: 오른쪽 방향 화살표 -->--%>
-<%--            <span class="prev">&lang;</span>--%>
-<%--            <span class="next">&rang;</span>--%>
-<%--        </p>--%>
-<%--    </div>--%>
-
-
-
+        </section>
+    </div>
 
 
 
@@ -252,12 +309,9 @@
 
 
 
-
 </div>
 
 
-<%--<script src="/script/main/vendor/jquery-1.10.2.min.js"></script>--%>
-<%--<script type="text/javascript" src="/script/main/home.js"></script>--%>
 
 
 <script>
@@ -322,3 +376,49 @@
 
 </script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/main/home.js"></script>
+<script>
+$(document).ready(function(){
+    $(".tabArea .tab li a").on("click", function(){
+
+        // 해당 요소를 클릭하는 내 자신의 index 번호를 가져온다. [0], [1]
+        const num = $(".tabArea .tab li a").index($(this));
+        // 기존에 적용되어 있는 on class 삭제
+        $(".tabArea .tab li").removeClass("on");
+        $(".tabArea .tabBox").removeClass("on");
+
+        // 다음 요소 클릭시 on class 추가
+        $('.tabArea .tab li:eq(' + num + ')').addClass("on");
+        $('.tabArea .tabBox:eq(' + num + ')').addClass("on");
+    });
+});
+
+
+
+
+
+
+
+
+
+
+(function($) {
+
+    var container = $('.container11');
+    var location = $('#location');
+    var section = $('.section');
+
+    section.on('mouseover', function(){
+        location.addClass('open-menu');
+    });
+    section.on('mouseout', function(){
+        location.removeClass('open-menu');
+    });
+    location.on('mouseover', function(){
+        location.addClass('open-menu');
+    });
+    location.on('mouseout', function(){
+        location.removeClass('open-menu');
+    });
+
+})(jQuery);
+</script>

@@ -20,7 +20,6 @@
     <link href="/css/common/tiles_sub_layout.css" rel='stylesheet'/>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 
@@ -33,10 +32,10 @@
     </div>
     <div class="content-container">
         <div class="content-wrap">
-            <div class="left-wrap">
+            <div class="top-wrap">
                 <tiles:insertAttribute name="menu"/>
             </div>
-            <div class='right-wrap'>
+            <div class='bottom-wrap'>
                 <tiles:insertAttribute name="content"/>
             </div>
         </div>

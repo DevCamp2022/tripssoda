@@ -79,7 +79,7 @@
         // 여행관심사 테스트 다시보기 버튼을 눌렀을 때
         $(".update-interest-btn").on("click", function () {
             location.href="/mypage/info/updateInterest";
-        })
+        });
     </script>
 </div>
 

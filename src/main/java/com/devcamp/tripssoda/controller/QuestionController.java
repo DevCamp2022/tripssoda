@@ -284,17 +284,18 @@ public class QuestionController {
             int rowCnt = questionService.updateStatus(questionDto);
 //            questionDto = questionService.read(id);
 
-
             if(rowCnt!=1)
                 throw new Exception("Select Failed");
             rattr.addAttribute("id", questionDto.getId());
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
+            rattr.addFlashAttribute("msg", "SELECT_OK");
             System.out.println("questionDto = " + questionDto);
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute(questionDto);
+            m.addAttribute("msg", "SELECT_OK");
             System.out.println("questionDto = " + questionDto);
 
 //            System.out.println("id = " + id);

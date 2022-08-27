@@ -242,6 +242,11 @@ a {
     font-weight: bold;
     line-height: 18px;
 }
+.profile-text2 {
+    color: #9a9a9a;
+    font-weight: bold;
+    line-height: 18px;
+}
 /* 답변하기 버튼 */
 .apply-btn {
     width: 280px;
@@ -361,6 +366,9 @@ a {
     padding-top: 5px;
     color: #9a9a9a;
     font-size: 13px;
+}
+.answer-select {
+    margin-left: 20px;
 }
 .comment {
     padding-top: 15px;

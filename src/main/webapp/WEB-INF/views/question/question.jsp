@@ -15,6 +15,8 @@
     let msg = "${msg}";
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="SELECT_OK") alert("답변채택이 완료되었습니다.")
+    if(msg=="SELECT_ERR") alert("답변채택이 실패하였습니다. 다시 시도해 주세요.");
 </script>
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${questionDto.id}">
@@ -22,6 +24,7 @@
     <input type="hidden" name="pageSize" value="${pageSize}">
     <input type="hidden" name="sessionId" value="${sessionScope.id}">
     <input type="hidden" name="memberId" value="${questionDto.userId}">
+    <input type="hidden" name="answerStatus" value="${questionDto.status}">
 
 <%--    <input type="hidden" name="title" value="${questionDto.title}">--%>
 <%--    <input type="hidden" name="regionCode" value="${questionDto.regionCode}">--%>
@@ -147,10 +150,30 @@
                         <div class="profile-icon">
 
                         </div>
-                        <div class="profile-text">
-                            답변을 작성해주세요!
-<%--                            프로필 사진을 클릭해보세요!--%>
-                        </div>
+                        <c:if test="${sessionScope.id ne questionDto.userId}">
+                            <c:if test="${questionDto.status eq 0}">
+                                <div class="profile-text">
+                                    답변을 작성해주세요!
+                                </div>
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <div class="profile-text2">
+                                    답변이 채택되었습니다.
+                                </div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${sessionScope.id eq questionDto.userId}">
+                            <c:if test="${questionDto.status eq 0}">
+                                <div class="profile-text">
+                                    답변을 채택해주세요!
+                                </div>
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <div class="profile-text2">
+                                    답변이 채택되었습니다.
+                                </div>
+                            </c:if>
+                        </c:if>
                     </div>
                     <c:if test="${sessionScope.id ne questionDto.userId}">
                         <c:if test="${questionDto.status eq 0}">
@@ -296,6 +319,7 @@
 
     $("#commentList").on("click", ".select-answer-btn", function(){
         let form = $("#form");
+        if(!confirm('답변을 채택하시겠습니까?')) return;
         form.attr("action", "<c:url value='/question/answer/select'/>");
         form.attr("method", "post");
         form.submit();
@@ -327,12 +351,17 @@
 
             let sessionId = $("input[name=sessionId]").val();
             let memberId = $("input[name=memberId]").val();
+            let answerStatus = $("input[name=answerStatus]").val();
 
             tmp += '<div class="repeat-answer-container" data-id='+comment.id
             tmp += ' data-questionId='+comment.questionId + '>'
             tmp += ' <div class="repeat-answer"><div class="answer-profile-img"><img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/'+ comment.profileImg +'"></div>'
             tmp += ' <div><span class="commenter">' + comment.nickname + '</span>'
-            tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div></div>'
+            tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div>'
+
+            <%--tmp += ' <div class="answer-select"><img class="answer-select-img" src="${pageContext.request.contextPath}/image/question/answer-select.svg"></div>'--%>
+            tmp += ' </div>'
+
             tmp += ' <div class="comment">' + comment.content + '</div>'
 <%--            <c:if test="${sessionScope.id eq answerDto.userId}">--%>
             if(sessionId==comment.userId) {
@@ -342,7 +371,9 @@
             }
 <%--            </c:if>--%>
             if(sessionId==memberId) {
-            tmp += '<button class="select-answer-btn" type="button">채택하기</button>'
+                if(answerStatus==0) {
+                    tmp += '<button class="select-answer-btn" type="button">채택하기</button>'
+                }
             }
             tmp += '<div class="only-line"></div>'
             tmp += '</div>'

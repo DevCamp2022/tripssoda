@@ -72,7 +72,7 @@ public class AccompanyController {
 
     @PostMapping("/modify")
     public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
-                           Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
+                           Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
 
@@ -112,6 +112,9 @@ public class AccompanyController {
             if(rowCnt!=1)
                 throw new Exception("Modify Failed");
             rattr.addFlashAttribute("msg", "MOD_OK");
+            if(toURL != null) {
+                return "redirect:" + toURL;
+            }
             return "redirect:/accompany/list";
         } catch (Exception e) {
             e.printStackTrace();

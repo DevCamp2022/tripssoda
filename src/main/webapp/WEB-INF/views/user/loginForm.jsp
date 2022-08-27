@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<c:url value="/css/user/loginForm.css"/>">
 
 <div class="main">
-    <form action="<c:url value="/login/emailLogin"/>" class="contents" method="post">
+    <form action="<c:url value="/login/emailLogin"/>" class="contents" method="post" onsubmit="return formCheck()">
         <h3 class="title">로그인</h3>
         <p class="error-msg">${URLDecoder.decode(param.msg)}</p>
         <input type="email" class="input-id" name="email" value="${cookie.email.value}" placeholder="이메일">
@@ -24,5 +24,23 @@
         </div>
     </form>
 </div>
+
+<script>
+    function formCheck() {
+        let email = $("input[name=email]").val();
+        let password = $("input[name=pwd]").val();
+
+        if(email == "" || email == null) {
+            alert("이메일을 입력해주세요.");
+            return false;
+        }
+
+        if(password == "" || password == null) {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+</script>
 
 

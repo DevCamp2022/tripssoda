@@ -11,6 +11,7 @@
     let msg = '${msg}';
     if(msg == 'DEL_OK') alert("질문이 삭제되었습니다.");
     if(msg == 'DEL_ERR') alert("예기치 않은 오류로 질문 삭제에 실패했습니다. 나중에 다시 시도해주세요");
+    if(msg == 'MOD_OK') alert("질문을 수정하였습니다.");
 </script>
 <div class="main">
     <div class="contents">
@@ -33,10 +34,11 @@
                     <i class="fa-solid fa-eye"></i><span class="view-cnt"> ${questionDto.viewCnt}</span>
                     <i class="fa-regular fa-comment"></i><span class="answer-cnt"> ${questionDto.ansCnt}</span>
                     <input type="hidden" name="id" value="${questionDto.id}">
-                    <input type="hidden" name="page" value="${param.page}">
-                    <input type="hidden" name="pageSize" value="${param.pageSize}">
                 </div>
             </c:forEach>
+            <input type="hidden" name="toURL" value="${toURL}">
+            <input type="hidden" name="page" value="${param.page}">
+            <input type="hidden" name="pageSize" value="${param.pageSize}">
             <div class="paging-container">
                 <div class="paging">
                     <c:if test="${totalQuestionCnt==null || totalQuestionCnt==0}">
@@ -98,11 +100,14 @@
             }
         })
     })
-
+    // 수정버튼 눌렀을 때
     $(".update-btn").on("click", function () {
         let questionId = $(this).parent().children("input[name=id]").val();
+        let toURL = $(this).parent().children("input[name=toURL]").val();
+        let page = $("input[name=page]").val();
+        let pageSize = $("input[name=pageSize]").val();
 
-        location.href="/question/modify?id=" + questionId;
+        location.href="/question/modify?id=" + questionId + "&toURL=" + toURL + "&page=" + page + "&pageSize=" + pageSize;
     });
 </script>
 

@@ -190,7 +190,7 @@
         let nickVerfResult = false;
 
         // 닉네임 유효성 검사
-        $("input[name=nickname]").keyup(function() {
+        $("input[name=nickname]").blur(function() {
             // 닉네임을 변수에 저장
             let nickname = $("input[name=nickname]").val();
             // 닉네임 유효성 검사결과를 변수에 저장

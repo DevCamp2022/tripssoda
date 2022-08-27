@@ -25,7 +25,7 @@
                 </div>
                 <div class="product-info">
                     <div class="img-wrap">
-                        <img src="/user/profileImg/${reservationDto.thumbnail}" alt="상품 대표 사진">
+                        <img src="/image/thumbnail/${reservationDto.thumbnail}" alt="상품 대표 사진">
                     </div>
                     <div class="info-wrap">
                         <h2 class="product-title"><a href="/product/detail?productId=${reservationDto.productId}&scheduleId=${reservationDto.productScheduleId}">${reservationDto.productTitle}</a></h2>

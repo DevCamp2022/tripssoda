@@ -29,10 +29,12 @@ public class UserServiceImpl implements UserService {
 
     private UserHistoryMapper userHistoryMapper;
 
+    private UserPointMapper userPointMapper;
+
     @Autowired
     DataSource ds;
 
-    public UserServiceImpl(UserHistoryMapper userHistoryMapper, EmailVerificationMapper emailVerificationMapper, WithdrawUserMapper withdrawUserMapper, TermsMapper termsMapper, UserMapper userMapper, UserTourInterestMapper userTourInterestMapper, UserTermsMapper userTermsMapper) {
+    public UserServiceImpl(UserPointMapper userPointMapper, UserHistoryMapper userHistoryMapper, EmailVerificationMapper emailVerificationMapper, WithdrawUserMapper withdrawUserMapper, TermsMapper termsMapper, UserMapper userMapper, UserTourInterestMapper userTourInterestMapper, UserTermsMapper userTermsMapper) {
         this.userMapper = userMapper;
         this.userTourInterestMapper = userTourInterestMapper;
         this.userTermsMapper = userTermsMapper;
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
         this.withdrawUserMapper = withdrawUserMapper;
         this.emailVerificationMapper = emailVerificationMapper;
         this.userHistoryMapper = userHistoryMapper;
+        this.userPointMapper = userPointMapper;
     }
 
     @Override
@@ -59,10 +62,20 @@ public class UserServiceImpl implements UserService {
         // 닉네임을 Dto에 새로 저장하여 insert 한다.
         userDto.setNickname(nickName);
 
+        // 회원가입시 적립금을 2000원 넣어줌
+        userDto.setPoint(2000);
+
         int rowCnt1 = userMapper.insertUser(userDto);
         if(rowCnt1 != 1) {
             throw new Exception("Insert user failed");
         }
+
+        // 적립금 이력을 남김
+        Map pointHistory = new HashMap();
+        pointHistory.put("userId", userDto.getId());
+        pointHistory.put("amount", 2000);
+        pointHistory.put("message", "회원가입 이벤트");
+        userPointMapper.insertUserPointHistory(pointHistory);
 
         // 유저의 id(식별자)를 가져온다
         int userId = userDto.getId();

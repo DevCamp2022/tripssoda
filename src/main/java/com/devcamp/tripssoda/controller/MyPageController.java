@@ -381,6 +381,7 @@ public class MyPageController {
         // 해당 계정으로 등록된 QnA 목록을 가져온다.
         List<QuestionDto> questionDtoList = questionService.selectAllUserQuestion(userId, sc);
 
+        model.addAttribute("toURL", request.getRequestURL());
         model.addAttribute("totalQuestionCnt", totalQuestionCnt);
         model.addAttribute("totalAnswerCnt", totalAnswerCnt);
         model.addAttribute("ph", ph);
@@ -456,6 +457,7 @@ public class MyPageController {
         // 해당 계정으로 등록된 동행게시글 목록을 가져온다.
         List<AccompanyDto> accompanyDtoList = accompanyService.selectAllUserAccompany(userId, sc);
 
+        model.addAttribute("toURL", request.getRequestURL());
         model.addAttribute("totalCnt", totalCnt);
         model.addAttribute("ph", ph);
         model.addAttribute("accompanyDtoList", accompanyDtoList);

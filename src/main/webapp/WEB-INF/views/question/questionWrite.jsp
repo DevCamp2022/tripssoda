@@ -55,6 +55,7 @@
         </div>
 </div>
 </form>
+<input type="hidden" name="toURL" value="${param.toURL}">
 <script>
     $(document).ready(function() {
         let formCheck = function() {
@@ -87,7 +88,9 @@
             //     $("textarea").attr('readonly', false);
             //     return;
             // }
-            form.attr("action", "<c:url value='/question/modify'/>?page=${page}&pageSize=${pageSize}");
+            let toURL = $("input[name=toURL]").val();
+
+            form.attr("action", "<c:url value='/question/modify'/>?page=${page}&pageSize=${pageSize}&toURL="+ toURL);
             form.attr("method", "post");
             form.submit();
         });

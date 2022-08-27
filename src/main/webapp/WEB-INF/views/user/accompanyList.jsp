@@ -10,7 +10,8 @@
 
 <script>
     let msg = '${msg}';
-    if(msg == 'DEL_OK') alert("성공적으로 삭제되었습니다")
+    if(msg == 'DEL_OK') alert("게시물을 삭제하였습니다.")
+    if(msg == 'MOD_OK') alert("게시물을 수정하였습니다.")
 </script>
 <div class="main">
     <div class="contents">
@@ -42,6 +43,10 @@
                     </div>
                 </div>
             </c:forEach>
+        <input type="hidden" name="toURL" value="${toURL}">
+        <input type="hidden" name="page" value="${param.page}">
+        <input type="hidden" name="pageSize" value="${param.pageSize}">
+
         <div class="paging-container">
             <div class="paging">
                 <c:if test="${totalCnt==null || totalCnt==0}">
@@ -67,8 +72,13 @@
     // 수정 버튼 눌렀을 때 수정 form으로 이동
     $(".modify-btn").on("click", function () {
         let accompanyId = $(this).parent().children("input[name=id]").val();
-        location.href="/accompany/modify?id=" + accompanyId;
-    })
+        let toURL = $("input[name=toURL]").val();
+        let page = $("input[name=page]").val();
+        let pageSize = $("input[name=pageSize]").val();
+
+        location.href="/accompany/modify?id=" + accompanyId + "&toURL=" + toURL;
+
+    });
 
     function formCheck() {
         if(!confirm("정말로 삭제하시겠습니까?")) {

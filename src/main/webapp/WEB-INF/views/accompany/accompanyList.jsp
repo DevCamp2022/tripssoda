@@ -15,7 +15,12 @@
 </head>
 <body>
 <input type="hidden" name="msg" value="${msg}">
-<form name="frm" method="get" action="<c:url value='/accompany/list'/>">
+<c:if test="${mode ne 'waiting'}">
+    <form name="frm" method="get" action="<c:url value='/accompany/list'/>">
+</c:if>
+<c:if test="${mode eq 'waiting'}">
+    <form name="frm" method="get" action="<c:url value='/accompany/waiting'/>">
+</c:if>
 <div class="main-img">
 
 </div>

@@ -42,7 +42,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/waiting")
-    public String waitingList(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String waitingList(String option, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 //
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
@@ -56,6 +56,7 @@ public class AccompanyController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.waitingGetPage(map);
             m.addAttribute("mode", "waiting");

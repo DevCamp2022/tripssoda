@@ -24,6 +24,7 @@ public class CombinedBoardController {
     @GetMapping("/list")
     public String boardList(Model m, SearchCondition sc, @RequestParam(value="menuCode",defaultValue="0") String menuCode) throws Exception{
 
+        System.out.println("menjjjjjjjjjuCode = " + menuCode);
         try {
             //menuCode 게시판아이디를 같이 보내준다
             int totalCnt = adminBoardService.getSearchResultCntForUser(sc, menuCode);
@@ -34,6 +35,7 @@ public class CombinedBoardController {
             List<CombinedBoardDto> list = adminBoardService.getSearchResultPageForUser(sc, menuCode);
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
+            m.addAttribute("menuCode",menuCode);
 
             System.out.println("list = " + list);
 //            for(CombinedBoardDto dto : list)
@@ -49,10 +51,12 @@ public class CombinedBoardController {
     }
 
     @GetMapping("/detail")
-    public String read(Model m, @RequestParam int id, SearchCondition sc) throws Exception{ //게시글id
+    public String read(Model m, @RequestParam int id, SearchCondition sc, @RequestParam(value="menuCode",defaultValue="0") String menuCode) throws Exception{ //게시글id
         CombinedBoardDto combinedBoardDto = adminBoardService.read(id);
+        System.out.println("menuCode = " + menuCode);
         m.addAttribute("combinedBoardDto",combinedBoardDto);
         m.addAttribute("searchCondition",sc);
+        m.addAttribute("menuCode",menuCode);
 
         return "board/board_content.mainTiles";
     }

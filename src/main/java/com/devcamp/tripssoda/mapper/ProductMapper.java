@@ -23,7 +23,9 @@ public interface ProductMapper {
     public int increaseCurrentMember(Map<String, Integer> scheduleInfo);
     public int setUpdateBy(Map<String, Integer> map);
     public int updateProductApproval(ApprovalDto approvalDto);
-    public int insertApprovalHistory(ApprovalDto approvalDto);
+    public int insertProductApprovalHistory(ApprovalDto approvalDto);
+    public int updatePartnerpproval(ApprovalDto approvalDto);
+    public int insertPartnerApprovalHistory(ApprovalDto approvalDto);
     public List<ProductScheduleDto> selectProductScheduleList(GetDetailProductDto dto);
     public List<ProductScheduleDto> selectScheduleList(Integer productId);
     public UpdateProductDto selectProductUpdate(Integer productId);

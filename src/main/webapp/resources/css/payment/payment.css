@@ -66,7 +66,7 @@ p.pay-method > b {
 
 div.reservation-wrap > form > div.reservation-info{
     display: inline-block;
-    width: 740px;
+    width: 660px;
     padding: 32px 42px;
     margin: 0px 20px 20px 20px;
 }
@@ -282,4 +282,36 @@ li.total-amount > em.detail-info-tit {
 li.total-amount > span.total-amount{
     text-align: right;
     margin-bottom: 30px;
+}
+
+input[type="radio"]{
+    position: relative;
+    top: 50%;
+    opacity: 1;
+    appearance: none;
+    outline: 0px;
+    box-shadow: none;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 1px 5px;
+    border: 1px solid rgb(139, 139, 139);
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked::after {
+    position: absolute;
+    background-color: #00ce7c;
+    border: 1px solid #00ce7c;
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 1px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+input[type="radio"]::after {
+    content: "";
 }

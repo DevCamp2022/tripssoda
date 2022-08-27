@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 <div class="combined-wrap">
-    <div class="combined-wrap-tit"><h1 class="writing-header">공지사항</h1></div>
+    <div class="combined-wrap-tit"><h1 class="writing-header">${menuCode == 'M001'?'공지사항':menuCode=='M002'?'프로모션':menuCode=='M003'?'자주묻는질문':'게시판'}</h1></div>
     <table class="combined-list-tb">
         <tr>
             <th class="tit" >제목</th>
@@ -20,7 +20,7 @@
         </tr>
     </table>
     <div class="pagination">
-        <a href="http://localhost:9100/board/list?menuCode=M001" class="to-list">목록으로</a>
+        <a href="http://localhost:9100/board/list?menuCode=${menuCode}" class="to-list">목록으로</a>
     </div>
 <%--    <table>--%>
 <%--        <c:if test="${mode ne 'new'}">--%>

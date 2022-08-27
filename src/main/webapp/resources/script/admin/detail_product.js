@@ -191,7 +191,7 @@ $(".prevBtn").click(function(){
 })
 
 $("#approvalSelection").on("change", function (){
-  if($(this).val()==0){
+  if($(this).val()==2){
     $("#reason").css("display","");
   } else  {
     $("#reason").css("display","none");
@@ -204,7 +204,7 @@ $("#btnApprove").click(function (){
   const reason = $("#reason").val();
   const approval = $("#approvalSelection").val();
 
-  if (approval==="0" && reason===""){
+  if (approval==="2" && reason===""){
     alert("사유를 작성하세요.")
     return;
   }

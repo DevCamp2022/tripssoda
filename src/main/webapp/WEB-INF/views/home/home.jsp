@@ -10,15 +10,21 @@
     <img src="/image/main/trip3.jpg" alt="a house on the mountain">
     <img src="/image/main/trip7.jpg" alt="a big building">
     <img src="/image/main/trip1.webp" alt="another house">
-
-<%--    <img src="/image/main/trip2.jpg" alt="a small road between two houses">--%>
-<%--    <img src="/image/main/trip4.jpg" alt="a modern city">--%>
-<%--    <img src="/image/main/trip5.jpg" alt="a lot of old houses">--%>
 </div>
 
 
 
-<div class="txt"><span><strong>동행</strong>함께 떠나는 여행</span></div>
+
+
+    <div class="searchMain">
+        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">
+        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+
+<div class="txt">
+    <span><strong>동행</strong>함께 떠나는 여행</span>
+    <a href="/accompany/list"><button id="goBtn" type="button">함께하기</button></a>
+</div>
 
     <section class="container">
         <h1 class="title">
@@ -33,41 +39,11 @@
             <span>together</span>
         </h2>
     </section>
-
-
 </div>
 
 
 
 <div class="content">
-
-
-
-<%--    <div class="slide-wrap">--%>
-
-<%--        <h1> 여행정보 공유해요! </h1>--%>
-
-<%--        <div class="slider">--%>
-<%--            <div class="slide" id="slide-1"><img src="/image/main/trip2.jpg"></div>--%>
-<%--            <div class="slide" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--            <div class="slide" id="slide-3"><img src="/image/main/trip4.jpg"></div>--%>
-<%--            <div class="slide" id="slide-4"><img src="/image/main/trip5.jpg"></div>--%>
-<%--            <div class="slide" id="slide-5"><img src="/image/main/trip6.jpg"></div>--%>
-<%--            <div class="slide" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--            <div class="slide" id="slide-3"><img src="/image/main/trip4.jpg"></div>--%>
-<%--            <div class="slide" id="slide-1"><img src="/image/main/trip2.jpg"></div>--%>
-<%--            <div class="slide" id="slide-5"><img src="/image/main/trip6.jpg"></div>--%>
-<%--            <div class="slide last" id="slide-2"><img src="/image/main/trip3.jpg"></div>--%>
-<%--        </div>--%>
-
-<%--&lt;%&ndash;        <a href="#slide-1">1</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-2">2</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-3">3</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-4">4</a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <a href="#slide-5">5</a>&ndash;%&gt;--%>
-<%--    </div>--%>
-
-
 
     <div class="slide-wrap">
 
@@ -144,27 +120,71 @@
 
 
 
-<%--&lt;%&ndash;    슬라이드리뷰&ndash;%&gt;--%>
-<%--    <div id="slideShow">--%>
-<%--        <ul class="slides">--%>
-<%--            <li><img src="/image/main/trip2.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip3.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip4.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip5.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip6.jpg"></li>--%>
-<%--            <li><img src="/image/main/trip7.jpg"></li>--%>
-<%--        </ul>--%>
-<%--        <p class="controller">--%>
+<%--    게시판--%>
+    <div id="wrap">
+        <section class="tabArea">
+            <ul class="tab">
+                <li class="on">
+                    <a href="#!"><span>공지사항</span></a>
+                </li>
+                <li>
+                    <a href="#!"><span>프로모션</span></a>
+                </li>
+                <li>
+                    <a href="#!"><span>FAQ</span></a>
+                </li>
+<%--                <li>--%>
+<%--                    <a href="#!"><span></span></a>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <a href="#!"><span></span></a>--%>
+<%--                </li>--%>
+            </ul>
+            <div class="tabBox on">
+                <div class="notice">
+                    <ul>
+                        <c:forEach var="noticeList" begin="1" end="5" step="1" items="${noticeList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
+                                    <p>${noticeList.title}</p>
+                                    <p><fmt:formatDate value="${noticeList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <div class="tabBox">
+                <div class="promotion">
+                    <ul>
+                        <c:forEach var="promoList" begin="1" end="5" step="1" items="${promotionList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
+                                    <p>${promoList.title}</p>
+                                    <p><fmt:formatDate value="${promoList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <div class="tabBox">
+                <div class="faq">
+                    <ul>
+                        <c:forEach var="faqList" begin="1" end="5" step="1" items="${faqList}">
+                            <li>
+                                <a href="/board/list${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
+                                    <p>${faqList.title}</p>
+                                    <p><fmt:formatDate value="${faqList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
 
-<%--            <!-- &lang: 왼쪽 방향 화살표--%>
-<%--            &rang: 오른쪽 방향 화살표 -->--%>
-<%--            <span class="prev">&lang;</span>--%>
-<%--            <span class="next">&rang;</span>--%>
-<%--        </p>--%>
-<%--    </div>--%>
-
-
-
+        </section>
+    </div>
 
 
 
@@ -253,11 +273,44 @@
 
 
 
+<%--    <div class="board_list_wrap">--%>
+<%--        <div class="tab_menu_wrap">--%>
+<%--            <ul class="tabmenu">--%>
+<%--                <li class="tabmenu_item active">--%>
+<%--                    <button type="button" data-value="notice">공지사항</button></li>--%>
+<%--                <li class="tabmenu_item">--%>
+<%--                    <button type="button" data-value="faq">자주묻는 질문</button></li>--%>
+<%--                <li class="tabmenu_item">--%>
+<%--                    <button type="button" data-value="promotion">프로모션</button></li>--%>
+<%--            </ul>--%>
+<%--            <button class="more-list">더보기</button>--%>
+<%--        </div>--%>
+
+<%--&lt;%&ndash;        for문&ndash;%&gt;--%>
+<%--        <ul class="content-list">--%>
+<%--            <li>--%>
+<%--                <a href="/board/detail">--%>
+<%--                    <span>트립소다 앱 런칭 알림</span>--%>
+<%--                    <span>2022.01.30.</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+
+<%--            <li>--%>
+<%--                <a href="/board/detail">--%>
+<%--                    <span>트립소다 앱 런칭 알림</span>--%>
+<%--                    <span>2022.01.30.</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
+
+
+
+
+
 </div>
 
 
-<%--<script src="/script/main/vendor/jquery-1.10.2.min.js"></script>--%>
-<%--<script type="text/javascript" src="/script/main/home.js"></script>--%>
 
 
 <script>
@@ -322,3 +375,49 @@
 
 </script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/main/home.js"></script>
+<script>
+$(document).ready(function(){
+    $(".tabArea .tab li a").on("click", function(){
+
+        // 해당 요소를 클릭하는 내 자신의 index 번호를 가져온다. [0], [1]
+        const num = $(".tabArea .tab li a").index($(this));
+        // 기존에 적용되어 있는 on class 삭제
+        $(".tabArea .tab li").removeClass("on");
+        $(".tabArea .tabBox").removeClass("on");
+
+        // 다음 요소 클릭시 on class 추가
+        $('.tabArea .tab li:eq(' + num + ')').addClass("on");
+        $('.tabArea .tabBox:eq(' + num + ')').addClass("on");
+    });
+});
+
+
+
+
+
+
+
+
+
+
+(function($) {
+
+    var container = $('.container11');
+    var location = $('#location');
+    var section = $('.section');
+
+    section.on('mouseover', function(){
+        location.addClass('open-menu');
+    });
+    section.on('mouseout', function(){
+        location.removeClass('open-menu');
+    });
+    location.on('mouseover', function(){
+        location.addClass('open-menu');
+    });
+    location.on('mouseout', function(){
+        location.removeClass('open-menu');
+    });
+
+})(jQuery);
+</script>

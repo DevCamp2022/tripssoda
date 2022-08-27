@@ -313,12 +313,15 @@ public class AdminController {
 //                List<PartnerDto> list = adminUserService.searchSelectPartner(sc);
 //            List<PartnerDto> partnerList = adminUserService.selectOnPartner(sc);
 //            List<PartnerDto> applicantList = adminUserService.selectOnApplicant(sc);
-            List<AdminProductDto> approvedList = adminProductService.selectProductByApprovalStatus("1");
+
             List<AdminProductDto> unapprovedList = adminProductService.selectProductByApprovalStatus("0");
+            List<AdminProductDto> approvedList = adminProductService.selectProductByApprovalStatus("1");
+            List<AdminProductDto> canceledList = adminProductService.selectProductByApprovalStatus("2");
 
 //                m.addAttribute("list", list);
             m.addAttribute("approvedList", approvedList);
             m.addAttribute("unapprovedList", unapprovedList);
+            m.addAttribute("canceledList", canceledList);
 
             m.addAttribute("ph", pageHandler);
 
@@ -351,7 +354,7 @@ public class AdminController {
     }
 
     @GetMapping("/productList/info")
-    public String getProductDetail(Integer productId, Model model) {
+    public String getProductDetail(Integer productId, SearchCondition sc, Model model) {
         System.out.println(productId);
         GetDetailProductDto details = productService.getProductDetailById(productId);
         System.out.println("details = " + details);

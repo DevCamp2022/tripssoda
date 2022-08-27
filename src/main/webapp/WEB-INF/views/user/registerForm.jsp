@@ -26,7 +26,7 @@
             <div class="msg"><form:errors path="birthday"/></div>
             <p class="row-title">이메일</p>
             <div class="email-wrap">
-                <input type="email" class="input-email" name="email" placeholder="이메일 주소 입력">
+                <input type="email" class="input-email" name="email" value="${param.email}" ${param.email_check == true ? "readonly" : ""} placeholder="이메일 주소 입력">
                 <button class="send-email-verf-btn" type="button">인증번호 전송</button>
                 <p class="email-check check-text"></p>
                 <input type="text" class="verf-num" placeholder="인증번호 입력">
@@ -52,8 +52,8 @@
             <p class="row-title">성별</p>
             <div class="gender-wrap">
                 <select name="gender" class="select-gender">
-                    <option value="M">남자</option>
-                    <option value="F">여자</option>
+                    <option value="M" ${param.gender == "male" ? "selected" : ""}>남자</option>
+                    <option value="F" ${param.gender == "female" ? "selected" : ""}>여자</option>
                 </select>
             </div>
             <p class="row-title">생일</p>
@@ -227,10 +227,10 @@
             alert("이메일을 입력해주세요");
             return;
         }
-        if(!emailResult) {
-            alert("올바른 이메일을 입력해주세요")
-            return;
-        }
+        // if(!emailResult) {
+        //     alert("올바른 이메일을 입력해주세요")
+        //     return;
+        // }
 
        $.ajax({
             type:"POST",
@@ -291,17 +291,17 @@
     })
 
     // 이메일 유효성 검사
-    $("input[name=email]").keyup(function () {
-        emailResult = emailJ.test($('input[name=email]').val());
-
-        // 이메일 형식에 맞지 않으면 메세지 표시
-        if(!emailResult) {
-            $('.email-check').text('올바른 이메일을 입력해주세요.');
-            $('.email-check').css('color', 'red');
-        } else {
-            $('.email-check').text('');
-        }
-    });
+    // $("input[name=email]").keyup(function () {
+    //     emailResult = emailJ.test($('input[name=email]').val());
+    //
+    //     // 이메일 형식에 맞지 않으면 메세지 표시
+    //     if(!emailResult) {
+    //         $('.email-check').text('올바른 이메일을 입력해주세요.');
+    //         $('.email-check').css('color', 'red');
+    //     } else {
+    //         $('.email-check').text('');
+    //     }
+    // });
 
     // 비밀번호 유효성 검사
     $("input[name=pwd]").keyup(function() {

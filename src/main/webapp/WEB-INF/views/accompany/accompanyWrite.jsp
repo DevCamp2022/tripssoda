@@ -74,8 +74,9 @@
             </select>
         </div>
         <div class="date-box">
-            <input name="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
-            <input name="endAt" type="date" value="<fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>">
+            <div class="date-text">날짜 선택</div>
+            <input name="startAt"class="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
+            <input name="endAt" class="endAt" type="date" value="<fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>">
         </div>
         <div class="title-box">
             <c:if test="${mode ne 'new'}">

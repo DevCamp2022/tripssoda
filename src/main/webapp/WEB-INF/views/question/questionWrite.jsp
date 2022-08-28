@@ -21,7 +21,7 @@
 </div>
 <div class="main-group">
         <div class="select-region-box">
-    <select id="area1" name="area1" onChange="cat1_change(this.value,area2)" required>
+    <select id="area1" name="area1" class="area1" onChange="cat1_change(this.value,area2)" required>
         <option disabled>-선택-</option>
         <option value='1' selected>동아시아</option>
         <option value='2'>동남아시아</option>
@@ -32,7 +32,7 @@
         <option value='7'>아프리카</option>
 
     </select>
-    <select id="area2" name="area2" onChange="cat2_change(this.value,area3)" required>
+    <select id="area2" name="area2" class="area2" onChange="cat2_change(this.value,area3)" required>
         <option disabled="disabled">-선택-</option>
         <option value='8' selected>한국</option>
         <option value='9'>일본</option>
@@ -42,7 +42,7 @@
         <option value='13'>중국</option>
         <option value='14'>몽골</option>
     </select>
-    <select id="area3" name="area3" required>
+    <select id="area3" name="area3" class="area3" required>
         <option disabled>-선택-</option>
         <option value='51' selected>서울</option>
         <option value='52'>강원도</option>

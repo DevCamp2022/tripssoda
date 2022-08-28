@@ -15,6 +15,12 @@
 </head>
 <body>
 <input type="hidden" name="msg" value="${msg}">
+<c:if test="${mode ne 'waiting'}">
+    <form name="frm" method="get" action="<c:url value='/accompany/list'/>">
+</c:if>
+<c:if test="${mode eq 'waiting'}">
+    <form name="frm" method="get" action="<c:url value='/accompany/waiting'/>">
+</c:if>
 <div class="main-img">
 
 </div>
@@ -29,9 +35,10 @@
             정렬
         </div>
         <div class="sort-button">
-            <select class="search-option" name="option">
-                <option value="" >최신순</option>
-                <option value="" >조회순</option>
+            <select class="search-option" name="option" onchange="this.form.submit()">
+                <option value="none" disabled selected>정렬선택</option>
+                <option value="time">최신순</option>
+                <option value="view">조회순</option>
             </select>
         </div>
         <c:if test="${mode ne 'waiting'}">
@@ -120,6 +127,7 @@
         </div>
     </c:if>
 </div>
+</form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/accompany/accompany_list.js"></script>
 </body>
 </html>

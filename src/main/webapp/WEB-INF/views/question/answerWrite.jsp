@@ -81,7 +81,7 @@
                 headers : { "content-type": "application/json"}, // 요청 헤더
                 data : JSON.stringify({questionId:questionId, content:content}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success : function(result){
-                    alert(result);
+                    // alert(result);
                     location.href="<c:url value="/question/read"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}";
                 },
                 error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
@@ -104,7 +104,8 @@
                 headers : { "content-type": "application/json"}, // 요청 헤더
                 data : JSON.stringify({id:id, content:content}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success : function(result){
-                    alert(result);
+                    // alert(result);
+                    alert('성공적으로 수정되었습니다.')
                     location.href="<c:url value="/question/read"/>?id=${questionDto.id}&page=${page}&pageSize=${pageSize}";
                 },
                 error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수

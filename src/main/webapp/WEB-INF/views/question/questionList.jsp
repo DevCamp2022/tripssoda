@@ -18,6 +18,12 @@
     if(msg=="DEL_OK")    alert("성공적으로 삭제되었습니다.");
     if(msg=="MOD_OK")    alert("성공적으로 수정되었습니다.");
 </script>
+<c:if test="${mode ne 'waiting'}">
+    <form method="get" action="<c:url value='/question/list'/>">
+</c:if>
+<c:if test="${mode eq 'waiting'}">
+    <form method="get" action="<c:url value='/question/waiting'/>">
+</c:if>
 <div class="main-img">
 
 </div>
@@ -32,9 +38,10 @@
             정렬
         </div>
         <div class="sort-button">
-            <select class="search-option" name="option">
-                <option value="" >등록순</option>
-                <option value="" >답변순</option>
+            <select class="search-option" name="option" onchange="this.form.submit()">
+                <option value="none" disabled selected>정렬선택</option>
+                <option value="time" >등록순</option>
+                <option value="answer" >답변순</option>
             </select>
         </div>
         <c:if test="${mode ne 'waiting'}">
@@ -137,5 +144,6 @@
         </div>
     </c:if>
 </div>
+</form>
 </body>
 </html>

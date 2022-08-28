@@ -25,18 +25,18 @@ a {
 .content-group {
     flex: 2.75;
     width: 800px;
-    min-height: 700px;
+    min-height: 900px;
     /* margin: auto; */
 }
 /* 제목 나오는 영역 */
 .title-line {
     display: flex;
     width: 800px;
-    height: 36px;
+    /*height: 36px;*/
     font-weight: 500;
     font-size: 24px;
     line-height: 1.5em;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 .question-icon {
     width: 36px;
@@ -52,6 +52,7 @@ a {
 .title-text {
     word-break:break-all;
     width: 800px;
+    margin-bottom: 20px;
 }
 .region-box {
     width: 800px;
@@ -241,6 +242,11 @@ a {
     font-weight: bold;
     line-height: 18px;
 }
+.profile-text2 {
+    color: #9a9a9a;
+    font-weight: bold;
+    line-height: 18px;
+}
 /* 답변하기 버튼 */
 .apply-btn {
     width: 280px;
@@ -360,6 +366,9 @@ a {
     padding-top: 5px;
     color: #9a9a9a;
     font-size: 13px;
+}
+.answer-select {
+    margin-left: 20px;
 }
 .comment {
     padding-top: 15px;

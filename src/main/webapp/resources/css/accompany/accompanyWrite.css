@@ -5,7 +5,9 @@ body {
     font-size: 14px;
     background-color: #fff;
 }
-
+textarea:focus {
+    outline: 1px solid #00ce7c;
+}
 /* '여행친구찾기' 사진 영역 */
 .main-img {
     width: 1200px;

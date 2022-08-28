@@ -134,6 +134,10 @@
                 alert("종료일을 선택해주세요.")
                 return false;
             }
+            if($("#start-at").val() > $("#end-at").val()) {
+                alert("시작일을 종료일 이전으로 선택해주세요.")
+                return false;
+            }
 
             //select-box 유효성 검사
             if($("#area2").val()=="") {

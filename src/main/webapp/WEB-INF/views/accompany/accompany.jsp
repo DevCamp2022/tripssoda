@@ -105,24 +105,38 @@
             <div class="profile-icon">
             </div>
             <div class="profile-text">
-<%--                프로필 사진을 클릭해보세요!--%>
                 동행에 참여 해보세요!
             </div>
         </div>
         <c:if test="${sessionScope.id ne accompanyDto.userId}">
             <c:if test="${sessionScope.id ne null}">
-                <a class="apply-text" href="https://${accompanyDto.chatUrl}">
-                <div class="apply-btn">
-                    오픈채팅방입장
-                </div>
-                </a>
+                <c:if test="${accompanyDto.status eq 1}">
+                    <div class="apply-btn2">
+                        동행 신청이 마감되었습니다.
+                    </div>
+                </c:if>
+                <c:if test="${accompanyDto.status eq 0}">
+                    <a class="apply-text" href="https://${accompanyDto.chatUrl}">
+                    <div class="apply-btn">
+                        오픈채팅방입장
+                    </div>
+                    </a>
+                </c:if>
             </c:if>
             <c:if test="${sessionScope.id eq null}">
+                <c:if test="${accompanyDto.status eq 0}">
                 <a class="apply-text" href="<c:url value='/login'/>">
                     <div class="apply-btn">
                         오픈채팅방입장
                     </div>
                 </a>
+                </c:if>
+
+                <c:if test="${accompanyDto.status eq 1}">
+                    <div class="apply-btn2">
+                        동행 신청이 마감되었습니다.
+                    </div>
+                </c:if>
             </c:if>
         </c:if>
     </div>

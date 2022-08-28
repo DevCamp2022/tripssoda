@@ -250,16 +250,16 @@ public class AccompanyController {
         try {
             accompanyDto = accompanyService.read(id);
 
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
+            Date today = new Date();
+            System.out.println("today = " + today.getTime());
+            if(accompanyDto.getEndAt().getTime()<=today.getTime()) {
+                accompanyDto.setStatus(1);
+            }
+
             //1. endAt을 불러온다.
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             //2. 오늘 날짜를 구한다.
-//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//            Date now = new Date();
-////            String nowTime = df.format(now);
-////            System.out.println("nowTime = " + nowTime);
-//            long milliSeconds = now.getTime();
-//            String strLong = Long.toString(milliSeconds);
-//            System.out.println("milliSeconds = " + milliSeconds);
 
             //3. 둘 다 milliseconds로 변환 후 오늘 날짜 - endAt<=0이면
 

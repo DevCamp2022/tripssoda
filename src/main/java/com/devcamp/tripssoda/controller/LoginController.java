@@ -298,6 +298,7 @@ public class LoginController {
         if(userDto!=null){
             session.setAttribute("email", userDto.getEmail());
             session.setAttribute("id", userDto.getId());
+            session.setAttribute("userCode", userDto.getUserCode());
             return "redirect:/";
         }else{
             rattr.addAttribute("email", email);

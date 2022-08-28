@@ -26,10 +26,10 @@
             <div class="msg"><form:errors path="birthday"/></div>
             <p class="row-title">이메일</p>
             <div class="email-wrap">
-                <input type="email" class="input-email" name="email" placeholder="이메일 주소 입력">
+                <input type="email" class="input-email" name="email" value="${param.email}" ${param.email_check == true ? "readonly" : ""} placeholder="이메일 주소 입력" maxlength="20">
                 <button class="send-email-verf-btn" type="button">인증번호 전송</button>
                 <p class="email-check check-text"></p>
-                <input type="text" class="verf-num" placeholder="인증번호 입력">
+                <input type="text" class="verf-num" placeholder="인증번호 입력" ${param.email_check == true ? "readonly" : ""} value="${param.email_check == true ? "이메일 인증이 완료되었습니다." : "" }" maxlength="18">
                 <button class="confirm-verf-num" type="button">인증번호 확인</button>
             </div>
             <p class="row-title">비밀번호</p>
@@ -52,8 +52,8 @@
             <p class="row-title">성별</p>
             <div class="gender-wrap">
                 <select name="gender" class="select-gender">
-                    <option value="M">남자</option>
-                    <option value="F">여자</option>
+                    <option value="M" ${param.gender == "male" ? "selected" : ""}>남자</option>
+                    <option value="F" ${param.gender == "female" ? "selected" : ""}>여자</option>
                 </select>
             </div>
             <p class="row-title">생일</p>
@@ -84,6 +84,7 @@
                     <a class="third-terms-link terms-link" target="_blank" href="<c:url value='/terms/marketing'/>">약관보기</a>
                 </li>
             </div>
+            <input type="hidden" class="email_check" name="emailCheck" value="${param.email_check}">
             <button type="submit" class="register-btn">회원가입</button>
         </form:form>
 
@@ -113,6 +114,14 @@
     let emailSendCheck = false;
     // 이메일 인증 여부를 저장할 변수 선언
     let emailVerfResult = false;
+
+    // 처음 화면에 진입했을 때 이메일이 있으면(카카오 회원가입의 경우) 이메일 인증을 완료시킴
+    $(document).ready(function() {
+        let email = $("input[name=email]").val();
+        if(email != null && email != "") {
+            emailVerfResult = true;
+        }
+    });
 
     // form 전송여부를 정하는 onsubmit 함수
     function formCheck() {
@@ -227,10 +236,10 @@
             alert("이메일을 입력해주세요");
             return;
         }
-        if(!emailResult) {
-            alert("올바른 이메일을 입력해주세요")
-            return;
-        }
+        // if(!emailResult) {
+        //     alert("올바른 이메일을 입력해주세요")
+        //     return;
+        // }
 
        $.ajax({
             type:"POST",
@@ -291,17 +300,17 @@
     })
 
     // 이메일 유효성 검사
-    $("input[name=email]").keyup(function () {
-        emailResult = emailJ.test($('input[name=email]').val());
-
-        // 이메일 형식에 맞지 않으면 메세지 표시
-        if(!emailResult) {
-            $('.email-check').text('올바른 이메일을 입력해주세요.');
-            $('.email-check').css('color', 'red');
-        } else {
-            $('.email-check').text('');
-        }
-    });
+    // $("input[name=email]").keyup(function () {
+    //     emailResult = emailJ.test($('input[name=email]').val());
+    //
+    //     // 이메일 형식에 맞지 않으면 메세지 표시
+    //     if(!emailResult) {
+    //         $('.email-check').text('올바른 이메일을 입력해주세요.');
+    //         $('.email-check').css('color', 'red');
+    //     } else {
+    //         $('.email-check').text('');
+    //     }
+    // });
 
     // 비밀번호 유효성 검사
     $("input[name=pwd]").keyup(function() {

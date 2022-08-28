@@ -15,7 +15,7 @@
 
 
 <div class="combined-wrap">
-    <div class="combined-wrap-tit"><h1 class="writing-header">Inquiry Board</h1></div>
+    <div class="combined-wrap-tit"><h1 class="writing-header">${mode == "reply" ? "Write Reply" : "Inquiry Board"}</h1></div>
     <form id="form" class="frm" action="" method="post">
 
         <table class="combined-list-tb">
@@ -29,24 +29,25 @@
             </tr>
 
 
+            <c:if test="${mode == null}">
+                <tr>
+                    <th class="tit" colspan="10">제목</th>
+                </tr>
+                <tr>
+                    <td class="con contit" colspan="10">
+        <%--                ${dto.title}--%>
+                        <input name="title" type="text" value="${inquiryDto.title}" placeholder="  제목을 입력해 주세요." ${mode == "reply" ? "" : "readonly"}>
 
-            <tr>
-                <th class="tit" colspan="10">제목</th>
-            </tr>
-            <tr>
-                <td class="con contit" colspan="10">
-    <%--                ${dto.title}--%>
-                        <input name="title" type="text" value="${combinedBoardDto.title}" placeholder="  제목을 입력해 주세요." readonly>${combinedBoardDto.title}
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <th class="tit" colspan="10">내용</th>
             </tr>
             <tr>
                 <td class="con concon" colspan="10">
     <%--                ${dto.content}--%>
-                        <textarea name="content" id="unitContent" rows="20px" placeholder=" 내용을 입력해 주세요." >${combinedBoardDto.content}</textarea>
+                        <textarea name="content" id="unitContent" rows="20px" placeholder=" 내용을 입력해 주세요." ${mode == "reply" ? "" : "readonly"}>${inquiryDto.content}</textarea>
                 </td>
             </tr>
 <%--            <tr>--%>
@@ -68,12 +69,17 @@
 <%--                <button type="button" id="resetBtn"> 취소</button>--%>
 
 <%--            </c:if>--%>
-
+        <input type="hidden" name="id" value="${param.id}">
     </form>
 <%--    <c:if test="${mode eq 'new'}">--%>
-        <button type="button" id="answerBtn">답변</button>
+        <button type="button" id="answerBtn">${mode == "reply" ? "답변 작성" : "답변"}</button>
         <button type="button" id="resetBtn"> 취소</button>
+        <input type="hidden" name="mode" value="${mode}">
 
+    <c:if test="${inquiryDto.ansUserId != null}">
+        <div class="combined-wrap-tit"><h1 class="writing-header">Reply</h1></div>
+        <textarea name="content" id="unitContent2" rows="20px" placeholder=" 내용을 입력해 주세요." readonly>${inquiryDto.ansContent}</textarea>
+    </c:if>
 <%--    </c:if>--%>
 <%--    <table>--%>
 <%--        <c:if test="${mode ne 'new'}">--%>
@@ -96,6 +102,10 @@
 
 <script>
     $(document).ready(function(){
+        CKEDITOR.replace('unitContent2', // 해당 name으로 된 textarea에 적용
+            {filebrowserUploadUrl:'/ckeditor/fileUploader',
+                width:'100%'
+            });
 
         let formCheck = function() {
             let form = document.getElementById("form");
@@ -184,6 +194,20 @@
             }
         });
 
+
+        $("#answerBtn").on("click", function () {
+            let mode = $("input[name=mode]").val();
+
+            if(mode == "reply") {
+                let form = $("#form");
+                form.attr("action", "<c:url value='/admin/inquiry/reply${searchCondition.queryString}'/>");
+                form.attr("method", "post");
+                // if(formCheck())
+                form.submit();
+            } else {
+                location.href="/admin/inquiry/reply${searchCondition.queryString}&id=${inquiryDto.id}";
+            }
+        });
         <%--$('#conDelBtn').on('click', function(){--%>
         <%--    location.href="<c:url value='/admin/remove${searchCondition.queryString}'/>";--%>
         <%--})--%>

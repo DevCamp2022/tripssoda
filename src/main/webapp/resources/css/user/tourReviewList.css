@@ -146,6 +146,9 @@ body {
 .td-review-content {
     float: left;
     width: 35%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .td-review-rating {

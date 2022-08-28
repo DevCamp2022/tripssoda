@@ -53,7 +53,7 @@ public class RegisterController {
 
     // 이메일 회원가입 form 전송
     @PostMapping("/register/write")
-    public String writeUserInfo(UserDto userDto, BindingResult bindingResult, HttpServletRequest request, Model model, RedirectAttributes rattr) throws Exception {
+    public String writeUserInfo(UserDto userDto, BindingResult bindingResult, Boolean emailCheck, HttpServletRequest request, Model model, RedirectAttributes rattr) throws Exception {
         // 수동으로 유효성 검사
         UserValidator userValidator = new UserValidator();
         userValidator.validate(userDto, bindingResult);
@@ -83,8 +83,10 @@ public class RegisterController {
             HttpSession session = request.getSession();
             session.setAttribute("userDto", userDto);
 
-            // 이메일 인증정보를 삭제
-            emailVerificationService.deleteEmailVerification(userDto.getEmail());
+            // 카카오 회원가입이 아닐 때는 이메일 인증정보를 삭제(카카오는 이메일 인증이 없으므로 삭제하지 않아도 된다)
+            if(emailCheck == null) {
+                emailVerificationService.deleteEmailVerification(userDto.getEmail());
+            }
 
             // 여행관심사 목록을 model에 저장(다음 페이지인 관심사 선택 페이지에서 사용)
             List<TourInterestCodeDto> tourInterestCodeDtoList = tourInterestCodeService.selectAllTourInterestCode();

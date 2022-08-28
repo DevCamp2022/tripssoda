@@ -33,4 +33,6 @@ public interface AccompanyService {
     List<AccompanyDto> waitingGetPage(Map map) throws Exception;
 
     int waitingGetCount() throws Exception;
+
+    List<AccompanyDto> selectAccompanyForMain(Map map);
 }

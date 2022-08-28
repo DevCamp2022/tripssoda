@@ -1,14 +1,10 @@
 package com.devcamp.tripssoda.controller;
 
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
-import com.devcamp.tripssoda.dto.CombinedBoardDto;
-import com.devcamp.tripssoda.dto.PageHandler;
-import com.devcamp.tripssoda.dto.ProductDto;
-import com.devcamp.tripssoda.dto.SearchCondition;
+import com.devcamp.tripssoda.dto.*;
+import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.AdminBoardService;
 import com.devcamp.tripssoda.service.ProductService;
 import org.slf4j.Logger;
@@ -27,11 +23,13 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 	private final ProductService productService;
 	private final AdminBoardService adminBoardService;
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private final AccompanyService accompanyService;
 
-	public HomeController(ProductService productService, AdminBoardService adminBoardService){
+
+	public HomeController(ProductService productService, AdminBoardService adminBoardService, AccompanyService accompanyService){
 		this.productService = productService;
 		this.adminBoardService = adminBoardService;
+		this.accompanyService = accompanyService;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -45,16 +43,24 @@ public class HomeController {
 			m.addAttribute("totalCnt", totalCnt);
 
 			PageHandler pageHandler = new PageHandler(totalCnt, sc);
+			PageHandlerOld pageHandlerOld = new PageHandlerOld(totalCnt, sc.getPage(), sc.getPageSize());
 
+			Map map = new HashMap();
+			map.put("offset", (sc.getPage()-1)*sc.getPageSize());
+			map.put("pageSize", sc.getPageSize());
+
+			List<AccompanyDto> accompanyList = accompanyService.selectAccompanyForMain(map);
+			for(AccompanyDto a : accompanyList){
+				System.out.println("a.toString() = " + a.toString());
+			}
 			List<CombinedBoardDto> noticeList = adminBoardService.getSearchResultPageForUser(sc, "M001");
 			List<CombinedBoardDto> promotionList = adminBoardService.getSearchResultPageForUser(sc, "M002");
 			List<CombinedBoardDto> faqList = adminBoardService.getSearchResultPageForUser(sc, "M003");
+			m.addAttribute("accompanyList", accompanyList);
 			m.addAttribute("noticeList", noticeList);
 			m.addAttribute("promotionList", promotionList);
 			m.addAttribute("faqList", faqList);
 			m.addAttribute("ph", pageHandler);
-
-//			System.out.println("noticeList.toString() = " + noticeList.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();

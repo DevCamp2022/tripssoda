@@ -33,7 +33,12 @@
             </div>
             <div class="region-box">
                 <div class="region-line">
-
+                    <div class="region-text">
+                        지역
+                    </div>
+                    <div class="region-data">
+                        ${accompanyDto.cityName}
+                    </div>
                 </div>
                 <div class="date-line">
 

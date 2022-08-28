@@ -73,10 +73,11 @@ public class AccompanyController {
 
     @PostMapping("/modify")
     public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
-                         Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
+                         Integer page, Integer pageSize, String area3, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
 
+        accompanyDto.setRegionCode(area3);
         accompanyDto.setUserId(writer);
         //유효성 검사를 추가 해야 한다.
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
@@ -142,20 +143,18 @@ public class AccompanyController {
     }
 
     @PostMapping("/write")
-    public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
+    public String write(AccompanyDto accompanyDto, BindingResult result, String area3, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        Integer writer = 43;
         String email = (String) session.getAttribute("email");
         UserDto userDto = userService.selectUserByEmail(email);
         String nickname = userDto.getNickname();
         accompanyDto.setNickname(nickname);
+        accompanyDto.setRegionCode(area3);
 
         String profileImg = userDto.getProfileImg();
         System.out.println("profileImg = " + profileImg);
         accompanyDto.setProfileImg(profileImg);
-
-//        Integer writer = 43;
         accompanyDto.setUserId(writer);
 
         //유효성 검사를 추가 해야 한다.

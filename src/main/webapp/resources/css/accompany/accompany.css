@@ -60,7 +60,15 @@ a {
     font-size: 16px;
     font-weight: 400;
     box-sizing: border-box;
-
+}
+.region-line {
+    display: flex;
+    width: 738px;
+    height: 19px;
+}
+.region-text {
+    color: #6a6a6a;
+    margin-right: 10px;
 }
 /* 내용(줄바꿈할 때 <p>태그가 붙게 해야 한다) */
 .content-box {

@@ -134,13 +134,10 @@ public class QuestionController {
     }
 
     @PostMapping("/modify")
-    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
-        System.out.println("result = " + result);
-        //userId는 인조식별자
+    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, String area3, Model m, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        int writer = 43;
-        System.out.println("questionDto = " + questionDto);
         questionDto.setUserId(writer);
+        questionDto.setRegionCode(area3);
 
 
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.

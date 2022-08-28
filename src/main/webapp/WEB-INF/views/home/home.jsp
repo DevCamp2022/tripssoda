@@ -67,20 +67,39 @@
                             <!-- <img src="${accompanyDto.thumbnail}" alt="thumbnail picture"> -->
                             <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="thumbnail picture">
                         </div>
-                        <div class="itemInfo-wrapper">
-                            <div class="accom-tit">
-                                <div>
-                                    <c:if test="${accompanyDto.status eq 0}">
-                                        [모집중]
-                                    </c:if>
-                                    <c:if test="${accompanyDto.status eq 1}">
-                                        [지난여행]
-                                    </c:if>
-                                </div>
-                                <div class="main-tourTitle">
+                        <div class="itemInfoAccom-wrapper">
+
+                                <div class="main-accomTitle">
+
+                                    <div>
+                                        <c:if test="${accompanyDto.status eq 0}">
+                                            [모집중]
+                                        </c:if>
+                                        <c:if test="${accompanyDto.status eq 1}">
+                                            [지난여행]
+                                        </c:if>
+                                    </div>
                                     <h4>${accompanyDto.title}</h4>
+
+
+                                    <div class="list-content-line conn">
+                                            ${accompanyDto.content}
+                                    </div>
+                                    <div class="list-nickname-line">
+                                        <div class="profile-img">
+                                            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">
+                                        </div>
+                                        <div class="nickname">
+                                                ${accompanyDto.nickname}
+                                        </div>
+                                        <div class="view-cnt-line">
+                                            <div class="view-cnt-icon"></div>
+                                            <div class="view-cnt">
+                                                    ${accompanyDto.viewCnt}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
 
                             <!--해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)-->
 <%--                            <div class="main-tourDate">--%>

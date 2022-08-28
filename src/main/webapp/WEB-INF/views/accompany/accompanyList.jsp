@@ -65,7 +65,26 @@
                             ${accompanyDto.title}
                         </div>
                     </div>
+                    <div class="list-content-line">
+                        ${accompanyDto.content}
+                    </div>
+                    <div class="list-nickname-line">
+                        <div class="profile-img">
+                            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">
+                        </div>
+                        <div class="nickname">
+                            ${accompanyDto.nickname}
+                        </div>
+                        <div class="view-cnt-line">
+                            <div class="view-cnt-icon">
 
+                            </div>
+                            <div class="view-cnt">
+                                    ${accompanyDto.viewCnt}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </a>
         </c:forEach>

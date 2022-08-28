@@ -6,18 +6,19 @@ import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,10 +28,11 @@ import java.util.Map;
 @Controller
 @RequestMapping("/accompany")
 public class AccompanyController {
-//    @InitBinder
-//    public void hashtag(WebDataBinder binder) {
-//        binder.registerCustomEditor(String[].class, "hashtag", new StringArrayPropertyEditor(" "));
-//    }
+    @InitBinder
+    public void hashtag(WebDataBinder binder) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
+    }
 
     AccompanyService accompanyService;
     UserService userService;
@@ -143,7 +145,7 @@ public class AccompanyController {
     }
 
     @PostMapping("/write")
-    public String write(AccompanyDto accompanyDto, BindingResult result, String area3, Model m,
+    public String write(AccompanyDto accompanyDto, BindingResult result, @Valid Date startAt, @Valid Date endAt, String area3, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
         String email = (String) session.getAttribute("email");
@@ -151,6 +153,8 @@ public class AccompanyController {
         String nickname = userDto.getNickname();
         accompanyDto.setNickname(nickname);
         accompanyDto.setRegionCode(area3);
+        accompanyDto.setStartAt(startAt);
+        accompanyDto.setEndAt(endAt);
 
         String profileImg = userDto.getProfileImg();
         System.out.println("profileImg = " + profileImg);

@@ -72,6 +72,10 @@
                 <option value='59'>전라도</option>
             </select>
         </div>
+        <div class="date-box">
+            <input name="startAt" type="date">
+            <input name="endAt" type="date">
+        </div>
         <div class="title-box">
             <c:if test="${mode ne 'new'}">
                 <div>

@@ -41,7 +41,14 @@
                     </div>
                 </div>
                 <div class="date-line">
-
+                    <img class="calendar-icon" src="<c:url value='/image/accompany/calendar-icon.svg'/>">
+                    <div class="start-date">
+                        <fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>
+                    </div>
+                    <p>&nbsp~&nbsp</p>
+                    <div class="end-date">
+                        <fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>
+                    </div>
                 </div>
             </div>
             <div class="content-box">

@@ -70,6 +70,19 @@ a {
     color: #6a6a6a;
     margin-right: 10px;
 }
+
+.date-line {
+    display: flex;
+    width: 300px;
+    height: 19px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+.calendar-icon {
+    margin-right: 10px;
+    margin-bottom: 2px;
+}
+
 /* 내용(줄바꿈할 때 <p>태그가 붙게 해야 한다) */
 .content-box {
     width: 800px;

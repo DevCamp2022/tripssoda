@@ -161,6 +161,9 @@
 					<c:if test="${sessionScope.userCode eq 'U003'}">
 						<li class="log"><a href="/admin/home" class="">관리자</a></li>
 					</c:if>
+					<c:if test="${sessionScope.userCode eq 'U002'}">
+						<li class="log"><a href="/partner/info" class="">파트너</a></li>
+					</c:if>
 
 
 					<c:if test="${loginId!=null}">

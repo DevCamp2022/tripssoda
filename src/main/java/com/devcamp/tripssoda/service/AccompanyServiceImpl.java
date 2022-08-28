@@ -151,4 +151,9 @@ public class AccompanyServiceImpl implements AccompanyService {
         return accompanyMapper.waitingCount();
     }
 
+    @Override
+    public List<AccompanyDto> selectAccompanyForMain(Map map) {
+        return accompanyMapper.selectAccompanyForMain(map);
+    }
+
 }

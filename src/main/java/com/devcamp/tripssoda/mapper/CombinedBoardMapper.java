@@ -29,14 +29,13 @@ public interface CombinedBoardMapper {
 
     int count() throws Exception;
 
-//    int searchResultCnt(SearchCondition sc) throws Exception;
     int searchResultCnt(Map<String, Object> map) throws Exception;
 
-//    List<CombinedBoardDto> searchSelectPage(SearchCondition sc) throws Exception;
-//    List<CombinedBoardDto> searchSelectPage(SearchCondition sc, String menuCode) throws Exception;
     List<CombinedBoardDto> searchSelectPage(Map map) throws Exception;
 
     public int getStatus(Integer id);
+
     int searchResultCntForUser(Map<String, Object> map) throws Exception;
-    public List<CombinedBoardDto> searchSelectPageForUser(Map map) throws Exception;
+
+    public List<CombinedBoardDto> searchSelectPageForUser(Map<String, Object> map) throws Exception;
 }

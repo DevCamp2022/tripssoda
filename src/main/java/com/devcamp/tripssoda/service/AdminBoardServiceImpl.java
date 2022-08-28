@@ -131,7 +131,7 @@ public class AdminBoardServiceImpl implements AdminBoardService{
 
 
     public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception {
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap();
         map.put("sc",sc);
         map.put("menuCode", menuCode);
 

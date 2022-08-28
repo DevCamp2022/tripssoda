@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Title</title>
@@ -73,8 +74,8 @@
             </select>
         </div>
         <div class="date-box">
-            <input name="startAt" type="date">
-            <input name="endAt" type="date">
+            <input name="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
+            <input name="endAt" type="date" value="<fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>">
         </div>
         <div class="title-box">
             <c:if test="${mode ne 'new'}">

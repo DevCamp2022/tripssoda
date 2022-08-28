@@ -75,12 +75,15 @@ public class AccompanyController {
 
     @PostMapping("/modify")
     public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
-                         Integer page, Integer pageSize, String area3, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
+                         Integer page, Integer pageSize, Date startAt, Date endAt, String area3, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
 
         accompanyDto.setRegionCode(area3);
         accompanyDto.setUserId(writer);
+        accompanyDto.setStartAt(startAt);
+        accompanyDto.setEndAt(endAt);
+
         //유효성 검사를 추가 해야 한다.
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
@@ -129,12 +132,14 @@ public class AccompanyController {
     }
 
     @GetMapping("/modify")
-    public String modify(Integer id, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String modify(Integer id, Integer page, Date startAt, Date endAt, Integer pageSize, Model m, HttpServletRequest request) {
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURL();
         AccompanyDto accompanyDto = null;
         try {
             accompanyDto = accompanyService.read(id);
+            System.out.println("accompanyDto.getStartAt() = " + accompanyDto.getStartAt());
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
             m.addAttribute(accompanyDto);

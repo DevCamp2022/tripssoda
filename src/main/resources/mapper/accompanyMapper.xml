@@ -62,7 +62,7 @@
     <!--    title = #{title}, content = #{content}, member_cnt = #{memberCnt}, hashtag = #{hashtag}, updated_by = #{userId}, updated_at = now()-->
     <update id="update" parameterType="AccompanyDto">
         UPDATE accompany
-        SET title = #{title}, content = #{content}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}, thumbnail = #{thumbnail}, region_code = #{regionCode}
+        SET title = #{title}, content = #{content}, start_at = #{startAt}, end_at = #{endAt}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}, thumbnail = #{thumbnail}, region_code = #{regionCode}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
     <delete id="delete" parameterType="map">

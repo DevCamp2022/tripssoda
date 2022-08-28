@@ -40,7 +40,7 @@ body {
     margin-bottom: 20px;
 }
 .reservation-wrap {
-    width: 100%;
+    width: 95%;
     display: flex;
     justify-content: center;
     border: 1px solid #e9e9e9;
@@ -84,6 +84,26 @@ body {
     width: 100px;
     height: 40px;
 }
+.canceled {
+    background-color: #00ce7c;
+    border: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
+.waiting-cancel {
+    background-color: #00ce7c;
+    border: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+}
 
 .payment-wrap {
     width: 50%;
@@ -94,6 +114,7 @@ body {
     height: 50px;
     color: gray;
 }
+
 
 li > span:nth-child(2) {
     float: right;
@@ -121,11 +142,20 @@ li > span:nth-child(2) {
 
 .used-point-wrap {
     background-color: #eefff4;
-    padding: 10px 30px;
+    padding: 10px 0;
     border: 1px solid #E9E9E9;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .used-point-wrap > span:nth-child(1) {
     color: #00ce7c;
     font-weight: 500;
+    padding-left: 10px;
+}
+
+.used-point-wrap > span:nth-child(2) {
+    font-weight: 500;
+    padding-right: 10px;
 }

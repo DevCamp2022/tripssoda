@@ -2,10 +2,10 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
+import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
-import com.devcamp.tripssoda.util.annotations.AuthChecking;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +42,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/waiting")
-    public String waitingList(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String waitingList(String option, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 //
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
@@ -56,6 +56,7 @@ public class AccompanyController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.waitingGetPage(map);
             m.addAttribute("mode", "waiting");
@@ -72,7 +73,7 @@ public class AccompanyController {
 
     @PostMapping("/modify")
     public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
-                           Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
+                         Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
 
@@ -131,7 +132,6 @@ public class AccompanyController {
         AccompanyDto accompanyDto = null;
         try {
             accompanyDto = accompanyService.read(id);
-            System.out.println("accompanyDto = " + accompanyDto);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
             m.addAttribute(accompanyDto);
@@ -140,7 +140,6 @@ public class AccompanyController {
         }
         return "accompany/accompanyWrite.mainTiles";
     }
-
 
     @PostMapping("/write")
     public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
@@ -205,18 +204,14 @@ public class AccompanyController {
         }
     }
 
-    @AuthChecking
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
-        System.out.println("\"kkkkkkkk\" = " + "kkkkkkkk");
+
         if(!loginCheck(request))
-        {
-            System.out.println("loginCheck(request) = " + loginCheck(request));
-            return "redirect:/login?toURL="+request.getRequestURL();}
+            return "redirect:/login?toURL="+request.getRequestURL();
         m.addAttribute("mode", "new");
         return "accompany/accompanyWrite.mainTiles";
     }
-
 
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
@@ -276,7 +271,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
@@ -284,13 +279,14 @@ public class AccompanyController {
 
         int totalCnt = 0;
         try {
-        totalCnt = accompanyService.getCount();
+            totalCnt = accompanyService.getCount();
 
-        PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
+            PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
 
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.getPage(map);
             m.addAttribute("ph", ph);

@@ -27,6 +27,21 @@
         SELECT id, user_id, nickname, profile_img, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
         FROM question
     </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="time"'>
+                ORDER BY created_at DESC, id DESC
+            </when>
+            <when test='option=="answer"'>
+                ORDER BY ans_cnt DESC, id DESC
+            </when>
+            <otherwise>
+                ORDER BY created_at DESC, id DESC
+            </otherwise>
+        </choose>
+    </sql>
+
     <select id="count" resultType="int">
         SELECT count(*)
         FROM question
@@ -79,12 +94,13 @@
     <select id="waitingSelectPage" parameterType="map" resultType="QuestionDto">
         <include refid="selectFromQuestion"/>
         WHERE status = 0
-        ORDER BY created_at DESC, id DESC
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
     <select id="selectPage" parameterType="map" resultType="QuestionDto">
         <include refid="selectFromQuestion"/>
-        ORDER BY created_at DESC, id DESC
+        WHERE true
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
     <update id="updateAnswerCnt" parameterType="map">

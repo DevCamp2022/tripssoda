@@ -51,8 +51,11 @@ public class AccompanyServiceImpl implements AccompanyService {
 
         File folder = new File(realPath);
         System.out.println("realPath = " + realPath);
+        System.out.println("uploadThumb = " + uploadThumb);
+        System.out.println("uploadName = " + uploadName);
         if(uploadThumb.isEmpty())
-            dto.setThumbnail("Empty");
+            //default이미지를 setter로 dto에 저장
+            dto.setThumbnail("default.webp");
         else {
 //            dto.setThumbnail(uploadName);
             if (!folder.exists()) {
@@ -67,6 +70,7 @@ public class AccompanyServiceImpl implements AccompanyService {
                 File file = new File(realPath + File.separator + uploadName);
                 uploadThumb.transferTo(file);
                 String fileName = ImageResize.thumbnailResize(realPath, uploadName);
+                System.out.println("fileName = " + fileName);
                 dto.setThumbnail(fileName);
 
             } catch (IllegalStateException | IOException e) {

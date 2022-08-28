@@ -85,8 +85,8 @@
         </div>
         <div class="date-box">
             <div class="date-text">날짜 선택</div>
-            <input name="startAt"class="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
-            <input name="endAt" class="endAt" type="date" value="<fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>">
+            <input name="startAt" id="start-at" class="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
+            <input name="endAt" id="end-at" class="endAt" type="date" value="<fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd" type="date"/>">
         </div>
         <div class="title-box">
             <c:if test="${mode ne 'new'}">
@@ -120,9 +120,20 @@
     function showVal(val) {
         document.getElementById('member-score').innerHTML=val+' 명';
     }
+
     $(document).ready(function() {
         let formCheck = function() {
             let form = document.getElementById("form");
+
+            //날짜 유효성 검사
+            if($("#start-at").val()=="") {
+                alert("시작일을 선택해주세요.")
+                return false;
+            }
+            if($("#end-at").val()=="") {
+                alert("종료일을 선택해주세요.")
+                return false;
+            }
 
             //select-box 유효성 검사
             if($("#area2").val()=="") {

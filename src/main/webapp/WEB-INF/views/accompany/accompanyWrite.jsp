@@ -73,6 +73,11 @@
                 <option value='59'>전라도</option>
             </select>
         </div>
+        <div class="member-box">
+            <div class="member-text">모집인원</div>
+            <input type="range" name="memberCnt" class="member-cnt" min="1" max="20" value="${accompanyDto.memberCnt}" step="1" oninput="showVal(this.value)"/>
+            <span id="member-score"></span>
+        </div>
         <div class="date-box">
             <div class="date-text">날짜 선택</div>
             <input name="startAt"class="startAt" type="date" value="<fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd" type="date"/>">
@@ -106,6 +111,9 @@
 </form>
 <input type="hidden" name="toURL" value="${param.toURL}">
 <script>
+    function showVal(val) {
+        document.getElementById('member-score').innerHTML=val+' 명';
+    }
     $(document).ready(function() {
         let formCheck = function() {
             let form = document.getElementById("form");

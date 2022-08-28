@@ -39,6 +39,12 @@
                     <div class="region-data">
                         ${accompanyDto.cityName}
                     </div>
+                    <div class="member-text">
+                        모집인원
+                    </div>
+                    <div class="member-cnt">
+                        ${accompanyDto.memberCnt}명
+                    </div>
                 </div>
                 <div class="date-line">
                     <img class="calendar-icon" src="<c:url value='/image/accompany/calendar-icon.svg'/>">

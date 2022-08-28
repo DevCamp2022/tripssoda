@@ -70,6 +70,12 @@ a {
     color: #6a6a6a;
     margin-right: 10px;
 }
+.member-text {
+    color: #6a6a6a;
+    margin-left: 20px;
+    margin-right: 10px;
+
+}
 
 .date-line {
     display: flex;

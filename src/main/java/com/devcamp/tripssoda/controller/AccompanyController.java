@@ -78,7 +78,8 @@ public class AccompanyController {
                          Integer page, Integer pageSize, Date startAt, Date endAt, String area3, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
-
+        //매개변수로 받지 않아도 dto로 자동으로 받는다.
+        System.out.println("accompanyDto.getMemberCnt() = " + accompanyDto.getMemberCnt());
         accompanyDto.setRegionCode(area3);
         accompanyDto.setUserId(writer);
         accompanyDto.setStartAt(startAt);
@@ -150,7 +151,7 @@ public class AccompanyController {
     }
 
     @PostMapping("/write")
-    public String write(AccompanyDto accompanyDto, BindingResult result, @Valid Date startAt, @Valid Date endAt, String area3, Model m,
+    public String write(AccompanyDto accompanyDto, BindingResult result, Integer memberCnt, @Valid Date startAt, @Valid Date endAt, String area3, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
         String email = (String) session.getAttribute("email");
@@ -160,6 +161,7 @@ public class AccompanyController {
         accompanyDto.setRegionCode(area3);
         accompanyDto.setStartAt(startAt);
         accompanyDto.setEndAt(endAt);
+        accompanyDto.setMemberCnt(memberCnt);
 
         String profileImg = userDto.getProfileImg();
         System.out.println("profileImg = " + profileImg);

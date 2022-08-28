@@ -75,7 +75,12 @@
         </div>
         <div class="member-box">
             <div class="member-text">모집인원</div>
-            <input type="range" name="memberCnt" class="member-cnt" min="1" max="20" value="${accompanyDto.memberCnt}" step="1" oninput="showVal(this.value)"/>
+            <c:if test="${mode eq 'new'}">
+                <input type="range" name="memberCnt" class="member-cnt" min="1" max="20" value="1" step="1" oninput="showVal(this.value)"/>
+            </c:if>
+            <c:if test="${mode ne 'new'}">
+                <input type="range" name="memberCnt" class="member-cnt" min="1" max="20" value="${accompanyDto.memberCnt}" step="1" oninput="showVal(this.value)"/>
+            </c:if>
             <span id="member-score"></span>
         </div>
         <div class="date-box">
@@ -111,6 +116,7 @@
 </form>
 <input type="hidden" name="toURL" value="${param.toURL}">
 <script>
+
     function showVal(val) {
         document.getElementById('member-score').innerHTML=val+' 명';
     }

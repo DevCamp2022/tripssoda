@@ -25,4 +25,6 @@ public interface InquiryMapper {
     int selectAllInquiryCnt();
 
     List<InquiryDto> selectAllInquiry(SearchCondition sc);
+
+    public int updateAdminInquiry(InquiryDto inquiryDto);
 }

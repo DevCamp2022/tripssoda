@@ -82,7 +82,7 @@ body {
     margin: 0 auto;
     width: 90%;
     border-top: none;
-    padding: 10px;
+    box-sizing: border-box;
 }
 
 .place {

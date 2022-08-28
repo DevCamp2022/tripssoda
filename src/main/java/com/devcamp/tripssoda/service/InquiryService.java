@@ -20,4 +20,6 @@ public interface InquiryService {
     void deleteUserInquiry(InquiryDto inquiryDto) throws Exception;
 
     void insertUserInquiry(InquiryDto inquiryDto) throws Exception;
+
+    void updateAdminInquiry(InquiryDto inquiryDto) throws Exception;
 }

@@ -4,15 +4,14 @@ import com.devcamp.tripssoda.dto.EmailVerificationDto;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.dto.UserHistoryDto;
 import com.devcamp.tripssoda.service.EmailVerificationService;
+import com.devcamp.tripssoda.service.KakaoLoginService;
 import com.devcamp.tripssoda.service.UserHistoryService;
 import com.devcamp.tripssoda.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 @Controller
@@ -36,6 +36,9 @@ public class LoginController {
 
     @Autowired
     EmailVerificationService emailVerificationService;
+
+    @Autowired
+    KakaoLoginService oAuthService;
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -278,6 +281,34 @@ public class LoginController {
         rattr.addFlashAttribute("msg", "PWD_MOD_OK");
 
         return "redirect:/login";
+    }
+
+    @RequestMapping("/login/kakao")
+    public String kakaoLogin(@RequestParam String code, Model model, RedirectAttributes rattr, HttpSession session) throws Exception{
+        String token = oAuthService.getKakaoAccessToken(code);
+        HashMap<String, String> userInfo = oAuthService.createKaKaoUser(token);
+        String email = userInfo.get("email");
+        String gender = userInfo.get("gender");
+
+        if (email == null || email == "") {
+            rattr.addFlashAttribute("error_msg_social","이메일 수집 동의를 하지 않아, 서비스 이용이 어렵습니다. 이메일 수집 동의 후 다시 회원가입 신청바랍니다.");
+            return "redirect:/login";
+        }
+        UserDto userDto = userService.selectUserByEmail(email);
+        if(userDto!=null){
+            session.setAttribute("email", userDto.getEmail());
+            session.setAttribute("id", userDto.getId());
+            session.setAttribute("userCode", userDto.getUserCode());
+            return "redirect:/";
+        }else{
+            rattr.addAttribute("email", email);
+            rattr.addAttribute("gender", gender);
+            rattr.addAttribute("email_check","true");
+            return "redirect:/register/write";
+//            ?email=" + email + "&gender=" + gender + "&birthday=" + birthday;
+//            return "redirect:/register?email="+email+"&email_check=true";
+        }
+
     }
 
     // 로그인 시도하는 메서드

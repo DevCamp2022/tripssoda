@@ -195,9 +195,14 @@ public class QuestionController {
     }
 
     @PostMapping("/write")
-    public String write(QuestionDto questionDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
+    public String write(String area1, String area2, String area3, QuestionDto questionDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        int writer = 43;
+        System.out.println("area1 = " + area1);
+        System.out.println("area2 = " + area2);
+        System.out.println("area3 = " + area3);
+
+        questionDto.setRegionCode(area3);
+
         String email = (String) session.getAttribute("email");
         UserDto userDto = userService.selectUserByEmail(email);
         String nickname = userDto.getNickname();

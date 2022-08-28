@@ -24,6 +24,7 @@ textarea:focus {
     margin: 20px auto 0 auto;
     width: 1200px;
     height: 525px;
+    /*height: 00px;*/
     border: 1px solid rgb(233,233,233);
     background-color: #fff;
 }

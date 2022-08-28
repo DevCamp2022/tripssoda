@@ -65,7 +65,7 @@
 
                             </div>
                             <div class="region-text">
-                                서울
+                                ${questionDto.cityName}
                             </div>
                         </div>
                         <div class="answer-on-off">

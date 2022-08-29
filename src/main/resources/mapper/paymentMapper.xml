@@ -155,5 +155,10 @@
             pm.id = #{paymentId} AND pm.user_id=#{userId};
     </select>
 
+    <update id="updatePaymentStatus" parameterType="Map">
+        UPDATE payment
+        SET status = #{status}, updated_at = now(), updated_by = #{userId}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

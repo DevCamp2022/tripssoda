@@ -17,6 +17,7 @@ public class ProductReviewDto {
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
+    private Integer scheduleId;
 
     public ProductReviewDto(Integer id, Integer productId, Integer userId, String content, Integer rating) {
         this.id = id;
@@ -24,6 +25,14 @@ public class ProductReviewDto {
         this.userId = userId;
         this.content = content;
         this.rating = rating;
+    }
+
+    public Integer getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(Integer scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public Integer getId() {

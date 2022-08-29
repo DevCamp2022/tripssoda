@@ -24,8 +24,15 @@
 
     <update id="updateUserInquiry" parameterType="InquiryDto">
         UPDATE inquiry
-        SET title = #{title}, content = #{content}
+        SET title = #{title}, content = #{content}, updated_by = #{userId}
         WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <update id="updateAdminInquiry" parameterType="InquiryDto">
+        UPDATE inquiry
+        SET ans_user_id = #{ansUserId}, ans_content = #{content}, ans_date = now(),
+            updated_by = #{updatedBy}, updated_at = now(), status = #{status}
+        WHERE id = #{id}
     </update>
 
     <delete id="deleteUserInquiry" parameterType="InquiryDto">

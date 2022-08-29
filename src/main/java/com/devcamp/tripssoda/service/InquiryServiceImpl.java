@@ -8,7 +8,6 @@ import com.devcamp.tripssoda.mapper.InquiryMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +50,9 @@ public class InquiryServiceImpl implements InquiryService {
         Integer id = inquiryDto.getId();
         // id로부터 수정전의 Dto를 가져옴
         InquiryDto oldInquiryDto = inquiryMapper.selectUserInquiry(id);
-
+        System.out.println("inquiryDto = " + inquiryDto);
         int rowCnt = inquiryMapper.updateUserInquiry(inquiryDto);
+
         if(rowCnt != 1) {
             throw new Exception("1:1 문의글 수정 오류");
         }
@@ -106,6 +106,16 @@ public class InquiryServiceImpl implements InquiryService {
         if(rowCnt != 1) {
             throw new Exception("1:1 문의글 등록 오류");
         }
+    }
+
+    @Override
+    public void updateAdminInquiry(InquiryDto inquiryDto) throws Exception {
+
+        int rowCnt = inquiryMapper.updateAdminInquiry(inquiryDto);
+        if(rowCnt != 1) {
+            throw new Exception("1:1 문의글 답변 등록 오류");
+        }
+
     }
 
 }

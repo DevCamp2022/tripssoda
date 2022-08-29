@@ -31,13 +31,17 @@
         <input type="hidden" name="id" value="${inquiryDto.id}" readonly>
         <c:if test="${inquiryDto.ansUserId != null}">
             <h2 class="title">답변</h2>
-            <textarea class="reply-textarea" readonly rows="20" placeholder="내용을 입력해 주세요.">${inquiryDto.ansContent}</textarea><br>
+            <textarea class="reply-textarea" id="unitcontent" readonly rows="20" placeholder="내용을 입력해 주세요.">${inquiryDto.ansContent}</textarea><br>
         </c:if>
     </div>
 </div>
 <script>
     // CK EDITOR 적용
     CKEDITOR.replace('content', // 해당 name으로 된 textarea에 적용
+        {filebrowserUploadUrl:'/ckeditor/fileUploader',
+            width:'100%'
+        });
+    CKEDITOR.replace('unitcontent', // 해당 name으로 된 textarea에 적용
         {filebrowserUploadUrl:'/ckeditor/fileUploader',
             width:'100%'
         });

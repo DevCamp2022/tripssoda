@@ -24,9 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class MyPageController {
@@ -290,11 +288,34 @@ public class MyPageController {
 
         return "user/reservationList.mypageTiles";
     }
+    // 예약 상세보기 페이지로 이동
     @GetMapping("/mypage/reservationList/reservationDetail")
     public String reservationDetail(ReservationDto reservationDto, Model model) {
         model.addAttribute("reservationDto", reservationDto);
 
         return "user/reservationDetail.mypageTiles";
+    }
+    // 예약 상세보기 - 예약 취소 버튼 눌렀을 때
+    @ResponseBody
+    @PostMapping("/mypage/reservationList/reservationDetail/cancelReservation")
+    public String cancelReservation(Integer paymentId, Integer reservationId, Integer userId) {
+        Map reservInfo = new HashMap();
+        reservInfo.put("status", 2);
+        reservInfo.put("id", reservationId);
+        reservInfo.put("userId", userId);
+
+        Map paymentInfo = new HashMap();
+        paymentInfo.put("status", 2);
+        paymentInfo.put("id", paymentId);
+        paymentInfo.put("userId", userId);
+
+        try {
+            reservationService.cancelUserReservation(reservInfo, paymentInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+        return "success";
     }
 
     // 적립 내역 페이지로 이동

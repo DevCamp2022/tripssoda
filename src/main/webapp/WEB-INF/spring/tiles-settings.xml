@@ -43,15 +43,15 @@
     <!-- 파트너 마이페이지 -->
     <definition name="partLayout" template="/WEB-INF/views/tiles/tiles_part_layout.jsp">
         <put-attribute name="header" value="/WEB-INF/views/tiles/header_template.jsp" />
-        <put-attribute name="partner" value="/WEB-INF/views/partner/side.jsp" />
-        <put-attribute name="content" value="" />
+        <put-attribute name="partner_side" value="/WEB-INF/views/partner/partner_side.jsp" />
+        <put-attribute name="partner_content" value="" />
         <put-attribute name="footer" value="/WEB-INF/views/tiles/footer_template.jsp" />
     </definition>
     <definition name="*.partnerTiles" extends="partLayout">
-        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+        <put-attribute name="partner_content" value="/WEB-INF/views/{1}.jsp" />
     </definition>
     <definition name="*/*.partnerTiles" extends="partLayout">
-        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+        <put-attribute name="partner_content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
 
     <!-- 타일즈 미 적용 -->

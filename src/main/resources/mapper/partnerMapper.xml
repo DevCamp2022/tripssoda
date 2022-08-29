@@ -6,7 +6,6 @@
     <insert id="insertPartner" parameterType="PartnerDto">
 		INSERT INTO partner
         (
-            id
             user_id,
             reg_number,
             company_name,
@@ -18,6 +17,7 @@
             manager_name,
             manager_tel,
             terms_agreement,
+            conclusion_date,
             created_at,
             created_by,
             updated_at,
@@ -25,7 +25,6 @@
         )
         VALUES
         (
-            #{id}
             #{userId},
             #{regNumber},
             #{companyName},
@@ -37,6 +36,7 @@
             #{managerName},
             #{managerTel},
             #{termsAgreement},
+            now(),
             now(),
             #{userId},
             now(),
@@ -95,4 +95,28 @@
         LIMIT #{offset}, #{pageSize}
     </select>
 
+    <select id="selectPartnerInformation" parameterType="int" resultType="PartnerDto">
+        SELECT *
+        FROM partner
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="updatePartnerInformation" parameterType="PartnerDto">
+        UPDATE partner
+        SET
+            reg_number = #{regNumber},
+            company_name = #{companyName},
+            partner_logo = #{partnerLogo},
+            intro = #{intro},
+            intro_attachment = #{introAttachment},
+            service_region = #{serviceRegion},
+            product_type = #{productType},
+            manager_name = #{managerName},
+            manager_tel = #{managerTel},
+            on_partnership = 0,
+            updated_at = now(),
+            updated_by = #{userId}
+
+        WHERE user_id = #{userId}
+    </update>
 </mapper>

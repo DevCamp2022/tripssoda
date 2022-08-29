@@ -9,7 +9,7 @@
 <div class="content">
   <br>
   <h4><strong>상품등록</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
-  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
+  <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" onsubmit="return (valid())">
   <!-- <form action="<c:url value='/product/register'/>" method="POST" enctype="multipart/form-data" > -->
   <input type="hidden" name="userId" value="${sessionScope.userId}" >
   <input type="hidden" name="partnerId" value="${sessionScope.partnerId}">

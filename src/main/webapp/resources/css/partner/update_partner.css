@@ -67,6 +67,7 @@ th{
   background-color: #fff;
   padding: 10px 20px;
   color:#D94844;
+  width: 30%;
 }
 
 .btnDel:hover{
@@ -75,16 +76,16 @@ th{
   color: white;
 }
 
-.submitBtn{
+.subBtn{
   border-radius: 5px;
   border: 1px solid #00ce7c;
   background-color: #fff;
   padding: 10px 20px;
   color:#00ce7c;
-  width: 500px;
+  width: 30%;
 }
 
-.submitBtn:hover{
+.subBtn:hover{
   background-color: #00ce7c;
   transition-duration: 0.5s;
   color: white;

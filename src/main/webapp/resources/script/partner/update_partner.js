@@ -34,7 +34,6 @@ function valid() {
         alert("최소 1개이상의 상품유형을 선택해 주세요.");
         return false;
     }
-
     return true;
 }
 
@@ -54,12 +53,50 @@ CKEDITOR.replace('intro',
     {filebrowserUploadUrl:'/ckeditor/fileUploader'
 });
 
-// $(".submitBtn").click(function(){
-//     let formData = new FormData();
 
-// // ... formData.append("키이름", "값"); 생략
 
-// for (let key of formData.keys()) {
-// 	console.log(key, ":", formData.get(key));
-// }
-// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////update//////////////////////
+$(document).ready(function(){
+    //파트너 로고 
+    let logoName = $(".partnerLogo").val();
+    let reName = logoName.replace('resized_','');
+    let modLogoName = reName.substr(36);
+    $(".uploadLogo").attr("value",modLogoName);
+
+    //첨부문서 
+    let attachName = $(".introAttachment").val();
+    let modAttachName = attachName.substr(36);
+    $(".uploadAttach").attr("value",modAttachName);
+
+    //체크박스
+    let productType = $(".productType").val();
+    let productTypeArr = productType.split(',');
+    for(let i=0; i<productTypeArr.length; i++) {
+        if(productTypeArr[i] == 'C002') {
+            $("#private").attr('checked','checked');
+            continue;
+        }
+        if(productTypeArr[i] == 'C003') {
+            $("#smallDay").attr('checked','checked');
+        }
+        if(productTypeArr[i] == 'C004') {
+            $("#busDay").attr('checked','checked');
+        }
+        if(productTypeArr[i] == 'C005') {
+            $("#unusual").attr('checked','checked');
+        }
+    }
+})

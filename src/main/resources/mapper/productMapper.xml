@@ -453,4 +453,29 @@
             pd.created_at;
 
     </select>
+
+    <select id="selectProductList" parameterType="int" resultType="ProductDto">
+        SELECT
+            id as productId,
+            title,
+            category,
+            thumbnail,
+            rating,
+            day_cnt
+
+        FROM product
+        WHERE partner_id=#{partnerId}
+    </select>
+
+    <select id="selectProductScheduleListforDetail" parameterType="int" resultType="ProductScheduleDto">
+        SELECT
+            start_date,
+            price,
+            current_member,
+            min_member,
+            max_member
+
+        FROM product_schedule
+        WHERE product_id=#{productId}
+    </select>
 </mapper>

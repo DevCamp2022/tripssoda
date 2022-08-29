@@ -1,6 +1,7 @@
 package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.*;
+import com.devcamp.tripssoda.service.PartnerService;
 import com.devcamp.tripssoda.service.ProductService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,11 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final PartnerService partnerService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, PartnerService partnerService) {
         this.productService = productService;
+        this.partnerService = partnerService;
     }
 
     @GetMapping("/list")
@@ -81,5 +84,31 @@ public class ProductController {
         System.out.println("dto.getProductId() = "+dto.getProductId());
         productService.updateProduct(dto, uploadThumb, request, regProductOptionListDto, regProductScheduleListDto);
         return "redirect:/product/update?productId="+dto.getProductId();
+    }
+
+    @GetMapping("/partner/list")
+    public String partnerProductList(HttpSession session, Model model) {
+        System.out.println("partner/list 접속중");
+        Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+        PartnerDto partnerDto = partnerService.getPartnerInformation(userId);
+        model.addAttribute("PartnerDto",partnerDto);
+
+        //product list 담기
+        Integer partnerId = partnerDto.getId();
+        System.out.println("partnerId = " + partnerId);
+        List<ProductDto> pList = productService.getProductList(partnerId);
+        model.addAttribute("pList", pList);
+        model.addAttribute("pListSize", pList.size());
+
+        //product schedule list 담기
+        for(int i=0; i<pList.size(); i++) {
+            Integer productId = pList.get(i).getProductId();
+            System.out.println("productId = " + productId);
+            List<ProductScheduleDto> psList = productService.selectProductScheduleListforDetail(productId);
+            System.out.println("psList = " + psList);
+            model.addAttribute("psList("+i+")", psList);
+        }
+
+        return "product/product_info.partnerTiles";
     }
 }

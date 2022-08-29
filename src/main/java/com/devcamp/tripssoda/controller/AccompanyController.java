@@ -249,7 +249,10 @@ public class AccompanyController {
 
         try {
             accompanyDto = accompanyService.read(id);
-
+            System.out.println("id = " + id);
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
+            System.out.println("accompanyDto.getStatus() = " + accompanyDto.getStatus());
+//            accompanyService.updateStatus(id, accompanyDto.getEndAt());
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
             Date today = new Date();
             System.out.println("today = " + today.getTime());
@@ -299,6 +302,16 @@ public class AccompanyController {
             map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.getPage(map);
+            Date today = new Date();
+            System.out.println("list.get(0).getEndAt() = " + list.get(0).getEndAt());
+//            System.out.println("list.get(0).getEndAt() = " + list.get(84).getEndAt());
+
+            System.out.println("today = " + today.getTime());
+            for (int i = 0; i <= list.size()-1; i++) {
+                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+                    list.get(i).setStatus(1);
+                }
+            }
             m.addAttribute("ph", ph);
             m.addAttribute("list", list);
             m.addAttribute("page", page);

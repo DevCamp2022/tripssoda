@@ -99,6 +99,13 @@
         <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
+    <!--    마감일이 지나면 status를 1로 update하기 위해 작성했지만 -->
+    <!--  컨트롤러에서 자체적으로 처리하도록 작성 해놓음  -->
+<!--    <update id="statusUpdate" parameterType="Map">-->
+<!--        UPDATE accompany-->
+<!--        SET status = 1-->
+<!--        WHERE id = #{id} and now() >= #{endAt}-->
+<!--    </update>-->
 
 <!--    08.29 추가 작업 예정-->
     <select id="searchSelectPage" parameterType="map" resultType="AccompanyDto">

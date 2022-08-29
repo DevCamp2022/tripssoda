@@ -25,4 +25,6 @@ public interface AccompanyMapper {
     public int waitingCount() throws Exception;
 
     List<AccompanyDto> selectAccompanyForMain(Map map);
+
+//    public int updateStatus(Map map) throws Exception;
 }

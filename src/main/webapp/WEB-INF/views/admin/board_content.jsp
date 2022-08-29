@@ -125,7 +125,9 @@
 
 <script>
     CKEDITOR.replace('unitContent',
-        {filebrowserUploadUrl:'/ckeditor/fileUploader'});
+        {filebrowserUploadUrl:'/ckeditor/fileUploader',
+            // width:'1200px',
+            height:'800px'});
 
     $(document).ready(function(){
 

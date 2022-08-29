@@ -68,7 +68,7 @@ input::placeholder {
 }
 
 .email-wrap > input {
-    width: 341px;
+    width: 353px;
     margin-bottom: 10px;
     height: 20px;
 }
@@ -130,7 +130,7 @@ input::placeholder {
 }
 
 .select-birth-month {
-    width: 28.4%;
+    width: 28%;
     height: 54px;
     box-sizing: border-box;
 

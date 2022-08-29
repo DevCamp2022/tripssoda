@@ -29,7 +29,7 @@
                 <div class="td-wrap">
                     <div class="td-review-id">${productReviewDto.id}</div>
                     <div class="td-product-id">${productReviewDto.productId}</div>
-                    <div class="td-review-content">${productReviewDto.content}</div>
+                    <div class="td-review-content"><a href="/product/detail?productId=${productReviewDto.productId}&scheduleId=${productReviewDto.scheduleId}">${productReviewDto.content}</a></div>
                     <div class="td-review-rating">${productReviewDto.rating}</div>
                     <div class="td-reg-date"><fmt:formatDate value="${productReviewDto.createdAt}" pattern="yyyy-MM-dd"/></div>
                 </div>
@@ -55,4 +55,7 @@
         </div>
     </div>
 </div>
+
+<script>
+</script>
 

@@ -63,7 +63,7 @@
 <!--        WHERE reservation.user_id = #{userId};-->
 <!--    </select>-->
     <select id="selectAllUserReservation" parameterType="Map" resultType="ReservationDto">
-        SELECT r.id, r.reserv_at, r.status, r.qty, ps.start_date, p.total_amount, pr.title AS productTitle,
+        SELECT r.id, r.reserv_at, r.status, r.qty, ps.start_date, p.total_amount, pr.title AS productTitle, p.id AS paymentId, r.user_id AS userId,
                pr.thumbnail, r.product_id AS productId, ps.id AS productScheduleId, p.method, p.used_point AS usedPoint, p.product_price AS price
         FROM tripssoda.reservation AS r
         LEFT JOIN tripssoda.product_schedule AS ps ON ps.id = r.product_schedule_id
@@ -73,4 +73,10 @@
         ORDER BY r.id DESC
         LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
+
+    <update id="cancelUserReservation" parameterType="Map">
+        UPDATE reservation
+        SET status = #{status}, updated_at = now(), updated_by = #{userId}
+        WHERE id = #{id}
+    </update>
 </mapper>

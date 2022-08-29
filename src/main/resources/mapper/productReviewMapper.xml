@@ -9,11 +9,22 @@
         WHERE id = #{id}
     </select>
 
-    <select id="selectAllUserProductReview" parameterType="map" resultType="ProductReviewDto">
-        SELECT *
-        FROM product_review
-        WHERE user_id = #{userId}
-        ORDER BY id DESC
+    <select id="selectAllUserProductReview" parameterType="Map" resultType="ProductReviewDto">
+        SELECT pr.id AS id,
+               pr.product_id AS productId,
+               pr.user_id AS userId,
+               pr.content AS content,
+               pr.rating AS rating,
+               pr.created_at AS createdAt,
+               pr.created_by AS createdBy,
+               pr.updated_at AS updatedAt,
+               pr.updated_by AS updatedBy,
+               ps.id AS scheduleId
+        FROM tripssoda.product_review AS pr
+        LEFT JOIN tripssoda.product_schedule AS ps ON pr.product_id = ps.product_id
+        WHERE pr.user_id = #{userId}
+        GROUP BY pr.id
+        ORDER BY pr.id DESC
         LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 

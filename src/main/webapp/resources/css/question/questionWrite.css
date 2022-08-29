@@ -23,35 +23,39 @@ textarea:focus {
 .select-region-box {
     margin: 20px auto 0 auto;
     width: 1200px;
-    height: 525px;
+    height: 100px;
+    /*height: 00px;*/
     border: 1px solid rgb(233,233,233);
     background-color: #fff;
+    text-align: center;
+    line-height: 100px;
 }
-.region-area {
-    width: 1200px;
-    display: flex;
-    margin: auto;
+.area1 {
+    width: 380px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
 }
-.continent-area {
-    width: 220px;
+.area2 {
+    width: 380px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
 }
-.country-area {
-    width: 144px;
-}
-.city-area {
-    width: 795px;
-}
-.city-component {
-    display: flex;
-}
-.continent-component > div {
-    padding: 10px;
-}
-.country-component > div {
-    padding: 10px;
-}
-.city-component > div {
-    padding: 10px;
+.area3 {
+    width: 380px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
 }
 /* 썸네일업로드부터 버튼까지 그룹화한 영역 */
 .main-group {

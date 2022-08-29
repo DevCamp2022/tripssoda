@@ -12,4 +12,5 @@ public interface PaymentMapper {
     public PriceProductDto selectPriceProduct(Map<String, Integer> productInfo);
     public Integer insertPayment(PaymentDetailDto paymentDetailDto);
     public PaymentSuccessDto selectPaymentSuccessDetail(Map<String,  Integer> paymentInfo);
+    public Integer updatePaymentStatus(Map<String, Integer> paymentInfo);
 }

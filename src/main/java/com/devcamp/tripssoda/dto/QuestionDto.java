@@ -16,13 +16,22 @@ public class QuestionDto {
     private Integer viewCnt;
     private Integer status;
     private Integer reportCnt;
-    private Integer regionCode;
+    private String regionCode;
+    private String cityName;
     private Date deletedAt;
     private Date createdAt;
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
     private String profileImg;
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
     public String getProfileImg() {
         return profileImg;
@@ -121,11 +130,11 @@ public class QuestionDto {
         this.reportCnt = reportCnt;
     }
 
-    public Integer getRegionCode() {
+    public String getRegionCode() {
         return regionCode;
     }
 
-    public void setRegionCode(Integer regionCode) {
+    public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
     }
 

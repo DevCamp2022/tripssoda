@@ -4,8 +4,10 @@ import com.devcamp.tripssoda.dto.PaymentDetailDto;
 import com.devcamp.tripssoda.dto.ReservationDto;
 import com.devcamp.tripssoda.dto.SearchCondition;
 import com.devcamp.tripssoda.exception.InsertException;
+import com.devcamp.tripssoda.mapper.PaymentMapper;
 import com.devcamp.tripssoda.mapper.ReservationMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +18,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     public final ReservationMapper reservationMapper;
 
-    public ReservationServiceImpl(ReservationMapper reservationMapper) {
+    public final PaymentMapper paymentMapper;
+
+    public ReservationServiceImpl(ReservationMapper reservationMapper, PaymentMapper paymentMapper) {
         this.reservationMapper = reservationMapper;
+        this.paymentMapper = paymentMapper;
     }
 
     public int insertReservation(PaymentDetailDto paymentDetailDto) throws InsertException {
@@ -63,6 +68,32 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public int selectAllUserReservationCnt(Integer userId) {
         return reservationMapper.selectAllUserReservationCnt(userId);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void cancelUserReservation(Map reservInfo, Map paymentInfo) throws Exception {
+        // reservation 데이터의 status를 변경
+//        Map statusAndId = new HashMap();
+//        statusAndId.put("status", status);
+//        statusAndId.put("id", id); // reservation id
+
+        int rowCnt = reservationMapper.cancelUserReservation(reservInfo);
+        if (rowCnt != 1) {
+            throw new Exception("예약 취소 오류");
+        }
+
+        int rowCnt2 = paymentMapper.updatePaymentStatus(paymentInfo);
+        if (rowCnt != 1) {
+            throw new Exception("결제 취소 오류");
+        }
+
+        // payment 데이터의 status를 변경
+//        paymentMapper.updatePaymentStatus()
+        // public int updatePayment(Map<String, Integer> paymentInfo) {
+        //        return paymentMapper.updatePaymentStatus(paymentInfo);
+        //    }
+
     }
 
 //    @Override

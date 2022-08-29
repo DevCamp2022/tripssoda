@@ -17,6 +17,8 @@ public interface ReservationMapper {
 
     public int selectAllUserReservationCnt(Integer userId);
 
+    public int cancelUserReservation(Map map);
+
 //    public List<Date> selectAllUserReservationStartDate(Integer userId);
 //
 //    public List<Integer> selectAllUserReservationTotalAmount(Integer userId);

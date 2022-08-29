@@ -30,6 +30,8 @@ public class AdminController {
     private final AdminProductService adminProductService;
     private final ProductService productService;
 
+    private final InquiryService inquiryService;
+
     @Autowired
     private final IpBanListMapper ipBanListMapper = null;
 
@@ -49,6 +51,7 @@ public class AdminController {
         this.adminProductService = adminProductService;
         this.productService = productService;
         this.adminEmailService = adminEmailService;
+        this.inquiryService = inquiryService1;
     }
 
 //    @AuthChecking
@@ -416,10 +419,12 @@ public class AdminController {
     }
 
     @GetMapping("/inquiry/read")
-    public String inquiryRead(Model m) throws Exception{
+    public String inquiryRead(Model m, Integer id, SearchCondition searchCondition) throws Exception{
 //        Integer id =
 //        InquiryDto inquiryDto = adminBoardService.read(id);
-
+        InquiryDto inquiryDto = inquiryService.selectUserInquiry(id);
+        m.addAttribute("inquiryDto", inquiryDto);
+        m.addAttribute("searchCondition", searchCondition);
 
         return "admin/inquiry_content.subTiles";
     }
@@ -449,5 +454,31 @@ public class AdminController {
 
         }
         return new ResponseEntity<String>(count+"명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders,HttpStatus.OK);
+    @GetMapping("/inquiry/reply")
+    public String inquiryReply(Model m, SearchCondition searchCondition) {
+        m.addAttribute("searchCondition", searchCondition);
+        m.addAttribute("mode", "reply");
+
+        return "admin/inquiry_content.subTiles";
+    }
+
+    @PostMapping("/inquiry/reply")
+    public String inquiryReply(InquiryDto inquiryDto, SearchCondition sc, RedirectAttributes rattr, HttpSession session, Model m) {
+        try {
+            System.out.println("start");
+            Integer userId = (Integer)session.getAttribute("id");
+            inquiryDto.setAnsUserId(userId);
+            inquiryDto.setUpdatedBy(userId);
+            inquiryDto.setStatus(1);
+            inquiryService.updateAdminInquiry(inquiryDto);
+            rattr.addAttribute("msg", "REPLY_OK");
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("inquiryDto", inquiryDto);
+            m.addAttribute("mode", "reply");
+
+            return "admin/inquiry_content.subTiles";
+        }
+        return "redirect:/admin/inquiry" + sc.getQueryString();
     }
 }

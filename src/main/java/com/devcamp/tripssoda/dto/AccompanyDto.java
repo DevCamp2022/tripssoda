@@ -9,7 +9,8 @@ public class AccompanyDto {
     private Integer id;
     private Integer userId;
     private String nickname;
-    private int regionCode;
+    private String regionCode;
+    private String cityName;
     private Date startAt;
     private Date endAt;
     private String thumbnail;
@@ -32,7 +33,7 @@ public class AccompanyDto {
 
     public AccompanyDto() {}
 
-    public AccompanyDto(int regionCode, Date startAt, Date endAt, String thumbnail, String title, String content, int memberCnt, String hashtag) {
+    public AccompanyDto(String regionCode, Date startAt, Date endAt, String thumbnail, String title, String content, int memberCnt, String hashtag) {
         this.regionCode = regionCode;
         this.startAt = startAt;
         this.endAt = endAt;
@@ -41,6 +42,14 @@ public class AccompanyDto {
         this.content = content;
         this.memberCnt = memberCnt;
         this.hashtag = hashtag;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public String getProfileImg() {
@@ -99,11 +108,11 @@ public class AccompanyDto {
         this.nickname = nickname;
     }
 
-    public int getRegionCode() {
+    public String getRegionCode() {
         return regionCode;
     }
 
-    public void setRegionCode(int regionCode) {
+    public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
     }
     public String getThumbnail() {

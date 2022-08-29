@@ -64,7 +64,7 @@
                             지역
                         </div>
                         <div class="region-selected">
-                            ${questionDto.regionCode}
+                            ${questionDto.cityName}
                         </div>
                     </div>
                 </div>

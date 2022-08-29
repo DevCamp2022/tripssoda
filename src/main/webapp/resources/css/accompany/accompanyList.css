@@ -28,6 +28,57 @@ body {
     /*min-height: 2000px;*/
     margin: 0 auto;
 }
+.select-region-box {
+    margin: 20px auto 0 auto;
+    width: 1200px;
+    height: 100px;
+    /*height: 00px;*/
+    border: 1px solid rgb(233,233,233);
+    background-color: #fff;
+    text-align: center;
+    line-height: 100px;
+}
+.area1 {
+    width: 300px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
+}
+.area2 {
+    width: 300px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
+}
+.area3 {
+    width: 300px;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #e9e9e9;
+    font-size: 14px;
+    padding: 16px 20px;
+    margin: 5px;
+}
+.search-button {
+    /* 메뉴바의 검색 버튼 아이콘  */
+    width: 100px;
+    height: 60px;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+.search-button:hover {
+    color: rgb(165, 165, 165);
+}
 
 .new-write-btn {
     width: 167px;
@@ -180,7 +231,7 @@ body {
 }
 .view-cnt-line {
     display: flex;
-    width: 31px;
+    width: 48px;
     height: 15px;
     margin-left: 80px;
     margin-top: 7px;
@@ -206,7 +257,7 @@ body {
     width:1200px;
     height: 60px;
     text-align: center;
-    margin-top: 900px;
+    margin-top: 1000px;
 }
 .paging {
     width: 1200px;

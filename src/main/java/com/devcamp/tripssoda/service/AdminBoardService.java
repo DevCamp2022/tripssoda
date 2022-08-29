@@ -32,6 +32,7 @@ public interface AdminBoardService {
     int selectAllInquiryCnt();
 
     List<InquiryDto> selectAllInquiry(SearchCondition sc);
+
     public List<CombinedBoardDto> getSearchResultPageForUser(SearchCondition sc, String menuCode) throws Exception;
 
     public int getSearchResultCntForUser(SearchCondition sc, String menuCode) throws Exception;

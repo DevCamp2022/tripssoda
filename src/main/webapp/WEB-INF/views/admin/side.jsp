@@ -24,7 +24,7 @@
             <li id="user"><a href="/admin/userList">회원관리</a></li><span>|</span>
             <li id="partner"><a href="/admin/partnerList">파트너관리</a></li><span>|</span>
             <li id="product"><a href="/admin/productList">상품관리</a></li><span>|</span>
-            <li id="mail"><a href="#">메일전송<span></span></a></li>
+            <li id="mail"><a href="/admin/email/sender">메일전송<span></span></a></li>
         </ul>
 <%--    </div>--%>
 </div>

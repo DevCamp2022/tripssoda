@@ -117,6 +117,11 @@
         FROM accompany
         WHERE user_id = #{userId} and date(created_at) = date(now());
     </select>
-
+<!--메인 보여줄 목록 -->
+    <select id="selectAccompanyForMain" parameterType="map" resultType="AccompanyDto">
+        <include refid="selectFromAccompany"/>
+        ORDER BY created_at DESC, id DESC
+        LIMIT 0, 4
+    </select>
 
 </mapper>

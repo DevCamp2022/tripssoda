@@ -21,8 +21,8 @@ public class AuthorizationAspect {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationAspect.class);
 
     @Around("execution(* com.devcamp.tripssoda.controller.AdminController.*(..))" +
-            "&& !@annotation(com.devcamp.tripssoda.util.annotations.SkipChecking)"
-            + "|| @annotation(com.devcamp.tripssoda.util.annotations.AuthChecking)")
+            "&& !@annotation(com.devcamp.tripssoda.util.annotations.SkipChecking)"/*
+            + "|| @annotation(com.devcamp.tripssoda.util.annotations.AuthChecking)"*/)
     public Object AdminCheck(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("### {}: before", joinPoint.getSignature().getName());
         System.out.println("\"AOP - Admin Login Check Started\" = " + "AOP - Admin Login Check Started");

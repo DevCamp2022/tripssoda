@@ -67,35 +67,35 @@ $(document).on("click",".hashes .delBtn",function(){
 $("#add-manGuide").click(function(){
     let s = '<div class="manGuide">';
     s += '<input type="text" name="mandatoryGuidance"/>';
-    s += '<button type="button" class="btn btn-outline-info manGuide-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel manGuide-delBtn">삭제</button><br></div>';
     $(".td-manGuide").append(s);
 });
 
 $("#add-refund").click(function(){
     let s = '<div class="refundPolicy">';
     s += '<input type="text" name="refundPolicy" id="refundPolicy"/>';
-    s += '<button type="button" class="refundPolicy-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel refundPolicy-delBtn">삭제</button><br></div>';
     $(".td-refund").append(s);
 });
 
 $("#add-inclusion").click(function(){
     let s = '<div class="inclusion">';
     s += '<input type="text" name="inclusion" id="inclusion"/>';
-    s += '<button type="button" class="inclusion-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel inclusion-delBtn">삭제</button><br></div>';
     $(".td-inclusion").append(s);
 });
 
 $("#add-exclusion").click(function(){
     let s = '<div class="exclusion">';
     s += '<input type="text" name="exclusion" id="exclusion"/>';
-    s += '<button type="button" class="exclusion-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel exclusion-delBtn">삭제</button><br></div>';
     $(".td-exclusion").append(s);
 });
 
 $("#add-additionalInfo").click(function(){
     let s = '<div class="additionalInfo">';
     s += '<input type="text" name="additionalInfo" id="additionalInfo"/>';
-    s += '<button type="button" class="additionalInfo-delBtn">삭제</button><br></div>';
+    s += '&nbsp;<button type="button" class="btnDel additionalInfo-delBtn">삭제</button><br></div>';
     $(".td-additionalInfo").append(s);
 });
 
@@ -148,7 +148,7 @@ $(".pickOption-addBtn").click(function(){
     s += "<tr class='tr-pickupOption'>"
     s += "<td class='td-additional-option' colspan='3'>";
     s += "<input type='text' name='pickupOption'>";
-    s += "<button type='button' class='btn btn-outline-danger pickupOption-delBtn'>삭제</button>";
+    s += "&nbsp;<button type='button' class='btnDel pickupOption-delBtn'>삭제</button>";
     s += "</td>";
     s += "</tr>";
     $(".table-pickupInfo").append(s);
@@ -221,7 +221,7 @@ function getScheduleList() {
         s += "<td>";
         s += "<input type='text' class='scheduleMaxMember_"+scheduleCnt+"' name='regProductScheduleListDto[" + scheduleCnt + "].scheduleMaxMember'>";
         s += "</td>";
-        s += "<td><button class='btn btn-outline-danger schedule-delBtn'>삭제</button></td>";
+        s += "<td><button class='btnDel schedule-delBtn'>삭제</button></td>";
         s += "</tr>";
         $(".table-schedule").append(s);
 		startDate.setDate(startDate.getDate() + 1);
@@ -372,7 +372,7 @@ $(document).ready(function(){
         for(let i=1; i<mdtArr.length; i++) {
             let s = '<div class="manGuide">';
             s += '<input type="text" name="mandatoryGuidance" value="' + mdtArr[i] + '">';
-            s += '<button type="button" class="btn btn-outline-danger manGuide-delBtn">삭제</button><br></div>';
+            s += '&nbsp;<button type="button" class="btnDel manGuide-delBtn">삭제</button><br></div>';
             $(".td-manGuide").append(s);
         }
     }
@@ -384,7 +384,7 @@ $(document).ready(function(){
         for(let i=1; i<rfArr.length; i++) {
             let s = '<div class="refundPolicy">';
             s += '<input type="text" name="refundPolicy" value="' + rfArr[i] + '">';
-            s += '<button type="button" class="btn btn-outline-danger refundPolicy-delBtn">삭제</button><br></div>';
+            s += '&nbsp;<button type="button" class="btnDel refundPolicy-delBtn">삭제</button><br></div>';
             $(".td-refund").append(s);
         }
     }
@@ -396,7 +396,7 @@ $(document).ready(function(){
         for(let i=1; i<addinArr.length; i++) {
             let s = '<div class="manGuide">';
             s += '<input type="text" name="additionalInfo" value="' + addinArr[i] + '">';
-            s += '<button type="button" class="btn btn-outline-danger additionalInfo-delBtn">삭제</button><br></div>';
+            s += '&nbsp;<button type="button" class="btnDel additionalInfo-delBtn">삭제</button><br></div>';
             $(".td-additionalInfo").append(s);
         }
     }
@@ -408,7 +408,7 @@ $(document).ready(function(){
         for(let i=1; i<excArr.length; i++) {
             let s = '<div class="exclusion">';
             s += '<input type="text" name="exclusion" value="' + excArr[i] + '">';
-            s += '<button type="button" class="btn btn-outline-danger exclusion-delBtn">삭제</button><br></div>';
+            s += '&nbsp;<button type="button" class="btnDel exclusion-delBtn">삭제</button><br></div>';
             $(".td-exclusion").append(s);
         }
     }
@@ -420,7 +420,7 @@ $(document).ready(function(){
         for(let i=1; i<incArr.length; i++) {
             let s = '<div class="inclusion">';
             s += '<input type="text" name="inclusion" value="' + incArr[i] + '">';
-            s += '<button type="button" class="btn btn-outline-danger inclusion-delBtn">삭제</button><br></div>';
+            s += '&nbsp;<button type="button" class="btnDel inclusion-delBtn">삭제</button><br></div>';
             $(".td-inclusion").append(s);
         }
     }
@@ -469,7 +469,7 @@ $(document).ready(function() {
                 s += "<tr class='tr-pickupOption'>"
                 s += "<td class='td-additional-option' colspan='3'>";
                 s += "<input type='text' name='pickupOption' value='"+poArr[i]+"'>";
-                s += "<button type='button' class='btn btn-outline-danger pickupOption-delBtn'>삭제</button>";
+                s += "&nbsp;<button type='button' class='btnDel pickupOption-delBtn'>삭제</button>";
                 s += "</td>";
                 s += "</tr>";
                 $(".table-pickupInfo").append(s);
@@ -512,8 +512,9 @@ $(document).ready(function() {
             str += '<label class="btn btn-outline-warning" for="option-type-s-'+z+'">선택형</label>';
             str += '<input type="radio" id="option-type-a-'+z+'" class="btn-check option-type-a-'+z+'" name="regProductOptionListDto['+z+'].type" value="A" autocomplete="off">';
             str += '<label class="btn btn-outline-warning" for="option-type-a-'+z+'">단답형</label>';
+            // str += '</div>';
+            str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btnDel option-delBtn" type="button">상품옵션 제거</button>';
             str += '</div>';
-            str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-danger option-delBtn" type="button">상품옵션 제거</button>';
             str += '</th>';
             str += '</tr>';
             str += '<tr>';
@@ -538,7 +539,7 @@ $(document).ready(function() {
             str += '<input class="input-option-s-price_'+z+'" type="text" name="regProductOptionListDto['+z+'].price" value="'+optionPriceArr[0]+'">';
             str += '</td>';
             str += '<td>';
-            str += '<button class="btn btn-outline-info add-tr-option" type="button" class="add-option">옵션추가</button>';
+            str += '<button class="btnAdd add-tr-option" type="button" class="add-option">옵션추가</button>';
             str += '<input type="hidden" name="regProductOptionListDto[' + z + '].orderNo" value="'+optionOrderNo+'">';
             str += '</td>';
             str += '</tr>';
@@ -553,7 +554,7 @@ $(document).ready(function() {
                 str += '<input class="input-option-s-price_'+z+'" type="text" name="regProductOptionListDto['+z+'].price" value="'+optionPriceArr[j]+'">';
                 str += '</td>';
                 str += '<td>';
-                str += '<button class="btn btn-outline-danger del-tr-option" type="button">옵션삭제</button>';
+                str += '<button class="btnDel del-tr-option" type="button">옵션삭제</button>';
                 str += '</td>';
                 str += '</tr>';
             }
@@ -636,7 +637,7 @@ $(document).on("click",".add-tr-option",function(){
         str += '<input class="input-option-s-price_'+numOfParent+'" type="text" name="regProductOptionListDto['+numOfParent+'].price">';
         str += '</td>';
         str += '<td>';
-        str += '<button class="btn btn-outline-danger del-tr-option" type="button">옵션삭제</button>';
+        str += '<button class="btnDel del-tr-option" type="button">옵션삭제</button>';
         str += '</td>';
         str += '</tr>';
     $(".table-type-s-" + numOfParent).append(str);
@@ -693,7 +694,7 @@ $(".add-option-btn").click(function(){
         str += '<input type="radio" id="option-type-a-'+optCnt+'" class="btn-check option-type-a-'+optCnt+'" name="regProductOptionListDto['+optCnt+'].type" value="A" autocomplete="off">';
         str += '<label class="btn btn-outline-warning" for="option-type-a-'+optCnt+'">단답형</label>';
         str += '</div>';
-        str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-danger option-delBtn" type="button">상품옵션 제거</button>';
+        str += '&nbsp;&nbsp;&nbsp;&nbsp;<button class="btnDel option-delBtn" type="button">상품옵션 제거</button>';
         str += '</th>';
         str += '</tr>';
         str += '<tr>';
@@ -718,7 +719,7 @@ $(".add-option-btn").click(function(){
         str += '<td>';
 
 
-        str += '<button class="btn btn-outline-info add-tr-option" type="button" class="add-option">옵션추가</button>';
+        str += '<button class="btnAdd add-tr-option" type="button" class="add-option">옵션추가</button>';
         str += '<input type="hidden" name="regProductOptionListDto[' + optCnt + '].orderNo" value="'+optCnt+'">';
         str += '</td>';
         str += '</tr>';
@@ -770,3 +771,16 @@ $(".add-option-btn").click(function(){
     optCnt++;
 })
 
+//썸네일 파일명 바인딩
+$("#uploadThumb").on('change',function(){
+    let fileName = $("#uploadThumb").val();
+    $(".uploadThumb").attr('value',fileName);
+});
+
+$(document).ready(function(){
+    //파트너 로고 
+    let thumbName = $(".prd-thumb").val();
+    let reName = thumbName.replace('resized_','');
+    let modThumbName = reName.substr(36);
+    $(".uploadThumb").attr("value",modThumbName);
+});

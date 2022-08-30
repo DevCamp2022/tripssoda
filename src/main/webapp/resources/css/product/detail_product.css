@@ -132,10 +132,12 @@ progress.currentMember {
   appearance: none;
   width: 100%;
 }
+
 progress.currentMember::-webkit-progress-bar {
   background:#e2e2e2;
   border-radius:10px;
 }
+
 progress.currentMember::-webkit-progress-value {
   border-radius:10px;
   background: rgb(0, 206, 124);

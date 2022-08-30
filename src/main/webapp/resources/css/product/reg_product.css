@@ -12,7 +12,6 @@ span.hashes{
 
 input.hashes{
   outline: none;
-  border: 0px solid black;
 }
 
 input[type="text"], input[type="number"], input[type="file"] {
@@ -40,11 +39,12 @@ tr{
   /* border: 1px solid gray; */
   height: 50px;
   padding: 10px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #ccc;
 }
 td{
   /* border: 1px solid gray; */
   padding: 10px;
+  width:800px;
 }
 
 th{
@@ -62,7 +62,7 @@ select{
   min-width: 500px;
 } 
 
-/* .filebox .uploadThumb {
+.filebox .uploadThumb {
   display: inline-block;
   height: 40px;
   padding: 0 10px;
@@ -70,7 +70,7 @@ select{
   border: 1px solid #dddddd;
   width: 78%;
   color: #999999;
-} */
+}
 
 .filebox label {
   display: inline-block;
@@ -78,14 +78,14 @@ select{
   cursor: pointer;
   margin-left: 10px;
   border-radius: 3px;
-  border: 1px solid gray;
-  color: gray;
+  border: 1px solid #ccc;
+  color: #ccc;
 }
 
 .filebox label:hover{
   transition-duration: 0.5s;
   color: #fff;
-  background-color: gray;
+  background-color: #ccc;
 }
 
 .filebox input[type="file"] {
@@ -167,5 +167,9 @@ input[type='radio']:checked + label {
 }
 
 .table-schedule{
+  text-align: center;
+}
+
+.td-submit{
   text-align: center;
 }

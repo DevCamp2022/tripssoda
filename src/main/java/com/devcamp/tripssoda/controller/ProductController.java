@@ -80,7 +80,13 @@ public class ProductController {
                                 @RequestParam MultipartFile uploadThumb,
                                 HttpServletRequest request,
                                 RegProductOptionListDto regProductOptionListDto,
-                                RegProductScheduleListDto regProductScheduleListDto) {
+                                RegProductScheduleListDto regProductScheduleListDto,
+                                HttpSession session,
+                                Model model) {
+        Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+        PartnerDto partnerDto = partnerService.getPartnerInformation(userId);
+        model.addAttribute("PartnerDto",partnerDto);
+
         System.out.println("dto.getProductId() = "+dto.getProductId());
         productService.updateProduct(dto, uploadThumb, request, regProductOptionListDto, regProductScheduleListDto);
         return "redirect:/product/update?productId="+dto.getProductId();

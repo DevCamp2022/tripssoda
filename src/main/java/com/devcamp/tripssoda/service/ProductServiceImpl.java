@@ -300,4 +300,14 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("result from schedule = " + result);
         }
     }
+
+    @Override
+    public List<ProductDto> getProductList(Integer partnerId) {
+        return productMapper.selectProductList(partnerId);
+    }
+
+    @Override
+    public List<ProductScheduleDto> selectProductScheduleListforDetail(Integer productId) {
+        return productMapper.selectProductScheduleListforDetail(productId);
+    }
 }

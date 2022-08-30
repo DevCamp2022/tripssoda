@@ -5,6 +5,7 @@ import com.devcamp.tripssoda.dto.SearchCondition;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,4 +36,6 @@ public interface AccompanyService {
     int waitingGetCount() throws Exception;
 
     List<AccompanyDto> selectAccompanyForMain(Map map);
+
+    int updateStatus(AccompanyDto accompanyDto) throws Exception;
 }

@@ -9,48 +9,32 @@ $("#termsAgreement").change(function() {
     }
 });
 
+//회사로고 미리보기 기능
+$("#uploadLogo").change(function(){
+    var f = $(this)[0].files[0];
+    
+    var reader = new FileReader();
+    reader.onload = function(e){
+        let newImg = document.createElement('img');
+        newImg.setAttribute("src", e.target.result);
+        newImg.setAttribute("width",300);
+        $(".pvUploadLogo").html(newImg);
+    }
+    reader.readAsDataURL($(this)[0].files[0]);
+});
+
+
 function valid() {
-    if($("#regNumber").val() == "") {
-        alert("사업자번호를 입력해 주세요.");
+    if(CKEDITOR.instances.intro.getData() =='' || CKEDITOR.instances.intro.getData().length ==0) {
+        alert("회사소개를 입력해 주세요.");
         return false;
     }
 
-    if($("#companyName").val() == "") {
-        alert("사업자명 입력해 주세요.");
+    if($("input[name='productType']:checked").val() == '' || $("input[name='productType']:checked").val() == undefined || $("input[name='productType']:checked").val() == null) {
+        alert("최소 1개이상의 상품유형을 선택해 주세요.");
         return false;
     }
 
-    if($("#intro").val() == "") {
-        alert("사업자소개를 입력해 주세요.");
-        return false;
-    }
-
-    if($("#serviceRegion").val() == "") {
-        alert("서비스 지역 입력해 주세요.");
-        return false;
-    }
-
-    if($("#productType").val() == "") {
-        alert("상품유형을 입력해 주세요.");
-        return false;
-    }
-
-    if($("#managerName").val() == "") {
-        alert("담당자 성함을 입력해 주세요.");
-        return false;
-    }
-
-    if($("#managerTel").val() == "") {
-            alert("담당자 연락처를 입력해 주세요.");
-            return false;
-        }
-
-    if($("#termsAgreement").val() == "0") {
-        alert("약관에 동의해 주셔야 가입이 가능합니다.");
-        return false;
-    }
-
-    console.log("모든 유효성을 통과함");
     return true;
 }
 

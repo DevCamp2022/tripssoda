@@ -37,6 +37,34 @@ public class ImageResize {
         }
     }
 
+    public static String logoResize(String path, String fileName) throws IOException {
+        File file = new File(path + File.separator + fileName);  //리사이즈할 파일 경로
+        InputStream inputStream = new FileInputStream(file);
+        Image img = new ImageIcon(file.toString()).getImage(); // 파일 정보 추출
+
+        System.out.println("사진의 가로길이 : " + img.getWidth(null)); // 파일의 가로
+        System.out.println("사진의 세로길이 : " + img.getHeight(null)); // 파일의 세로
+        /* 파일의 길이 혹은 세로길이에 따라 if(분기)를 통해서 응용할 수 있습니다.
+         * '예를 들어 파일의 가로 해상도가 1000이 넘을 경우 1000으로 리사이즈 한다. 같은 분기' */
+        int width = 500; // 리사이즈할 가로 길이
+        int height = 500*img.getHeight(null)/img.getWidth(null); // 리사이즈할 세로 길이
+
+        if(img.getWidth(null)>500) {
+            BufferedImage resizedImage = resize(inputStream, width, height);
+            String resizedName = "resized_" + fileName;
+            // 리사이즈 실행 메소드에 값을 넘겨준다.
+            ImageIO.write(resizedImage, "jpg", new File(path + File.separator + resizedName));
+            // 리사이즈된 파일, 포맷, 저장할 파일경로
+            file.delete();
+            System.out.println("리사이즈된 사진의 세로길이 : " + resizedImage.getHeight(null)); // 파일의 세로
+            return resizedName;
+        } else {
+            return fileName;
+        }
+    }
+
+
+
     /* 리사이즈 실행 메소드 */
     public static BufferedImage resize(InputStream inputStream, int width, int height)
             throws IOException {

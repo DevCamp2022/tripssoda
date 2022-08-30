@@ -21,4 +21,7 @@ public interface PartnerMapper {
     PartnerDto selectPartnerInfo(Integer id);
 
     public int count();
+
+    PartnerDto selectPartnerInformation(Integer userId);
+    public void updatePartnerInformation(PartnerDto dto);
 }

@@ -14,9 +14,9 @@ public class AccompanyControllerTest {
         SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy년 MM월dd일 HH시mm분ss초");
 
         long format_time1 = System.currentTimeMillis();
-        String format_time2 = format2.format (System.currentTimeMillis());
+//        String format_time2 = format1.format();
 
-        System.out.println(format_time1);
-        System.out.println(format_time2);
+//        System.out.println(format_time1);
+//        System.out.println(format_time2);
     }
 }

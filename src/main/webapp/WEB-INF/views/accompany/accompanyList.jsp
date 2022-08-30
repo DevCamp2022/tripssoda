@@ -101,7 +101,7 @@
                                 모집중
                             </c:if>
                             <c:if test="${accompanyDto.status eq 1}">
-                                지난여행
+                                <span class="recruit-off-text">지난여행</span>
                             </c:if>
                         </div>
                         <div class="list-title">

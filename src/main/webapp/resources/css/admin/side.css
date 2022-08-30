@@ -11,21 +11,6 @@
     align-items: center;
     margin-bottom: 20px;
 }
-.user-img-wrap {
-    width: 50px;
-    height: 50px;
-}
-.user-img-wrap > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-.menu-nickname {
-    font-size: 17px;
-    font-weight: 500;
-    padding-left: 12px;
-}
-
 .side-container{
     text-align: center;
     width: 100%;
@@ -42,11 +27,9 @@
     margin-bottom: 30px;
 }
 .side-container li{
-    /*background: #fafafa;*/
     width: 200px;
     height: 52px;
     border-radius: 8px;
-    /*border: 1px solid #e9e9e9;*/
     box-sizing: border-box;
     display: flex;
     align-items: center;

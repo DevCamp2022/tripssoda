@@ -7,13 +7,14 @@
 
 <div class="side-container">
     <div class="side-container-board">
-        <div class="menu-header">
-            <div class="user-img-wrap">
-                <img src="${pageContext.request.contextPath}/image/partnerLogo/${PartnerDto.partnerLogo}" class="profile-img" alt="프로필 이미지">
-            </div><br>
-            <p class="menu-nickname">${PartnerDto.companyName}</p>
-        </div>
+        
         <ul>
+            <div class="menu-header">
+                <div class="user-img-wrap">
+                    <img src="${pageContext.request.contextPath}/image/partnerLogo/${PartnerDto.partnerLogo}" class="profile-img" alt="프로필 이미지">
+                </div><br>
+                <p class="menu-nickname">${PartnerDto.companyName}</p>
+            </div>
             <li id="all"><a href="/partner/info">파트너정보<span>></span></a></li>
             <li><a href="/product/partner/list">상품관리<span>></span></a></li>
         </ul>

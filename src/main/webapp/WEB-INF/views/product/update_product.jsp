@@ -8,7 +8,7 @@
   <br>
   <h4><strong>상품수정</strong><span style="font-size:0.6em;">(<span class="man-star">*</span>표시를 포함한 내용은 필수입력 항목입니다.)</span></h4>
   <hr>
-  <form action="<c:url value='/product/update'/>" method="POST" enctype="multipart/form-data">
+  <form action="<c:url value='/product/update'/>" method="POST" enctype="multipart/form-data" onsubmit="return valid()">
   <!--나중에 hidden으로 바꿀것-->
   <input type="hidden" name="productId" value="${dto.productId}" readonly>
   <input type="hidden" name="userId" value="${sessionScope.userId}">
@@ -26,7 +26,7 @@
       <td>
         <input type="hidden" id="category" value="${dto.category}">
         <select name="category" id="sel-category">
-          <option>카테고리를 선택해주세요</option>
+          <option selected disabled hidden>카테고리를 선택해주세요</option>
           <option class="C001" value="C001">에디터 픽</option>
           <option class="C002" value="C002">프라이빗 투어</option>
           <option class="C003" value="C003">소규모 데이투어</option>
@@ -38,9 +38,15 @@
     <tr>
       <th><span class="man-star">*</span>대표썸네일</th>
       <td class="td-thumbnail">
-        <input type="file" name="uploadThumb" id="uploadThumb" value="${dto.thumbnail}"/>
-        <div class="div-thumbnail">
+        <div class="filebox">
+          <input type="hidden" class="prd-thumb" value="${dto.thumbnail}" readonly>
+          <input type='text' class="uploadThumb" placeholder="회사소개 문서가 있다면 첨부 부탁드릴게요!" style='width:300px;' readonly>
+          <label for="uploadThumb">파일찾기</label> 
+          <input type="file" name="uploadThumb" id="uploadThumb" value="${dto.thumbnail}">
+        </div>
+        <div iv class="div-thumbnail">
           <img src="${pageContext.request.contextPath}/image/thumbnail/${dto.thumbnail}">
+        </div>
         </div>
       </td>
     </tr>
@@ -105,7 +111,7 @@
             <td colspan="3">
               <input type="hidden" id="get-pickupOption" value="${dto.pickupOption}">
               <input type="text" name="pickupOption" id="firstpo">&nbsp;
-              <button type="button" class="btn btn-outline-info pickOption-addBtn">픽업옵션추가</button>
+              <button type="button" class="btnAdd pickOption-addBtn">픽업옵션추가</button>
             </td>
           </tr>
           
@@ -123,7 +129,7 @@
       <td class="td-inclusion">
         <input type="hidden" id="get-inc" value="${dto.inclusion}">
         <input type="text" name="inclusion" id="inclusion"/>
-        <button class="btn btn-outline-info" type="button" id="add-inclusion">추가</button><br>
+        <button class="btnAdd" type="button" id="add-inclusion">추가</button><br>
       </td>
     </tr>
     <tr>
@@ -131,7 +137,7 @@
       <td class="td-exclusion">
         <input type="hidden" id="get-exc" value="${dto.exclusion}">
         <input type="text" name="exclusion" id="exclusion"/>
-        <button class="btn btn-outline-info" type="button" id="add-exclusion">추가</button><br>
+        <button class="btnAdd" type="button" id="add-exclusion">추가</button><br>
       </td>
     </tr>
     <tr>
@@ -139,7 +145,7 @@
       <td class="td-additionalInfo">
         <input type="hidden" id="get-addin" value="${dto.additionalInfo}">
         <input type="text" name="additionalInfo" id="additionalInfo"/>
-        <button class="btn btn-outline-info" type="button" id="add-additionalInfo">추가</button><br>
+        <button class="btnAdd" type="button" id="add-additionalInfo">추가</button><br>
       </td>
     </tr>
     <tr>
@@ -147,7 +153,7 @@
       <td class="td-manGuide">
         <input type="hidden" id="get-manguid" value="${dto.mandatoryGuidance}">
         <input type="text" name="mandatoryGuidance" id="mandatoryGuidance"/>
-        <button class="btn btn-outline-info" type="button" id="add-manGuide">추가</button><br>
+        <button class="btnAdd" type="button" id="add-manGuide">추가</button><br>
       </td>
     </tr>
     <tr>
@@ -155,14 +161,14 @@
       <td class="td-refund">
         <input type="hidden" id="get-rfp" value="${dto.refundPolicy}">
         <input type="text" name="refundPolicy" id="refundPolicy"/>
-        <button class="btn btn-outline-info" type="button" id="add-refund">추가</button><br>
+        <button class="btnAdd" type="button" id="add-refund">추가</button><br>
       </td>
     </tr>
     <!-- 상품옵션 -->
     <tr>
       <th>상품옵션</th>
       <td class="product-option">
-        <button class="btn btn-outline-primary add-option-btn" type="button">상품옵션 추가</button>
+        <button class="btnAdd add-option-btn" type="button">상품옵션 추가</button>
         <input type="hidden" id="get-optionSize" value="${fn:length(poList)}">
         <input type="hidden" id="get-scheduleSize" value="${fn:length(psList)}">
 
@@ -230,7 +236,7 @@
                 <input type='text' class='scheduleMaxMember_${status.index}' name='regProductScheduleListDto[${status.index}].scheduleMaxMember' value="${list.scheduleMaxMember}">
               </td>
               <td>
-                <button class='btn btn-outline-danger schedule-delBtn'>삭제</button>
+                <button class='btnDel schedule-delBtn'>삭제</button>
               </td>
             </tr>
           </c:forEach>
@@ -240,7 +246,7 @@
     <tr>
       <th></th>
       <td class="td-submit">
-        <button class="btn btn-outline-success submitBtn" type="submit">제출</button>
+        <button class="btnSub subBtn" type="submit">제출</button>
       </td>
     </tr>
   </table>

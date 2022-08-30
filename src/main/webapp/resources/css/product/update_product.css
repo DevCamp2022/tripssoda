@@ -2,92 +2,176 @@ span.man-star{
   color: red;
 }
 
+span.hashes{
+  border-radius: 3px;
+  background-color: gray;
+  color:white;
+  margin-right: 10px;
+  padding: 5px;
+}
+
 input.hashes{
   outline: none;
-  border: 0px solid black;
 }
 
-.div-thumbnail>img{
-  width: 500px;
-  border: 2px solid rgb(0, 206, 124);
-  border-radius: 15px;
-  margin-top: 15px;
-}
-
-.hashes{
-  background-color: #f5f5f5;
-  color: rgb(119, 119, 119);
-  margin-right: 15px;
-  border-radius: 3px;
-  font-size: 14px;
-  padding: 2px 10px;
-}
-
-.keyword-del{
-  cursor: pointer;
-  font-size: 12px;
-}
-
-input[type="text"] {
-  display: inline-block;
-  width: 80%;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 16px 20px;
-  background: #fff;
-  border: 1px solid var(--color-whiteGray);
-  border-radius: 4px;
-  box-sizing: border-box;
-  vertical-align: top;
-  margin-bottom: 10px;
-}
-
-input[type="number"] {
-  display: inline-block;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 16px 20px;
-  background: #fff;
-  border: 1px solid var(--color-whiteGray);
-  border-radius: 4px;
-  box-sizing: border-box;
-  vertical-align: top;
-  margin-bottom: 10px;
-}
-
-select {
+input[type="text"], input[type="number"], input[type="file"] {
   display: inline-block;
   width: 70%;
   font-size: 13px;
   line-height: 20px;
-  padding: 16px 20px;
+  padding: 8px 20px;
   background: #fff;
-  border: 1px solid var(--color-whiteGray);
+  border: 1px solid #dddddd;
   border-radius: 4px;
   box-sizing: border-box;
   vertical-align: top;
+  margin-bottom: 10px;
 }
 
-table th{
-  vertical-align: top;
+table{
+  /* border-top: 1px solid gray;
+  border-bottom: 1px solid gray; */
+  padding: 10px;
+  font-size: 0.8rem;
+}
+
+tr{
+  /* border: 1px solid gray; */
+  height: 50px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+td{
+  /* border: 1px solid gray; */
+  padding: 10px;
+  width:800px;
+}
+
+th{
+  padding: 10px;
+  vertical-align:middle;
+  width:150px;
+}
+
+select{
+  padding: 10px;
 }
 
 .cke_contents{ 
-  min-height:550px; 
+  min-height:300px; 
+  min-width: 500px;
 } 
 
-.btn-outline-danger{
-  margin-left: 4px;
+.filebox .uploadThumb {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  width: 78%;
+  color: #999999;
+}
+
+.filebox label {
+  display: inline-block;
+    padding: 7px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    position: relative;
+    top: -5px;
+}
+
+.filebox label:hover{
+  transition-duration: 0.5s;
+  color: #fff;
+  background-color: #ccc;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 3px;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+input[type='radio'] + label {
+  border: 1px solid #f6bb43;
+  width: 100px;
+  margin-right:-6px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.btn-group{
+  width:500px;
+}
+
+input[type='radio']:checked + label {
+  border: 1px solid #ccc;
+  background-color: #f6bb43;
+  transition-duration: 0.5s;
+  width: 100px;
+  margin-right:-6px;
+  padding: 10px 20px;
+}
+
+.btnAdd{
+  border-radius: 5px;
+  border: 1px solid #0067A3;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#0067A3;
+}
+
+.btnAdd:hover{
+  background-color: #0067A3;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.btnDel{
+  border-radius: 5px;
+  border: 1px solid #D94844;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#D94844;
+}
+
+.btnDel:hover{
+  background-color: #D94844;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.subBtn{
+  border-radius: 5px;
+  border: 1px solid #00ce7c;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#00ce7c;
+  width: 500px;
+}
+
+.subBtn:hover{
+  background-color: #00ce7c;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.table-schedule{
+  text-align: center;
 }
 
 .td-submit{
   text-align: center;
-}
-.submitBtn{
-  width:600px;
-  display: inline-block;
-}
-
-.add-option-btn{
-  width:600px;
 }

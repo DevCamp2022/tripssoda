@@ -457,6 +457,7 @@ body{
 .main-accomTitle>div{
     text-align: left;
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 
@@ -486,7 +487,7 @@ body{
     font-weight: 500;
     line-height: 22px;
     text-align: left;
-    height: 34px;
+    height: 24px;
     overflow: hidden;
     text-overflow: ellipsis;
     overflow-wrap: break-word;
@@ -569,8 +570,8 @@ div.bx-viewport{
 /* 내용 */
 .list-content-line {
     width: 282px;
-    height: 19px;
-    margin: 9px 0 0 0;
+    height: 24px;
+    /*margin: 9px 0 0 0;*/
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -606,6 +607,8 @@ div.bx-viewport{
     height: 15px;
     margin-left: 75px;
     margin-top: 2px;
+    display: flex;
+    align-items: center;
 }
 /* 조회수 아이콘 */
 .view-cnt-icon {
@@ -622,7 +625,7 @@ div.bx-viewport{
     width:40px;
     color: rgb(154,154,154);
     margin-left: 4px;
-    padding-bottom: 15px;
+    /*padding-bottom: 15px;*/
 }
 
 /**************/
@@ -941,4 +944,11 @@ div#wrap{
 .slide-wrap{
     display: flex;
     justify-content: center;
+}
+
+.promotion p{
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

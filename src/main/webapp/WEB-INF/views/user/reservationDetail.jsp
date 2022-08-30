@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<title>계정 관리</title>
+<title>예약 상세</title>
 <link rel="stylesheet" href="<c:url value="/css/user/reservationDetail.css"/>">
     <script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 

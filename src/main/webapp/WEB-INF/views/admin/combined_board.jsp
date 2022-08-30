@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="/css/admin/combined_board.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-
+<script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 
 <script>
     let msg = "${msg}";
@@ -103,13 +103,13 @@
             </c:if>
             <c:if test="${totalCnt!=null && totalCnt!=0}">
                 <c:if test="${ph.showPrev}">
-                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.beginPage-1)}&menuCode=${param.menuCode}"/>">&lt;</a>
+                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.beginPage-1)}&menuCode=${param.menuCode}"/>"><i class="fa-solid fa-circle-arrow-left"></i></a>
                 </c:if>
                 <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
                     <a class="page ${i==ph.sc.page? "paging-active" : ""}" href="<c:url value="/admin/boardList${ph.sc.getQueryString(i)}&menuCode=${param.menuCode}"/>">${i}</a>
                 </c:forEach>
                 <c:if test="${ph.showNext}">
-                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.endPage+1)}&menuCode=${param.menuCode}"/>">&gt;</a>
+                    <a class="page" href="<c:url value="/admin/boardList${ph.sc.getQueryString(ph.endPage+1)}&menuCode=${param.menuCode}"/>"><i class="fa-solid fa-circle-arrow-right"></i></a>
                 </c:if>
             </c:if>
         </div>

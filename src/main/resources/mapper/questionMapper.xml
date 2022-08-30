@@ -10,11 +10,28 @@
     </select>
 
     <select id="selectAllUserQuestion" parameterType="map" resultType="QuestionDto">
-        SELECT *
-        FROM question
-        WHERE user_id = #{userId}
+        SELECT q.id,
+               q.user_id,
+               q.nickname,
+               q.title,
+               q.content,
+               q.hashtag,
+               q.ans_cnt,
+               q.view_cnt,
+               q.status,
+               q.report_cnt,
+               q.region_code,
+               q.deleted_at,
+               q.created_at,
+               q.created_by,
+               q.updated_at,
+               q.updated_by,
+               c.city_name AS cityName
+        FROM question AS q
+        LEFT JOIN city_code AS c ON q.region_code = c.region_code
+        WHERE q.user_id = #{userId}
         ORDER BY id DESC
-            LIMIT #{sc.offset}, #{sc.pageSize}
+        LIMIT #{sc.offset}, #{sc.pageSize}
     </select>
 
     <select id="selectAllUserQuestionCnt" parameterType="int" resultType="int">

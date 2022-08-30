@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<title>회원가입 유형 선택</title>
+<title>로그인 유형 선택</title>
 <link rel="stylesheet" href="<c:url value="/css/user/selectLoginType.css"/>">
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 

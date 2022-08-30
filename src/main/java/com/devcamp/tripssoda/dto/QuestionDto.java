@@ -25,14 +25,6 @@ public class QuestionDto {
     private Integer updatedBy;
     private String profileImg;
 
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
     public String getProfileImg() {
         return profileImg;
     }
@@ -48,6 +40,14 @@ public class QuestionDto {
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public Integer getId() {

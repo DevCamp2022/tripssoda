@@ -10,6 +10,7 @@ public class AccompanyDto {
     private Integer userId;
     private String nickname;
     private String regionCode;
+    private String cityName;
     private Date startAt;
     private Date endAt;
     private String thumbnail;
@@ -29,8 +30,6 @@ public class AccompanyDto {
     private Date updatedAt;
     private int updatedBy;
     private String profileImg;
-
-    private String cityName;
 
     public AccompanyDto() {}
 

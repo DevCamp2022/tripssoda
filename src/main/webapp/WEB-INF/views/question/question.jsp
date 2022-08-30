@@ -15,6 +15,8 @@
     let msg = "${msg}";
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="SELECT_OK") alert("답변채택이 완료되었습니다.")
+    if(msg=="SELECT_ERR") alert("답변채택이 실패하였습니다. 다시 시도해 주세요.");
 </script>
 <form id="form" action="" method="">
     <input type="hidden" name="id" value="${questionDto.id}">
@@ -22,6 +24,7 @@
     <input type="hidden" name="pageSize" value="${pageSize}">
     <input type="hidden" name="sessionId" value="${sessionScope.id}">
     <input type="hidden" name="memberId" value="${questionDto.userId}">
+    <input type="hidden" name="answerStatus" value="${questionDto.status}">
 
 <%--    <input type="hidden" name="title" value="${questionDto.title}">--%>
 <%--    <input type="hidden" name="regionCode" value="${questionDto.regionCode}">--%>
@@ -61,7 +64,7 @@
                             지역
                         </div>
                         <div class="region-selected">
-                            ${questionDto.regionCode}
+                            ${questionDto.cityName}
                         </div>
                     </div>
                 </div>
@@ -147,10 +150,30 @@
                         <div class="profile-icon">
 
                         </div>
-                        <div class="profile-text">
-                            답변을 작성해주세요!
-<%--                            프로필 사진을 클릭해보세요!--%>
-                        </div>
+                        <c:if test="${sessionScope.id ne questionDto.userId}">
+                            <c:if test="${questionDto.status eq 0}">
+                                <div class="profile-text">
+                                    답변을 작성해주세요!
+                                </div>
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <div class="profile-text2">
+                                    답변이 채택되었습니다.
+                                </div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${sessionScope.id eq questionDto.userId}">
+                            <c:if test="${questionDto.status eq 0}">
+                                <div class="profile-text">
+                                    답변을 채택해주세요!
+                                </div>
+                            </c:if>
+                            <c:if test="${questionDto.status eq 1}">
+                                <div class="profile-text2">
+                                    답변이 채택되었습니다.
+                                </div>
+                            </c:if>
+                        </c:if>
                     </div>
                     <c:if test="${sessionScope.id ne questionDto.userId}">
                         <c:if test="${questionDto.status eq 0}">
@@ -244,13 +267,13 @@
             $.ajax({
                 type:'POST',       // 요청 메서드
                 url: '/answers?questionId='+questionId,  // 요청 URI // /ch4/comments?bno=1085 POST
-                headers : { "content-type": "application/json"}, // 요청 헤더
+                headers : { "content-type": "application/json; charset:UTF-8" }, // 요청 헤더
                 data : JSON.stringify({questionId:questionId, content:comment}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success : function(result){
                     alert(result);
                     showList(questionId);
                 },
-                error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
+                error   : function(){ alert("작성 실패") } // 에러가 발생했을 때, 호출될 함수
             }); // $.ajax()
         });
 
@@ -278,13 +301,16 @@
         $("#commentList").on("click", ".delBtn", function(){
             let id = $(this).parent().attr("data-id");
             let questionId = $(this).parent().attr("data-questionId");
+            if(!confirm('정말로 삭제하시겠습니까?')) return;
 
             $.ajax({
                 type:'DELETE',
                 url: '/answers/'+id+'?questionId='+questionId,  // 요청 URI
                 success : function(result){
-                    alert(result)
+                    // alert(result)
+                    alert('성공적으로 삭제되었습니다.');
                     showList(questionId);
+                    location.reload();
                 },
                 error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
             }); // $.ajax()
@@ -293,6 +319,7 @@
 
     $("#commentList").on("click", ".select-answer-btn", function(){
         let form = $("#form");
+        if(!confirm('답변을 채택하시겠습니까?')) return;
         form.attr("action", "<c:url value='/question/answer/select'/>");
         form.attr("method", "post");
         form.submit();
@@ -324,12 +351,17 @@
 
             let sessionId = $("input[name=sessionId]").val();
             let memberId = $("input[name=memberId]").val();
+            let answerStatus = $("input[name=answerStatus]").val();
 
             tmp += '<div class="repeat-answer-container" data-id='+comment.id
             tmp += ' data-questionId='+comment.questionId + '>'
             tmp += ' <div class="repeat-answer"><div class="answer-profile-img"><img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/'+ comment.profileImg +'"></div>'
             tmp += ' <div><span class="commenter">' + comment.nickname + '</span>'
-            tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div></div>'
+            tmp += ' <div class="comment-date">' + dateToString(comment.createdAt) + '</div></div>'
+
+            <%--tmp += ' <div class="answer-select"><img class="answer-select-img" src="${pageContext.request.contextPath}/image/question/answer-select.svg"></div>'--%>
+            tmp += ' </div>'
+
             tmp += ' <div class="comment">' + comment.content + '</div>'
 <%--            <c:if test="${sessionScope.id eq answerDto.userId}">--%>
             if(sessionId==comment.userId) {
@@ -339,7 +371,9 @@
             }
 <%--            </c:if>--%>
             if(sessionId==memberId) {
-            tmp += '<button class="select-answer-btn" type="button">채택하기</button>'
+                if(answerStatus==0) {
+                    tmp += '<button class="select-answer-btn" type="button">채택하기</button>'
+                }
             }
             tmp += '<div class="only-line"></div>'
             tmp += '</div>'

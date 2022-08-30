@@ -23,4 +23,6 @@ public interface AccompanyMapper {
     public int selectUserAccompanyCntToday(Integer userId);
     public List<AccompanyDto> waitingSelectPage(Map map) throws Exception;
     public int waitingCount() throws Exception;
+
+    List<AccompanyDto> selectAccompanyForMain(Map map);
 }

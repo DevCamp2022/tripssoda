@@ -17,14 +17,13 @@ public class QuestionDto {
     private Integer status;
     private Integer reportCnt;
     private String regionCode;
+    private String cityName;
     private Date deletedAt;
     private Date createdAt;
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
     private String profileImg;
-
-    private String cityName;
 
     public String getProfileImg() {
         return profileImg;

@@ -16,13 +16,15 @@ public class QuestionDto {
     private Integer viewCnt;
     private Integer status;
     private Integer reportCnt;
-    private Integer regionCode;
+    private String regionCode;
     private Date deletedAt;
     private Date createdAt;
     private Integer createdBy;
     private Date updatedAt;
     private Integer updatedBy;
     private String profileImg;
+
+    private String cityName;
 
     public String getProfileImg() {
         return profileImg;
@@ -39,6 +41,14 @@ public class QuestionDto {
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public Integer getId() {
@@ -121,11 +131,11 @@ public class QuestionDto {
         this.reportCnt = reportCnt;
     }
 
-    public Integer getRegionCode() {
+    public String getRegionCode() {
         return regionCode;
     }
 
-    public void setRegionCode(Integer regionCode) {
+    public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
     }
 

@@ -23,7 +23,7 @@
             </div>
             <c:forEach var="questionDto" items="${questionDtoList}">
                 <div class="question-info">
-                    <span class="place">여행지역 넣어야 함</span>
+                    <span class="place">${questionDto.cityName}</span>
                     <span class="answer-status">${questionDto.status=="1" ? "답변완료" : "답변대기"}</span>
                     <div class="question-title"><a href="/question/read?id=${questionDto.id}">${questionDto.title}</a></div>
                     <div class="hashtag-wrap">

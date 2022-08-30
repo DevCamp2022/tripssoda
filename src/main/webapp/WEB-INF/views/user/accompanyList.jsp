@@ -25,7 +25,7 @@
                         <span class="status">${accompanyDto.status == "0" ? "모집중" : "모집 완료"}</span>
                         <span class="accompany-title"><a href="/accompany/read?id=${accompanyDto.id}">${accompanyDto.title}</a></span>
                         <div class="region-and-date">
-                            <i class="fa-solid fa-location-dot"></i><span class="region">제주도</span>
+                            <i class="fa-solid fa-location-dot"></i><span class="region">${accompanyDto.cityName}</span>
                             <span class="start-date"><fmt:formatDate value="${accompanyDto.startAt}" pattern="yyyy-MM-dd"/> ~</span>
                             <span class="end-date"><fmt:formatDate value="${accompanyDto.endAt}" pattern="yyyy-MM-dd"/></span>
                         </div>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<title>내 동행 게시글</title>
+<title>1:1 문의글</title>
 <link rel="stylesheet" href="<c:url value="/css/user/inquiryForm.css"/>">
 <script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
 

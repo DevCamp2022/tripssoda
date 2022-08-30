@@ -90,6 +90,9 @@ body {
     font-size: 14px;
     padding-left: 10px;
 }
+.place > i {
+    padding-right: 7px;
+}
 .answer-status {
     float: right;
     padding-right: 10px;

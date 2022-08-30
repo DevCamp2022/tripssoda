@@ -453,9 +453,9 @@ public class AdminController {
             return new ResponseEntity<String>("이메일 전송 중 에러가 발생했습니다.", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
-        return new ResponseEntity<String>(count+"명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders,HttpStatus.OK);
+        return new ResponseEntity<String>(count + "명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders, HttpStatus.OK);
     }
-
+    
     @GetMapping("/inquiry/reply")
     public String inquiryReply(Model m, SearchCondition searchCondition) {
         m.addAttribute("searchCondition", searchCondition);

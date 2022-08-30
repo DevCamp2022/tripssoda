@@ -57,7 +57,10 @@ body {
 .btn {
     background-color: #00ce7c;
     color: white;
+    border: none;
+    border-radius: 8px;
     font-weight: 500;
+    padding: 5px 10px;
 }
 .reply-textarea {
     width: 100%;

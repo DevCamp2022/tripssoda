@@ -23,7 +23,7 @@ div.search-wrap{
 }
 
 table.board-table {
-width: 100%;
+    width: 100%;
 }
 table.board-table th{
     border: 1px none black;
@@ -127,5 +127,5 @@ div.paging a{
 }
 
 input[name='keyword']:focus{
-outline: none;
+    outline: none;
 }

@@ -10,6 +10,7 @@ body{
     height: auto;
     /*color: black;*/
     color:#3D3D3D;
+    margin-bottom: 60px;
 }
 
 .combined-wrap th{
@@ -40,6 +41,10 @@ body{
     /*width: 100%;*/
 }
 
+.combined-list-tb select {
+    margin: 10px;
+}
+
 .combined-wrap .titb{
     padding: 10px 3px;
     text-align: center;
@@ -56,7 +61,7 @@ body{
 }
 
 .combined-wrap .tit{
-    padding: 10px 0px;
+    padding: 10px 20px;
     text-align: center;
     /*background: lightgreen;*/
     /*background-color: rgb(22, 22, 22);*/
@@ -109,7 +114,6 @@ body{
     line-height: 30px;
     padding: 10px 0px;
 
-
 }
 
 .con.contitle{
@@ -126,8 +130,15 @@ body{
 .con.contitle.ellipsis {
     width: 200px;
     height: inherit;
-    overflow: hidden;
     text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.con.contitle.ellipsis > a {
+    text-overflow: ellipsis;
+    overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -197,8 +208,16 @@ body{
 .paging-container{
     display: flex;
     justify-content: center;
+    margin: 40px auto;
 }
-
+.page {
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    color: #00ce7c;
+    font-weight: bold;
+}
 
 .frm .contit{
     /*width: 840px;*/

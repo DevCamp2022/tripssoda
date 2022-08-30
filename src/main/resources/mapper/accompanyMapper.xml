@@ -66,7 +66,7 @@
     <select id="waitingCount" resultType="int">
         SELECT count(*)
         FROM accompany
-        WHERE status = 0
+        WHERE date(end_at) >= date(DATE_FORMAT(now(), '%Y-%m-%d'))
     </select>
     <insert id="insert" parameterType="AccompanyDto">
 	    INSERT INTO accompany (user_id, nickname, profile_img, region_code, start_at, end_at, thumbnail, title, content,
@@ -74,13 +74,24 @@
 	    VALUES(#{userId}, #{nickname}, #{profileImg}, #{regionCode}, #{startAt}, #{endAt}, #{thumbnail}, #{title}, #{content},
                #{memberCnt}, #{hashtag}, #{chatUrl}, now(), #{createdBy})
     </insert>
-    <select id="select" parameterType="int" resultType="AccompanyDto">
-        SELECT *
-        FROM accompany AS a
-        LEFT OUTER JOIN city_code AS c
-        ON a.region_code = c.region_code
-        WHERE id = #{id}
-    </select>
+
+        <select id="select" parameterType="int" resultType="AccompanyDto">
+            SELECT *
+            FROM accompany AS a
+             LEFT OUTER JOIN city_code AS c
+             ON a.region_code = c.region_code
+             INNER JOIN user_info AS u
+            ON a.user_id = u.id
+            WHERE a.id = #{id};
+        </select>
+<!--    08.31 JOIN으로 gender, birth 가져오기 전 쿼리문 -->
+<!--    <select id="select" parameterType="int" resultType="AccompanyDto">-->
+<!--        SELECT *-->
+<!--        FROM accompany AS a-->
+<!--                 LEFT OUTER JOIN city_code AS c-->
+<!--                                 ON a.region_code = c.region_code-->
+<!--        WHERE id = #{id}-->
+<!--    </select>-->
     <!--    SET region_code = #{regionCode}, start_at = #{startAt}, end_at = #{endAt}, thumbnail = #{thumbnail},-->
     <!--    title = #{title}, content = #{content}, member_cnt = #{memberCnt}, hashtag = #{hashtag}, updated_by = #{userId}, updated_at = now()-->
     <update id="update" parameterType="AccompanyDto">
@@ -109,7 +120,7 @@
         FROM accompany AS a
         LEFT OUTER JOIN city_code AS c
         ON a.region_code = c.region_code
-        WHERE status = 0
+        WHERE date(end_at) >= date(DATE_FORMAT(now(), '%Y-%m-%d'))
         <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
@@ -135,6 +146,15 @@
         SET status = #{status}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
+
+<!--    08.31 작성. accompany와 user_info 테이블을 조인해서 gender, birthday를 가져오기 위한 select -->
+    <select id="selectFromUserInfo" >
+      SELECT * FROM accompany AS a
+      JOIN user_info AS u
+      ON a.user_id = u.id
+      WHERE a.user_id = #{userId}
+    </select>
+
 
 <!--    08.29 추가 작업 예정-->
     <select id="searchSelectPage" parameterType="map" resultType="AccompanyDto">

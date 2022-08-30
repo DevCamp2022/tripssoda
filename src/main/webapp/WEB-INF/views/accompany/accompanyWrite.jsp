@@ -25,20 +25,19 @@
 <form id="form" action="" method="">
     <div class="main-group">
         <div class="upload-img">
-
-            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf" >
+            <label for="uploadThumb" class="input-upload-replace" ><div class="upload-img-wrap"><img class="upload-img-tag" src="${pageContext.request.contextPath}/image/accompany/upload.png"/></div></label>
+            <input type="file" name="uploadThumb" id="uploadThumb" class="input-upload" style="display: none">
 <%--            <input type="file" name="uploadThumb" id="uploadThumb" class="sdfadsf" value="${accompanyDto.thumbnail}">--%>
 
             <div class="div-thumbnail">
                 <c:if test="${mode ne 'new'}">
-                    <img width="1200px" height="400px" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}">
+                    <img src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}">
                 </c:if>
             </div>
 <%--            <c:if test="${accompanyDto.thumbnail eq null}">--%>
 <%--                <img width="1200px" height="400px" src="${pageContext.request.contextPath}/image/thumbnail/default.webp">--%>
 <%--            </c:if>--%>
-
-</div>
+        </div>
         <div class="select-region-box">
             <select id="area1" name="area1" class="area1" onChange="cat1_change(this.value,area2)" required>
                 <option disabled>-선택-</option>
@@ -227,7 +226,7 @@
             reader.onload = function(e){
                 let newImg = document.createElement('img');
                 newImg.setAttribute("src", e.target.result);
-                newImg.setAttribute("width",1200);
+                // newImg.setAttribute("width",1200);
                 newImg.setAttribute("height", 400);
                 $(".div-thumbnail").html(newImg);
             }

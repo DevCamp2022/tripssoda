@@ -4,6 +4,7 @@ import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+import org.apache.ibatis.javassist.Loader;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping("/accompany")
@@ -93,21 +92,24 @@ public class AccompanyController {
 
             List<AccompanyDto> list = accompanyService.waitingGetPage(map);
 
-//            SimpleDateFormat df = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-
-//            String format_time2 = df.format();
-
-
+//            System.out.println("list.size() = " + list.size());
+//            List<AccompanyDto> list2 = new ArrayList<>();
+//
 //            Date today = new Date();
-//            System.out.println("list.get(0).getEndAt() = " + list.get(0).getEndAt());
-//            System.out.println("today = " + today.getTime());
-//            System.out.println("df.format(list.get(i).getEndAt()) = " + df.format(list.get(0).getEndAt()));
-
-//            for (int i = 0; i <= list.size()-1; i++) {
-//                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
-//                    accompanyService.updateStatus(list.get(i).getId(), df.format(list.get(i).getEndAt()));
+//            for (int i = 0; i < list.size(); i++) {
+//                if(list.get(i).getEndAt().getTime()<today.getTime()) {
+//                    list.get(i).setStatus(1);
 //                }
+//                System.out.println("list.get(0) = " + list.get(0));
+//                System.out.println("list.get(0).getStatus() = " + list.get(0).getStatus());
+//                boolean a = list.get(0).getStatus()==0;
+//                System.out.println("a = " + a);
+//                if(list.get(i).getStatus()==0) {
+//                    list2.add(list.get(i));
+//                }
+//                System.out.println("list2.get(0) = " + list2.get(0).getStatus());
 //            }
+//            System.out.println("list2.size() = " + list2.size());
 
             m.addAttribute("mode", "waiting");
             m.addAttribute("ph", ph);
@@ -220,7 +222,8 @@ public class AccompanyController {
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
             accompanyDto.setHashtag("아무나다좋아");
-        String[] hashList = accompanyDto.getHashtag().split(" ");
+        String replaceHashtag = accompanyDto.getHashtag().trim().replaceAll(" +", " ");
+        String[] hashList = replaceHashtag.split(" ");
         //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
         String hashtag2 = "";
         for(String hashtag : hashList) {
@@ -295,16 +298,44 @@ public class AccompanyController {
     public String read(Integer id, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         AccompanyDto accompanyDto = null;
 
+
         try {
             accompanyDto = accompanyService.read(id);
+
+            //성별을 구한다.
+            String genderPrev = accompanyDto.getGender();
+            String genderNext = "";
+            if(genderPrev.equals("M")) {
+                genderNext = "남성";
+            } else {
+                genderNext = "여성";
+            }
+
+            //나이대를 구한다.
+            SimpleDateFormat df = new SimpleDateFormat("yyyy");
+            Date birthday = accompanyDto.getBirthday();
+            String birthdayStr = df.format(birthday);
+            Integer birthInt = Integer.valueOf(birthdayStr);
+            Integer age = 2022 - birthInt + 1;
+            age = age/10*10;
+            String finalAge = age+"대";
+
+            //성별, 나이를 해시태그에 setter로 저장.
+            String finalHashtag = "#"+ genderNext + " #" + finalAge + " " + accompanyDto.getHashtag();
+            accompanyDto.setHashtag(finalHashtag);
             System.out.println("id = " + id);
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             System.out.println("accompanyDto.getStatus() = " + accompanyDto.getStatus());
 //            accompanyService.updateStatus(id, accompanyDto.getEndAt());
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
             Date today = new Date();
-            System.out.println("today = " + today.getTime());
-            if(accompanyDto.getEndAt().getTime()<=today.getTime()) {
+            Date sqlDateToday = new java.sql.Date(today.getTime());
+            Date sqlDateEndAt = new java.sql.Date(accompanyDto.getEndAt().getTime());
+
+            long subtractGetTime = sqlDateToday.getTime() - sqlDateEndAt.getTime();
+            System.out.println("subtractGetTime = " + subtractGetTime);
+            if(accompanyDto.getEndAt().getTime()+(60*60*24*1000)<=today.getTime()) {
+//            if(subtractGetTime > 0) {
                 accompanyDto.setStatus(1);
             }
 
@@ -355,7 +386,7 @@ public class AccompanyController {
 
             Date today = new Date();
             for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+                if(list.get(i).getEndAt().getTime()+(60*60*24*1000)<=today.getTime()) {
                     list.get(i).setStatus(1);
                 }
             }

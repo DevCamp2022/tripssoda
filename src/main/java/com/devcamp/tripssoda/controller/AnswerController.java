@@ -41,7 +41,6 @@ public class AnswerController {
             return new ResponseEntity<>("MOD_ERR", HttpStatus.BAD_REQUEST);
         }
     }
-
     @PostMapping("/answers")
     public ResponseEntity<String> write(@RequestBody AnswerDto dto, Integer questionId, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("id");

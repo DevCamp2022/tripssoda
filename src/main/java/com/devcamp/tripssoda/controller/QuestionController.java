@@ -61,7 +61,7 @@ public class QuestionController {
 //    }
 
     @GetMapping("/waiting")
-    public String waitingList(Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
+    public String waitingList(String option, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         //로그인 구현되면 주석 풀고 수정.
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
@@ -77,6 +77,7 @@ public class QuestionController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<QuestionDto> list = questionService.waitingGetPage(map);
             m.addAttribute("mode", "waiting");
@@ -133,13 +134,10 @@ public class QuestionController {
     }
 
     @PostMapping("/modify")
-    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
-        System.out.println("result = " + result);
-        //userId는 인조식별자
+    public String modify(QuestionDto questionDto, BindingResult result, Integer page, Integer pageSize, String area3, Model m, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        int writer = 43;
-        System.out.println("questionDto = " + questionDto);
         questionDto.setUserId(writer);
+        questionDto.setRegionCode(area3);
 
 
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
@@ -166,9 +164,6 @@ public class QuestionController {
             if(rowCnt!=1)
                 throw new Exception("Modify Failed");
             rattr.addFlashAttribute("msg", "MOD_OK");
-            if(toURL != null) {
-                return "redirect:" + toURL;
-            }
             return "redirect:/question/list";
         } catch (Exception e) {
             e.printStackTrace();
@@ -197,9 +192,14 @@ public class QuestionController {
     }
 
     @PostMapping("/write")
-    public String write(QuestionDto questionDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
+    public String write(String area1, String area2, String area3, QuestionDto questionDto, BindingResult result, Model m, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        int writer = 43;
+        System.out.println("area1 = " + area1);
+        System.out.println("area2 = " + area2);
+        System.out.println("area3 = " + area3);
+
+        questionDto.setRegionCode(area3);
+
         String email = (String) session.getAttribute("email");
         UserDto userDto = userService.selectUserByEmail(email);
         String nickname = userDto.getNickname();
@@ -286,17 +286,18 @@ public class QuestionController {
             int rowCnt = questionService.updateStatus(questionDto);
 //            questionDto = questionService.read(id);
 
-
             if(rowCnt!=1)
                 throw new Exception("Select Failed");
             rattr.addAttribute("id", questionDto.getId());
             rattr.addAttribute("page", page);
             rattr.addAttribute("pageSize", pageSize);
+            rattr.addFlashAttribute("msg", "SELECT_OK");
             System.out.println("questionDto = " + questionDto);
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute(questionDto);
+            m.addAttribute("msg", "SELECT_OK");
             System.out.println("questionDto = " + questionDto);
 
 //            System.out.println("id = " + id);
@@ -326,7 +327,7 @@ public class QuestionController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
         //로그인 구현되면 주석 풀고 수정.
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
@@ -342,6 +343,7 @@ public class QuestionController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<QuestionDto> list = questionService.getPage(map);
             m.addAttribute("ph", ph);

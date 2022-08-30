@@ -41,9 +41,24 @@
     </select>
 
     <sql id="selectFromAccompany">
-        SELECT id, user_id, nickname, profile_img, region_code, start_at, end_at, thumbnail, title, content, member_cnt, hashtag, chat_url, created_at, view_cnt
+        SELECT *
         FROM accompany
     </sql>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="time"'>
+                ORDER BY created_at DESC, id DESC
+            </when>
+            <when test='option=="view"'>
+                ORDER BY view_cnt DESC, id DESC
+            </when>
+            <otherwise>
+                ORDER BY created_at DESC, id DESC
+            </otherwise>
+        </choose>
+    </sql>
+
     <select id="count" resultType="int">
         SELECT count(*)
         FROM accompany
@@ -60,14 +75,17 @@
                #{memberCnt}, #{hashtag}, #{chatUrl}, now(), #{createdBy})
     </insert>
     <select id="select" parameterType="int" resultType="AccompanyDto">
-        <include refid="selectFromAccompany"/>
+        SELECT *
+        FROM accompany AS a
+        LEFT OUTER JOIN city_code AS c
+        ON a.region_code = c.region_code
         WHERE id = #{id}
     </select>
     <!--    SET region_code = #{regionCode}, start_at = #{startAt}, end_at = #{endAt}, thumbnail = #{thumbnail},-->
     <!--    title = #{title}, content = #{content}, member_cnt = #{memberCnt}, hashtag = #{hashtag}, updated_by = #{userId}, updated_at = now()-->
     <update id="update" parameterType="AccompanyDto">
         UPDATE accompany
-        SET title = #{title}, content = #{content}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}, thumbnail = #{thumbnail}
+        SET title = #{title}, content = #{content}, start_at = #{startAt}, end_at = #{endAt}, hashtag = #{hashtag}, chat_url = #{chatUrl}, member_cnt = #{memberCnt}, thumbnail = #{thumbnail}, region_code = #{regionCode}
         WHERE id = #{id} AND user_id = #{userId}
     </update>
     <delete id="delete" parameterType="map">
@@ -87,14 +105,32 @@
         ORDER BY created_at DESC, id DESC
     </select>
     <select id="waitingSelectPage" parameterType="map" resultType="AccompanyDto">
-        <include refid="selectFromAccompany"/>
+        SELECT *
+        FROM accompany AS a
+        LEFT OUTER JOIN city_code AS c
+        ON a.region_code = c.region_code
         WHERE status = 0
-        ORDER BY created_at DESC, id DESC
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
     <select id="selectPage" parameterType="map" resultType="AccompanyDto">
-        <include refid="selectFromAccompany"/>
-        ORDER BY created_at DESC, id DESC
+        SELECT *
+        FROM accompany AS a
+        LEFT OUTER JOIN city_code AS c
+        ON a.region_code = c.region_code
+        WHERE true
+        <include refid="searchCondition"/>
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+<!--    08.29 추가 작업 예정-->
+    <select id="searchSelectPage" parameterType="map" resultType="AccompanyDto">
+        SELECT *
+        FROM accompany AS a
+        LEFT OUTER JOIN city_code AS c
+        ON a.region_code = c.region_code
+        WHERE true
+        <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
 
@@ -104,6 +140,11 @@
         FROM accompany
         WHERE user_id = #{userId} and date(created_at) = date(now());
     </select>
-
+<!--메인 보여줄 목록 -->
+    <select id="selectAccompanyForMain" parameterType="map" resultType="AccompanyDto">
+        <include refid="selectFromAccompany"/>
+        ORDER BY created_at DESC, id DESC
+        LIMIT 0, 4
+    </select>
 
 </mapper>

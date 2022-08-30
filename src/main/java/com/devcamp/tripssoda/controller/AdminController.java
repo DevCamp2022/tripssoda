@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,18 +35,22 @@ public class AdminController {
     @Autowired
     private final IpBanListMapper ipBanListMapper = null;
 
+    private final AdminEmailService adminEmailService;
+
     public AdminController(AdminBoardService adminBoardService,
                            AdminUserService adminUserService,
                            UserService userService,
                            AdminProductService adminProductService,
                            ProductService productService,
-                           InquiryService inquiryService, InquiryService inquiryService1)
+                           InquiryService inquiryService,
+                           AdminEmailService adminEmailService)
     {
         this.adminBoardService = adminBoardService;
         this.adminUserService = adminUserService;
         this.userService = userService;
         this.adminProductService = adminProductService;
         this.productService = productService;
+        this.adminEmailService = adminEmailService;
         this.inquiryService = inquiryService1;
     }
 
@@ -424,6 +429,31 @@ public class AdminController {
         return "admin/inquiry_content.subTiles";
     }
 
+    @GetMapping("/email/sender")
+    public String adminEmailSender(){
+        return "admin/email_sender.subTiles";
+    }
+
+    @PostMapping("/email/send")
+    @ResponseBody
+    public ResponseEntity<String> sendEmail(HttpSession session, String receiver, String title, String content){
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+
+        Integer userId = (Integer) session.getAttribute("id");
+        Integer count = 0;
+
+        System.out.println("receiver = " + receiver);
+        System.out.println("title = " + title);
+        System.out.println("content = " + content);
+        try {
+            count = adminEmailService.sendMultipleEmail(userId, receiver, title, content);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("이메일 전송 중 에러가 발생했습니다.", responseHeaders,HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+        return new ResponseEntity<String>(count+"명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders,HttpStatus.OK);
     @GetMapping("/inquiry/reply")
     public String inquiryReply(Model m, SearchCondition searchCondition) {
         m.addAttribute("searchCondition", searchCondition);

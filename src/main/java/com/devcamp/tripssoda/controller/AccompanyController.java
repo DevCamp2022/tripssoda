@@ -2,22 +2,23 @@ package com.devcamp.tripssoda.controller;
 
 import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
+import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
-import com.devcamp.tripssoda.util.annotations.AuthChecking;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,10 +28,11 @@ import java.util.Map;
 @Controller
 @RequestMapping("/accompany")
 public class AccompanyController {
-//    @InitBinder
-//    public void hashtag(WebDataBinder binder) {
-//        binder.registerCustomEditor(String[].class, "hashtag", new StringArrayPropertyEditor(" "));
-//    }
+    @InitBinder
+    public void hashtag(WebDataBinder binder) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
+    }
 
     AccompanyService accompanyService;
     UserService userService;
@@ -42,7 +44,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/waiting")
-    public String waitingList(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String waitingList(String option, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 //
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
@@ -56,6 +58,7 @@ public class AccompanyController {
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.waitingGetPage(map);
             m.addAttribute("mode", "waiting");
@@ -72,11 +75,16 @@ public class AccompanyController {
 
     @PostMapping("/modify")
     public String modify(@RequestParam MultipartFile uploadThumb, HttpServletRequest request, AccompanyDto accompanyDto, BindingResult result,
-                           Integer page, Integer pageSize, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
+                         Integer page, Integer pageSize, Date startAt, Date endAt, String area3, String toURL, Model m, HttpSession session, RedirectAttributes rattr) {
         System.out.println("result = " + result);
         Integer writer = (int) session.getAttribute("id");
-
+        //매개변수로 받지 않아도 dto로 자동으로 받는다.
+        System.out.println("accompanyDto.getMemberCnt() = " + accompanyDto.getMemberCnt());
+        accompanyDto.setRegionCode(area3);
         accompanyDto.setUserId(writer);
+        accompanyDto.setStartAt(startAt);
+        accompanyDto.setEndAt(endAt);
+
         //유효성 검사를 추가 해야 한다.
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
@@ -125,13 +133,14 @@ public class AccompanyController {
     }
 
     @GetMapping("/modify")
-    public String modify(Integer id, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String modify(Integer id, Integer page, Date startAt, Date endAt, Integer pageSize, Model m, HttpServletRequest request) {
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURL();
         AccompanyDto accompanyDto = null;
         try {
             accompanyDto = accompanyService.read(id);
-            System.out.println("accompanyDto = " + accompanyDto);
+            System.out.println("accompanyDto.getStartAt() = " + accompanyDto.getStartAt());
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
             m.addAttribute(accompanyDto);
@@ -141,22 +150,22 @@ public class AccompanyController {
         return "accompany/accompanyWrite.mainTiles";
     }
 
-
     @PostMapping("/write")
-    public String write(AccompanyDto accompanyDto, BindingResult result, Model m,
+    public String write(AccompanyDto accompanyDto, BindingResult result, Integer memberCnt, @Valid Date startAt, @Valid Date endAt, String area3, Model m,
                         @RequestParam MultipartFile uploadThumb, HttpServletRequest request, HttpSession session, RedirectAttributes rattr) {
         Integer writer = (int) session.getAttribute("id");
-//        Integer writer = 43;
         String email = (String) session.getAttribute("email");
         UserDto userDto = userService.selectUserByEmail(email);
         String nickname = userDto.getNickname();
         accompanyDto.setNickname(nickname);
+        accompanyDto.setRegionCode(area3);
+        accompanyDto.setStartAt(startAt);
+        accompanyDto.setEndAt(endAt);
+        accompanyDto.setMemberCnt(memberCnt);
 
         String profileImg = userDto.getProfileImg();
         System.out.println("profileImg = " + profileImg);
         accompanyDto.setProfileImg(profileImg);
-
-//        Integer writer = 43;
         accompanyDto.setUserId(writer);
 
         //유효성 검사를 추가 해야 한다.
@@ -205,18 +214,14 @@ public class AccompanyController {
         }
     }
 
-    @AuthChecking
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
-        System.out.println("\"kkkkkkkk\" = " + "kkkkkkkk");
+
         if(!loginCheck(request))
-        {
-            System.out.println("loginCheck(request) = " + loginCheck(request));
-            return "redirect:/login?toURL="+request.getRequestURL();}
+            return "redirect:/login?toURL="+request.getRequestURL();
         m.addAttribute("mode", "new");
         return "accompany/accompanyWrite.mainTiles";
     }
-
 
     @PostMapping("/remove")
     public String remove(Integer id, Integer page, Integer pageSize, Model m, HttpSession session, RedirectAttributes rattr) {
@@ -245,16 +250,16 @@ public class AccompanyController {
         try {
             accompanyDto = accompanyService.read(id);
 
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
+            Date today = new Date();
+            System.out.println("today = " + today.getTime());
+            if(accompanyDto.getEndAt().getTime()<=today.getTime()) {
+                accompanyDto.setStatus(1);
+            }
+
             //1. endAt을 불러온다.
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             //2. 오늘 날짜를 구한다.
-//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//            Date now = new Date();
-////            String nowTime = df.format(now);
-////            System.out.println("nowTime = " + nowTime);
-//            long milliSeconds = now.getTime();
-//            String strLong = Long.toString(milliSeconds);
-//            System.out.println("milliSeconds = " + milliSeconds);
 
             //3. 둘 다 milliseconds로 변환 후 오늘 날짜 - endAt<=0이면
 
@@ -276,7 +281,7 @@ public class AccompanyController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
@@ -284,13 +289,14 @@ public class AccompanyController {
 
         int totalCnt = 0;
         try {
-        totalCnt = accompanyService.getCount();
+            totalCnt = accompanyService.getCount();
 
-        PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
+            PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
 
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.getPage(map);
             m.addAttribute("ph", ph);

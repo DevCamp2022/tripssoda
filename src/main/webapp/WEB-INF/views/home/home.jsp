@@ -52,28 +52,65 @@
         <div class="div-list-wrap">
             <h1>취향저격 동행찾기</h1>
             <div class="btn-lank">
-                <a href="/product/list"><span>더보기</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                <a href="/accompany/list"><span>더보기</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
 
-            <c:forEach var="list" items="${list0}" varStatus="statusNm">
-                <div class="div-editor">
-                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+            <c:forEach var="accompanyDto" items="${accompanyList}" varStatus="statusNm">
+
+<%--                ${accompanyDto.nickname}  ${accompanyDto.thumbnail} ${accompanyDto.title}--%>
+<%--                <img class="main-img" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">--%>
+
+                <div class="div-editor div-editor-${statusNm.count}">
+                    <a href="http://localhost:9100//accompany/read?id=${accompanyDto.id}">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
-                            <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
-                            <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${list.thumbnail}" alt="thumbnail picture">
+                            <!-- <img src="${accompanyDto.thumbnail}" alt="thumbnail picture"> -->
+                            <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="thumbnail picture">
                         </div>
-                        <!--상품정보(제목, 평점, 출발일, 가격)-->
-                        <div class="itemInfo-wrapper">
-                            <div class="main-tourTitle">
-                                <h4>${list.title}</h4>
-                            </div>
-                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>
-                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>
-                            <div class="main-tourDate">2022년 08월 19일 출발 </div>
-                            <div class="main-tourPrice">
-                                <b>160,000원</b>
-                            </div>
+                        <div class="itemInfoAccom-wrapper">
+
+                                <div class="main-accomTitle">
+
+                                    <div>
+                                        <c:if test="${accompanyDto.status eq 0}">
+                                            [모집중]
+                                        </c:if>
+                                        <c:if test="${accompanyDto.status eq 1}">
+                                            [지난여행]
+                                        </c:if>
+                                    </div>
+                                    <h4>${accompanyDto.title}</h4>
+
+
+                                    <div class="list-content-line conn">
+                                            ${accompanyDto.content}
+                                    </div>
+                                    <div class="list-nickname-line">
+                                        <div class="profile-img">
+                                            <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">
+                                        </div>
+                                        <div class="nickname">
+                                                ${accompanyDto.nickname}
+                                        </div>
+                                        <div class="view-cnt-line">
+                                            <div class="view-cnt-icon"></div>
+                                            <div class="view-cnt">
+                                                    ${accompanyDto.viewCnt}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <!--해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)-->
+<%--                            <div class="main-tourDate">--%>
+<%--                                <fmt:formatDate value="${list.startDate}" pattern="yyyy년 MM월 dd일 출발" />--%>
+<%--                            </div>--%>
+
+<%--                            <div class="main-tourPrice">--%>
+<%--                                <b>--%>
+<%--                                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${list.price}" />원--%>
+<%--                                </b>--%>
+<%--                            </div>--%>
                         </div>
                     </a>
                 </div>
@@ -90,8 +127,8 @@
             </div>
 
             <c:forEach var="list" items="${list0}" varStatus="statusNm">
-                <div class="div-editor">
-                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+                <div class="div-editor div-editor-${statusNm.count}">
+                    <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}&startDate=${list.startDate}">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
                             <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
@@ -102,11 +139,16 @@
                             <div class="main-tourTitle">
                                 <h4>${list.title}</h4>
                             </div>
-                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>
-                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>
-                            <div class="main-tourDate">2022년 08월 19일 출발 </div>
+                            <!--해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)-->
+                            <div class="main-tourDate">
+                                <fmt:formatDate value="${list.startDate}" pattern="yyyy년 MM월 dd일 출발" />
+                            </div>
+
                             <div class="main-tourPrice">
-                                <b>160,000원</b>
+                                <b>
+                                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${list.price}" />원
+                                </b>
+
                             </div>
                         </div>
                     </a>
@@ -128,8 +170,29 @@
             </div>
 
             <c:forEach var="list" items="${list1}" varStatus="statusNm">
-                <div class="div-editor">
-                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+<%--                <div class="div-editor">--%>
+<%--                    <a href="/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">--%>
+<%--                        <!--썸네일-->--%>
+<%--                        <div class="thumbnail-wrapper">--%>
+<%--                            <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->--%>
+<%--                            <img class="img-thumbnail" src="${pageContext.request.contextPath}/image/thumbnail/${list.thumbnail}" alt="thumbnail picture">--%>
+<%--                        </div>--%>
+<%--                        <!--상품정보(제목, 평점, 출발일, 가격)-->--%>
+<%--                        <div class="itemInfo-wrapper">--%>
+<%--                            <div class="main-tourTitle">--%>
+<%--                                <h4>${list.title}</h4>--%>
+<%--                            </div>--%>
+<%--                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>--%>
+<%--                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>--%>
+<%--                            <div class="main-tourDate">2022년 08월 19일 출발 </div>--%>
+<%--                            <div class="main-tourPrice">--%>
+<%--                                <b>160,000원</b>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
+                <div class="div-editor div-editor-${statusNm.count}">
+                    <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
                             <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
@@ -140,16 +203,20 @@
                             <div class="main-tourTitle">
                                 <h4>${list.title}</h4>
                             </div>
-                            <div class="articles__RatingDiv-sc-1mbly56-1 cHzgPP rating"><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="100" size="18"><i style="width: 100%;"></i></span><span class="articles__StarSpan-sc-1mbly56-2 gzTNBY star" width="59.999999999999964" size="18"><i style="width: 60%;"></i></span></div>
-                            <!—해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)—>
-                            <div class="main-tourDate">2022년 08월 19일 출발 </div>
+                            <!--해당상품의 상품일정에서 오늘로부터 가장 가까운 출발일/가격/최저가(해당상품일정중)-->
+                            <div class="main-tourDate">
+                                <fmt:formatDate value="${list.startDate}" pattern="yyyy년 MM월 dd일 출발" />
+                            </div>
+
                             <div class="main-tourPrice">
-                                <b>160,000원</b>
+                                <b>
+                                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${list.price}" />원
+                                </b>
+
                             </div>
                         </div>
                     </a>
                 </div>
-
             </c:forEach>
         </div>
 
@@ -157,71 +224,118 @@
 
 
 
-<%--    게시판--%>
-    <div id="wrap">
-        <section class="tabArea">
-            <ul class="tab">
-                <li class="on">
-                    <a href="#!"><span>공지사항</span></a>
-                </li>
-                <li>
-                    <a href="#!"><span>프로모션</span></a>
-                </li>
-                <li>
-                    <a href="#!"><span>FAQ</span></a>
-                </li>
-<%--                <li>--%>
-<%--                    <a href="#!"><span></span></a>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <a href="#!"><span></span></a>--%>
-<%--                </li>--%>
-            </ul>
-            <div class="tabBox on">
-                <div class="notice">
-                    <ul>
-                        <c:forEach var="noticeList" begin="1" end="5" step="1" items="${noticeList}">
-                            <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
-                                    <p>${noticeList.title}</p>
-                                    <p><fmt:formatDate value="${noticeList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-            <div class="tabBox">
-                <div class="promotion">
-                    <ul>
-                        <c:forEach var="promoList" begin="1" end="5" step="1" items="${promotionList}">
-                            <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
-                                    <p>${promoList.title}</p>
-                                    <p><fmt:formatDate value="${promoList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-            <div class="tabBox">
-                <div class="faq">
-                    <ul>
-                        <c:forEach var="faqList" begin="1" end="5" step="1" items="${faqList}">
-                            <li>
-                                <a href="/board/list${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
-                                    <p>${faqList.title}</p>
-                                    <p><fmt:formatDate value="${faqList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
 
-        </section>
+    <div class="slide-wrap">
+
+    <div class="qna-section">
+        <h1>여행정보 공유해요!</h1>
+<%--        <h2 class="section-title">여행정보 공유해요!</h2>--%>
+
+        <div class="qna-wrap">
+            <!-- forEach -->
+            <div class="qna">
+                <span class="region">부산</span>
+                <span class="qna-title">낙곱새 맛집 소개좀</span>
+                <p class="qna-info">부산 갈건데 맛있는 식당 추천좀 부산 갈건데 맛있는 식당 추천좀부산 갈건데 맛있는 식당 추천좀 부산 갈건데 맛있는 식당 추천좀</p>
+                <div class="user-wrap">
+                    <div class="user-img-wrap">
+<%--                        <img src="/user/profileImg/${accompany.profileImg}" alt="프로필 이미지">--%>
+                        <img class="img-thumbnail" src="${pageContext.request.contextPath}/user/profileImg/${accompany.profileImg}" alt="profile image">
+                    </div>
+                    <p class="menu-nickname">ReMinD</p>
+                </div>
+                <div class="qna-answer">
+                    <p>저도 낙곱새 먹고싶네요</p>
+                    <div class="answer-cnt">
+                        등 3개의 답변
+                    </div>
+                </div>
+            </div>
+            <!-- forEach -->
+        </div>
     </div>
+
+
+
+
+
+
+
+
+
+        <%--    게시판--%>
+        <div id="wrap">
+            <section class="tabArea">
+                <ul class="tab">
+                    <li class="on">
+                        <a href="#!"><span>공지사항</span></a>
+                    </li>
+                    <li>
+                        <a href="#!"><span>프로모션</span></a>
+                    </li>
+                    <li>
+                        <a href="#!"><span>FAQ</span></a>
+                    </li>
+                    <%--                <li>--%>
+                    <%--                    <a href="#!"><span></span></a>--%>
+                    <%--                </li>--%>
+                    <%--                <li>--%>
+                    <%--                    <a href="#!"><span></span></a>--%>
+                    <%--                </li>--%>
+                </ul>
+                <div class="tabBox on">
+                    <div class="notice">
+                        <ul>
+                            <c:forEach var="noticeList" begin="0" end="4" step="1" items="${noticeList}">
+                                <li>
+                                    <a href="/board/detail${searchCondition.queryString}&menuCode=M001&id=${noticeList.id}">
+                                        <p>${noticeList.title}</p>
+                                        <p><fmt:formatDate value="${noticeList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tabBox">
+                    <div class="promotion">
+                        <ul>
+                            <c:forEach var="promoList" begin="0" end="4" step="1" items="${promotionList}">
+                                <li>
+                                    <a href="/board/detail${searchCondition.queryString}&menuCode=M002&id=${promoList.id}">
+                                        <p>${promoList.title}</p>
+                                        <p><fmt:formatDate value="${promoList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tabBox">
+                    <div class="faq">
+                        <ul>
+                            <c:forEach var="faqList" begin="0" end="4" step="1" items="${faqList}">
+                                <li>
+                                    <a href="/board/detail${searchCondition.queryString}&menuCode=M003&id=${faqList.id}">
+                                        <p>${faqList.title}</p>
+                                        <p><fmt:formatDate value="${faqList.createdAt}" pattern="yy-MM-dd" type="date"/></p>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+
+
+
+
+    </div>
+
+
 
 
 
@@ -307,8 +421,6 @@
         </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a></div></div></div>
     </div>
 
-
-
 </div>
 
 
@@ -353,28 +465,9 @@
 //            moveSlide(currentIdx + 1);
 //        }
 //    });
-//
-//
-//
-    //
-    // function mainPopInit(){
-    //     $(".popular").bxSlider({
-    //         captions : false,
-    //         pager : false,
-    //         infiniteLoop : false,
-    //         hideControlOnEnd : true,
-    //         minSlides : 5,
-    //         maxSlides : 5,
-    //         moveSlides : 1,
-    //         slideWidth : 1200,
-    //         onSliderLoad: function(){
-    //             $("#popular").css("visibility", "visible").animate({opacity:1});
-    //         }
-    //     });
-    // }
-
 
 </script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/main/home.js"></script>
 <script>
 $(document).ready(function(){

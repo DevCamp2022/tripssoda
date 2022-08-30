@@ -56,7 +56,7 @@ body{
 
 /* 정렬 텍스트 */
 .sort-text {
-    width: 26px;
+    width: 40px;
     height: 17px;
     color: #6a6a6a;
     margin: 3px 10px 0 0;
@@ -122,7 +122,7 @@ body{
     display: block;
     border-bottom: 1px solid #e9e9e9;
     width: 510px;
-    margin-top: 40px;
+    margin-top: 10px;
     margin-left: 5px;
 }
 
@@ -192,6 +192,9 @@ body{
     color: #6a6a6a;
     margin-top: 20px;
     font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* 프로필사진, 닉네임, 조회수 라인 */
 .list-nickname-line {

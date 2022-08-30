@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 
-<link rel="stylesheet" href="/css/admin/combined_board.css" />
+<link rel="stylesheet" href="/css/admin/combined_board.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 <script>
@@ -127,7 +127,7 @@
     CKEDITOR.replace('unitContent',
         {filebrowserUploadUrl:'/ckeditor/fileUploader',
             // width:'1200px',
-            height:'800px'});
+            height:'600px'});
 
     $(document).ready(function(){
 

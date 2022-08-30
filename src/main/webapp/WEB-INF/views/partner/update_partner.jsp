@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <title>파트너 수정</title>
+<link href="/css/partner/partner_common.css" rel='stylesheet' />
 <link href="/css/partner/update_partner.css" rel='stylesheet' />
 
 <div class="content">
-  <div class="partner_form">
+  <div class="partner_content">
   <!-- <form action="/partner/info/update" method="POST" enctype="multipart/form-data" onsubmit="return valid()"> -->
   <form action="/partner/info/update" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="userId" value="${sessionScope.id}">

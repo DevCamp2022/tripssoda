@@ -37,5 +37,5 @@ public interface AccompanyService {
 
     List<AccompanyDto> selectAccompanyForMain(Map map);
 
-//    int updateStatus(Integer id, Date endAt) throws Exception;
+    int updateStatus(AccompanyDto accompanyDto) throws Exception;
 }

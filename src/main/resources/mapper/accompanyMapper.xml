@@ -95,7 +95,6 @@
         FROM accompany AS a
         LEFT OUTER JOIN city_code AS c
         ON a.region_code = c.region_code
-        WHERE true
         <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
@@ -104,8 +103,15 @@
 <!--    <update id="statusUpdate" parameterType="Map">-->
 <!--        UPDATE accompany-->
 <!--        SET status = 1-->
-<!--        WHERE id = #{id} and now() >= #{endAt}-->
+<!--        WHERE id = #{id} AND now() >= #{endAt}-->
 <!--    </update>-->
+
+    <!--  status를 0, 1로 변경(게시글 상태를 모집중/모집마감)  -->
+    <update id="updateStatus" parameterType="AccompanyDto">
+        UPDATE question
+        SET status = #{status}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
 
 <!--    08.29 추가 작업 예정-->
     <select id="searchSelectPage" parameterType="map" resultType="AccompanyDto">

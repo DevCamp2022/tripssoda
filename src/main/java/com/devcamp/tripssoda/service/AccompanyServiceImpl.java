@@ -153,11 +153,8 @@ public class AccompanyServiceImpl implements AccompanyService {
         return accompanyMapper.selectAccompanyForMain(map);
     }
 
-//    @Override
-//    public int updateStatus(Integer id, Date endAt) throws Exception {
-//        Map map = new HashMap();
-//        map.put("id", id);
-//        map.put("endAt", endAt);
-//        return accompanyMapper.updateStatus(map);
-//    }
+    @Override
+    public int updateStatus(AccompanyDto accompanyDto) throws Exception {
+        return accompanyMapper.updateStatus(accompanyDto);
+    }
 }

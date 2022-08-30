@@ -51,7 +51,7 @@ public class AdminController {
         this.adminProductService = adminProductService;
         this.productService = productService;
         this.adminEmailService = adminEmailService;
-        this.inquiryService = inquiryService1;
+        this.inquiryService = inquiryService;
     }
 
 //    @AuthChecking
@@ -436,7 +436,7 @@ public class AdminController {
 
     @PostMapping("/email/send")
     @ResponseBody
-    public ResponseEntity<String> sendEmail(HttpSession session, String receiver, String title, String content){
+    public ResponseEntity<String> sendEmail(HttpSession session, String receiver, String title, String content) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
 
@@ -450,10 +450,11 @@ public class AdminController {
             count = adminEmailService.sendMultipleEmail(userId, receiver, title, content);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<String>("이메일 전송 중 에러가 발생했습니다.", responseHeaders,HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>("이메일 전송 중 에러가 발생했습니다.", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
-        return new ResponseEntity<String>(count+"명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders,HttpStatus.OK);
+        return new ResponseEntity<String>(count + "명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders, HttpStatus.OK);
+    }
     @GetMapping("/inquiry/reply")
     public String inquiryReply(Model m, SearchCondition searchCondition) {
         m.addAttribute("searchCondition", searchCondition);

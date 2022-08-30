@@ -20,7 +20,7 @@
         </tr>
     </table>
     <div class="pagination">
-        <a href="http://localhost:9100/board/list?menuCode=${menuCode}" class="to-list">목록으로</a>
+        <a href="/board/list?menuCode=${menuCode}" class="to-list">목록으로</a>
     </div>
 <%--    <table>--%>
 <%--        <c:if test="${mode ne 'new'}">--%>

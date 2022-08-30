@@ -10,11 +10,34 @@
     </select>
 
     <select id="selectAllUserAccompany" parameterType="map" resultType="AccompanyDto">
-        SELECT *
-        FROM accompany
-        WHERE user_id = #{userId}
+        SELECT a.id,
+               a.user_id,
+               a.nickname,
+               a.region_code,
+               a.start_at,
+               a.end_at,
+               a.thumbnail,
+               a.status,
+               a.title,
+               a.content,
+               a.member_cnt,
+               a.hashtag,
+               a.view_cnt,
+               a.acmp_board_status,
+               a.report_cnt,
+               a.chat_url,
+               a.applicant_cnt,
+               a.deleted_at,
+               a.created_at,
+               a.created_by,
+               a.updated_at,
+               a.updated_by,
+               c.city_name
+        FROM accompany AS a
+                 LEFT JOIN city_code AS c ON a.region_code = c.region_code
+        WHERE a.user_id = #{userId}
         ORDER BY id DESC
-        LIMIT #{sc.offset}, #{sc.pageSize}
+            LIMIT #{sc.offset}, #{sc.pageSize};
     </select>
 
     <sql id="selectFromAccompany">

@@ -24,7 +24,7 @@
     </select>
 
     <sql id="selectFromQuestion">
-        SELECT id, user_id, nickname, profile_img, title, content, hashtag, ans_cnt, view_cnt, status, region_code, created_at
+        SELECT *
         FROM question
     </sql>
 
@@ -58,7 +58,10 @@
             (#{title}, #{content}, #{userId}, #{nickname}, #{profileImg}, #{hashtag}, #{regionCode})
     </insert>
     <select id="select" parameterType="int" resultType="QuestionDto">
-        <include refid="selectFromQuestion"/>
+        SELECT *
+        FROM question AS q
+        LEFT OUTER JOIN city_code AS c
+        ON q.region_code = c.region_code
         WHERE id = #{id}
     </select>
     <update id="update" parameterType="QuestionDto">
@@ -92,13 +95,19 @@
         DELETE FROM question
     </delete>
     <select id="waitingSelectPage" parameterType="map" resultType="QuestionDto">
-        <include refid="selectFromQuestion"/>
+        SELECT *
+        FROM question AS q
+        LEFT OUTER JOIN city_code AS c
+        ON q.region_code = c.region_code
         WHERE status = 0
         <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}
     </select>
     <select id="selectPage" parameterType="map" resultType="QuestionDto">
-        <include refid="selectFromQuestion"/>
+        SELECT *
+        FROM question AS q
+        LEFT OUTER JOIN city_code AS c
+        ON q.region_code = c.region_code
         WHERE true
         <include refid="searchCondition"/>
         LIMIT #{offset}, #{pageSize}

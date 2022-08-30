@@ -21,7 +21,7 @@
                 <div class="reserv-info">
                     <div class="reserv-id"><span>예약번호</span> ${reservationDto.id}</div>
                     <div class="reserv-date"><span>예약 날짜</span> <fmt:formatDate value="${reservationDto.reservAt}" pattern="yyyy-MM-dd"/></div>
-                    <div class="reserv-status"><span>${reservationDto.status == 1 ? "예약 완료" : "예약 취소"}</span></div>
+                    <div class="reserv-status"><span>${reservationDto.status == 1 ? "예약 완료" : reservationDto.status == 2 ? "취소 대기중" : "취소"}</span></div>
                 </div>
                 <div class="product-info">
                     <div class="img-wrap">
@@ -36,7 +36,7 @@
 <%--                    <input type="hidden" value="${reservationDto.productScheduleId}">--%>
                     <input type="hidden" class="query-string" value="${reservationDto.queryString}">
                     <div class="btn-wrap">
-                        <button type="button" class="write-review-btn">여행후기 작성</button>
+<%--                        <button type="button" class="write-review-btn">여행후기 작성</button>--%>
                         <button type="button" class="reserv-detail-btn">예약 상세보기</button>
                     </div>
                 </div>

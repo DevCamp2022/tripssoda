@@ -35,7 +35,7 @@
 		position: relative;
 		padding-left: 30px;
 		/*width: 1000px;*/
-		width: 950px;
+		width: 980px;
 		overflow: hidden;
 	}
 

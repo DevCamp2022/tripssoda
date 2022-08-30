@@ -24,9 +24,17 @@
                     <img src="${pageContext.request.contextPath}/image/thumbnail/${reservationDto.thumbnail}" alt="상품 대표 이미지">
                 </div>
                 <p class="tour-title-wrap">
-                    <a href="">${reservationDto.productTitle}</a>
+                    <a href="/product/detail?productId=${reservationDto.productId}&scheduleId=${reservationDto.productScheduleId}">${reservationDto.productTitle}</a>
                 </p>
-                <button class="cancel-btn">예약 취소</button>
+                <c:if test="${reservationDto.status == 0}">
+                    <button class="canceled">예약 취소 완료</button>
+                </c:if>
+                <c:if test="${reservationDto.status == 1}">
+                    <button class="cancel-btn">예약 취소하기</button>
+                </c:if>
+                <c:if test="${reservationDto.status == 2}">
+                    <button class="waiting-cancel">취소 대기중</button>
+                </c:if>
             </div>
             <ul class="payment-wrap">
                 <li class="start-date-wrap">
@@ -61,27 +69,40 @@
         </div>
     </div>
 </div>
+<input type="hidden" name="paymentId" value="${reservationDto.paymentId}">
+<input type="hidden" name="reservId" value="${reservationDto.id}">
+<input type="hidden" name="userId" value="${reservationDto.userId}">
+
 
 <script>
-    // 수정 버튼을 눌렀을 때
-    $(".update-btn").on("click", function() {
-        // 회원정보 수정 페이지로 이동
-        location.href="/mypage/info/update"
-    });
+    $(".cancel-btn").on("click", function () {
+        if(!confirm("정말 예약취소 신청을 하시겠습니까?\n예약취소 신청은 다시 되돌릴 수 없습니다.")) {
+            return;
+        }
+        let paymentId = $("input[name=paymentId]").val();
+        let reservationId = $("input[name=reservId]").val();
+        let userId = $("input[name=userId]").val();
 
-    // 회원 탈퇴 버튼을 눌렀을 때
-    $(".withdraw-btn").on("click", function () {
-        if(!confirm("정말로 탈퇴 하시겠습니까?")) return;
-        let form = $(".user-info");
-        form.attr("action", "<c:url value='/mypage/delete'/>");
-        form.attr("method", "post");
-        form.submit();
-    });
+        $.ajax({
+            type: "post",
+            url : '/mypage/reservationList/reservationDetail/cancelReservation',
+            traditional: true,
+            data : { paymentId:paymentId, reservationId:reservationId, userId:userId},
+            success : function(data){
+                if(data=="success"){
+                    location.href = location.href;
+                    alert("예약취소를 신청하였습니다.");
+                }else if(data=="fail"){
+                    alert("예기치 않은 오류로 예약취소 신청에 실패했습니다. 나중에 다시 시도해주세요");
+                }
 
-    // 여행관심사 테스트 다시보기 버튼을 눌렀을 때
-    $(".update-interest-btn").on("click", function () {
-        location.href="/mypage/info/updateInterest";
-    })
+            },
+            error : function(){
+
+            }
+        })
+
+    });
 </script>
 
 

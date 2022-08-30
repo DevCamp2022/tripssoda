@@ -21,12 +21,11 @@ public class ReservationDto {
     private String thumbnail;
     private Integer productScheduleId;
     private Integer productId;
-
+    private Integer paymentId;
     private String method;
-
     private Integer usedPoint;
-
     private Integer price;
+    private Integer userId;
 
     // 쿼리스트링 만들어주는 메서드
     public String getQueryString(){
@@ -39,7 +38,6 @@ public class ReservationDto {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String reservAt = simpleDateFormat.format(getReservAt());
         String startDate = simpleDateFormat.format(getStartDate());
-
         return UriComponentsBuilder.newInstance()
                 .queryParam("id", id)
                 .queryParam("qty", qty)
@@ -50,7 +48,28 @@ public class ReservationDto {
                 .queryParam("usedPoint", usedPoint)
                 .queryParam("reservAt", reservAt)
                 .queryParam("startDate", startDate)
+                .queryParam("paymentId", paymentId)
+                .queryParam("status", status)
+                .queryParam("productScheduleId", productScheduleId)
+                .queryParam("productId", productId)
+                .queryParam("userId", userId)
                 .build().toString();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(Integer paymentId) {
+        this.paymentId = paymentId;
     }
 
     public String getMethod() {
@@ -170,6 +189,11 @@ public class ReservationDto {
                 ", thumbnail='" + thumbnail + '\'' +
                 ", productScheduleId=" + productScheduleId +
                 ", productId=" + productId +
+                ", paymentId=" + paymentId +
+                ", method='" + method + '\'' +
+                ", usedPoint=" + usedPoint +
+                ", price=" + price +
+                ", userId=" + userId +
                 '}';
     }
 

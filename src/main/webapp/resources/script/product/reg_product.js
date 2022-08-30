@@ -276,10 +276,10 @@ function valid() {
         return false;
     }
 
-    if(CKEDITOR.instances.prdIntro.getData() =='' || CKEDITOR.instances.prdIntro.getData().length ==0) {
-        alert("상품소개를 입력해 주세요.");
-        return false;
-    }
+    // if(CKEDITOR.instances.prdIntro.getData() =='' || CKEDITOR.instances.prdIntro.getData().length ==0) {
+    //     alert("상품소개를 입력해 주세요.");
+    //     return false;
+    // }
 
     if(CKEDITOR.instances.courseIntro.getData() =='' || CKEDITOR.instances.courseIntro.getData().length ==0) {
         alert("코스소개란을 작성해 주세요.");

@@ -182,7 +182,7 @@
         <table class="table table-schedule">
           <tr>
             <th>번호</th>
-            <th>시작여행일</th>
+            <th width="150px">시작여행일</th>
             <th>가격</th>
             <th>모집 최소인원</th>
             <th>모집 최대인원</th>

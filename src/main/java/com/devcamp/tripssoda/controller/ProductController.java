@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -34,7 +34,7 @@ public class ProductController {
 
     @GetMapping("/register")
     public String registerProduct(HttpSession session) {
-        return "product/reg_product.partnerTiles";
+        return "product/reg_product.mainTiles";
     }
 
 
@@ -72,7 +72,7 @@ public class ProductController {
         model.addAttribute("poList", poList);
         model.addAttribute("psList", psList);
 
-        return "product/update_product.partnerTiles";
+        return "product/update_product.mainTiles";
     }
 
     @PostMapping("/update")
@@ -101,14 +101,14 @@ public class ProductController {
         model.addAttribute("pListSize", pList.size());
 
         //product schedule list 담기
+        Map<ProductDto, Object> map = new LinkedHashMap<>();
         for(int i=0; i<pList.size(); i++) {
             Integer productId = pList.get(i).getProductId();
             System.out.println("productId = " + productId);
             List<ProductScheduleDto> psList = productService.selectProductScheduleListforDetail(productId);
-            System.out.println("psList = " + psList);
-            model.addAttribute("psList("+i+")", psList);
+            map.put(pList.get(i), psList);
         }
-
+        model.addAttribute("map", map);
         return "product/product_info.partnerTiles";
     }
 }

@@ -17,7 +17,7 @@ input.hashes{
 
 input[type="text"], input[type="number"], input[type="file"] {
   display: inline-block;
-  width: 80%;
+  width: 70%;
   font-size: 13px;
   line-height: 20px;
   padding: 12px 20px;
@@ -33,6 +33,7 @@ table{
   /* border-top: 1px solid gray;
   border-bottom: 1px solid gray; */
   padding: 10px;
+  font-size: 0.8rem;
 }
 
 tr{
@@ -44,13 +45,12 @@ tr{
 td{
   /* border: 1px solid gray; */
   padding: 10px;
-  width: 800px;
 }
 
 th{
   padding: 10px;
   vertical-align:middle;
-  width:auto;
+  width:150px;
 }
 
 select{
@@ -59,7 +59,7 @@ select{
 
 .cke_contents{ 
   min-height:300px; 
-  min-width: 550px;
+  min-width: 500px;
 } 
 
 /* .filebox .uploadThumb {
@@ -164,4 +164,8 @@ input[type='radio']:checked + label {
   background-color: #00ce7c;
   transition-duration: 0.5s;
   color: white;
+}
+
+.table-schedule{
+  text-align: center;
 }

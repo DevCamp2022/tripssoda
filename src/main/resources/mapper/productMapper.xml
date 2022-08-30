@@ -465,6 +465,7 @@
 
         FROM product
         WHERE partner_id=#{partnerId}
+        ORDER BY productId asc
     </select>
 
     <select id="selectProductScheduleListforDetail" parameterType="int" resultType="ProductScheduleDto">
@@ -477,5 +478,6 @@
 
         FROM product_schedule
         WHERE product_id=#{productId}
+        ORDER BY start_date asc
     </select>
 </mapper>

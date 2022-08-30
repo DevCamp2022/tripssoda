@@ -455,6 +455,7 @@ public class AdminController {
         }
         return new ResponseEntity<String>(count + "명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders, HttpStatus.OK);
     }
+    
     @GetMapping("/inquiry/reply")
     public String inquiryReply(Model m, SearchCondition searchCondition) {
         m.addAttribute("searchCondition", searchCondition);

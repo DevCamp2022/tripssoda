@@ -11,10 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class AccompanyServiceImpl implements AccompanyService {
@@ -156,4 +153,8 @@ public class AccompanyServiceImpl implements AccompanyService {
         return accompanyMapper.selectAccompanyForMain(map);
     }
 
+    @Override
+    public int updateStatus(AccompanyDto accompanyDto) throws Exception {
+        return accompanyMapper.updateStatus(accompanyDto);
+    }
 }

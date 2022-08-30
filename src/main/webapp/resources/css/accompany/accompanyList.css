@@ -180,10 +180,13 @@ body {
 }
 /* 모집중/지난여행 */
 .recruit-on-off {
-    width: 59px;
+    width: 65px;
     height: 24px;
     font-size: 16px;
     color: rgb(0,206,124);
+}
+.recruit-off-text {
+    color: #9a9a9a;
 }
 /* 제목 */
 .list-title {

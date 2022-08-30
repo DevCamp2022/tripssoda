@@ -131,7 +131,6 @@
                     </div>
                 </a>
                 </c:if>
-
                 <c:if test="${accompanyDto.status eq 1}">
                     <div class="apply-btn2">
                         동행 신청이 마감되었습니다.

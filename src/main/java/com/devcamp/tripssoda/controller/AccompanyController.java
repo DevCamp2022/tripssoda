@@ -1,9 +1,7 @@
 package com.devcamp.tripssoda.controller;
 
-import com.devcamp.tripssoda.dto.AccompanyDto;
+import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
-import com.devcamp.tripssoda.dto.PageHandlerOld;
-import com.devcamp.tripssoda.dto.UserDto;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -43,6 +41,39 @@ public class AccompanyController {
         this.userService = userService;
     }
 
+    @PostMapping("/select")
+    public String select(AccompanyDto accompanyDto,
+//                         Integer id,
+                         Model m, HttpSession session, Integer page, Integer pageSize, RedirectAttributes rattr) {
+        Integer writer = (int) session.getAttribute("id");
+        accompanyDto.setUserId(writer);
+
+        accompanyDto.setStatus(1);
+
+        try {
+            int rowCnt = accompanyService.updateStatus(accompanyDto);
+//            questionDto = questionService.read(id);
+
+            if(rowCnt!=1)
+                throw new Exception("Update Status Failed");
+            rattr.addAttribute("id", accompanyDto.getId());
+            rattr.addAttribute("page", page);
+            rattr.addAttribute("pageSize", pageSize);
+            rattr.addFlashAttribute("msg", "SELECT_OK");
+            System.out.println("accompanyDto = " + accompanyDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(accompanyDto);
+            m.addAttribute("msg", "SELECT_OK");
+            System.out.println("accompanyDto = " + accompanyDto);
+
+//            System.out.println("id = " + id);
+        }
+        return "redirect:/accompany/read";
+//        return "question/question.mainTiles";
+    }
+
     @GetMapping("/waiting")
     public String waitingList(String option, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 //
@@ -61,6 +92,23 @@ public class AccompanyController {
             map.put("option", option);
 
             List<AccompanyDto> list = accompanyService.waitingGetPage(map);
+
+//            SimpleDateFormat df = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+
+//            String format_time2 = df.format();
+
+
+//            Date today = new Date();
+//            System.out.println("list.get(0).getEndAt() = " + list.get(0).getEndAt());
+//            System.out.println("today = " + today.getTime());
+//            System.out.println("df.format(list.get(i).getEndAt()) = " + df.format(list.get(0).getEndAt()));
+
+//            for (int i = 0; i <= list.size()-1; i++) {
+//                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+//                    accompanyService.updateStatus(list.get(i).getId(), df.format(list.get(i).getEndAt()));
+//                }
+//            }
+
             m.addAttribute("mode", "waiting");
             m.addAttribute("ph", ph);
             m.addAttribute("list", list);
@@ -249,7 +297,10 @@ public class AccompanyController {
 
         try {
             accompanyDto = accompanyService.read(id);
-
+            System.out.println("id = " + id);
+            System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
+            System.out.println("accompanyDto.getStatus() = " + accompanyDto.getStatus());
+//            accompanyService.updateStatus(id, accompanyDto.getEndAt());
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
             Date today = new Date();
             System.out.println("today = " + today.getTime());
@@ -281,11 +332,12 @@ public class AccompanyController {
     }
 
     @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, String option, Model m, HttpServletRequest request) {
+    public String list(Integer page, Integer pageSize, String area3, String option, Model m, HttpServletRequest request) {
 //        if(!loginCheck(request))
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
+//        if(area3==null) area3="51";
 
         int totalCnt = 0;
         try {
@@ -297,8 +349,24 @@ public class AccompanyController {
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
             map.put("option", option);
+//            map.put("area3", area3);
 
             List<AccompanyDto> list = accompanyService.getPage(map);
+
+            Date today = new Date();
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+                    list.get(i).setStatus(1);
+                }
+            }
+//            System.out.println("list = " + list);
+//            System.out.println("list.get(0).getEndAt() = " + list.get(0).getEndAt());
+//            System.out.println("today = " + today.getTime());
+//            for (int i = 0; i <= list.size()-1; i++) {
+//                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+//                    list.get(i).setStatus(1);
+//                }
+//            }
             m.addAttribute("ph", ph);
             m.addAttribute("list", list);
             m.addAttribute("page", page);

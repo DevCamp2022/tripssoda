@@ -4,6 +4,7 @@ import com.devcamp.tripssoda.dto.AccompanyDto;
 import com.devcamp.tripssoda.dto.QuestionDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +26,6 @@ public interface AccompanyMapper {
     public int waitingCount() throws Exception;
 
     List<AccompanyDto> selectAccompanyForMain(Map map);
+
+    public int updateStatus(AccompanyDto accompanyDto) throws Exception;
 }

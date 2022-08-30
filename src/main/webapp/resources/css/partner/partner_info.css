@@ -1,0 +1,109 @@
+.table-partner-info{
+  font-size: 16px;
+}
+
+th>img{
+  border-radius: 30px;
+  width: 100px;
+  padding: 15px;
+}
+
+table{
+  margin-left: 50px;
+}
+
+th>span{
+  font-size: 16px;
+}
+
+tr{
+  border-bottom: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+th{
+  width: 200px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+td{
+  vertical-align: middle;
+  padding: 10px 20px;
+}
+
+/* td span{
+  padding: 10px 20px;
+} */
+
+.btnAdd{
+  border-radius: 5px;
+  border: 1px solid #0067A3;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#0067A3;
+}
+
+.btnAdd:hover{
+  background-color: #0067A3;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.btnDel{
+  border-radius: 5px;
+  border: 1px solid #D94844;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#D94844;
+}
+
+.btnDel:hover{
+  background-color: #D94844;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.submitBtn{
+  border-radius: 5px;
+  border: 1px solid #00ce7c;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#00ce7c;
+  width: 500px;
+}
+
+.submitBtn:hover{
+  background-color: #00ce7c;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.productType-wrap{
+  border-radius: 3px;
+  background-color: gray;
+  color:white;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.dwl-img{
+  position: relative;
+  top:5px;
+}
+
+.awaiting{
+  border-radius: 3px;
+  background-color: rgb(218, 81, 81);
+  color:white;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.approved{
+  border-radius: 3px;
+  background-color: rgb(68, 135, 223);
+  color:white;
+  margin-right: 10px;
+  padding: 5px;
+}

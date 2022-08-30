@@ -28,7 +28,7 @@
 				<a href="mailto:info@tripsoda.com">info@tripsoda.com</a>
 			</div>
 			<div class="info_wrap_horizontal vertical_line info_regular grey_6A small_gap font_fix_320">
-				<p class="info_bold">개인정보 처리방침</p><p>이용약관</p><p>취소 및 환불정책</p><p><a href="/partner/reg">파트너 입점</a></p></div>
+				<p class="info_bold">개인정보 처리방침</p><p>이용약관</p><p>취소 및 환불정책</p><p><a href="/partner/register">파트너 입점</a></p></div>
 			</div>
 			<div class="middle_gap"><p class="copyright">트립쏘다는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다.</p>
 				<p class="copyright">자사는 통신판매중개자이며 통신판매 당사자가 아닙니다.<!-- --> 상품정보 및 거래에 관한 책임은 판매자에게 있습니다.</p>

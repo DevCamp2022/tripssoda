@@ -1,0 +1,98 @@
+.td-schedule{
+  background-color: rgb(250, 250, 250);
+  height: 150px;
+  padding: 20px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.div-schedule{
+  border: 1px solid #e6e5e5;
+  background-color: white;
+  height: 150px;
+  width: 130px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.img-thumbnail{
+  width: 200px;
+  height: 150px;
+  background-color: aquamarine;
+}
+
+.div-title{
+  padding: 10px 20px;
+  width: 160px;
+}
+
+table.product-detail-list{
+  vertical-align: middle;
+}
+
+table{
+  border: 1px solid #e6e5e5;
+  border-radius: 5px;
+}
+
+.btnAdd{
+  /* float: right; */
+  border-radius: 5px;
+  border: 1px solid #0067A3;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#0067A3;
+  width:100%;
+}
+
+.btnAdd:hover{
+  background-color: #0067A3;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.btnReg{
+  /* float: right; */
+  border-radius: 5px;
+  border: 1px solid #db9600;
+  background-color: #fff;
+  padding: 10px 20px;
+  color:#db9600;
+  width:500px;
+}
+
+.btnReg:hover{
+  background-color: #db9600;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+
+progress.currentMember {
+  appearance: none;
+  width: 100%;
+}
+progress.currentMember::-webkit-progress-bar {
+  background:#e2e2e2;
+  border-radius:10px;
+}
+progress.currentMember::-webkit-progress-value {
+  border-radius:10px;
+  background: rgb(0, 206, 124);
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.show-startDate{
+  font-weight: bolder;
+}

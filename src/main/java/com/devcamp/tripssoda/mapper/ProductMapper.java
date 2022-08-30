@@ -36,4 +36,6 @@ public interface ProductMapper {
     public void deleteProductOption(Integer productOptionId);
     public int updateProductSchedule(RegProductScheduleDto PSDto);
     public void deleteProductSchedule(Integer productScheduleId);
+    public List<ProductDto> selectProductList(Integer partnerId);
+    public List<ProductScheduleDto> selectProductScheduleListforDetail(Integer productId);
 }

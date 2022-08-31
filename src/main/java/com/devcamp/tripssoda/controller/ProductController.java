@@ -42,12 +42,17 @@ public class ProductController {
     public String registerProduct(
             ProductDto dto,
             HttpServletRequest request,
+            HttpSession session,
             @RequestParam MultipartFile uploadThumb,
             @ModelAttribute(value = "RegProductOptionListDto[]") RegProductOptionListDto regProductOptionListDto,
             @ModelAttribute(value = "RegProductScheduleListDto[]") RegProductScheduleListDto regProductScheduleListDto) {
+        Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
+        dto.setUserId(userId);
+        PartnerDto partnerDto = partnerService.getPartnerInformation(userId);
+        dto.setPartnerId(partnerDto.getId());
 
         productService.regProduct(dto, regProductOptionListDto, regProductScheduleListDto, request, uploadThumb);
-        return "redirect:/product/register"; //나중에 마이페이지 파트너 상품등록 확인뷰로 바꿀것
+        return "redirect:/product/partner/list";
     }
 
 

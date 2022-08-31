@@ -16,8 +16,25 @@
                 <p class="menu-nickname">${PartnerDto.companyName}</p>
             </div>
             <li id="all"><a href="/partner/info">파트너정보<span>></span></a></li>
-            <li><a href="/product/partner/list">상품관리<span>></span></a></li>
+            <li><a id="product-manage" href="/product/partner/list" onclick="preventClick(event)">상품관리<span>></span></a></li>
         </ul>
     </div>
 </div>
+
+<script>
+    let onPartnership = ${PartnerDto.onPartnership};
+    // $("#product-manage").on("click", function (e) {
+    //     alert(onPartnership);
+    //     if(onPartnership == 1) {
+    //         alert("파트너쉽을 먼저 체결해야 합니다");
+    //         e.preventDefault();
+    //     }
+    // });
+    function preventClick(e) {
+        if(onPartnership != 1) {
+            alert("파트너쉽을 먼저 체결해야 합니다");
+            e.preventDefault();
+        }
+    }
+</script>
 

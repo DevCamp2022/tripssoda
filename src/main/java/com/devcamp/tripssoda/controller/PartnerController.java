@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,7 +31,12 @@ public class PartnerController {
 
     @SkipChecking
     @GetMapping("/register")
-    public String regPartner() {
+    public String regPartner(HttpSession session, RedirectAttributes rattr) {
+
+        if(session.getAttribute("id")==null) {
+            rattr.addFlashAttribute("msg", "Id is null");
+            return "redirect:/register";
+        }
         return "partner/reg_partner.mainTiles";
     }
 

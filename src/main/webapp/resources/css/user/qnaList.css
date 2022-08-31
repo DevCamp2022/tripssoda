@@ -83,6 +83,7 @@ body {
     width: 90%;
     border-top: none;
     box-sizing: border-box;
+    padding: 10px;
 }
 
 .place {

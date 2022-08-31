@@ -4,7 +4,10 @@
 
 <title>회원가입 유형 선택</title>
 <link rel="stylesheet" href="/css/user/selectRegisterType.css">
-
+<script>
+    let msg = "${msg}";
+    if(msg == "Id is null") alert("회원만 파트너 입점 신청이 가능합니다.\n회원가입 페이지로 이동합니다.");
+</script>
 <div class="main">
     <div class="contents">
         <div class="slogan">

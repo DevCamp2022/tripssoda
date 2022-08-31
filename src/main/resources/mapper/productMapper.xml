@@ -73,7 +73,6 @@
         content,
         price,
         order_no,
-        countable,
         created_at,
         created_by,
         updated_at,
@@ -87,7 +86,6 @@
         #{content},
         #{price},
         #{orderNo},
-        "N",
         now(),
         #{userId},
         now(),
@@ -136,7 +134,7 @@
         FROM product AS p
         INNER JOIN product_schedule AS ps
         ON (p.id=ps.product_id)
-        WHERE date(start_date) >= date(now()) AND category=#{category} GROUP BY p.id
+        WHERE date(start_date) >= date(now()) AND category=#{category} AND approval_status = 1 GROUP BY p.id
         LIMIT 0, 4;
     </select>
 

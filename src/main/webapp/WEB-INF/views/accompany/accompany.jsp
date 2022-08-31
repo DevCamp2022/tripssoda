@@ -18,7 +18,7 @@
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
 </script>
-<form id="form" action="" method="">
+<form id="form" class="top-form" action="" method="">
     <input type="hidden" name="id" value="${accompanyDto.id}">
     <input type="hidden" name="msg" value="${msg}">
     <div class="main-img-area">
@@ -92,11 +92,11 @@
                     ${accompanyDto.nickname}
                 </div>
 <%--                <div class="profile-tag">--%>
-<%--                    # 맛집탐방러--%>
+<%--                        --%>
 <%--                </div>--%>
             </div>
             <div class="tag2-line">
-<%--                40대 · 남성 · 대한민국 · 경험추구형--%>
+                ${modelHashtag}
             </div>
         </div>
     </div>

@@ -5,7 +5,8 @@ body {
     font-size: 15px;
 }
 .top-form {
-    background-color: rgb(233,233,233);
+    background-color: rgb(248,248,248);
+
 }
 .a-tag {
     text-decoration: none;
@@ -34,7 +35,7 @@ body {
     width: 1200px;
     height: 100px;
     /*height: 00px;*/
-    border: 1px solid rgb(233,233,233);
+    border: 2px solid #000000;
     background-color: #fff;
     text-align: center;
     line-height: 100px;
@@ -44,7 +45,7 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid #e9e9e9;
+    border: 2px solid #00ce7c;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
@@ -54,7 +55,7 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid #e9e9e9;
+    border: 2px solid #00ce7c;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
@@ -64,7 +65,7 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid #e9e9e9;
+    border: 2px solid #00ce7c;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
@@ -139,9 +140,10 @@ body {
 }
 /* 정렬 선택 버튼-옵션 */
 .search-option {
+    height: 40px;
     display: block;
     padding: 5px 3px 9px 10px;
-    border: unset;
+    border: 2px solid black;
     background-color: #fff;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -150,9 +152,13 @@ body {
     color: #000000;
     border-radius: 3px;
 }
+.search-option:hover {
+    border: 2px solid #00ce7c;
+}
+
 /* 모집중인 글만 보기 */
 .only-recruit {
-    width: 167px;
+    width: 205px;
     background-color: rgb(255,255,255);
     padding: 10px 19px;
     color: rgb(37,37,37);
@@ -162,6 +168,8 @@ body {
     margin-right: 20px;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
+    border: 2px solid black;
 }
 .only-recruit:hover {
     border: 2px solid #00ce7c;

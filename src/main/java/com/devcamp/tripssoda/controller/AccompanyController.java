@@ -339,6 +339,10 @@ public class AccompanyController {
             age = age/10*10;
             String finalAge = age+"대";
 
+            //성별, 나이를 하나의 변수로 묶고, Model로 보내기
+            String modelHashtag = finalAge + " · " + genderNext;
+            System.out.println("modelHashtag = " + modelHashtag);
+
             //성별, 나이를 해시태그에 setter로 저장.
             String finalHashtag = "#"+ genderNext + " #" + finalAge + " " + accompanyDto.getHashtag();
             accompanyDto.setHashtag(finalHashtag);
@@ -370,6 +374,7 @@ public class AccompanyController {
             m.addAttribute(accompanyDto);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
+            m.addAttribute("modelHashtag", modelHashtag);
 
             if(accompanyDto.equals(null))
                 throw new Exception("Read Failed");

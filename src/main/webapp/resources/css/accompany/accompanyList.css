@@ -144,8 +144,10 @@ body {
     border: unset;
     background-color: #fff;
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 350;
-    color: #6a6a6a;
+    font-weight: 700;
+    font-size: 16px;
+    /*color: #6a6a6a;*/
+    color: #000000;
     border-radius: 3px;
 }
 /* 모집중인 글만 보기 */

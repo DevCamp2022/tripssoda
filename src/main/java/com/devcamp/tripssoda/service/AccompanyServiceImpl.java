@@ -157,4 +157,24 @@ public class AccompanyServiceImpl implements AccompanyService {
     public int updateStatus(AccompanyDto accompanyDto) throws Exception {
         return accompanyMapper.updateStatus(accompanyDto);
     }
+
+    @Override
+    public int regionCount(String area3) throws Exception {
+        return accompanyMapper.regionCount(area3);
+    }
+
+    @Override
+    public List<AccompanyDto> regionSelectPage(Map map) throws Exception {
+        return accompanyMapper.regionSelectPage(map);
+    }
+
+    @Override
+    public int waitingRegionCount(String area3) throws Exception {
+        return accompanyMapper.waitingRegionCount(area3);
+    }
+
+    @Override
+    public List<AccompanyDto> waitingRegionSelectPage(Map map) throws Exception {
+        return accompanyMapper.waitingRegionSelectPage(map);
+    }
 }

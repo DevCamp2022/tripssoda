@@ -30,6 +30,9 @@ public class AccompanyDto {
     private Date updatedAt;
     private int updatedBy;
     private String profileImg;
+    private String gender;
+    private Date birthday;
+    private String area3;
 
     public AccompanyDto() {}
 
@@ -42,6 +45,30 @@ public class AccompanyDto {
         this.content = content;
         this.memberCnt = memberCnt;
         this.hashtag = hashtag;
+    }
+
+    public String getArea3() {
+        return area3;
+    }
+
+    public void setArea3(String area3) {
+        this.area3 = area3;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getCityName() {

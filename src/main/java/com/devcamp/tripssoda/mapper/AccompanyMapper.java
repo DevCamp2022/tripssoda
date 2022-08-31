@@ -28,4 +28,12 @@ public interface AccompanyMapper {
     List<AccompanyDto> selectAccompanyForMain(Map map);
 
     public int updateStatus(AccompanyDto accompanyDto) throws Exception;
+
+    public int regionCount(String area3) throws Exception;
+
+    public List<AccompanyDto> regionSelectPage(Map map) throws Exception;
+
+    public int waitingRegionCount(String area3) throws Exception;
+
+    public List<AccompanyDto> waitingRegionSelectPage(Map map) throws Exception;
 }

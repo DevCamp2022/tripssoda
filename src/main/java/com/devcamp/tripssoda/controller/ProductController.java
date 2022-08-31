@@ -77,7 +77,7 @@ public class ProductController {
         model.addAttribute("poList", poList);
         model.addAttribute("psList", psList);
 
-        return "redirect:/partner/product/detail";
+        return "product/update_product.mainTiles";
     }
 
     @PostMapping("/update")

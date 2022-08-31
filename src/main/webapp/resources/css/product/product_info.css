@@ -96,3 +96,9 @@ progress.currentMember::-webkit-progress-value {
 .show-startDate{
   font-weight: bolder;
 }
+
+.approval{
+  padding: 3px 6px;
+  border-radius: 5px;
+  color: white;
+}

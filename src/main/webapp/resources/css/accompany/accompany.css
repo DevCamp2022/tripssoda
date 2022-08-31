@@ -3,7 +3,6 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
     font-size: 15px;
-    background-color: #fff;
 }
 a {
     text-decoration: none;
@@ -55,7 +54,7 @@ a {
     height: 89px;
     margin: 40px 0 0;
     padding: 20px 30px;
-    border: 1px solid #e9e9e9;
+    border: 3px solid #e9e9e9;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 400;
@@ -148,7 +147,7 @@ a {
     flex: 1;
     width: 320px;
     height: 252px;
-    border: 1px solid #e9e9e9;
+    border: 3px solid #e9e9e9;
     padding: 20px 19px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -181,6 +180,7 @@ a {
 }
 /* 닉네임 */
 .nickname {
+    padding-bottom: 5px;
     font-size: 16px;
     font-weight: bold;
     overflow: hidden;
@@ -206,7 +206,7 @@ a {
 }
 /* #안붙은 태그가 나오는 아래줄 */
 .tag2-line {
-    /* margin-top: 10px; */
+     margin-top: 10px;
     color: #6a6a6a;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -219,7 +219,7 @@ a {
     padding-top: 40px;
     width: 280px;
     height: 126px;
-    border-top: 1px solid #e9e9e9;
+    border-top: 3px solid #e9e9e9;
 }
 /* 느낌표 아이콘 있는 줄 그룹 */
 .profile-icon-line {
@@ -254,8 +254,8 @@ a {
     background-color: #00ce7c;
     text-align: center;
     line-height: 50px;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
 }
 .apply-text {

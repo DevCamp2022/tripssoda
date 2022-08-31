@@ -34,6 +34,7 @@
                 <td style="vertical-align: middle;padding: 15px 15px;border-bottom: 1px solid #e6e5e5;">
                   <strong>출발일이 다른 동일투어</strong>&nbsp;<span>총&nbsp;<span style="color:rgb(0, 206, 124);">${fn:length(entry.value)}</span>건</span>
                   <!-- <div style="float:right;color:rgb(119, 119, 119);"><span class="prevBtn" style="cursor:pointer;">< </span><span style="font-size: 0.7em;">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="nextBtn" style="cursor:pointer;"> ></span></div> -->
+                  <input type="hidden" class="hid-approval-${i.index}" value="${entry.key.approvalStatus}"><span class="approval-${i.index} approval"></span>
                 </td>
               </tr>
               <tr>

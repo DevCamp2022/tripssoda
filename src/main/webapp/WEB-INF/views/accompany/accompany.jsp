@@ -18,7 +18,7 @@
     if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
     if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
 </script>
-<form id="form" action="" method="">
+<form id="form" class="top-form" action="" method="">
     <input type="hidden" name="id" value="${accompanyDto.id}">
     <input type="hidden" name="msg" value="${msg}">
     <div class="main-img-area">
@@ -92,11 +92,11 @@
                     ${accompanyDto.nickname}
                 </div>
 <%--                <div class="profile-tag">--%>
-<%--                    # 맛집탐방러--%>
+<%--                        --%>
 <%--                </div>--%>
             </div>
             <div class="tag2-line">
-<%--                40대 · 남성 · 대한민국 · 경험추구형--%>
+                ${modelHashtag}
             </div>
         </div>
     </div>
@@ -108,6 +108,22 @@
                 동행에 참여 해보세요!
             </div>
         </div>
+<%--        글쓴이와 세션의 id가 같을 때 오픈채팅방을 열고싶으면 아래 주석을 해제 --%>
+<%--        <c:if test="${sessionScope.id eq accompanyDto.userId}">--%>
+<%--            <c:if test="${accompanyDto.status eq 1}">--%>
+<%--                <div class="apply-btn2">--%>
+<%--                    동행 신청이 마감되었습니다.--%>
+<%--                </div>--%>
+<%--            </c:if>--%>
+<%--            <c:if test="${accompanyDto.status eq 0}">--%>
+<%--                <a class="apply-text" href="https://${accompanyDto.chatUrl}">--%>
+<%--                    <div class="apply-btn">--%>
+<%--                        오픈채팅방입장--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </c:if>--%>
+<%--        </c:if>--%>
+
         <c:if test="${sessionScope.id ne accompanyDto.userId}">
             <c:if test="${sessionScope.id ne null}">
                 <c:if test="${accompanyDto.status eq 1}">

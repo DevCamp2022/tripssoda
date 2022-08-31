@@ -35,7 +35,7 @@ body {
     width: 1200px;
     height: 100px;
     /*height: 00px;*/
-    border: 2px solid #000000;
+    border: 3px solid #e9e9e9;
     background-color: #fff;
     text-align: center;
     line-height: 100px;
@@ -45,7 +45,7 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 2px solid #00ce7c;
+    border: 3px solid #e9e9e9;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
@@ -55,7 +55,7 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 2px solid #00ce7c;
+    border: 3px solid #e9e9e9;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
@@ -65,11 +65,14 @@ body {
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    border: 2px solid #00ce7c;
+    border: 3px solid #e9e9e9;
     font-size: 16px;
     font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
+}
+.area1:hover, .area2:hover, .area3:hover {
+    border: 2px solid #00ce7c;
 }
 .search-button {
     /* 메뉴바의 검색 버튼 아이콘  */
@@ -84,9 +87,7 @@ body {
     outline: none;
     margin-left: 10px;
 }
-.search-button:hover {
-    color: rgb(165, 165, 165);
-}
+
 
 .new-write-btn {
     /*width: 167px;*/
@@ -172,10 +173,11 @@ body {
     border: 2px solid black;
 }
 .only-recruit:hover {
+    width: 205px;
     border: 2px solid #00ce7c;
 }
 .only-recruit2 {
-    width: 167px;
+    width: 205px;
     background-color: #00ce7c;
     padding: 10px 19px;
     color: #ffffff;
@@ -185,10 +187,9 @@ body {
     margin-right: 20px;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
 }
-.only-recruit2:hover {
-    border: 3px solid #ffffff;
-}
+
 /* 리스트 영역 그룹 지정 */
 .list-group {
     display: flex;

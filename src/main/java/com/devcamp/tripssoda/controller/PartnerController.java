@@ -29,7 +29,7 @@ public class PartnerController {
         this.userService = userService;
     }
 
-//    @SkipChecking
+    @SkipChecking
     @GetMapping("/register")
     public String regPartner(HttpSession session, RedirectAttributes rattr) {
 
@@ -49,7 +49,7 @@ public class PartnerController {
         return "partner/partner_side";
     }
 
-//    @SkipChecking
+    @SkipChecking
     @PostMapping("/register")
     public String regPartner(PartnerDto dto,
                              HttpServletRequest request,

@@ -3,8 +3,9 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
     font-size: 15px;
-    background-color: #fff;
-
+}
+.top-form {
+    background-color: rgb(233,233,233);
 }
 .a-tag {
     text-decoration: none;
@@ -37,31 +38,35 @@ body {
     background-color: #fff;
     text-align: center;
     line-height: 100px;
+    border-radius: 7px;
 }
 .area1 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid #e9e9e9;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
 }
 .area2 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid #e9e9e9;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
 }
 .area3 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 1px solid #e9e9e9;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
 }
@@ -69,11 +74,13 @@ body {
     /* 메뉴바의 검색 버튼 아이콘  */
     width: 100px;
     height: 60px;
-    background-color: #FFFFFF;
-    color: #000000;
-    font-size: 15px;
-    border: 1px solid black;
-    border-radius: 3px;
+    background-color: #00ce7c;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    outline: none;
     margin-left: 10px;
 }
 .search-button:hover {
@@ -139,12 +146,12 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 350;
     color: #6a6a6a;
+    border-radius: 3px;
 }
 /* 모집중인 글만 보기 */
 .only-recruit {
     width: 167px;
     background-color: rgb(255,255,255);
-    border: 1px solid rgb(37,37,37);
     padding: 10px 19px;
     color: rgb(37,37,37);
     font-weight: 700;
@@ -153,6 +160,24 @@ body {
     margin-right: 20px;
     text-align: center;
     cursor: pointer;
+}
+.only-recruit:hover {
+    border: 2px solid #00ce7c;
+}
+.only-recruit2 {
+    width: 167px;
+    background-color: #00ce7c;
+    padding: 10px 19px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.only-recruit2:hover {
+    border: 3px solid #ffffff;
 }
 /* 리스트 영역 그룹 지정 */
 .list-group {

@@ -26,11 +26,11 @@
             <div class="msg"><form:errors path="birthday"/></div>
             <p class="row-title">이메일</p>
             <div class="email-wrap">
-                <input type="email" class="input-email" name="email" value="${param.email}" ${param.email_check == true ? "readonly" : ""} placeholder="이메일 주소 입력" maxlength="20">
-                <button class="send-email-verf-btn" type="button">인증번호 전송</button>
+                <input type="email" class="input-email" name="email" value="${param.email}" ${param.email_check == true ? "readonly" : ""} placeholder="이메일 주소 입력" maxlength="50">
+                <button class="send-email-verf-btn" type="button" ${param.email_check == true ? "disabled=disabled" : ""}>인증번호 전송</button>
                 <p class="email-check check-text"></p>
                 <input type="text" class="verf-num" placeholder="인증번호 입력" ${param.email_check == true ? "readonly" : ""} value="${param.email_check == true ? "이메일 인증이 완료되었습니다." : "" }" maxlength="18">
-                <button class="confirm-verf-num" type="button">인증번호 확인</button>
+                <button class="confirm-verf-num" type="button" ${param.email_check == true ? "disabled=disabled" : ""}>인증번호 확인</button>
             </div>
             <p class="row-title">비밀번호</p>
             <div class="pwd-wrap">

@@ -459,7 +459,8 @@
             category,
             thumbnail,
             rating,
-            day_cnt
+            day_cnt,
+            approval_status
 
         FROM product
         WHERE partner_id=#{partnerId}
@@ -477,5 +478,11 @@
         FROM product_schedule
         WHERE product_id=#{productId}
         ORDER BY start_date asc
+    </select>
+
+    <select id="selectOneProduct" parameterType="int" resultType="ProductDto">
+        SELECT *
+        FROM product
+        WHERE id=#{productId}
     </select>
 </mapper>

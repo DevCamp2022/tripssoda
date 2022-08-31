@@ -310,4 +310,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductScheduleDto> selectProductScheduleListforDetail(Integer productId) {
         return productMapper.selectProductScheduleListforDetail(productId);
     }
+
+    @Override
+    public ProductDto getOneProductData(Integer productId) {
+        return productMapper.selectOneProduct(productId);
+    }
 }

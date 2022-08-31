@@ -26,4 +26,6 @@ public interface ProductService {
     public void updateProduct(UpdateProductDto dto, @RequestParam MultipartFile uploadThumb, HttpServletRequest request, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto);
     public List<ProductDto> getProductList(Integer partnerId);
     public List<ProductScheduleDto> selectProductScheduleListforDetail(Integer productId);
+
+    public ProductDto getOneProductData(Integer productId);
 }

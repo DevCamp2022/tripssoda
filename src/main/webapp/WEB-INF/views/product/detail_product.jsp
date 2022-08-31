@@ -10,7 +10,9 @@
     <div class="right-area">
       <!-- banner생각해볼것 -->
       <p class="showCategory">${details.category}</p>
-      <span class="showRating">평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp;<span class="material-icons">alarm_on</span>${details.reqTime}시간 소요</span><br>
+      <span class="showRating">
+        <!-- 평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp; -->
+        <span class="material-icons">alarm_on</span>${details.reqTime}시간 소요</span><br>
       <b class="detail-title">${details.title}</b>
       <input type="hidden" value="${details.keyword}" id="keywords">
       <div class="keywords-wrap"></div>
@@ -19,7 +21,7 @@
       <div class="dateList">
         <span style="float:left;">출발일이 다른 동일투어</span>
         <span style="color:rgb(119, 119, 119);float:left;">&nbsp;총 <span style="color:rgb(0, 206, 124);">${fn:length(list)}</span>건</span>
-        <div style="float:right;color:rgb(119, 119, 119);"><span class="prevBtn" style="cursor:pointer;">< NEXT</span><span style="font-size: 0.7em;">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="nextBtn" style="cursor:pointer;">PREV ></span></div>
+        <div style="float:right;color:rgb(119, 119, 119);"><span class="prevBtn" style="cursor:pointer;">< PREV</span><span style="font-size: 0.7em;">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="nextBtn" style="cursor:pointer;">NEXT ></span></div>
         <br><br>
         <input id="list-length" type="hidden" value="${fn:length(list)}" >
         <c:forEach var="list" items="${list}" varStatus="statusNm">

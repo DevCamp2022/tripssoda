@@ -63,7 +63,7 @@
 
     <update id="setUpdatedBy" parameterType="map">
         UPDATE user_info
-        SET updated_by = #{updatedBy}, updated_at = #{updatedAt}
+        SET updated_by = #{updatedBy}, updated_at = now()
         WHERE id = #{userId}
     </update>
 

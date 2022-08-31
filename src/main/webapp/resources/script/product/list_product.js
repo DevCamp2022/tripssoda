@@ -37,6 +37,7 @@ $(".prevBtn").click(function(){
   handleList();
 })
 
+
 //카테고리 버튼 클릭 이벤트(스크롤이동)
 //에디터 388, 프라이빗 748
 $(document).on('click', '#category-editor', function(){
@@ -48,3 +49,8 @@ $(document).on('click', '#category-private', function(){
   window.scrollTo(0, 730);
 
 });
+
+// 준비중인 카테고리 클릭했을 때
+$(".wait").on("click", function () {
+  alert("아직 준비중인 상품입니다");
+})

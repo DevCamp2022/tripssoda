@@ -17,7 +17,7 @@
             </div>
             <li class="account-manage"><a href="<c:url value="/mypage/info"/>">계정 관리<span><i class="fa-solid fa-angle-right"></i></span></a></li>
             <li class="point-manage"><a href="<c:url value="/mypage/pointHistory"/>">적립 내역<span><i class="fa-solid fa-angle-right"></i></span></a></li>
-            <li class="review-manage"><a href="<c:url value="/mypage/tourReviewList"/>">여행 후기<span><i class="fa-solid fa-angle-right"></i></span></a></li>
+<%--            <li class="review-manage"><a href="<c:url value="/mypage/tourReviewList"/>">여행 후기<span><i class="fa-solid fa-angle-right"></i></span></a></li>--%>
             <li class="reservation-manage"><a href="<c:url value="/mypage/reservationList"/>">예약 내역<span><i class="fa-solid fa-angle-right"></i></span></a></li>
             <li class="qna-manage"><a href="<c:url value="/mypage/qnaList"/>">내 Q&A<span><i class="fa-solid fa-angle-right"></i></span></a></li>
             <li class="accompany-manage"><a href="<c:url value="/mypage/accompanyList"/>">내 동행게시글<span><i class="fa-solid fa-angle-right"></i></span></a></li>

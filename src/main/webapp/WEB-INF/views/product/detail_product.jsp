@@ -141,7 +141,6 @@
       </c:choose>
     </div>
 
-    <!-- <div class="left-area"> -->
       <div id="chase">
         <input id="currentMember" type="hidden" value="${details.currentMember}" >
         <input id="minMember" type="hidden" value="${details.minMember}" >
@@ -155,12 +154,10 @@
         <span style="color:rgb(0, 206, 124);">투어확정</span><br>
         <span class="show-startDate"><fmt:formatDate value="${details.startDate}" pattern="yyyy년 MM월 dd일 출발" /></span><br><br>
         <span class="show-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${details.schedulePrice}" /></span>
-
         <a href="/payment/reservation?productId=${details.productId}&scheduleId=${details.scheduleId}">
           <div class="reserveBtn">예약하기</div>
         </a>
-      </div>
-    <!-- </div> -->
+        </div>
 </div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/product/detail_product.js"></script>

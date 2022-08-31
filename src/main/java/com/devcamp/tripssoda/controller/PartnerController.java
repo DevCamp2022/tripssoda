@@ -29,7 +29,7 @@ public class PartnerController {
         this.userService = userService;
     }
 
-    @SkipChecking
+//    @SkipChecking
     @GetMapping("/register")
     public String regPartner(HttpSession session, RedirectAttributes rattr) {
 
@@ -49,7 +49,7 @@ public class PartnerController {
         return "partner/partner_side";
     }
 
-    @SkipChecking
+//    @SkipChecking
     @PostMapping("/register")
     public String regPartner(PartnerDto dto,
                              HttpServletRequest request,
@@ -68,7 +68,7 @@ public class PartnerController {
     }
 
 
-    @SkipChecking //스킵 안돼요오......^^
+//    @SkipChecking //스킵 안돼요오......^^
     @GetMapping("/info")
     public String PartnerInfo(HttpSession session, Model model) {
         Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -77,7 +77,7 @@ public class PartnerController {
         return "partner/partner_info.partnerTiles";
     }
 
-    @SkipChecking
+//    @SkipChecking
     @GetMapping("/info/update")
     public String modPartnerInfo(HttpSession session, Model model) {
         Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -86,7 +86,7 @@ public class PartnerController {
         return "partner/update_partner.partnerTiles";
     }
 
-    @SkipChecking
+//    @SkipChecking
     @PostMapping("/info/update")
     public String modPartnerInfo(PartnerDto dto,
                                  HttpServletRequest request,

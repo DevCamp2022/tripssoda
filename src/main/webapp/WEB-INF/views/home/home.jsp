@@ -16,10 +16,10 @@
 
 
 
-    <div class="searchMain">
-        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">
-        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </div>
+<%--    <div class="searchMain">--%>
+<%--        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">--%>
+<%--        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>--%>
+<%--    </div>--%>
 
 <div class="txt">
     <span><strong>동행</strong>함께 떠나는 여행</span>

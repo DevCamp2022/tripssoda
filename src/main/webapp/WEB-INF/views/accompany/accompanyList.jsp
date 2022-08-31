@@ -17,10 +17,10 @@
 <body>
 <input type="hidden" name="msg" value="${msg}">
 <c:if test="${mode ne 'waiting'}">
-    <form name="frm" method="get" action="<c:url value='/accompany/list'/>">
+    <form name="frm" method="get" class="top-form" action="<c:url value='/accompany/list'/>">
 </c:if>
 <c:if test="${mode eq 'waiting'}">
-    <form name="frm" method="get" action="<c:url value='/accompany/waiting'/>">
+    <form name="frm" method="get" class="top-form" action="<c:url value='/accompany/waiting'/>">
 </c:if>
 <div class="main-img">
 
@@ -84,8 +84,8 @@
         </div>
         </c:if>
         <c:if test="${mode eq 'waiting'}">
-            <div class="only-recruit" onclick="location.href='<c:url value="/accompany/list"/>'">
-                모든 글 보기
+            <div class="only-recruit2" onclick="location.href='<c:url value="/accompany/list"/>'">
+                모집중인 글만 보기
             </div>
         </c:if>
     </div>

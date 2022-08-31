@@ -108,6 +108,22 @@
                 동행에 참여 해보세요!
             </div>
         </div>
+<%--        글쓴이와 세션의 id가 같을 때 오픈채팅방을 열고싶으면 아래 주석을 해제 --%>
+<%--        <c:if test="${sessionScope.id eq accompanyDto.userId}">--%>
+<%--            <c:if test="${accompanyDto.status eq 1}">--%>
+<%--                <div class="apply-btn2">--%>
+<%--                    동행 신청이 마감되었습니다.--%>
+<%--                </div>--%>
+<%--            </c:if>--%>
+<%--            <c:if test="${accompanyDto.status eq 0}">--%>
+<%--                <a class="apply-text" href="https://${accompanyDto.chatUrl}">--%>
+<%--                    <div class="apply-btn">--%>
+<%--                        오픈채팅방입장--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </c:if>--%>
+<%--        </c:if>--%>
+
         <c:if test="${sessionScope.id ne accompanyDto.userId}">
             <c:if test="${sessionScope.id ne null}">
                 <c:if test="${accompanyDto.status eq 1}">

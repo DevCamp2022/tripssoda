@@ -12,7 +12,7 @@
     <input type="hidden" value="${sessionScope.id}" readonly>
 
 
-    <table clas="table-partner-info">
+    <table clas="table-partner-info" style="margin-bottom: 100px;">
       <tr>
         <th colspan="2">
           <img src="${pageContext.request.contextPath}/image/partnerLogo/${PartnerDto.partnerLogo}" class="profile-img" alt="회사로고">

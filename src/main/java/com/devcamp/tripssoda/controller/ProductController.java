@@ -99,7 +99,6 @@ public class ProductController {
 
     @GetMapping("/partner/list")
     public String partnerProductList(HttpSession session, Model model) {
-        System.out.println("partner/list 접속중");
         Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
         PartnerDto partnerDto = partnerService.getPartnerInformation(userId);
         model.addAttribute("PartnerDto",partnerDto);
@@ -116,10 +115,12 @@ public class ProductController {
         for(int i=0; i<pList.size(); i++) {
             Integer productId = pList.get(i).getProductId();
             System.out.println("productId = " + productId);
+
             List<ProductScheduleDto> psList = productService.selectProductScheduleListforDetail(productId);
             map.put(pList.get(i), psList);
         }
         model.addAttribute("map", map);
+        System.out.println("map = " + map);
         return "product/product_info.partnerTiles";
     }
 }

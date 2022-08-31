@@ -84,7 +84,7 @@
       <td>
         <label><input id="termsAgreement" type="checkbox" 
         style="vertical-align:middle;"  required="required"
-        name="termsAgreement" value="0"/>&nbsp;<span class="terms">파트너 약관동의</span></label><a href="/terms/service" ><span style="font-size:16px;color:rgb(0, 0, 152)">&nbsp;[약관보기]</span></a>
+        name="termsAgreement" value="0"/>&nbsp;<span class="terms">파트너 약관동의</span></label><a href="/terms/service" target="_blank"><span style="font-size:16px;color:rgb(0, 0, 152)">&nbsp;[약관보기]</span></a>
       </td>
     </tr>
     <tr style="border-bottom:1px solid white;text-align:center;">

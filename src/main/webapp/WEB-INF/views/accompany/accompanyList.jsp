@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <link rel="stylesheet" href="<c:url value='/css/accompany/accompanyList.css'/>">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <input type="hidden" name="msg" value="${msg}">
@@ -64,11 +65,11 @@
     <div class="sort-bar2">
         <a href="<c:url value='/accompany/write'/>">
         <div class="new-write-btn">
-            동행 글쓰기
+            글쓰기
         </div>
         </a>
         <div class="sort-text">
-            정렬
+<%--            정렬--%>
         </div>
         <div class="sort-button">
             <select class="search-option" name="option" onchange="this.form.submit()">
@@ -94,6 +95,7 @@
                 <div class="list-one">
                     <div class="list-thumbnail2">
                         <img class="list-thumbnail" src="/image/thumbnail/${accompanyDto.thumbnail}" alt="">
+                        <div class="thumbnail-text"><div class="location-img-area"><img src="/image/accompany/location-icon.svg"></div><div class="location-text">${accompanyDto.cityName}</div></div>
                     </div>
                     <div class="list-title-line">
                         <div class="recruit-on-off">

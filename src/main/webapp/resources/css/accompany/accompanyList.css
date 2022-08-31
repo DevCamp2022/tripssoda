@@ -81,17 +81,27 @@ body {
 }
 
 .new-write-btn {
-    width: 167px;
-    background-color: rgb(255,255,255);
-    border: 1px solid rgb(37,37,37);
-    padding: 10px 19px;
-    color: rgb(37,37,37);
-    font-weight: 700;
+    /*width: 167px;*/
+    /*background-color: rgb(255,255,255);*/
+    /*border: 1px solid rgb(37,37,37);*/
+    /*padding: 10px 19px;*/
+    /*color: rgb(37,37,37);*/
+    /*font-weight: 700;*/
+    /*font-size: 16px;*/
+    /*border-radius: 30px;*/
+    /*margin-right: 20px;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+    width: 100px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #00ce7c;
+    border-radius: 4px;
     font-size: 16px;
-    border-radius: 30px;
-    margin-right: 20px;
+    font-weight: 700;
     text-align: center;
-    cursor: pointer;
+    line-height: 40px;
+    margin-left: 20px;
 }
 
 /* 정렬 버튼 행전체 */
@@ -100,7 +110,7 @@ body {
     height: 41px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 50px 0 0 0;
 }
 /* 정렬 텍스트 */
@@ -118,7 +128,7 @@ body {
     font-weight: 350;
     line-height: 21px;
     color: rgb(37,37,37);
-    margin-right: 30px;
+    margin-left: 500px;
 }
 /* 정렬 선택 버튼-옵션 */
 .search-option {
@@ -164,12 +174,52 @@ body {
     padding-bottom: 25px;
     /* background-color: royalblue; */
 }
+.list-thumbnail2 {
+    position: relative;
+    overflow: hidden;
+}
+.list-thumbnail2:hover {
+    opacity: 0.7;
+}
 /* 리스트-썸네일 */
 .list-thumbnail {
     width: 282px;
     height: 282px;
     background-color: #e9e9e9;
     border-radius: 10px;
+
+}
+.list-thumbnail:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease 0s;
+}
+.thumbnail-text {
+    /*width: 82px;*/
+    height: 31px;
+    border-radius: 16px;
+    background-color: rgb(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    color: #FFFFFF;
+    padding-left: 6px;
+    padding-right: 7px;
+    margin-top: 5px;
+}
+.location-img-area {
+    width: 21px;
+    height: 21px;
+    border-radius: 11px;
+    background-color: rgb(233,233,233);
+    text-align: center;
+    line-height: 21px;
+}
+.location-text {
+    line-height: 21px;
+    padding-left: 5px;
 }
 /* 리스트-모집중, 제목 라인 */
 .list-title-line {

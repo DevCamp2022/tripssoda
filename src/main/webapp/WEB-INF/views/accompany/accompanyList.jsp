@@ -89,7 +89,6 @@
         </c:if>
     </div>
     <div class="list-group">
-<%--        <c:if test="${mode ne 'waiting'}">--%>
         <c:forEach var="accompanyDto" items="${list}">
             <a class="a-tag" href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">
                 <div class="list-one">
@@ -131,81 +130,74 @@
                 </div>
             </a>
         </c:forEach>
-<%--        </c:if>--%>
-<%--        <c:if test="${mode eq 'waiting'}">--%>
-<%--            <c:forEach var="accompanyDto" items="${list}">--%>
-<%--                <c:if test="${accompanyDto.status eq 1}">--%>
-<%--                    <input type="hidden" name="id" value="${accompanyDto.id}">--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${accompanyDto.status eq 0}">--%>
-<%--                <a class="a-tag" href="<c:url value='/accompany/read?id=${accompanyDto.id}&page=${ph.page}&pageSize=${ph.pageSize}'/>">--%>
-<%--                    <div class="list-one">--%>
-<%--                        <div class="list-thumbnail2">--%>
-<%--                            <img class="list-thumbnail" src="/image/thumbnail/${accompanyDto.thumbnail}" alt="">--%>
-<%--                        </div>--%>
-<%--                        <div class="list-title-line">--%>
-<%--                            <div class="recruit-on-off">--%>
-<%--                                <c:if test="${accompanyDto.status eq 0}">--%>
-<%--                                    모집중--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${accompanyDto.status eq 1}">--%>
-<%--                                    <span class="recruit-off-text">지난여행</span>--%>
-<%--                                </c:if>--%>
-<%--                            </div>--%>
-<%--                            <div class="list-title">--%>
-<%--                                    ${accompanyDto.title}--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="list-content-line">--%>
-<%--                                ${accompanyDto.content}--%>
-<%--                        </div>--%>
-<%--                        <div class="list-nickname-line">--%>
-<%--                            <div class="profile-img">--%>
-<%--                                <img class="profile-img2" src="${pageContext.request.contextPath}/user/profileImg/${accompanyDto.profileImg}">--%>
-<%--                            </div>--%>
-<%--                            <div class="nickname">--%>
-<%--                                    ${accompanyDto.nickname}--%>
-<%--                            </div>--%>
-<%--                            <div class="view-cnt-line">--%>
-<%--                                <div class="view-cnt-icon">--%>
-<%--                                </div>--%>
-<%--                                <div class="view-cnt">--%>
-<%--                                        ${accompanyDto.viewCnt}--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </a>--%>
-<%--                </c:if>--%>
-<%--            </c:forEach>--%>
-<%--        </c:if>--%>
     </div>
     <c:if test="${mode ne 'waiting'}">
-    <div class="paging-container">
-        <div class="paging">
-            <c:if test="${ph.showPrev}">
-                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
-            </c:if>
-            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-            </c:forEach>
-            <c:if test="${ph.showNext}">
-                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
-            </c:if>
-        </div>
-    </div>
+            <div class="paging-container">
+                <div class="paging">
+                    <c:if test="${area3 ne null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/list?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                        </c:if>
+                    </c:if>
+                    <c:if test="${area3 eq null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                        </c:if>
+                    </c:if>
+                </div>
+            </div>
+<%--        <c:if test="${user3 eq null}">--%>
+<%--            <div class="paging-container">--%>
+<%--                <div class="paging">--%>
+<%--                    <c:if test="${ph.showPrev}">--%>
+<%--                        <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>--%>
+<%--                    </c:if>--%>
+<%--                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">--%>
+<%--                        <a class="paging-active" href="<c:url value='/accompany/list?user3=${list.get(0).user3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>--%>
+<%--                    </c:forEach>--%>
+<%--                    <c:if test="${ph.showNext}">--%>
+<%--                        <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </c:if>--%>
     </c:if>
     <c:if test="${mode eq 'waiting'}">
         <div class="paging-container">
             <div class="paging">
-                <c:if test="${ph.showPrev}">
-                    <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                <c:if test="${area3 ne null}">
+                    <c:if test="${ph.showPrev}">
+                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                    </c:if>
+                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                        <a class="paging-active" href="<c:url value='/accompany/waiting?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                    </c:forEach>
+                    <c:if test="${ph.showNext}">
+                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                    </c:if>
                 </c:if>
-                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                    <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                </c:forEach>
-                <c:if test="${ph.showNext}">
-                    <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                <c:if test="${area3 eq null}">
+                    <c:if test="${ph.showPrev}">
+                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                    </c:if>
+                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                        <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                    </c:forEach>
+                    <c:if test="${ph.showNext}">
+                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                    </c:if>
                 </c:if>
             </div>
         </div>

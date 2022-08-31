@@ -38,4 +38,12 @@ public interface AccompanyService {
     List<AccompanyDto> selectAccompanyForMain(Map map);
 
     int updateStatus(AccompanyDto accompanyDto) throws Exception;
+
+    int regionCount(String area3) throws Exception;
+
+    List<AccompanyDto> regionSelectPage(Map map) throws Exception;
+
+    int waitingRegionCount(String area3) throws Exception;
+
+    List<AccompanyDto> waitingRegionSelectPage(Map map) throws Exception;
 }

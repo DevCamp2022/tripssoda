@@ -131,72 +131,130 @@
             </a>
         </c:forEach>
     </div>
+    <%-- 페이징 --%>
+
     <c:if test="${mode ne 'waiting'}">
             <div class="paging-container">
                 <div class="paging">
+                    <%--  area3이 있을 때 --%>
                     <c:if test="${area3 ne null}">
-                        <c:if test="${ph.showPrev}">
-                            <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                        <%-- option이 있을 때--%>
+                        <c:if test="${option ne null}">
+                            <c:if test="${ph.showPrev}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}&option=${option}'/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a class="paging-active" href="<c:url value='/accompany/list?area3=${area3}&page=${i}&pageSize=${ph.pageSize}&option=${option}'/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}&option=${option}'/>">&gt;</a>
+                            </c:if>
                         </c:if>
-                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <a class="paging-active" href="<c:url value='/accompany/list?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                        </c:forEach>
-                        <c:if test="${ph.showNext}">
-                            <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                        <%-- option이 없을 때 --%>
+                        <c:if test="${option eq null}">
+                            <c:if test="${ph.showPrev}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+<%--                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>--%>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a class="paging-active" href="<c:url value='/accompany/list?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+<%--                                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>--%>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+<%--                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>--%>
+                            </c:if>
                         </c:if>
                     </c:if>
+                    <%-- area3이 없을 때 --%>
                     <c:if test="${area3 eq null}">
-                        <c:if test="${ph.showPrev}">
-                            <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                        <%-- option이 없을 때 --%>
+                        <c:if test="${option eq null}">
+                            <c:if test="${ph.showPrev}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                            </c:if>
                         </c:if>
-                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                        </c:forEach>
-                        <c:if test="${ph.showNext}">
-                            <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
-                        </c:if>
+                        <%-- option이 있을 때 --%>
+                        <c:if test="${option ne null}">
+                            <c:if test="${ph.showPrev}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}&option=${option}'/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}&option=${option}'/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}&option=${option}'/>">&gt;</a>
+                            </c:if>
+                         </c:if>
                     </c:if>
                 </div>
             </div>
-<%--        <c:if test="${user3 eq null}">--%>
-<%--            <div class="paging-container">--%>
-<%--                <div class="paging">--%>
-<%--                    <c:if test="${ph.showPrev}">--%>
-<%--                        <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>--%>
-<%--                    </c:if>--%>
-<%--                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">--%>
-<%--                        <a class="paging-active" href="<c:url value='/accompany/list?user3=${list.get(0).user3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>--%>
-<%--                    </c:forEach>--%>
-<%--                    <c:if test="${ph.showNext}">--%>
-<%--                        <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>--%>
-<%--                    </c:if>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
     </c:if>
+<%--    <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>--%>
     <c:if test="${mode eq 'waiting'}">
         <div class="paging-container">
             <div class="paging">
+                    <%--  area3이 있을 때 --%>
                 <c:if test="${area3 ne null}">
-                    <c:if test="${ph.showPrev}">
-                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                    <%-- option이 있을 때--%>
+                    <c:if test="${option ne null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}&option=${option}'/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/waiting?area3=${area3}&page=${i}&pageSize=${ph.pageSize}&option=${option}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}&option=${option}'/>">&gt;</a>
+                        </c:if>
                     </c:if>
-                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a class="paging-active" href="<c:url value='/accompany/waiting?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                    </c:forEach>
-                    <c:if test="${ph.showNext}">
-                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                    <%-- option이 없을 때 --%>
+                    <c:if test="${option eq null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                            <%--                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>--%>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/waiting?area3=${area3}&page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                            <%--                                <a class="paging-active" href="<c:url value='/accompany/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>--%>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?area3=${area3}&page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                            <%--                                <a class="paging-prev-next" href="<c:url value='/accompany/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>--%>
+                        </c:if>
                     </c:if>
                 </c:if>
+                    <%-- area3이 없을 때 --%>
                 <c:if test="${area3 eq null}">
-                    <c:if test="${ph.showPrev}">
-                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                    <%-- option이 없을 때 --%>
+                    <c:if test="${option eq null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                        </c:if>
                     </c:if>
-                    <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
-                    </c:forEach>
-                    <c:if test="${ph.showNext}">
-                        <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                    <%-- option이 있을 때 --%>
+                    <c:if test="${option ne null}">
+                        <c:if test="${ph.showPrev}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.beginPage-1}&pageSize=${ph.pageSize}&option=${option}'/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a class="paging-active" href="<c:url value='/accompany/waiting?page=${i}&pageSize=${ph.pageSize}&option=${option}'/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a class="paging-prev-next" href="<c:url value='/accompany/waiting?page=${ph.endPage+1}&pageSize=${ph.pageSize}&option=${option}'/>">&gt;</a>
+                        </c:if>
                     </c:if>
                 </c:if>
             </div>
@@ -408,6 +466,7 @@
                 sel.options[i+1] = new Option(name[i],val[i]);
             }
         }
+
     </script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/accompany/accompany_list.js"></script>
 </body>

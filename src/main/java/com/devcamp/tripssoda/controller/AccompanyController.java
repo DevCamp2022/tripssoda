@@ -75,16 +75,16 @@ public class AccompanyController {
 
     @GetMapping("/waiting")
     public String waitingList(String option, String area3, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
-//
+
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
 
         int totalCnt = 0;
         try {
             if(area3!=null) {
-                totalCnt = accompanyService.waitingGetCount();
-            } else {
                 totalCnt = accompanyService.waitingRegionCount(area3);
+            } else {
+                totalCnt = accompanyService.waitingGetCount();
             }
             System.out.println("totalCnt = " + totalCnt);
             System.out.println("page = " + page);
@@ -105,9 +105,9 @@ public class AccompanyController {
             List<AccompanyDto> list = null;
 
             if(area3!=null) {
-                list = accompanyService.waitingGetPage(map);
-            } else {
                 list = accompanyService.waitingRegionSelectPage(map);
+            } else {
+                list = accompanyService.waitingGetPage(map);
             }
 
 //            System.out.println("list.size() = " + list.size());
@@ -435,6 +435,7 @@ public class AccompanyController {
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
             m.addAttribute("area3", area3);
+            m.addAttribute("option", option);
             System.out.println("area3 = " + area3);
         } catch (Exception e) {
             e.printStackTrace();

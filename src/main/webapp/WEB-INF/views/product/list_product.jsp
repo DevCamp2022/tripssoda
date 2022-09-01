@@ -15,22 +15,22 @@
         <p>프라이빗투어</p>
       </div>
       
-      <div class="div-category-button">
+      <div class="div-category-button wait">
         <img src="https://tripsoda.com/images/common/icon/menu/store/small.svg">
         <p>소규모데이투어</p>
       </div>
       
-      <div class="div-category-button">
+      <div class="div-category-button wait">
         <img src="https://tripsoda.com/images/common/icon/menu/store/bus.svg">
         <p>버스데이투어</p>
       </div>
       
-      <div class="div-category-button">
+      <div class="div-category-button wait">
         <img src="https://tripsoda.com/images/common/icon/menu/store/theme.svg">
         <p>이색 투어</p>
       </div>
       
-      <div class="div-category-button">
+      <div class="div-category-button wait">
         <img src="https://tripsoda.com/images/common/icon/menu/store/deadline.svg">
         <p>마감임박투어</p>
       </div>

@@ -271,8 +271,8 @@ function valid() {
         return false;
     }
 
-    if($("#minMember").val() - $("#maxMember").val() < 0) {
-        alert("총 기간이 최소 1일 이상이어야 합니다.");
+    if($("#maxMember").val() - $("#minMember").val() < 0) {
+        alert("최소인원이 최대인원보다 많을 수 없습니다.");
         return false;
     }
 

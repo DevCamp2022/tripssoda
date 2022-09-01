@@ -10,7 +10,9 @@
     <div class="right-area">
       <!-- banner생각해볼것 -->
       <p class="showCategory">${details.category}</p>
-      <span class="showRating">평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp;<span class="material-icons">alarm_on</span>${details.reqTime}시간 소요</span><br>
+      <span class="showRating">
+        <!-- 평점 : ${details.rating} &nbsp;&nbsp;|&nbsp;&nbsp; -->
+        <span class="material-icons">alarm_on</span>${details.reqTime}시간 소요</span><br>
       <b class="detail-title">${details.title}</b>
       <input type="hidden" value="${details.keyword}" id="keywords">
       <div class="keywords-wrap"></div>
@@ -19,7 +21,7 @@
       <div class="dateList">
         <span style="float:left;">출발일이 다른 동일투어</span>
         <span style="color:rgb(119, 119, 119);float:left;">&nbsp;총 <span style="color:rgb(0, 206, 124);">${fn:length(list)}</span>건</span>
-        <div style="float:right;color:rgb(119, 119, 119);"><span class="prevBtn" style="cursor:pointer;">< NEXT</span><span style="font-size: 0.7em;">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="nextBtn" style="cursor:pointer;">PREV ></span></div>
+        <div style="float:right;color:rgb(119, 119, 119);"><span class="prevBtn" style="cursor:pointer;">< PREV</span><span style="font-size: 0.7em;">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="nextBtn" style="cursor:pointer;">NEXT ></span></div>
         <br><br>
         <input id="list-length" type="hidden" value="${fn:length(list)}" >
         <c:forEach var="list" items="${list}" varStatus="statusNm">
@@ -141,7 +143,6 @@
       </c:choose>
     </div>
 
-    <!-- <div class="left-area"> -->
       <div id="chase">
         <input id="currentMember" type="hidden" value="${details.currentMember}" >
         <input id="minMember" type="hidden" value="${details.minMember}" >
@@ -155,12 +156,10 @@
         <span style="color:rgb(0, 206, 124);">투어확정</span><br>
         <span class="show-startDate"><fmt:formatDate value="${details.startDate}" pattern="yyyy년 MM월 dd일 출발" /></span><br><br>
         <span class="show-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${details.schedulePrice}" /></span>
-
         <a href="/payment/reservation?productId=${details.productId}&scheduleId=${details.scheduleId}">
           <div class="reserveBtn">예약하기</div>
         </a>
-      </div>
-    <!-- </div> -->
+        </div>
 </div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/script/product/detail_product.js"></script>

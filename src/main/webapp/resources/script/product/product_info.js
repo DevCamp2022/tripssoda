@@ -77,3 +77,27 @@ $(document).ready(function(){
     })
   }
 })
+
+$(document).ready(function(){
+  for(let i=0; i<pListSize; i++){
+    let app = $(".hid-approval-"+i).val();
+    $(".approval-"+i).text("지랄");
+    if(app == "0") {
+      str = "승인대기중";
+      $(".approval-"+i).text(str);
+      $(".approval-"+i).css("background-color","orange");
+    }
+
+    else if(app == "1") {
+      str = "판매중";
+      $(".approval-"+i).text(str);
+      $(".approval-"+i).css("background-color","navy");
+    }
+
+    else if(app == "2") {
+      str = "반려";
+      $(".approval-"+i).text(str);
+      $(".approval-"+i).css("background-color","gray");
+    }
+  }
+})

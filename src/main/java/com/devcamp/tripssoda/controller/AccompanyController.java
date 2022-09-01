@@ -4,7 +4,11 @@ import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+<<<<<<< HEAD
 import com.devcamp.tripssoda.util.annotations.AuthChecking;
+=======
+import org.apache.ibatis.javassist.Loader;
+>>>>>>> e890691f3ca8fe5f1aafb104e4a8e34448e0eca7
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
@@ -19,10 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping("/accompany")
@@ -76,45 +78,67 @@ public class AccompanyController {
     }
 
     @GetMapping("/waiting")
-    public String waitingList(String option, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
-//
+    public String waitingList(String option, String area3, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
 
         int totalCnt = 0;
         try {
-            totalCnt = accompanyService.waitingGetCount();
+            if(area3!=null) {
+                totalCnt = accompanyService.waitingRegionCount(area3);
+            } else {
+                totalCnt = accompanyService.waitingGetCount();
+            }
+            System.out.println("totalCnt = " + totalCnt);
+            System.out.println("page = " + page);
+            System.out.println("pageSize = " + pageSize);
 
             PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
+
+
 
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
             map.put("option", option);
+            if(area3!=null) {
+                map.put("area3", area3);
+            }
 
-            List<AccompanyDto> list = accompanyService.waitingGetPage(map);
+            List<AccompanyDto> list = null;
 
-//            SimpleDateFormat df = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+            if(area3!=null) {
+                list = accompanyService.waitingRegionSelectPage(map);
+            } else {
+                list = accompanyService.waitingGetPage(map);
+            }
 
-//            String format_time2 = df.format();
-
-
+//            System.out.println("list.size() = " + list.size());
+//            List<AccompanyDto> list2 = new ArrayList<>();
+//
 //            Date today = new Date();
-//            System.out.println("list.get(0).getEndAt() = " + list.get(0).getEndAt());
-//            System.out.println("today = " + today.getTime());
-//            System.out.println("df.format(list.get(i).getEndAt()) = " + df.format(list.get(0).getEndAt()));
-
-//            for (int i = 0; i <= list.size()-1; i++) {
-//                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
-//                    accompanyService.updateStatus(list.get(i).getId(), df.format(list.get(i).getEndAt()));
+//            for (int i = 0; i < list.size(); i++) {
+//                if(list.get(i).getEndAt().getTime()<today.getTime()) {
+//                    list.get(i).setStatus(1);
 //                }
+//                System.out.println("list.get(0) = " + list.get(0));
+//                System.out.println("list.get(0).getStatus() = " + list.get(0).getStatus());
+//                boolean a = list.get(0).getStatus()==0;
+//                System.out.println("a = " + a);
+//                if(list.get(i).getStatus()==0) {
+//                    list2.add(list.get(i));
+//                }
+//                System.out.println("list2.get(0) = " + list2.get(0).getStatus());
 //            }
+//            System.out.println("list2.size() = " + list2.size());
 
             m.addAttribute("mode", "waiting");
             m.addAttribute("ph", ph);
             m.addAttribute("list", list);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
+            m.addAttribute("area3", area3);
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "LIST_ERR");
@@ -221,7 +245,8 @@ public class AccompanyController {
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(accompanyDto.getHashtag()==null || accompanyDto.getHashtag().trim().equals(""))
             accompanyDto.setHashtag("아무나다좋아");
-        String[] hashList = accompanyDto.getHashtag().split(" ");
+        String replaceHashtag = accompanyDto.getHashtag().trim().replaceAll(" +", " ");
+        String[] hashList = replaceHashtag.split(" ");
         //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
         String hashtag2 = "";
         for(String hashtag : hashList) {
@@ -297,16 +322,48 @@ public class AccompanyController {
     public String read(Integer id, Integer page, Integer pageSize, Model m, RedirectAttributes rattr) {
         AccompanyDto accompanyDto = null;
 
+
         try {
             accompanyDto = accompanyService.read(id);
+
+            //성별을 구한다.
+            String genderPrev = accompanyDto.getGender();
+            String genderNext = "";
+            if(genderPrev.equals("M")) {
+                genderNext = "남성";
+            } else {
+                genderNext = "여성";
+            }
+
+            //나이대를 구한다.
+            SimpleDateFormat df = new SimpleDateFormat("yyyy");
+            Date birthday = accompanyDto.getBirthday();
+            String birthdayStr = df.format(birthday);
+            Integer birthInt = Integer.valueOf(birthdayStr);
+            Integer age = 2022 - birthInt + 1;
+            age = age/10*10;
+            String finalAge = age+"대";
+
+            //성별, 나이를 하나의 변수로 묶고, Model로 보내기
+            String modelHashtag = finalAge + " · " + genderNext;
+            System.out.println("modelHashtag = " + modelHashtag);
+
+            //성별, 나이를 해시태그에 setter로 저장.
+            String finalHashtag = "#"+ genderNext + " #" + finalAge + " " + accompanyDto.getHashtag();
+            accompanyDto.setHashtag(finalHashtag);
             System.out.println("id = " + id);
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt());
             System.out.println("accompanyDto.getStatus() = " + accompanyDto.getStatus());
 //            accompanyService.updateStatus(id, accompanyDto.getEndAt());
             System.out.println("accompanyDto.getEndAt() = " + accompanyDto.getEndAt().getTime());
             Date today = new Date();
-            System.out.println("today = " + today.getTime());
-            if(accompanyDto.getEndAt().getTime()<=today.getTime()) {
+            Date sqlDateToday = new java.sql.Date(today.getTime());
+            Date sqlDateEndAt = new java.sql.Date(accompanyDto.getEndAt().getTime());
+
+            long subtractGetTime = sqlDateToday.getTime() - sqlDateEndAt.getTime();
+            System.out.println("subtractGetTime = " + subtractGetTime);
+            if(accompanyDto.getEndAt().getTime()+(60*60*24*1000)<=today.getTime()) {
+//            if(subtractGetTime > 0) {
                 accompanyDto.setStatus(1);
             }
 
@@ -322,6 +379,7 @@ public class AccompanyController {
             m.addAttribute(accompanyDto);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
+            m.addAttribute("modelHashtag", modelHashtag);
 
             if(accompanyDto.equals(null))
                 throw new Exception("Read Failed");
@@ -339,25 +397,38 @@ public class AccompanyController {
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
-//        if(area3==null) area3="51";
+        System.out.println("area3 = " + area3);
 
         int totalCnt = 0;
         try {
-            totalCnt = accompanyService.getCount();
-
+            if(area3==null) {
+                totalCnt = accompanyService.getCount();
+            } else {
+                totalCnt = accompanyService.regionCount(area3);
+            }
             PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
+            System.out.println("totalCnt = " + totalCnt);
+            System.out.println("page = " + page);
+            System.out.println("pageSize = " + pageSize);
 
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
             map.put("pageSize", pageSize);
             map.put("option", option);
-//            map.put("area3", area3);
-
-            List<AccompanyDto> list = accompanyService.getPage(map);
+            if(area3!=null) {
+                map.put("area3", area3);
+            }
+            List<AccompanyDto> list = null;
+            if(area3==null) {
+                list = accompanyService.getPage(map);
+            } else {
+                list = accompanyService.regionSelectPage(map);
+            }
+            System.out.println("list.get(0) = " + list.get(0));
 
             Date today = new Date();
             for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getEndAt().getTime()<=today.getTime()) {
+                if(list.get(i).getEndAt().getTime()+(60*60*24*1000)<=today.getTime()) {
                     list.get(i).setStatus(1);
                 }
             }
@@ -373,6 +444,9 @@ public class AccompanyController {
             m.addAttribute("list", list);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
+            m.addAttribute("area3", area3);
+            m.addAttribute("option", option);
+            System.out.println("area3 = " + area3);
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "LIST_ERR");

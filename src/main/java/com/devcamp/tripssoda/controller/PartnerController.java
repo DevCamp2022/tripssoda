@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
+import java.net.http.HttpResponse;
 
 @Controller
 @RequestMapping("/partner")
@@ -30,7 +34,12 @@ public class PartnerController {
 
     @SkipChecking
     @GetMapping("/register")
-    public String regPartner() {
+    public String regPartner(HttpSession session, RedirectAttributes rattr) {
+
+        if(session.getAttribute("id")==null) {
+            rattr.addFlashAttribute("msg", "Id is null");
+            return "redirect:/register";
+        }
         return "partner/reg_partner.mainTiles";
     }
 
@@ -62,7 +71,7 @@ public class PartnerController {
     }
 
 
-    @SkipChecking //스킵 안돼요오......^^
+//    @SkipChecking //스킵 안돼요오......^^
     @GetMapping("/info")
     public String PartnerInfo(HttpSession session, Model model) {
         Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -71,7 +80,7 @@ public class PartnerController {
         return "partner/partner_info.partnerTiles";
     }
 
-    @SkipChecking
+//    @SkipChecking
     @GetMapping("/info/update")
     public String modPartnerInfo(HttpSession session, Model model) {
         Integer userId = Integer.parseInt(String.valueOf(session.getAttribute("id")));
@@ -80,7 +89,7 @@ public class PartnerController {
         return "partner/update_partner.partnerTiles";
     }
 
-    @SkipChecking
+//    @SkipChecking
     @PostMapping("/info/update")
     public String modPartnerInfo(PartnerDto dto,
                                  HttpServletRequest request,

@@ -3,7 +3,9 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
     font-size: 15px;
-    background-color: #fff;
+}
+.top-form {
+    background-color: rgb(248,248,248);
 
 }
 .a-tag {
@@ -33,65 +35,82 @@ body {
     width: 1200px;
     height: 100px;
     /*height: 00px;*/
-    border: 1px solid rgb(233,233,233);
+    border: 3px solid #e9e9e9;
     background-color: #fff;
     text-align: center;
     line-height: 100px;
+    border-radius: 7px;
 }
 .area1 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
-    border: 1px solid #e9e9e9;
-    font-size: 14px;
+    border-radius: 5px;
+    border: 3px solid #e9e9e9;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
 }
 .area2 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
-    border: 1px solid #e9e9e9;
-    font-size: 14px;
+    border-radius: 5px;
+    border: 3px solid #e9e9e9;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
 }
 .area3 {
     width: 300px;
     height: 60px;
-    border-radius: 3px;
-    border: 1px solid #e9e9e9;
-    font-size: 14px;
+    border-radius: 5px;
+    border: 3px solid #e9e9e9;
+    font-size: 16px;
+    font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
+}
+.area1:hover, .area2:hover, .area3:hover {
+    border: 2px solid #00ce7c;
 }
 .search-button {
     /* 메뉴바의 검색 버튼 아이콘  */
     width: 100px;
     height: 60px;
-    background-color: #FFFFFF;
-    color: #000000;
-    font-size: 15px;
-    border: 1px solid black;
-    border-radius: 3px;
+    background-color: #00ce7c;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    outline: none;
     margin-left: 10px;
 }
-.search-button:hover {
-    color: rgb(165, 165, 165);
-}
+
 
 .new-write-btn {
-    width: 167px;
-    background-color: rgb(255,255,255);
-    border: 1px solid rgb(37,37,37);
-    padding: 10px 19px;
-    color: rgb(37,37,37);
-    font-weight: 700;
+    /*width: 167px;*/
+    /*background-color: rgb(255,255,255);*/
+    /*border: 1px solid rgb(37,37,37);*/
+    /*padding: 10px 19px;*/
+    /*color: rgb(37,37,37);*/
+    /*font-weight: 700;*/
+    /*font-size: 16px;*/
+    /*border-radius: 30px;*/
+    /*margin-right: 20px;*/
+    /*text-align: center;*/
+    /*cursor: pointer;*/
+    width: 100px;
+    height: 40px;
+    color: #FFFFFF;
+    background: #00ce7c;
+    border-radius: 4px;
     font-size: 16px;
-    border-radius: 30px;
-    margin-right: 20px;
+    font-weight: 700;
     text-align: center;
-    cursor: pointer;
+    line-height: 40px;
+    margin-left: 20px;
 }
 
 /* 정렬 버튼 행전체 */
@@ -100,7 +119,7 @@ body {
     height: 41px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 50px 0 0 0;
 }
 /* 정렬 텍스트 */
@@ -118,23 +137,30 @@ body {
     font-weight: 350;
     line-height: 21px;
     color: rgb(37,37,37);
-    margin-right: 30px;
+    margin-left: 500px;
 }
 /* 정렬 선택 버튼-옵션 */
 .search-option {
+    height: 40px;
     display: block;
     padding: 5px 3px 9px 10px;
-    border: unset;
+    border: 2px solid black;
     background-color: #fff;
     font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 350;
-    color: #6a6a6a;
+    font-weight: 700;
+    font-size: 16px;
+    /*color: #6a6a6a;*/
+    color: #000000;
+    border-radius: 3px;
 }
+.search-option:hover {
+    border: 2px solid #00ce7c;
+}
+
 /* 모집중인 글만 보기 */
 .only-recruit {
-    width: 167px;
+    width: 205px;
     background-color: rgb(255,255,255);
-    border: 1px solid rgb(37,37,37);
     padding: 10px 19px;
     color: rgb(37,37,37);
     font-weight: 700;
@@ -143,7 +169,27 @@ body {
     margin-right: 20px;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
+    border: 2px solid black;
 }
+.only-recruit:hover {
+    width: 205px;
+    border: 2px solid #00ce7c;
+}
+.only-recruit2 {
+    width: 205px;
+    background-color: #00ce7c;
+    padding: 10px 19px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-right: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
 /* 리스트 영역 그룹 지정 */
 .list-group {
     display: flex;
@@ -164,12 +210,52 @@ body {
     padding-bottom: 25px;
     /* background-color: royalblue; */
 }
+.list-thumbnail2 {
+    position: relative;
+    overflow: hidden;
+}
+.list-thumbnail2:hover {
+    opacity: 0.7;
+}
 /* 리스트-썸네일 */
 .list-thumbnail {
     width: 282px;
     height: 282px;
     background-color: #e9e9e9;
     border-radius: 10px;
+
+}
+.list-thumbnail:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease 0s;
+}
+.thumbnail-text {
+    /*width: 82px;*/
+    height: 31px;
+    border-radius: 16px;
+    background-color: rgb(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    color: #FFFFFF;
+    padding-left: 6px;
+    padding-right: 7px;
+    margin-top: 5px;
+}
+.location-img-area {
+    width: 21px;
+    height: 21px;
+    border-radius: 11px;
+    background-color: rgb(233,233,233);
+    text-align: center;
+    line-height: 21px;
+}
+.location-text {
+    line-height: 21px;
+    padding-left: 5px;
 }
 /* 리스트-모집중, 제목 라인 */
 .list-title-line {

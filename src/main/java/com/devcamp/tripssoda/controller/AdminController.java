@@ -75,11 +75,15 @@ public class AdminController {
     }
 
 
+//    @GetMapping("/home")
+//    public String adminHome(){
+//        return "admin/admin_home.subTiles";
+//    }
+
     @GetMapping("/home")
     public String adminHome(){
-        return "admin/admin_home.subTiles";
+        return "admin/template/index.subTiles";
     }
-
 
     //관리자페이지 통합게시판 & 각 게시판 목록
     @GetMapping("/boardList")

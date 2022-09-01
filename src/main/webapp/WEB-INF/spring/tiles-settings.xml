@@ -31,6 +31,9 @@
     <definition name="*/*.subTiles" extends="subLayout">
             <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
     </definition>
+    <definition name="*/*/*.subTiles" extends="subLayout">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>
 
 
     <definition name="*/*.mypageTiles" template="/WEB-INF/views/tiles/mypage_menu_layout.jsp">

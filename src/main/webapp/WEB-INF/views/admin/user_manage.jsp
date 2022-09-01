@@ -11,17 +11,17 @@
 
     <div class="list-container">
 
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">회원목록</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd">통계</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>
-            </li>
-        </ul>
+<%--        <ul class="nav nav-tabs">--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link active" data-toggle="tab" href="#qwe">회원목록</a>--%>
+<%--            </li>--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" data-toggle="tab" href="#asd">통계</a>--%>
+<%--            </li>--%>
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" data-toggle="tab" href="#zxc">ZXC</a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
 
         <div class="tab-content">
 
@@ -45,10 +45,10 @@
                 <form name="boardListForm">
                     <table class="combined-list-tb">
                         <tr>
-                            <td colspan="7">
+                            <td colspan="10">
                                 <button disabled>전체선택</button>
                             </td>
-                            <td colspan="3">
+                            <td colspan="1">
                                 <button id="bDelBtn" type="button">삭제</button>
                             </td>
                         </tr>

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<link rel="stylesheet" href="/css/admin/combined_board.css"/>
 <link rel="stylesheet" href="/css/admin/product_manage.css"/>
 
 <div class="combined-wrap">
@@ -10,34 +9,34 @@
     </div>
 
     <div class="tab-pane fade show active" id="asd">
-        <div class="search-container">
-            <form action="<c:url value="/admin/productList"/>" class="search-form" method="get">
-                <select class="search-option" name="option">
-                    <option value="NA" ${ph.sc.option=='NA' ? "selected" : ""}>회사명</option>
-                    <option value="NI" ${ph.sc.option=='NI' ? "selected" : ""}>닉네임</option>
-                    <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>이름+닉네임</option>
-                </select>
+<%--        <div class="search-container">--%>
+<%--            <form action="<c:url value="/admin/productList"/>" class="search-form" method="get">--%>
+<%--                <select class="search-option" name="option">--%>
+<%--                    <option value="NA" ${ph.sc.option=='NA' ? "selected" : ""}>회사명</option>--%>
+<%--                    <option value="NI" ${ph.sc.option=='NI' ? "selected" : ""}>닉네임</option>--%>
+<%--                    <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>이름+닉네임</option>--%>
+<%--                </select>--%>
 
-                <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}"
-                       placeholder="검색어를 입력해주세요">
-                <input type="submit" class="search-button" value="검색">
-            </form>
-        </div>
+<%--                <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}"--%>
+<%--                       placeholder="검색어를 입력해주세요">--%>
+<%--                <input type="submit" class="search-button" value="검색">--%>
+<%--            </form>--%>
+<%--        </div>--%>
 
         <div class="product-container">
             <h1 class="product-container-title">승인 대기 중 상품</h1>
             <form name="boardListForm">
                 <table class="combined-list-tb">
                     <th class="titb"><input type="checkbox" id="all_check"></th>
-                    <th class="tit">유저ID</th>
-                    <th class="tit">회사명</th>
-                    <th class="tit">제목</th>
-                    <th class="tit">소요시간</th>
-                    <th class="tit">일정 수</th>
-                    <th class="tit">최소 인원</th>
-                    <th class="tit">최대 인원</th>
-                    <th class="tit">가격</th>
-                    <th class="tit">상태</th>
+                    <th class="tit user">유저ID</th>
+                    <th class="tit company">회사명</th>
+                    <th class="tit title">제목</th>
+<%--                    <th class="tit">소요시간</th>--%>
+<%--                    <th class="tit">일정 수</th>--%>
+<%--                    <th class="tit">최소 인원</th>--%>
+<%--                    <th class="tit">최대 인원</th>--%>
+                    <th class="tit price">가격</th>
+                    <th class="tit status">상태</th>
 <%--                    <th class="tit">취소사유</th>--%>
                     </tr>
 
@@ -51,13 +50,51 @@
                             <td class="con" name="title"><a
                                     href="/admin/productList/info${searchCondition.queryString}&productId=${unapproved.productId}">${unapproved.title}</a>
                             </td>
-                            <td class="con" name="reqTime">${unapproved.reqTime}</td>
-                            <td class="con" name="dayCnt">${unapproved.dayCnt}</td>
-                            <td class="con" name="minMember">${unapproved.minMember}</td>
-                            <td class="con" name="maxMember">${unapproved.maxMember}</td>
+<%--                            <td class="con" name="reqTime">${unapproved.reqTime}</td>--%>
+<%--                            <td class="con" name="dayCnt">${unapproved.dayCnt}</td>--%>
+<%--                            <td class="con" name="minMember">${unapproved.minMember}</td>--%>
+<%--                            <td class="con" name="maxMember">${unapproved.maxMember}</td>--%>
                             <td class="con" name="productPrice">${unapproved.productPrice}</td>
                             <td class="con" name="approvalStatus">${unapproved.approvalStatus==0?"대기":nnapproved.approvalStatus==1?"완료":"취소"}</td>
 <%--                            <td class="con" name="canceledReason">${unapproved.approvalStatus==0?"대기":napproved.approvalStatus==1?"완료":"취소"}</td>--%>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </form>
+
+            <h1 class="product-container-title">반려된 상품</h1>
+            <form name="boardListForm">
+                <table class="combined-list-tb">
+                    <th class="titb"><input type="checkbox" id="all_check"></th>
+                    <th class="tit user">유저ID</th>
+                    <th class="tit company">회사명</th>
+                    <th class="tit title">제목</th>
+                    <%--                    <th class="tit">소요시간</th>--%>
+                    <%--                    <th class="tit">일정 수</th>--%>
+                    <%--                    <th class="tit">최소 인원</th>--%>
+                    <%--                    <th class="tit">최대 인원</th>--%>
+                    <th class="tit price">가격</th>
+                    <th class="tit status">상태</th>
+                    <%--                    <th class="tit">취소사유</th>--%>
+                    </tr>
+
+                    <c:forEach var="canceled" items="${canceledList}">
+                        <tr class="con-td">
+                            <td class="con" name="productId">${canceled.productId}</td>
+                            <td class="con" name="userId">${canceled.partnerId}</td>
+                            <td class="con" name="companyName"><a
+                                    href="/admin/partner/info${searchCondition.queryString}&id=${canceled.partnerId}">${canceled.companyName}</a>
+                            </td>
+                            <td class="con" name="title"><a
+                                    href="/admin/productList/info${searchCondition.queryString}&productId=${canceled.productId}">${canceled.title}</a>
+                            </td>
+                                <%--                            <td class="con" name="reqTime">${unapproved.reqTime}</td>--%>
+                                <%--                            <td class="con" name="dayCnt">${unapproved.dayCnt}</td>--%>
+                                <%--                            <td class="con" name="minMember">${unapproved.minMember}</td>--%>
+                                <%--                            <td class="con" name="maxMember">${unapproved.maxMember}</td>--%>
+                            <td class="con" name="productPrice">${canceled.productPrice}</td>
+                            <td class="con" name="approvalStatus">${canceled.approvalStatus==0?"대기":canceled.approvalStatus==1?"완료":"취소"}</td>
+                                <%--                            <td class="con" name="canceledReason">${unapproved.approvalStatus==0?"대기":napproved.approvalStatus==1?"완료":"취소"}</td>--%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -67,15 +104,15 @@
             <form name="boardListForm">
                 <table class="combined-list-tb">
                     <th class="titb"><input type="checkbox" id="all_check"></th>
-                    <th class="tit">유저ID</th>
-                    <th class="tit">회사명</th>
-                    <th class="tit">제목</th>
-                    <th class="tit">소요시간</th>
-                    <th class="tit">일정 수</th>
-                    <th class="tit">최소 인원</th>
-                    <th class="tit">최대 인원</th>
-                    <th class="tit">가격</th>
-                    <th class="tit">상태</th>
+                    <th class="tit user">유저ID</th>
+                    <th class="tit company">회사명</th>
+                    <th class="tit title">제목</th>
+                    <%--                    <th class="tit">소요시간</th>--%>
+                    <%--                    <th class="tit">일정 수</th>--%>
+                    <%--                    <th class="tit">최소 인원</th>--%>
+                    <%--                    <th class="tit">최대 인원</th>--%>
+                    <th class="tit price">가격</th>
+                    <th class="tit status">상태</th>
                     </tr>
 
                     <c:forEach var="approved" items="${approvedList}">
@@ -85,13 +122,13 @@
                             <td class="con" name="companyName"><a
                                     href="/admin/partner/info${searchCondition.queryString}&id=${approved.partnerId}">${approved.companyName}</a>
                             </td>
-                            <td class="con" name="title"><a
+                            <td class="con" name="title"><a class="title"
                                     href="/admin/productList/info${searchCondition.queryString}&productId=${approved.productId}">${approved.title}</a>
                             </td>
-                            <td class="con" name="reqTime">${approved.reqTime}</td>
-                            <td class="con" name="dayCnt">${approved.dayCnt}</td>
-                            <td class="con" name="minMember">${approved.minMember}</td>
-                            <td class="con" name="maxMember">${approved.maxMember}</td>
+<%--                            <td class="con" name="reqTime">${approved.reqTime}</td>--%>
+<%--                            <td class="con" name="dayCnt">${approved.dayCnt}</td>--%>
+<%--                            <td class="con" name="minMember">${approved.minMember}</td>--%>
+<%--                            <td class="con" name="maxMember">${approved.maxMember}</td>--%>
                             <td class="con" name="productPrice">${approved.productPrice}</td>
                             <td class="con" name="approvalStatus">${approved.approvalStatus==0?"대기":approved.approvalStatus==1?"완료":"취소"}</td>
                         </tr>

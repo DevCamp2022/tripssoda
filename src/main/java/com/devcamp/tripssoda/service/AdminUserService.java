@@ -16,6 +16,7 @@ public interface AdminUserService {
     List<PartnerDto> selectOnPartner(SearchCondition sc);
 
     List<PartnerDto> selectOnApplicant(SearchCondition sc);
+    public List<PartnerDto> selectOnCancelled(SearchCondition sc);
 
     Integer partnerApprove(Integer id);
 

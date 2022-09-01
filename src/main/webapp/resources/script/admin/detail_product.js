@@ -215,7 +215,7 @@ $("#btnApprove").click(function (){
     method: "GET",
     data: {productId: URLSearch.get("productId"), reason: reason, approval:approval},
     success: function (result) {
-      if (result===success){
+      if (result==="success"){
         alert("처리가 완료되었습니다.")
 
       }

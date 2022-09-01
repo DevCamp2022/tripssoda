@@ -26,44 +26,79 @@
 
         <div class="tab-content">
             <div class="tab-pane fade show active" id="qwe">
-                <div class="search-container">
-                    <form action="<c:url value="/admin/partnerList"/>" class="search-form" method="get">
-                        <select class="search-option" name="option">
-                            <option value="NA" ${ph.sc.option=='NA' ? "selected" : ""}>회사명</option>
-                            <option value="NI" ${ph.sc.option=='NI' ? "selected" : ""}>닉네임</option>
-                            <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>이름+닉네임</option>
-                        </select>
+<%--                <div class="search-container">--%>
+<%--                    <form action="<c:url value="/admin/partnerList"/>" class="search-form" method="get">--%>
+<%--                        <select class="search-option" name="option">--%>
+<%--                            <option value="NA" ${ph.sc.option=='NA' ? "selected" : ""}>회사명</option>--%>
+<%--                            <option value="NI" ${ph.sc.option=='NI' ? "selected" : ""}>닉네임</option>--%>
+<%--                            <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>이름+닉네임</option>--%>
+<%--                        </select>--%>
 
-                        <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">
-                        <input type="submit" class="search-button" value="검색">
-                    </form>
-                </div>
+<%--                        <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">--%>
+<%--                        <input type="submit" class="search-button" value="검색">--%>
+<%--                    </form>--%>
+<%--                </div>--%>
 
                 <div class="partner-container">
 
                     <form name="boardListForm" class="apply-form">
                         <table class="combined-list-tb">
                             <tr>
+                                <th class="titb"><input type="checkbox" id="all_check"></th>
                                 <th class="tit">유저ID</th>
                                 <th class="tit">회사명</th>
                                 <th class="tit">상품지역</th>
                                 <th class="tit">상품유형</th>
-                                <th class="tit">현황</th>
+                                <th class="tit">담당자연락처</th>
+                                <th class="tit">파트너체결일</th>
+                                <th class="tit">상태</th>
                             </tr>
 
-                            <c:forEach var="partner" items="${applicantList}">
+                            <c:forEach var="applicant" items="${applicantList}">
                                 <tr class="con-td">
-                                    <td class="con" name="userId">${partner.userId}</td>
-                                    <td class="con" name="companyName"><a href="/admin/partner/info${searchCondition.queryString}&id=${partner.id}" >${partner.companyName}</a></td>
-                                    <td class="con" name="serviceRegion">${partner.serviceRegion}</td>
-                                    <td class="con" name="productType" data-menu-code="${partner.productType}">${partner.productType}</td>
-                                    <td class="con" name="conclusionDate">${partner.onPartnership==0? '심사대기' : '파트너'}</td>
+                                    <td class="con">${applicant.id}</td>
+                                    <td class="con" name="userId">${applicant.userId}</td>
+                                    <td class="con" name="companyName"><a href="/admin/partner/info${searchCondition.queryString}&partnerId=${applicant.id}" >${applicant.companyName}</a></td>
+                                    <td class="con" name="serviceRegion">${applicant.serviceRegion}</td>
+                                    <td class="con" name="productType" data-menu-code="${applicant.productType}">${applicant.productType}</td>
+                                    <td class="con" name="managerTel">${applicant.managerTel}</td>
+                                    <td class="con" name="conclusionDate">${applicant.conclusionDate}</td>
+                                    <td class="con"> ${partner.onPartnership==1? '파트너' : '해지'} </td>
                                 </tr>
                             </c:forEach>
 
                         </table>
                     </form>
 
+                    <form name="boardListForm">
+                        <table class="c<form name="boardListForm" class="apply-form">
+                        <table class="combined-list-tb">
+                            <tr>
+                                <th class="titb"><input type="checkbox" id="all_check"></th>
+                                <th class="tit">유저ID</th>
+                                <th class="tit">회사명</th>
+                                <th class="tit">상품지역</th>
+                                <th class="tit">상품유형</th>
+                                <th class="tit">담당자연락처</th>
+                                <th class="tit">파트너체결일</th>
+                                <th class="tit">상태</th>
+                            </tr>
+
+                            <c:forEach var="cancelled" items="${cancelledList}">
+                                <tr class="con-td">
+                                    <td class="con">${cancelled.id}</td>
+                                    <td class="con" name="userId">${cancelled.userId}</td>
+                                    <td class="con" name="companyName"><a href="/admin/partner/info${searchCondition.queryString}&partnerId=${cancelled.id}" >${cancelled.companyName}</a></td>
+                                    <td class="con" name="serviceRegion">${cancelled.serviceRegion}</td>
+                                    <td class="con" name="productType" data-menu-code="${cancelled.productType}">${cancelled.productType}</td>
+                                    <td class="con" name="managerTel">${cancelled.managerTel}</td>
+                                    <td class="con" name="conclusionDate">${cancelled.conclusionDate}</td>
+                                    <td class="con"> ${cancelled.onPartnership==2? '반려' : '해지'} </td>
+                                </tr>
+                            </c:forEach>
+
+                        </table>
+                    </form>
 
 
                     <form name="boardListForm">
@@ -86,12 +121,11 @@
                                 <th class="tit">파트너체결일</th>
                                 <th class="tit">상태</th>
                             </tr>
-
                             <c:forEach var="partner" items="${partnerList}">
                                 <tr class="con-td">
                                     <td class="con">${partner.id}</td>
                                     <td class="con" name="userId">${partner.userId}</td>
-                                    <td class="con" name="companyName"><a href="/admin/partnerInfo${searchCondition.queryString}&id=${partner.id}" >${partner.companyName}</a></td>
+                                    <td class="con" name="companyName"><a href="/admin/partner/info${searchCondition.queryString}&partnerId=${partner.id}" >${partner.companyName}</a></td>
                                     <td class="con" name="serviceRegion">${partner.serviceRegion}</td>
                                     <td class="con" name="productType" data-menu-code="${partner.productType}">${partner.productType}</td>
                                     <td class="con" name="managerTel">${partner.managerTel}</td>

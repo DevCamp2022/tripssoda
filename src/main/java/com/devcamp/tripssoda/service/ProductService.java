@@ -18,7 +18,8 @@ public interface ProductService {
     public List<ProductScheduleDto> selectScheduleList(Integer productId);
     public List<ProductOptionDto> selectOptionList(Integer productId);
     public int updateProductApproval(ApprovalDto approvalDto) throws Exception;
-    public List<ProductScheduleDto> getScheduleList(Integer productId);
+    public int updatePartnerApproval(ApprovalDto partnerApprovalDto) throws Exception;
+        public List<ProductScheduleDto> getScheduleList(Integer productId);
     public List<ProductScheduleDto> getProductScheduleList(GetDetailProductDto dto);
     public UpdateProductDto getUpdateProduct(Integer productId);
     public List<UpdateProductDto> getUpdateProductOption(Integer productId);
@@ -26,4 +27,6 @@ public interface ProductService {
     public void updateProduct(UpdateProductDto dto, @RequestParam MultipartFile uploadThumb, HttpServletRequest request, RegProductOptionListDto regProductOptionListDto, RegProductScheduleListDto regProductScheduleListDto);
     public List<ProductDto> getProductList(Integer partnerId);
     public List<ProductScheduleDto> selectProductScheduleListforDetail(Integer productId);
+
+    public ProductDto getOneProductData(Integer productId);
 }

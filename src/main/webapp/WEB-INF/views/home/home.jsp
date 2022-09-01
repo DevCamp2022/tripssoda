@@ -242,7 +242,7 @@
                 <div class="user-wrap">
                     <div class="user-img-wrap">
 <%--                        <img src="/user/profileImg/${accompany.profileImg}" alt="프로필 이미지">--%>
-                        <img class="img-thumbnail" src="${pageContext.request.contextPath}/user/profileImg/${accompany.profileImg}" alt="profile image">
+                        <img class="img-thumbnail" src="${pageContext.request.contextPath}/user/profileImg/default_img.JPG" alt="profile image">
                     </div>
                     <p class="menu-nickname">ReMinD</p>
                 </div>

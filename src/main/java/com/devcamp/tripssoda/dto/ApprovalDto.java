@@ -6,14 +6,24 @@ import org.apache.ibatis.type.Alias;
 public class ApprovalDto {
     private Integer userId;
     private Integer productId;
+    private Integer partnerId;
     private Integer approval;
     private String reason;
 
+    public Integer getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
+    }
+
     @Override
     public String toString() {
-        return "ProductApprovalDto{" +
+        return "ApprovalDto{" +
                 "userId=" + userId +
                 ", productId=" + productId +
+                ", partnerId=" + partnerId +
                 ", approval=" + approval +
                 ", reason='" + reason + '\'' +
                 '}';

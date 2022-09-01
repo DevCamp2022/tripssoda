@@ -15,7 +15,7 @@ public interface PartnerMapper {
     List<PartnerDto> selectOnPartner(SearchCondition sc);
 
     List<PartnerDto> selectOnApplicant(SearchCondition sc);
-
+    List<PartnerDto> selectOnCancelled(SearchCondition sc);
     Integer updateToPartner(Integer id);
 
     PartnerDto selectPartnerInfo(Integer id);

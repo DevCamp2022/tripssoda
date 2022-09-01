@@ -59,6 +59,11 @@
         where on_partnership = 0
     </select>
 
+    <select id="selectOnCancelled" resultType="PartnerDto">
+        select * from partner
+        where on_partnership = 2
+    </select>
+
     <update id="updateToPartner" parameterType="PartnerDto">
         UPDATE partner
         SET 'on_partnership' = 1

@@ -4,6 +4,7 @@ import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
+import com.devcamp.tripssoda.util.annotations.AuthChecking;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
@@ -262,6 +263,7 @@ public class AccompanyController {
         }
     }
 
+    @AuthChecking
     @GetMapping("/write")
     public String write(HttpServletRequest request, Model m) {
 

@@ -40,6 +40,7 @@ body {
     text-align: center;
     line-height: 100px;
     border-radius: 7px;
+    box-sizing: border-box;
 }
 .area1 {
     width: 300px;
@@ -50,6 +51,8 @@ body {
     font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
+    box-sizing: border-box;
+
 }
 .area2 {
     width: 300px;
@@ -60,6 +63,8 @@ body {
     font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
+    box-sizing: border-box;
+
 }
 .area3 {
     width: 300px;
@@ -70,6 +75,8 @@ body {
     font-weight: 700;
     padding: 16px 20px;
     margin: 5px;
+    box-sizing: border-box;
+
 }
 .area1:hover, .area2:hover, .area3:hover {
     border: 2px solid #00ce7c;
@@ -133,11 +140,10 @@ body {
 /* 정렬 선택 버튼 */
 .sort-button {
     width: 82px;
-    height: 37px;
     font-weight: 350;
     line-height: 21px;
     color: rgb(37,37,37);
-    margin-left: 500px;
+    margin-left: 600px;
 }
 /* 정렬 선택 버튼-옵션 */
 .search-option {
@@ -165,7 +171,7 @@ body {
     color: rgb(37,37,37);
     font-weight: 700;
     font-size: 16px;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-right: 20px;
     text-align: center;
     cursor: pointer;
@@ -183,7 +189,7 @@ body {
     color: #ffffff;
     font-weight: 700;
     font-size: 16px;
-    border-radius: 30px;
+    border-radius: 4px;
     margin-right: 20px;
     text-align: center;
     cursor: pointer;

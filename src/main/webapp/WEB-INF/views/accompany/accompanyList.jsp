@@ -65,7 +65,7 @@
     <div class="sort-bar2">
         <a href="<c:url value='/accompany/write'/>">
         <div class="new-write-btn">
-            글쓰기
+            동행 글쓰기
         </div>
         </a>
         <div class="sort-text">

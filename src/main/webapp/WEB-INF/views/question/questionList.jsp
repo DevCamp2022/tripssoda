@@ -34,9 +34,9 @@
                 질문 글쓰기
             </div>
         </a>
-        <div class="sort-text">
-            정렬
-        </div>
+<%--        <div class="sort-text">--%>
+<%--            정렬--%>
+<%--        </div>--%>
         <div class="sort-button">
             <select class="search-option" name="option" onchange="this.form.submit()">
                 <option value="none" disabled selected>정렬선택</option>
@@ -50,8 +50,8 @@
         </div>
         </c:if>
         <c:if test="${mode eq 'waiting'}">
-            <div class="only-recruit" onclick="location.href='<c:url value="/question/list"/>'">
-                모든 답변 보기
+            <div class="only-recruit2" onclick="location.href='<c:url value="/question/list"/>'">
+                답변을 기다리는 질문만 보기
             </div>
         </c:if>
     </div>

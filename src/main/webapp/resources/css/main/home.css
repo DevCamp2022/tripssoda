@@ -443,7 +443,12 @@ body{
     border-radius: 15px;
     transition: all 0.4s;
 }
-
+.user-img-wrap {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 .img-thumbnail:hover{
     transform: scale(1.1);
 }

@@ -272,17 +272,24 @@ body {
 }
 /* 모집중/지난여행 */
 .recruit-on-off {
-    width: 65px;
+    /*width: 82px;*/
     height: 24px;
     font-size: 16px;
     color: rgb(0,206,124);
+    font-weight: 800;
+    /*letter-spacing: 0.5px;*/
+    /*margin-right: 5px;*/
+}
+.recruit-on-text {
+    /*margin-left: -5px;*/
 }
 .recruit-off-text {
     color: #9a9a9a;
+    font-weight: 800;
 }
 /* 제목 */
 .list-title {
-    width: 223px;
+    width: 200px;
     color: #000;
     font-size: 16px;
     overflow: hidden;
@@ -322,6 +329,8 @@ body {
 .nickname {
     width: 150px;
     line-height: 24px;
+    color: #00ce7c;
+    font-weight: 600;
     /*padding-right: 35px;*/
 }
 .view-cnt-line {

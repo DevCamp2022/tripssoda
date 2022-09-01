@@ -17,10 +17,11 @@
 
 
 
-    <!-- <div class="searchMain">
-        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">
-        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </div> -->
+    <div class="searchMain">
+<%--        <input type="text" id="searchInput" placeholder="검색어를 입력하세요!">--%>
+<%--        <button type="button" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i></button>--%>
+<%--        <img src="/image/main/vacation.gif"  width="100px" alt="a big building">--%>
+    </div>
 
 
 <div class="txt">
@@ -56,6 +57,12 @@
             <div class="btn-lank">
                 <a href="/accompany/list"><span>더보기</span><i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
+
+
+            <img class="pointImg" src="/image/main/vacation.gif"  alt="a big building">
+            <img class="pointImg2" src="/image/main/tratxt.gif"  alt="a big building">
+            <img class="pointImg3" src="/image/main/heart.gif"  alt="a big building">
+
 
             <c:forEach var="accompanyDto" items="${accompanyList}" varStatus="statusNm">
 
@@ -230,7 +237,7 @@
     <div class="slide-wrap">
 
     <div class="qna-section">
-        <h1>여행정보 공유해요!</h1>
+        <h1>여행정보 공유해요</h1>
 <%--        <h2 class="section-title">여행정보 공유해요!</h2>--%>
 
         <div class="qna-wrap">

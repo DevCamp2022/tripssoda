@@ -66,18 +66,20 @@ body {
     color:black;
 }
 
+
+
 div.txt>span{
-    font-size: 32px;
+    font-size: 42px;
     text-shadow: 1px 1px 2px gray;
     position:relative;
 }
 div.txt>span>strong{
-    font-size: 53px;
+    font-size: 70px;
     letter-spacing: 6px;
-    padding-right: 12px;
+    padding-right: 46px;
     position:absolute;
-    top:-12px;
-    left:-110px;
+    top:-54px;
+    left:-86px;
     text-shadow: 1px 1px 2px gray;
 
 }
@@ -89,8 +91,10 @@ div.txt>span>strong:hover{
 
 #goBtn{
     font-weight: bold;
+    font-size: 20px;
+    color:#252525;;
     position: absolute;
-    top: 50px;
+    top: 66px;
     display: block;
     right:-80px;
     width:150px;
@@ -100,7 +104,6 @@ div.txt>span>strong:hover{
     /*background-color: transparent;*/
     /*border:none;*/
     background-color: rgba(255,255,255,0.3);
-
     transition:all 0.9s;
 }
 #goBtn:hover{
@@ -220,11 +223,14 @@ div.txt>span>strong:hover{
     margin-top: 100px;
 }
 .slide-wrap h1{
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 21px;
     font-width: 700px;
-    margin-top:70px;
-    margin-bottom: 50px;
+    margin-top:50px;
+    /*margin-bottom: 10px;*/
     color:#2f3542;
+    text-align: left;
+    padding-left: 25px;
 
 }
 .slider {
@@ -283,7 +289,7 @@ div.txt>span>strong:hover{
 }
 
 .block_popular{
-    margin: 0px 0 300px 0;
+    margin: 0px 0 100px 0;
     /*margin-bottom: 300px;*/
 }
 
@@ -435,6 +441,30 @@ body{
     width: 100%;
     overflow: hidden;
     border-radius: 15px;
+    position: relative;
+}
+
+.pointImg{
+    position:absolute;
+    /*top:200px;*/
+    /*left:35px;  */
+    width:70px;
+    top: 23px;
+    left:195px;
+}
+
+.pointImg2{
+    width:200px;
+    position:absolute;
+    top:130px;
+    left:64px;
+}
+
+.pointImg3{
+    width:70px;
+    position:absolute;
+    top:230px;
+    right:30px;
 }
 
 .img-thumbnail{
@@ -772,7 +802,7 @@ li{
 
 /*********************/
 div#wrap{
-    margin: 120px 0px;
+    margin: 100px 0px;
 }
 .tabArea { background-color: #fff; width: 560px; height: 300px; margin-bottom: 150px; border: 1px solid #f1f1f1; padding: 30px 40px 0; }
 .tabArea .tab { display: flex; justify-content: left; }
@@ -848,7 +878,8 @@ div#wrap{
 }
 .qna-section>h1{
     margin-top:36px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding-left: 0px;
 }
 
 .section-title {

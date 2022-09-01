@@ -183,6 +183,29 @@ public class ProductServiceImpl implements ProductService {
         return rowCnt;
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public int updatePartnerApproval(ApprovalDto partnerApprovalDto) throws Exception {
+        int rowCnt = productMapper.updatePartnerApproval(partnerApprovalDto);
+        try {
+            if (rowCnt != 1) {
+                throw new Exception();
+            }
+            if (partnerApprovalDto.getApproval().equals(0)) {
+                System.out.println("productApprovalDto.getApproval() = " + partnerApprovalDto.getApproval());
+
+                rowCnt = productMapper.insertPartnerApprovalHistory(partnerApprovalDto);
+                if (rowCnt != 1) {
+                    throw new Exception();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception();
+        }
+        return rowCnt;
+    }
+
+
     @Override
     public List<ProductScheduleDto> getScheduleList(Integer productId) {
         return null;

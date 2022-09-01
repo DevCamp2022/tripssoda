@@ -293,10 +293,13 @@ public class AdminController {
 //                List<PartnerDto> list = adminUserService.searchSelectPartner(sc);
                 List<PartnerDto> partnerList = adminUserService.selectOnPartner(sc);
                 List<PartnerDto> applicantList = adminUserService.selectOnApplicant(sc);
+                List<PartnerDto> cancelledList = adminUserService.selectOnCancelled(sc);
 
+                System.out.println("cancelledList = " + cancelledList);
 //                m.addAttribute("list", list);
                 m.addAttribute("partnerList", partnerList);
                 m.addAttribute("applicantList", applicantList);
+                m.addAttribute("cancelledList", cancelledList);
 
                 m.addAttribute("ph", pageHandler);
 
@@ -327,7 +330,7 @@ public class AdminController {
             List<AdminProductDto> unapprovedList = adminProductService.selectProductByApprovalStatus("0");
             List<AdminProductDto> approvedList = adminProductService.selectProductByApprovalStatus("1");
             List<AdminProductDto> canceledList = adminProductService.selectProductByApprovalStatus("2");
-
+            System.out.println("canceledList = " + canceledList);
 //                m.addAttribute("list", list);
             m.addAttribute("approvedList", approvedList);
             m.addAttribute("unapprovedList", unapprovedList);
@@ -343,21 +346,21 @@ public class AdminController {
 
         return "admin/product_manage.subTiles";
     }
-
-    //파트너 심사 승인
-    @PostMapping("/partner/approve")
-    public String approval(PartnerDto partnerDto, Model m, SearchCondition sc, Integer id) throws Exception {
-
-        Integer result = adminUserService.partnerApprove(id);
-        m.addAttribute("partnerDto", partnerDto);
-
-        return "admin/partner_manage.subTiles";
-    }
+//
+//    //파트너 심사 승인
+//    @PostMapping("/partner/approve")
+//    public String approval(PartnerDto partnerDto, Model m, SearchCondition sc, Integer id) throws Exception {
+//
+//        Integer result = adminUserService.partnerApprove(id);
+//        m.addAttribute("partnerDto", partnerDto);
+//
+//        return "admin/partner_manage.subTiles";
+//    }
 
     //파트너 정보
     @GetMapping("/partner/info")
-    public String partnerInfo(Integer id, Model m){
-        PartnerDto partnerDto = adminUserService.selectPartnerInfo(id);
+    public String partnerInfo(Integer partnerId, Model m){
+        PartnerDto partnerDto = adminUserService.selectPartnerInfo(partnerId);
         System.out.println("partnerDto = " + partnerDto);
         m.addAttribute("partnerDto", partnerDto);
         return "admin/partner_detail.subTiles";
@@ -378,6 +381,20 @@ public class AdminController {
         model.addAttribute("option", option);
 
         return "admin/product_detail.subTiles";
+    }
+
+    @GetMapping("/partner/approval")
+    public ResponseEntity<String> approvePartner(HttpSession session, ApprovalDto approvalDto){
+        Integer userId = (Integer) session.getAttribute("id");
+        approvalDto.setUserId(userId);
+        System.out.println("파트너 approval = " + approvalDto);
+        try {
+            productService.updatePartnerApproval(approvalDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @GetMapping("/product/approval")
@@ -455,7 +472,7 @@ public class AdminController {
         }
         return new ResponseEntity<String>(count + "명의 유저에게 이메일 전송을 완료했습니다.", responseHeaders, HttpStatus.OK);
     }
-    
+
     @GetMapping("/inquiry/reply")
     public String inquiryReply(Model m, SearchCondition searchCondition) {
         m.addAttribute("searchCondition", searchCondition);

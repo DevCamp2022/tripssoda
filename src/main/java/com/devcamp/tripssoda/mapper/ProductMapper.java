@@ -24,7 +24,8 @@ public interface ProductMapper {
     public int setUpdateBy(Map<String, Integer> map);
     public int updateProductApproval(ApprovalDto approvalDto);
     public int insertProductApprovalHistory(ApprovalDto approvalDto);
-    public int updatePartnerpproval(ApprovalDto approvalDto);
+//    일단 프로덕트에다 하드코딩...
+    public int updatePartnerApproval(ApprovalDto approvalDto);
     public int insertPartnerApprovalHistory(ApprovalDto approvalDto);
     public List<ProductScheduleDto> selectProductScheduleList(GetDetailProductDto dto);
     public List<ProductScheduleDto> selectScheduleList(Integer productId);

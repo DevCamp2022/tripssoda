@@ -48,6 +48,9 @@ public class AdminUserServiceImpl implements AdminUserService{
     public List<PartnerDto> selectOnApplicant(SearchCondition sc) {
         return  partnerMapper.selectOnApplicant(sc);
     }
+    public List<PartnerDto> selectOnCancelled(SearchCondition sc) {
+        return  partnerMapper.selectOnCancelled(sc);
+    }
 
     @Override
     public Integer partnerApprove(Integer id) {

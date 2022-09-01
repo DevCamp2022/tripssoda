@@ -4,7 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link href="/css/admin/detail_product.css" rel='stylesheet' />
 <div class="content">
-  zzzzzzzzzzzzzzzzzzzzzzzzzzzz
+  <form id="approvalForm">
+    <select id="approvalSelection" data-target="product">
+      <option value="0">대기</option>
+      <option value="1">승인</option>
+      <option value="2">반려</option>
+      <%--<option>취소</option>--%>
+    </select>
+    <input type="text" id="reason" style="display: none" placeholder="사유를 입력하세요."/>
+  </form>
+  <button type="button" id="btnApprove">적용하기</button>
 
   <table>
     <th>zz</th>
@@ -22,11 +31,8 @@
       <td class="con" name="productType" data-menu-code="${partner.productType}">${partnerDto.productType}</td>
       <td class="con" name="conclusionDate">${partnerDto.onPartnership==0? '심사대기' : '파트너'}</td>
     </tr>
-    <tr>
-      <button>승인</button>
-      <button>거절</button>
-    </tr>
+
   </table>
 
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/detail_product.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/script/admin/detail_partner.js"></script>

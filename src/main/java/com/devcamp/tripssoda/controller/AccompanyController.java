@@ -4,11 +4,7 @@ import com.devcamp.tripssoda.dto.*;
 import com.devcamp.tripssoda.dto.PageHandlerOld;
 import com.devcamp.tripssoda.service.AccompanyService;
 import com.devcamp.tripssoda.service.UserService;
-<<<<<<< HEAD
 import com.devcamp.tripssoda.util.annotations.AuthChecking;
-=======
-import org.apache.ibatis.javassist.Loader;
->>>>>>> e890691f3ca8fe5f1aafb104e4a8e34448e0eca7
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;

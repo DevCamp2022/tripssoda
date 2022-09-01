@@ -4,24 +4,19 @@ body{
     font-size: 15px;
     background-color: #fff;
 }
-
-
 div.content{
     margin-top: 50px;
 }
-
 h1.board-title{
     font-size: 22px;
     font-weight: 600;
 }
-
 hr.separator {
     margin-bottom: 20px;
 }
 div.search-wrap{
     margin: 20px 10px 20px 0;
 }
-
 table.board-table {
     width: 100%;
 }
@@ -33,7 +28,6 @@ table.board-table th{
     padding: 10px 20px;
     text-align: center;
 }
-
 table.board-table tr td {
     border-bottom: 1px solid #D5D5D5FF;
     padding: 15px;
@@ -41,16 +35,13 @@ table.board-table tr td {
 }
 
 table.board-table th.number{
-
 }
 table.board-table th.title{
     width: 700px;
 }
 table.board-table th.date{
-
 }
 table.board-table th.count{
-
 }
 
 div.paging{
@@ -61,24 +52,19 @@ div.paging{
 div.paging a{
     padding: 10px;
 }
-
 .search-container {
-    /*background-color: rgb(253, 253, 250);*/
     width: 100%;
     height: 110px;
-    /*border: 1px solid #ddd;*/
     margin-top : 10px;
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .search-form {
     height: 37px;
     display: flex;
 }
-
 .search-option {
     width: 100px;
     height: 100%;
@@ -87,11 +73,9 @@ div.paging a{
     border: 1px solid #ccc;
     color: gray;
 }
-
 .search-option > option {
     text-align: center;
 }
-
 .search-input {
     color: gray;
     background-color: white;
@@ -105,7 +89,6 @@ div.paging a{
 .search-input::placeholder {
     color: gray;
 }
-
 .search-button {
     /* 메뉴바의 검색 버튼 아이콘  */
     width: 20%;
@@ -119,13 +102,7 @@ div.paging a{
     font-size: 15px;
     border: none;
     margin-left: 15px;
-
 }
 
-.search-button:hover {
-    color: rgb(165, 165, 165);
-}
-
-input[name='keyword']:focus{
-    outline: none;
-}
+.search-button:hover {color: rgb(165, 165, 165); }
+input[name='keyword']:focus{ outline: none; }

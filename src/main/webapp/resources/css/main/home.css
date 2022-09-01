@@ -742,8 +742,6 @@ li{
 
 
 
-
-
 /*게시판*/
 .board_list_wrap{
     width:600px;
@@ -764,8 +762,6 @@ li{
     display: flex;
     justify-content: space-between;
 }
-
-
 
 
 
@@ -792,28 +788,21 @@ div#wrap{
 .tabArea .tab span{ padding-right:40px;}
 .tabBox li{
     padding: 5px 0px;
-    /*border-bottom: 1px solid #f1f1f1;*/
 }
-
 .searchMain{
     position: absolute;
     top:95px;
     left:780px;
-
 }
 #searchInput{
     width: 290px;
     height: 45px;
     font-size: 15px;
     border: 0;
-    /*border-radius: 15px;*/
     outline: none;
     padding-left: 80px;
     border-radius: 5px;
-    /*background-color: rgb(233, 233, 233);*/
-    /*border-bottom: 1px solid #2e9ad0;*/
     background-color: rgba(255,255,255,0.3);
-    /*background: transparent;*/
     box-shadow: 2px 2px 2px #333333;
 }
 #searchBtn{
@@ -843,21 +832,13 @@ div#wrap{
     overflow: hidden;
 }
 
-
-
 /**/
 
 .div-editor .div-editor-1{
-
 }
 
-
-
 .qna-section {
-    /*border:1px solid black;*/
     width: fit-content;
-    /*margin-top:150px;*/
-    /*margin-left: 30px;*/
     margin-right: 30px;
 }
 .qna-section>h1{
@@ -914,11 +895,9 @@ div#wrap{
 }
 
 .user-img-wrap {
-
 }
 
 .menu-nickname {
-
 }
 
 .qna-answer {
@@ -939,7 +918,6 @@ div#wrap{
     color: rgb(154, 154, 154);
 
 }
-
 
 .slide-wrap{
     display: flex;

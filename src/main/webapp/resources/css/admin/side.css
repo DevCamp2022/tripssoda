@@ -1,8 +1,6 @@
 .side-wrap{
     margin-top: 50px;
 }
-
-
 .menu-header {
     width: 270px;
     box-sizing: border-box;
@@ -47,12 +45,10 @@
     flex-wrap: nowrap;
     flex-direction: row;
 }
-
 .side-container span {
     float: right;
     color: grey;
 }
-
 .side-wrap>label{
     display:block;
     margin-bottom: 12px;

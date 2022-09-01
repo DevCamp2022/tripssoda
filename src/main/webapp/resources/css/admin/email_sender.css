@@ -6,13 +6,11 @@
     align-items: flex-start;
     justify-content: center;
 }
-
 div.frm-wrap{
     border: 1px solid #e9e9e9;
     width: 800px;
     padding: 20px;
 }
-
 div.detail-wrap{
     display: flex;
     flex-direction: row;
@@ -23,21 +21,10 @@ div.detail-wrap{
     width: 100%;
     margin-bottom: 20px;
 }
-
-
-input.email-inp{
-    width: 80%;
-}
-
-select.email-sel{
-    width: 40%;
-}
-
+input.email-inp{ width: 80%; }
+select.email-sel{width: 40%; }
 textarea.content.email-inp{
     width: 100%;
     height: 600px;
 }
-
-span.receiver, span.title{
-    width: 20%;
-}
+span.receiver, span.title{ width: 20%; }

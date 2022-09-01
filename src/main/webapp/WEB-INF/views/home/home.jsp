@@ -230,7 +230,7 @@
     <div class="slide-wrap">
 
     <div class="qna-section">
-        <h1>여행정보 공유해요!</h1>
+        <h1>여행정보 공유해요</h1>
 <%--        <h2 class="section-title">여행정보 공유해요!</h2>--%>
 
         <div class="qna-wrap">

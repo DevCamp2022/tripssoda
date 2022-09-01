@@ -49,4 +49,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- 한글 변환 필터 끝 -->
+	<session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
 </web-app>

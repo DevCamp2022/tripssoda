@@ -11,5 +11,5 @@
     }
     a:hover{   text-decoration: none;}
 </style>
-<body>
-<h1><br><br><Br>관리자 메인 홈</h1>
+<body><x></x>
+<h1><br><br><Br></h1>

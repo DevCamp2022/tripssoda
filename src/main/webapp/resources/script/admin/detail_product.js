@@ -217,7 +217,7 @@ $("#btnApprove").click(function (){
     success: function (result) {
       if (result==="success"){
         alert("처리가 완료되었습니다.")
-
+        window.location.href="/admin/partnerList";
       }
     },
     error: function (result) {

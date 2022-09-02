@@ -43,8 +43,10 @@ div.content-container{
 /*}*/
 
 div.content-wrap{
-    width: 1200px;
+    min-width: 1200px;
     margin: 0 auto;
+    display: flex;
+
     /*background-color: cornflowerblue;*/
 }
 
@@ -54,12 +56,14 @@ div.top-wrap > div.menu{
 }
 
 div.bottom-wrap{
+    min-width: 1200px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: flex-start;
     align-items: center;
+    padding: 0 50px;
 }
 
 

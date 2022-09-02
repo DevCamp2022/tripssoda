@@ -100,10 +100,10 @@
                     <div class="list-title-line">
                         <div class="recruit-on-off">
                             <c:if test="${accompanyDto.status eq 0}">
-                                모집중
+                                <span class="recruit-on-text">[모집중]</span>
                             </c:if>
                             <c:if test="${accompanyDto.status eq 1}">
-                                <span class="recruit-off-text">지난여행</span>
+                                <span class="recruit-off-text">[지난여행]</span>
                             </c:if>
                         </div>
                         <div class="list-title">

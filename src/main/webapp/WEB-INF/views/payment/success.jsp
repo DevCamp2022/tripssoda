@@ -10,7 +10,7 @@
         <div class="success-info">
             <div class="success-header">
                 <img class="thumbnail" src="/image/sample/sample_img.png"/>
-                <strong class="product-title">제목zzzzzzzzzzzzzzzzzzzzzzz</strong>
+                <strong class="product-title">제목</strong>
             </div>
             <div class="success-detail">
                 <ul class="detail-info">

@@ -8,7 +8,8 @@ div.combined-wrap{
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
-    align-items: flex-start
+    align-items: flex-start;
+    width: 1000px;
 }
 
 .combined-list-tb {
@@ -326,4 +327,25 @@ body{
 .bc-button-wrap{
     padding: 20px 0px;
     text-align: right;
+}
+
+td.con > a > span.product-title{
+    width: 550px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.table th.product-title{
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+}
+
+.card{
+    width: 100%;
 }

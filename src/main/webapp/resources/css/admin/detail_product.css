@@ -22,7 +22,7 @@ div.detail-wrap{
 div.right-area{
   clear: both;
   display: inline-block;
-  padding: 50px;
+  padding: 25px;
   width: 800px;
 }
 
@@ -146,10 +146,10 @@ progress.currentMember::-webkit-progress-value {
 table.option-detail{
   border: 1px solid rgb(220, 220, 220);
   font-size: 13px;
-  width: 700px;
+  width: 900px;
 }
 
-table.option-detail th, td{
+table.option-detail th, table.option-detail td{
   border: 1px solid rgb(220, 220, 220);
   padding: 10px;
 }
@@ -161,4 +161,29 @@ table.option-detail th{
 
 div.right-wrap{
   width: 800px;
+}
+.approval-table{
+  margin-top: 25px;
+}
+
+.approval-table th{
+  width: 200px;
+}
+
+.approval-table td {
+}
+.approval-table th, .approval-table td{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+#approvalSelection{
+  display: inline-block;
+  padding: 6px;
+}
+
+#reason{
+  padding: 6px;
 }

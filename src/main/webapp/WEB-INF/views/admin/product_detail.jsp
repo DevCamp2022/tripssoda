@@ -3,20 +3,31 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link href="/css/admin/detail_product.css" rel='stylesheet'/>
-<div class="content">
-    <div class="product-banner-wrap">11</div>
-    <!-- <div class="detail-wrap"> -->
-    <form id="approvalForm">
-        <select id="approvalSelection" data-target="product">
-            <option value="0">대기</option>
-            <option value="1">승인</option>
-            <option value="2">반려</option>
-            <%--<option>취소</option>--%>
-        </select>
-        <input type="text" id="reason" style="display: none" placeholder="사유를 입력하세요."/>
-    </form>
+<link rel="stylesheet" href="/css/admin/combined_board.css" />
 
-    <button type="button" id="btnApprove">적용하기</button>
+<div class="content">
+<%--    <div class="product-banner-wrap">11</div>--%>
+    <!-- <div class="detail-wrap"> -->
+    <table class="approval-table">
+        <tr >
+            <th><span>파트너쉽 승인 처리</span></th>
+            <td>
+                <form id="approvalForm">
+                    <select id="approvalSelection" data-target="product">
+                        <option value="0">대기</option>
+                        <option value="1">승인</option>
+                        <option value="2">반려</option>
+
+                    </select>
+                    <input type="text" id="reason" style="display: none" placeholder="사유를 입력하세요.">
+                    <button type="button" id="btnApprove" class="btn btn-primary">적용하기</button>
+
+                </form>
+
+            </td>
+        </tr>
+    </table>
+
 
     <div class="right-area">
         <!-- banner생각해볼것 -->

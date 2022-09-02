@@ -190,7 +190,7 @@ public class ProductServiceImpl implements ProductService {
             if (rowCnt != 1) {
                 throw new Exception();
             }
-            if (partnerApprovalDto.getApproval().equals(0)) {
+            if (partnerApprovalDto.getApproval().equals(2)) {
                 System.out.println("productApprovalDto.getApproval() = " + partnerApprovalDto.getApproval());
 
                 rowCnt = productMapper.insertPartnerApprovalHistory(partnerApprovalDto);

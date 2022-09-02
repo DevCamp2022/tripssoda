@@ -6,11 +6,12 @@ body{
 }
 
 .combined-wrap{
-    min-height: 1000px;
+    /*min-height: 1000px;*/
     height: auto;
     /*color: black;*/
     color:#3D3D3D;
     margin-bottom: 60px;
+    width: 1100px;
 }
 
 .combined-wrap th{
@@ -227,3 +228,7 @@ body{
 .board-btns{  padding: 20px 0px; text-align: right; }
 
 .bc-button-wrap{ padding: 20px 0px; text-align: right; }
+
+.table tr>th{
+    text-align: center;
+}

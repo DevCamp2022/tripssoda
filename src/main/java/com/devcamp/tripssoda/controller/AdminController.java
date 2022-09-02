@@ -37,13 +37,16 @@ public class AdminController {
 
     private final AdminEmailService adminEmailService;
 
+    private final PartnerService partnerService;
+
     public AdminController(AdminBoardService adminBoardService,
                            AdminUserService adminUserService,
                            UserService userService,
                            AdminProductService adminProductService,
                            ProductService productService,
                            InquiryService inquiryService,
-                           AdminEmailService adminEmailService)
+                           AdminEmailService adminEmailService,
+                           PartnerService partnerService)
     {
         this.adminBoardService = adminBoardService;
         this.adminUserService = adminUserService;
@@ -52,6 +55,7 @@ public class AdminController {
         this.productService = productService;
         this.adminEmailService = adminEmailService;
         this.inquiryService = inquiryService;
+        this.partnerService = partnerService;
     }
 
 //    @AuthChecking
@@ -361,13 +365,14 @@ public class AdminController {
 //        return "admin/partner_manage.subTiles";
 //    }
 
-    //파트너 정보
+
     @GetMapping("/partner/info")
-    public String partnerInfo(Integer partnerId, Model m){
-        PartnerDto partnerDto = adminUserService.selectPartnerInfo(partnerId);
+    public String partnerInfo(Integer userId, Model m){
+        System.out.println("partnerId = " + userId);
+        PartnerDto partnerDto = partnerService.getPartnerInformation(userId);
         System.out.println("partnerDto = " + partnerDto);
-        m.addAttribute("partnerDto", partnerDto);
-        return "admin/partner_detail.subTiles";
+        m.addAttribute("PartnerDto",partnerDto);
+        return "admin/partner_info.subTiles";
     }
 
     @GetMapping("/productList/info")

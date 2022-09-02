@@ -107,3 +107,12 @@ td{
   margin-right: 10px;
   padding: 5px;
 }
+
+#approvalSelection{
+  display: inline-block;
+  padding: 6px;
+}
+
+#reason{
+  padding: 6px;
+}

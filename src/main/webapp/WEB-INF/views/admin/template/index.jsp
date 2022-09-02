@@ -1,36 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
 
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<%--<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->--%>
+<%--<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->--%>
+<%--<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->--%>
+<%--<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->--%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>트립쏘다 관리자페이지</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="/adminTemplate/assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="/adminTemplate/assets/css/style.css">
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
    <style>
     #weatherWidget .currentDesc {
@@ -72,12 +58,12 @@
 
 <body>
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
+    <%--<aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.jsp"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+            si            <a href="index.jsp"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -150,7 +136,7 @@
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
-    </aside>
+    </aside>--%>
     <!-- /#left-panel -->
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
@@ -274,8 +260,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text">$<span class="count">23569</span></div>
-                                            <div class="stat-heading">Revenue</div>
+                                            <div class="stat-text">￦<span class="count">6439100</span></div>
+                                            <div class="stat-heading">총매출</div>
                                         </div>
                                     </div>
                                 </div>
@@ -292,8 +278,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">3435</span></div>
-                                            <div class="stat-heading">Sales</div>
+                                            <div class="stat-text"><span class="count">33</span></div>
+                                            <div class="stat-heading">누적판매량</div>
                                         </div>
                                     </div>
                                 </div>
@@ -310,8 +296,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">349</span></div>
-                                            <div class="stat-heading">Templates</div>
+                                            <div class="stat-text"><span class="count">24</span></div>
+                                            <div class="stat-heading">동행 게시글</div>
                                         </div>
                                     </div>
                                 </div>
@@ -328,8 +314,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">2986</span></div>
-                                            <div class="stat-heading">Clients</div>
+                                            <div class="stat-text"><span class="count">14</span></div>
+                                            <div class="stat-heading">활성유저</div>
                                         </div>
                                     </div>
                                 </div>
@@ -394,7 +380,7 @@
                 <!-- Orders -->
                 <div class="orders">
                     <div class="row">
-                        <div class="col-xl-8">
+                        <%--<div class="col-xl-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="box-title">Orders </h4>
@@ -494,7 +480,7 @@
                                     </div> <!-- /.table-stats -->
                                 </div>
                             </div> <!-- /.card -->
-                        </div>  <!-- /.col-lg-8 -->
+                        </div>--%>  <!-- /.col-lg-8 -->
 
                         <div class="col-xl-4">
                             <div class="row">
@@ -520,11 +506,19 @@
                                 </div>
                             </div>
                         </div> <!-- /.col-md-4 -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Pie Chart</h4>
+                                    <div class="flot-container">
+                                        <div id="flot-pie" class="flot-pie-container" style="padding: 0px; position: relative;"><canvas class="flot-base" width="413" height="275" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 413px; height: 275px;"></canvas><canvas class="flot-overlay" width="413" height="275" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 413px; height: 275px;"></canvas><div class="legend"><div style="position: absolute; width: 58px; height: 110px; top: 5px; right: 5px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #8fc9fb;overflow:hidden"></div></div></td><td class="legendLabel"> Data 1</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #007BFF;overflow:hidden"></div></div></td><td class="legendLabel"> Data 2</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #00c292;overflow:hidden"></div></div></td><td class="legendLabel"> Data 3</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #F44336;overflow:hidden"></div></div></td><td class="legendLabel"> Data 4</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #32c39f;overflow:hidden"></div></div></td><td class="legendLabel"> Data 5</td></tr></tbody></table></div></div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <!-- /.orders -->
                 <!-- To Do and Live Chat -->
-                <div class="row">
+                <%--<div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
@@ -641,7 +635,7 @@
                             </div> <!-- /.card-body -->
                         </div><!-- /.card -->
                     </div>
-                </div>
+                </div>--%>
                 <!-- /To Do and Live Chat -->
                 <!-- Calender Chart Weather  -->
                 <div class="row">
@@ -785,9 +779,9 @@
 
             // Pie chart flotPie1
             var piedata = [
-                { label: "Desktop visits", data: [[1,32]], color: '#5c6bc0'},
-                { label: "Tab visits", data: [[1,33]], color: '#ef5350'},
-                { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
+                { label: "남자", data: [[1,33]], color: '#5c6bc0'},
+                { label: "여자", data: [[1,67]], color: '#ef5350'},
+                // { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
             ];
 
             $.plot('#flotPie1', piedata, {

@@ -467,7 +467,7 @@ canvas {
   .order-table tr th {
     background: #e8e9ef; }
   .order-table tr td:last-child, .order-table tr th:last-child {
-    text-align: right; }
+    text-align: center; }
   .order-table tr:last-child td {
     border: none; }
   .order-table .badge {
@@ -566,11 +566,12 @@ aside.left-panel {
   width: 280px;
   -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
           box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  top: 55px;
-  z-index: 999; }
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*bottom: 0;*/
+  /*top: 55px;*/
+  /*z-index: 999;*/
+}
   aside.left-panel:hover {
     overflow-x: scroll; }
 
@@ -822,8 +823,9 @@ aside.left-panel {
 /* Right panel */
 .right-panel {
   background: #f1f2f7;
-  margin-left: 280px;
-  margin-top: 55px; }
+  /*margin-left: 280px;*/
+  /*margin-top: 55px;*/
+}f
   .right-panel .top-left {
     width: 350px;
     float: left; }

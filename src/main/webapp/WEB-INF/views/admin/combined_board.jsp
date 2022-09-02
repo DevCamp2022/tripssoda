@@ -3,8 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 
 <link rel="stylesheet" href="/css/admin/combined_board.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-<script src="https://kit.fontawesome.com/66af10c0bc.js" crossorigin="anonymous"></script>
+
 
 <script>
     let msg = "${msg}";
@@ -16,11 +15,11 @@
 
 <div class="combined-wrap">
     <div class="b-tit">
-        <c:if test='${param.menuCode==null}'><h1>Combined Board</h1></c:if>
-        <c:if test='${param.menuCode=="M001"}'><h1>Notice Board</h1></c:if>
-        <c:if test='${param.menuCode=="M002"}'><h1>Promotion Board</h1></c:if>
-        <c:if test='${param.menuCode=="M003"}'><h1>FAQ Board</h1></c:if>
-        <c:if test='${param.menuCode=="M004"}'><h1>Inquiry Board</h1></c:if>
+        <c:if test='${param.menuCode==null}'><h1>통합게시판</h1></c:if>
+        <c:if test='${param.menuCode=="M001"}'><h1>공지사항</h1></c:if>
+        <c:if test='${param.menuCode=="M002"}'><h1>프로모션</h1></c:if>
+        <c:if test='${param.menuCode=="M003"}'><h1>자주 묻는 질문</h1></c:if>
+        <c:if test='${param.menuCode=="M004"}'><h1>1:1 문의</h1></c:if>
     </div>
 
     <div class="search-container">

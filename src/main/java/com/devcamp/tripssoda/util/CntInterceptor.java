@@ -76,7 +76,7 @@ public class CntInterceptor implements HandlerInterceptor {
         int count = accompanyMapper.selectUserAccompanyCntToday(userId);
         System.out.println("cnt inter###인터셉 count = " + count);
 
-        if(count >=3) {
+        if(count >=10) {
             try {
                 res.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = res.getWriter();

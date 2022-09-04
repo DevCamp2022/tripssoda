@@ -29,6 +29,17 @@
 		<property name="configLocation" value="WEB-INF/config/mybatis-config.xml"/>
 	</bean>
 
+
+<!--	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>-->
+<!--		<property name="url" value="jdbc:mysql://localhost:3306/tripssoda?useUnicode=true&amp;characterEncoding=utf8"></property>-->
+<!--		&lt;!&ndash;property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+<!--          <property name="url" value="jdbc:mysql://localhost:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8"></property&ndash;&gt;-->
+<!--		<property name="username" value="remind"></property>-->
+<!--		<property name="password" value="9248"></property>-->
+<!--	</bean>-->
+
+
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>

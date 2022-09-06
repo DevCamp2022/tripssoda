@@ -6,14 +6,6 @@ TripSsoda - FastCampus DevCamp Project
 커뮤니티형 여행 플랫폼 서비스입니다.
 <br><br>
 
-## 👨‍💻팀원
-권능<br>
-강은혜<br>
-김지원<br>
-김윤기<br>
-서현우<br>
-<br>
-
 ## 📆 진행기간
 <img src="https://user-images.githubusercontent.com/87851820/188601793-a114a5a6-9417-48a4-b6e4-5dd8e34d6cfa.png" width="270"/>&nbsp;&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/87851820/188602363-05ffb178-9710-4a79-acea-0b9db0824825.png" width="270"/><br>
 <br>
@@ -35,6 +27,8 @@ TripSsoda - FastCampus DevCamp Project
 **합계**|**59**
 <br>
 
+## 주요기능
+
 ## ⚙️ 개발환경
 <img src="https://user-images.githubusercontent.com/87851820/188607510-d3b4023c-bc29-47e8-9840-8b4f721d1d41.png" width="80%"/>
 <br>
@@ -49,3 +43,11 @@ Javascript|19|368|258|2,044|7.99%
 Query|26|193|58|1,729|6.75%
 기타|10|65|53|565|2.21%
 합계|344|5,164|2,035|25,588|100%
+
+## 👨‍💻팀원
+[권능](https://github.com/darren-gwon)<br>
+[강은혜](https://github.com/ReneeKang)<br>
+[김지원](https://github.com/g1mzee)<br>
+[김윤기](https://github.com/Reprisal123123)<br>
+[서현우](https://github.com/Robert0623)<br>
+<br>

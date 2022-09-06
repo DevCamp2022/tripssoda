@@ -28,6 +28,16 @@ TripSsoda - FastCampus DevCamp Project
 <br>
 
 ## 주요기능
+* 카카오 로그인
+* 마이페이지
+* 커뮤니티게시판
+* 파트너 입점 신청
+* 파트너 상품 등록
+* KG이니시스 & 카카오페이 결제
+* 관리자 통합게시판
+* 파트너 관리
+* 상품 관리
+<br>
 
 ## ⚙️ 개발환경
 <img src="https://user-images.githubusercontent.com/87851820/188607510-d3b4023c-bc29-47e8-9840-8b4f721d1d41.png" width="80%"/>

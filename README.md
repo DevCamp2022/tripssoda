@@ -1,9 +1,10 @@
 # 커뮤니티형 여행 플랫폼 TripSsoda
 TripSsoda - FastCampus DevCamp Project
+<br>
 
 ## 프로젝트소개
 커뮤니티형 여행 플랫폼 서비스입니다.
-<br><br>
+<br>
 
 ## 👨‍💻팀원
 권능<br>
@@ -19,6 +20,7 @@ TripSsoda - FastCampus DevCamp Project
 
 ## 📄 ERD
 <img src="https://user-images.githubusercontent.com/87851820/188594322-ace0acb7-52f0-4aaa-9952-0917d7bc13a2.png" width="80%"/>
+
 핵심 모듈 | 갯수
 ---|---|
 유저&파트너|13
@@ -35,6 +37,7 @@ TripSsoda - FastCampus DevCamp Project
 
 ## ⚙️ 개발환경
 <img src="https://user-images.githubusercontent.com/87851820/188607510-d3b4023c-bc29-47e8-9840-8b4f721d1d41.png" width="80%"/>
+<br>
 
 ## 📈 프로젝트 분석
 언어|파일|공백|커맨드|코드|퍼센트

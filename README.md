@@ -1,10 +1,10 @@
 # 커뮤니티형 여행 플랫폼 TripSsoda
 TripSsoda - FastCampus DevCamp Project
-<br>
+<br><br>
 
 ## 프로젝트소개
 커뮤니티형 여행 플랫폼 서비스입니다.
-<br>
+<br><br>
 
 ## 👨‍💻팀원
 권능<br>

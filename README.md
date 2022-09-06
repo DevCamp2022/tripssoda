@@ -45,9 +45,9 @@ Query|26|193|58|1,729|6.75%
 합계|344|5,164|2,035|25,588|100%
 
 ## 👨‍💻팀원
-[권능](https://github.com/darren-gwon)<br>
-[강은혜](https://github.com/ReneeKang)<br>
-[김지원](https://github.com/g1mzee)<br>
-[김윤기](https://github.com/Reprisal123123)<br>
-[서현우](https://github.com/Robert0623)<br>
+[권능](https://github.com/darren-gwon) | darren.gwon@gmail.com<br>
+[강은혜](https://github.com/ReneeKang) | gracekang61@naver.com<br>
+[김지원](https://github.com/g1mzee) | gimzee@naver.com<br>
+[김윤기](https://github.com/Reprisal123123) | kezy@daum.net<br>
+[서현우](https://github.com/Robert0623) | tone8943@gmail.com<br>
 <br>

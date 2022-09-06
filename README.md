@@ -18,11 +18,10 @@ TripSsoda - FastCampus DevCamp Project
 ## 프로젝트 ERD
 ![erd](https://user-images.githubusercontent.com/87851820/188594322-ace0acb7-52f0-4aaa-9952-0917d7bc13a2.png)
 탄탄한 ERD설계에 심혈을 기울인 프로젝트입니다.
-테이블: 59개
-컬럼: 549개
+### 테이블: 59개<br>
+### 컬럼: 549개
 
-핵심 모듈 | 갯수![188597938-c1ae4665-a61b-4426-a85d-3d91a07dfb2f](https://user-images.githubusercontent.com/87851820/188601100-3a23266c-801d-455e-902f-1a3eb9b48b2f.png)
-
+핵심 모듈 | 갯수
 ---|---|
 유저&파트너|13
 여행상품|6
@@ -33,6 +32,7 @@ TripSsoda - FastCampus DevCamp Project
 코드테이블|7
 분석용테이블|4
 기타|9
+<br>
 
-![image](https://user-images.githubusercontent.com/87851820/188607373-b7b28d04-f30e-4ad6-81c4-b5e4ff474dd2.png)
-
+## 개발환경
+<img src="https://user-images.githubusercontent.com/87851820/188607510-d3b4023c-bc29-47e8-9840-8b4f721d1d41.png" width="80%"/>

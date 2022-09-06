@@ -394,7 +394,6 @@ public class AccompanyController {
 //            return "redirect:/login/login+toURL"+request.getRequestURL();
         if(page==null) page=1;
         if(pageSize==null) pageSize=12;
-        System.out.println("area3 = " + area3);
 
         int totalCnt = 0;
         try {
@@ -404,9 +403,6 @@ public class AccompanyController {
                 totalCnt = accompanyService.regionCount(area3);
             }
             PageHandlerOld ph = new PageHandlerOld(totalCnt, page, pageSize);
-            System.out.println("totalCnt = " + totalCnt);
-            System.out.println("page = " + page);
-            System.out.println("pageSize = " + pageSize);
 
             Map map = new HashMap();
             map.put("offset", (page-1)*pageSize);
@@ -421,7 +417,6 @@ public class AccompanyController {
             } else {
                 list = accompanyService.regionSelectPage(map);
             }
-            System.out.println("list.get(0) = " + list.get(0));
 
             Date today = new Date();
             for (int i = 0; i < list.size(); i++) {
@@ -441,9 +436,13 @@ public class AccompanyController {
             m.addAttribute("list", list);
             m.addAttribute("page", page);
             m.addAttribute("pageSize", pageSize);
-            m.addAttribute("area3", area3);
             m.addAttribute("option", option);
+
+            if(area3!=null)
+                m.addAttribute("area3", area3);
+
             System.out.println("area3 = " + area3);
+            System.out.println("option = " + option);
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "LIST_ERR");

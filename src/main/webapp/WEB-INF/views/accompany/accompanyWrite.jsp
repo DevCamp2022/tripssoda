@@ -224,14 +224,19 @@
 
             var reader = new FileReader();
             reader.onload = function(e){
+                //img태그를 생성
                 let newImg = document.createElement('img');
+                //속성 추가
                 newImg.setAttribute("src", e.target.result);
-                // newImg.setAttribute("width",1200);
-                newImg.setAttribute("height", 400);
+                //1200px X 400px로 크기 고정
+                newImg.setAttribute('width', '1200px');
+                newImg.setAttribute('height', '400px');
                 $(".div-thumbnail").html(newImg);
             }
             reader.readAsDataURL($(this)[0].files[0]);
         });
+        //update 크기 조절을 위해 자식요소 img태그에 클래스를 추가
+        $(".div-thumbnail").children('img').addClass('thumb-img');
     });
     // CKEDITOR.replace('content',
     //     {filebrowserUploadUrl:'/ckeditor/fileUploader'

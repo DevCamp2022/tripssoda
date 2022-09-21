@@ -143,7 +143,8 @@ public class QuestionController {
         //1. hashtag를 공백으로 구분해서 input태그에서 입력받고, 컨트롤러에서 받아서 공백으로 나눈다.
         if(questionDto.getHashtag()==null || questionDto.getHashtag().trim().equals(""))
             questionDto.setHashtag("아무나다좋아");
-        String[] hashList = questionDto.getHashtag().split(" ");
+        String replaceHashtag = questionDto.getHashtag().trim().replaceAll(" +", " ");
+        String[] hashList = replaceHashtag.split(" ");
         //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
         String hashtag2 = "";
         for(String hashtag : hashList) {
@@ -218,7 +219,8 @@ public class QuestionController {
         if(questionDto.getHashtag()==null || questionDto.getHashtag().trim().equals(""))
             questionDto.setHashtag("아무나다좋아");
 //        String newHashtag = questionDto.getHashtag().replaceAll("\\s+","");
-        String[] hashList = questionDto.getHashtag().split(" ");
+        String replaceHashtag = questionDto.getHashtag().trim().replaceAll(" +", " ");
+        String[] hashList = replaceHashtag.split(" ");
         //2. 배열에서 값을 하나씩 꺼내서 앞에 #을 붙이고 문자열로 변환한다.
         String hashtag2 = "";
         for(String hashtag : hashList) {

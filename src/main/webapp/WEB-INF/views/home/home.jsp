@@ -70,7 +70,8 @@
 <%--                <img class="main-img" src="${pageContext.request.contextPath}/image/thumbnail/${accompanyDto.thumbnail}" alt="">--%>
 
                 <div class="div-editor div-editor-${statusNm.count}">
-                    <a href="http://localhost:9100//accompany/read?id=${accompanyDto.id}">
+                    <%-- 09.21 c:url태그로 수정 --%>
+                    <a href="<c:url value='/accompany/read?id=${accompanyDto.id}'/>">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
                             <!-- <img src="${accompanyDto.thumbnail}" alt="thumbnail picture"> -->
@@ -137,7 +138,8 @@
 
             <c:forEach var="list" items="${list0}" varStatus="statusNm">
                 <div class="div-editor div-editor-${statusNm.count}">
-                    <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}&startDate=${list.startDate}">
+                    <%-- 09.21 c:url태그로 수정 --%>
+                    <a href="<c:url value='/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}&startDate=${list.startDate}'/>">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
                             <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->
@@ -201,7 +203,8 @@
 <%--                    </a>--%>
 <%--                </div>--%>
                 <div class="div-editor div-editor-${statusNm.count}">
-                    <a href="http://localhost:9100/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}">
+                    <%-- 09.21 c:url태그로 수정 --%>
+                    <a href="<c:url value='/product/detail?productId=${list.productId}&scheduleId=${list.scheduleId}'/>">
                         <!--썸네일-->
                         <div class="thumbnail-wrapper">
                             <!-- <img src="${list.thumbnail}" alt="thumbnail picture"> -->

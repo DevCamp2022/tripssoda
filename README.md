@@ -79,6 +79,6 @@ Query|26|193|58|1,729|6.75%
 [권능](https://github.com/darren-gwon) | darren.gwon@gmail.com<br>
 [강은혜](https://github.com/ReneeKang) | gracekang61@naver.com<br>
 [김지원](https://github.com/g1mzee) | gimzee@naver.com<br>
-[김윤기](https://github.com/Reprisal123123) | kezy@daum.net<br>
+[김윤기](https://github.com/Reprisal123123) | kezy1992@gmail.com<br>
 [서현우](https://github.com/Robert0623) | tone8943@gmail.com<br>
 <br>
